@@ -1,108 +1,176 @@
--- 1. Gestion des utilisateurs ------------------------------------------------------------------------------------
-CREATE TABLE utilisateur (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    mot_de_passe VARCHAR(255) NOT NULL,
-    role ENUM('utilisateur', 'admin', 'organisateur') NOT NULL DEFAULT 'utilisateur',
-    bio TEXT,
-    photo_profil VARCHAR(255),
-    xp INT DEFAULT 0,
-    niveau INT UNSIGNED DEFAULT NULL, -- Retained to reference the level
-    xp_requis INT UNSIGNED           -- Combined from niveau table
-);
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Feb 21, 2025 at 12:51 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
--- 2. Gestion des événements --------------------------------------------------------------------------------------
-CREATE TABLE localisation (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    adresse VARCHAR(255),
-    ville VARCHAR(100),
-    pays VARCHAR(100)
-);
+--
+-- Database: `pidev`
+--
 
-CREATE TABLE evenement (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(255) NOT NULL,
-    date DATETIME NOT NULL,
-    lieu VARCHAR(255),
-    id_localisation INT,
-    cree_par INT,
-    FOREIGN KEY (id_localisation) REFERENCES localisation(id) ON DELETE SET NULL,
-    FOREIGN KEY (cree_par) REFERENCES utilisateur(id) ON DELETE SET NULL
-);
+-- --------------------------------------------------------
 
-CREATE TABLE participant_evenement (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    evenement_id INT,
-    utilisateur_id INT,
-    statut ENUM('en_attente', 'confirme', 'annule'),
-    FOREIGN KEY (evenement_id) REFERENCES evenement(id) ON DELETE CASCADE,
-    FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id) ON DELETE CASCADE
-);
+--
+-- Table structure for table `article_boutique`
+--
 
--- 3. Gestion des équipes -----------------------------------------------------------------------------------------
-CREATE TABLE equipe (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    evenement_id INT,
-    nom VARCHAR(255) NOT NULL,
-    chef_equipe_id INT,
-    FOREIGN KEY (evenement_id) REFERENCES evenement(id) ON DELETE CASCADE,
-    FOREIGN KEY (chef_equipe_id) REFERENCES utilisateur(id) ON DELETE SET NULL
-);
+CREATE TABLE `article_boutique` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `type` enum('article','ticket') DEFAULT NULL,
+  `prix` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE membre_equipe (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    equipe_id INT,
-    utilisateur_id INT,
-    role ENUM('chef', 'membre'),
-    FOREIGN KEY (equipe_id) REFERENCES equipe(id) ON DELETE CASCADE,
-    FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id) ON DELETE CASCADE
-);
+-- --------------------------------------------------------
 
-CREATE TABLE tache (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    equipe_id INT,
-    titre VARCHAR(255) NOT NULL,
-    description TEXT,
-    id_assignateur INT,
-    id_responsable INT,
-    statut ENUM('en_attente', 'en_cours', 'termine'),
-    FOREIGN KEY (equipe_id) REFERENCES equipe(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_assignateur) REFERENCES utilisateur(id) ON DELETE SET NULL,
-    FOREIGN KEY (id_responsable) REFERENCES utilisateur(id) ON DELETE SET NULL
-);
+--
+-- Table structure for table `calendrier`
+--
 
--- 4. Calendrier --------------------------------------------------------------------------------------------------
-CREATE TABLE calendrier (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    titre VARCHAR(255) NOT NULL,
-    type ENUM('evenement', 'tache'),
-    date DATETIME,
-    evenement_id INT DEFAULT NULL,
-    tache_id INT DEFAULT NULL,
-    FOREIGN KEY (evenement_id) REFERENCES evenement(id) ON DELETE CASCADE,
-    FOREIGN KEY (tache_id) REFERENCES tache(id) ON DELETE CASCADE
-);
+CREATE TABLE `calendrier` (
+  `id` int(11) NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `type` enum('evenement','tache') DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `evenement_id` int(11) DEFAULT NULL,
+  `tache_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 5. Gestion des Q/R ---------------------------------------------------------------------------------------------
-CREATE TABLE `reponses` (
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contrat`
+--
+
+CREATE TABLE `contrat` (
+  `contrat_id` int(11) NOT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  `offre_id` int(11) DEFAULT NULL,
+  `date_debut` date NOT NULL,
+  `date_fin` date DEFAULT NULL,
+  `description` longtext NOT NULL,
+  `statut` enum('brouillon','actif','termine','resilie','dispute') NOT NULL DEFAULT 'brouillon',
+  `echeancier_paiement` longtext NOT NULL,
+  `cree_le` timestamp NOT NULL DEFAULT current_timestamp(),
+  `mis_a_jour_le` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `equipe`
+--
+
+CREATE TABLE `equipe` (
+  `id` int(11) NOT NULL,
+  `evenement_id` int(11) DEFAULT NULL,
+  `nom` varchar(255) NOT NULL,
+  `chef_equipe_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `evenement`
+--
+
+CREATE TABLE `evenement` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `date` datetime NOT NULL,
+  `lieu` varchar(255) DEFAULT NULL,
+  `id_localisation` int(11) DEFAULT NULL,
+  `cree_par` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `localisation`
+--
+
+CREATE TABLE `localisation` (
+  `id` int(11) NOT NULL,
+  `adresse` varchar(255) DEFAULT NULL,
+  `ville` varchar(100) DEFAULT NULL,
+  `pays` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `membre_equipe`
+--
+
+CREATE TABLE `membre_equipe` (
+  `id` int(11) NOT NULL,
+  `equipe_id` int(11) DEFAULT NULL,
+  `utilisateur_id` int(11) DEFAULT NULL,
+  `role` enum('chef','membre') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offre`
+--
+
+CREATE TABLE `offre` (
+  `offre_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `budget` decimal(12,2) UNSIGNED NOT NULL,
+  `type_contrat` enum('forfait','horaire','abonnement') NOT NULL,
+  `statut` enum('ouvert','ferme','en_cours','expire') NOT NULL DEFAULT 'ouvert',
+  `cree_le` timestamp NOT NULL DEFAULT current_timestamp(),
+  `expire_le` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `panier`
+--
+
+CREATE TABLE `panier` (
   `id` int(11) NOT NULL,
   `utilisateur_id` int(11) NOT NULL,
-  `question_id` int(11) NOT NULL,
-  `reponse` varchar(11) NOT NULL,
-  `reponse_correcte` varchar(1) NOT NULL
-);
+  `article_id` int(11) NOT NULL,
+  `quantite` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
 
-CREATE TABLE `reponse` (
-  `id_reponse` int(11) NOT NULL,
-  `date_reponse` varchar(20) NOT NULL,
-  `description_reponse` varchar(200) NOT NULL,
-  `id_reclamation` int(11) NOT NULL
-);
+--
+-- Table structure for table `participant_evenement`
+--
 
+CREATE TABLE `participant_evenement` (
+  `id` int(11) NOT NULL,
+  `evenement_id` int(11) DEFAULT NULL,
+  `utilisateur_id` int(11) DEFAULT NULL,
+  `statut` enum('en_attente','confirme','annule') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions`
+--
 
 CREATE TABLE `questions` (
   `id_question` int(11) NOT NULL,
@@ -112,63 +180,344 @@ CREATE TABLE `questions` (
   `reponse_2` text NOT NULL,
   `reponse_3` text NOT NULL,
   `reponse_4` text NOT NULL
-);
--- 6. Gestion de la boutique --------------------------------------------------------------------------------------
-CREATE TABLE article_boutique (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(255) NOT NULL,
-    type ENUM('article', 'ticket'),
-    prix DECIMAL(10,2) NOT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE panier (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    utilisateur_id INT NOT NULL,
-    article_id INT NOT NULL,
-    quantite INT UNSIGNED NOT NULL,
-    FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id) ON DELETE CASCADE,
-    FOREIGN KEY (article_id) REFERENCES article_boutique(id) ON DELETE CASCADE
-);
+-- --------------------------------------------------------
 
--- 7. Gestion des freelances --------------------------------------------------------------------------------------
-CREATE TABLE service (
-    service_id INT PRIMARY KEY AUTO_INCREMENT,
-    freelance_id INT NOT NULL,
-    titre VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    expertise VARCHAR(50) NOT NULL,
-    duree_jours SMALLINT UNSIGNED NOT NULL,
-    prix DECIMAL(10,2) UNSIGNED NOT NULL,
-    mode_paiement ENUM('horaire', 'forfait', 'milestone') NOT NULL,
-    cree_le TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    mis_a_jour_le TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (freelance_id) REFERENCES utilisateur(id) ON DELETE CASCADE
-);
+--
+-- Table structure for table `reponse`
+--
 
-CREATE TABLE offre (
-    offre_id INT PRIMARY KEY AUTO_INCREMENT,
-    client_id INT NOT NULL,
-    titre VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    budget DECIMAL(12,2) UNSIGNED NOT NULL,
-    type_contrat ENUM('forfait', 'horaire', 'abonnement') NOT NULL,
-    statut ENUM('ouvert', 'ferme', 'en_cours', 'expire') NOT NULL DEFAULT 'ouvert',
-    cree_le TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    expire_le DATE NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES utilisateur(id) ON DELETE CASCADE
-);
+CREATE TABLE `reponse` (
+  `id_reponse` int(11) NOT NULL,
+  `date_reponse` varchar(20) NOT NULL,
+  `description_reponse` varchar(200) NOT NULL,
+  `id_reclamation` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE contrat (
-    contrat_id INT PRIMARY KEY AUTO_INCREMENT,
-    service_id INT,
-    offre_id INT,
-    date_debut DATE NOT NULL,
-    date_fin DATE,
-    description LONGTEXT NOT NULL,
-    statut ENUM('brouillon', 'actif', 'termine', 'resilie', 'dispute') NOT NULL DEFAULT 'brouillon',
-    echeancier_paiement LONGTEXT NOT NULL,
-    cree_le TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    mis_a_jour_le TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (service_id) REFERENCES service(service_id) ON DELETE SET NULL,
-    FOREIGN KEY (offre_id) REFERENCES offre(offre_id) ON DELETE SET NULL
-);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reponses`
+--
+
+CREATE TABLE `reponses` (
+  `id` int(11) NOT NULL,
+  `utilisateur_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `reponse` varchar(11) NOT NULL,
+  `reponse_correcte` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service`
+--
+
+CREATE TABLE `service` (
+  `service_id` int(11) NOT NULL,
+  `freelance_id` int(11) NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `expertise` varchar(50) NOT NULL,
+  `duree_jours` smallint(5) UNSIGNED NOT NULL,
+  `prix` decimal(10,2) UNSIGNED NOT NULL,
+  `mode_paiement` enum('horaire','forfait','milestone') NOT NULL,
+  `cree_le` timestamp NOT NULL DEFAULT current_timestamp(),
+  `mis_a_jour_le` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tache`
+--
+
+CREATE TABLE `tache` (
+  `id` int(11) NOT NULL,
+  `equipe_id` int(11) DEFAULT NULL,
+  `titre` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `id_responsable` int(11) DEFAULT NULL,
+  `statut` enum('en_attente','en_cours','termine') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `utilisateur`
+--
+
+CREATE TABLE `utilisateur` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `mot_de_passe` varchar(255) NOT NULL,
+  `role` enum('utilisateur','admin','organisateur') NOT NULL DEFAULT 'utilisateur',
+  `bio` text DEFAULT NULL,
+  `photo_profil` varchar(255) DEFAULT NULL,
+  `xp` int(11) DEFAULT 0,
+  `niveau` int(10) UNSIGNED DEFAULT NULL,
+  `xp_requis` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `article_boutique`
+--
+ALTER TABLE `article_boutique`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `calendrier`
+--
+ALTER TABLE `calendrier`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `evenement_id` (`evenement_id`),
+  ADD KEY `tache_id` (`tache_id`);
+
+--
+-- Indexes for table `contrat`
+--
+ALTER TABLE `contrat`
+  ADD PRIMARY KEY (`contrat_id`),
+  ADD KEY `service_id` (`service_id`),
+  ADD KEY `offre_id` (`offre_id`);
+
+--
+-- Indexes for table `equipe`
+--
+ALTER TABLE `equipe`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `evenement_id` (`evenement_id`),
+  ADD KEY `chef_equipe_id` (`chef_equipe_id`);
+
+--
+-- Indexes for table `evenement`
+--
+ALTER TABLE `evenement`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_localisation` (`id_localisation`),
+  ADD KEY `cree_par` (`cree_par`);
+
+--
+-- Indexes for table `localisation`
+--
+ALTER TABLE `localisation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `membre_equipe`
+--
+ALTER TABLE `membre_equipe`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `equipe_id` (`equipe_id`),
+  ADD KEY `utilisateur_id` (`utilisateur_id`);
+
+--
+-- Indexes for table `offre`
+--
+ALTER TABLE `offre`
+  ADD PRIMARY KEY (`offre_id`),
+  ADD KEY `client_id` (`client_id`);
+
+--
+-- Indexes for table `panier`
+--
+ALTER TABLE `panier`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `utilisateur_id` (`utilisateur_id`),
+  ADD KEY `article_id` (`article_id`);
+
+--
+-- Indexes for table `participant_evenement`
+--
+ALTER TABLE `participant_evenement`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `evenement_id` (`evenement_id`),
+  ADD KEY `utilisateur_id` (`utilisateur_id`);
+
+--
+-- Indexes for table `service`
+--
+ALTER TABLE `service`
+  ADD PRIMARY KEY (`service_id`),
+  ADD KEY `freelance_id` (`freelance_id`);
+
+--
+-- Indexes for table `tache`
+--
+ALTER TABLE `tache`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `equipe_id` (`equipe_id`),
+  ADD KEY `id_responsable` (`id_responsable`);
+
+--
+-- Indexes for table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `article_boutique`
+--
+ALTER TABLE `article_boutique`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `calendrier`
+--
+ALTER TABLE `calendrier`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `contrat`
+--
+ALTER TABLE `contrat`
+  MODIFY `contrat_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `equipe`
+--
+ALTER TABLE `equipe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `evenement`
+--
+ALTER TABLE `evenement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `localisation`
+--
+ALTER TABLE `localisation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `membre_equipe`
+--
+ALTER TABLE `membre_equipe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `offre`
+--
+ALTER TABLE `offre`
+  MODIFY `offre_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `panier`
+--
+ALTER TABLE `panier`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `participant_evenement`
+--
+ALTER TABLE `participant_evenement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `service`
+--
+ALTER TABLE `service`
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tache`
+--
+ALTER TABLE `tache`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `calendrier`
+--
+ALTER TABLE `calendrier`
+  ADD CONSTRAINT `calendrier_ibfk_1` FOREIGN KEY (`evenement_id`) REFERENCES `evenement` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `calendrier_ibfk_2` FOREIGN KEY (`tache_id`) REFERENCES `tache` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `contrat`
+--
+ALTER TABLE `contrat`
+  ADD CONSTRAINT `contrat_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `contrat_ibfk_2` FOREIGN KEY (`offre_id`) REFERENCES `offre` (`offre_id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `equipe`
+--
+ALTER TABLE `equipe`
+  ADD CONSTRAINT `equipe_ibfk_1` FOREIGN KEY (`evenement_id`) REFERENCES `evenement` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `equipe_ibfk_2` FOREIGN KEY (`chef_equipe_id`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `evenement`
+--
+ALTER TABLE `evenement`
+  ADD CONSTRAINT `evenement_ibfk_1` FOREIGN KEY (`id_localisation`) REFERENCES `localisation` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `evenement_ibfk_2` FOREIGN KEY (`cree_par`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `membre_equipe`
+--
+ALTER TABLE `membre_equipe`
+  ADD CONSTRAINT `membre_equipe_ibfk_1` FOREIGN KEY (`equipe_id`) REFERENCES `equipe` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `membre_equipe_ibfk_2` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `offre`
+--
+ALTER TABLE `offre`
+  ADD CONSTRAINT `offre_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `panier`
+--
+ALTER TABLE `panier`
+  ADD CONSTRAINT `panier_ibfk_1` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `panier_ibfk_2` FOREIGN KEY (`article_id`) REFERENCES `article_boutique` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `participant_evenement`
+--
+ALTER TABLE `participant_evenement`
+  ADD CONSTRAINT `participant_evenement_ibfk_1` FOREIGN KEY (`evenement_id`) REFERENCES `evenement` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `participant_evenement_ibfk_2` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `service`
+--
+ALTER TABLE `service`
+  ADD CONSTRAINT `service_ibfk_1` FOREIGN KEY (`freelance_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tache`
+--
+ALTER TABLE `tache`
+  ADD CONSTRAINT `tache_ibfk_1` FOREIGN KEY (`equipe_id`) REFERENCES `equipe` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tache_ibfk_3` FOREIGN KEY (`id_responsable`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

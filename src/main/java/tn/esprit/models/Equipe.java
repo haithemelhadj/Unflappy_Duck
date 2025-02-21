@@ -2,6 +2,7 @@ package tn.esprit.models;
 
 public class Equipe {
 
+    //id	evenement_id	nom	chef_equipe_id
     int id;
     int evenement_id;
     String nom;

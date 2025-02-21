@@ -1,25 +1,25 @@
 package tn.esprit.models;
 
-import tn.esprit.models.enums.Statut;
+//import tn.esprit.models.enums.Statut;
 
 
 public class Tache {
 
-
+    //id	equipe_id	titre	description	id_responsable	statut
     private int id;
     private int equipe_id;
     private String titre;
     private String description;
-    //private int id_assignateur;
     private int id_responsable;
-    private Statut statut;
+    private String statut;
 
     //region constructors
 
     public Tache() {
     }
 
-    public Tache(int id, int equipe_id, String titre, String description, int id_responsable, Statut statut) {
+    public Tache(int id, int equipe_id, String titre, String description, int id_responsable, String statut) {
+        //System.out.println("const w id....adding tache....");
         this.id = id;
         this.equipe_id = equipe_id;
         this.titre = titre;
@@ -29,7 +29,8 @@ public class Tache {
         this.statut = statut;
     }
 
-    public Tache(int equipe_id, String titre, String description, int id_responsable, Statut statut) {
+    public Tache(int equipe_id, String titre, String description, int id_responsable, String statut) {
+        //System.out.println("no id const....adding tache....");
         this.equipe_id = equipe_id;
         this.titre = titre;
         this.description = description;
@@ -38,6 +39,13 @@ public class Tache {
         this.statut = statut;
     }
 
+    public Tache(int equipe_id, String titre, String description, int id_responsable) {
+        //System.out.println("no id,status const....adding tache....");
+        this.equipe_id = equipe_id;
+        this.titre = titre;
+        this.description = description;
+        this.id_responsable = id_responsable;
+    }
 //endregion
 
     //region getters & setters
@@ -90,14 +98,14 @@ public class Tache {
         this.id_responsable = id_responsable;
     }
 
-    public Statut getStatut() {
+    public String getStatut() {
         return statut;
     }
 
-    public void setStatut(Statut statut) {
+    public void setStatut(String statut) {
         this.statut = statut;
     }
-
+/**/
     //endregion
 
 
@@ -136,7 +144,8 @@ public class Tache {
         int id_responsable = Integer.parseInt(parts[4].trim());
 
         // Assuming Statut is an enum or a class that can be constructed from a string
-        Statut statut = Statut.valueOf(parts[5].trim().toUpperCase());
+        //Statut statut = Statut.valueOf(parts[5].trim().toUpperCase());
+        String statut = parts[5].trim().toUpperCase();
 
         // Create and return the Tache object
         Tache tache = new Tache();

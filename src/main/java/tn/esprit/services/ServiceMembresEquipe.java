@@ -3,7 +3,7 @@ package tn.esprit.services;
 import tn.esprit.interfaces.IService;
 import tn.esprit.models.MembresEquipe;
 import tn.esprit.models.Tache;
-import tn.esprit.models.enums.Statut;
+//import tn.esprit.models.enums.Statut;
 import tn.esprit.models.enums.roles;
 
 import javax.management.relation.Role;
@@ -43,7 +43,7 @@ public class ServiceMembresEquipe implements IService<MembresEquipe> {
 
 
         List<MembresEquipe> membresEquipes = new ArrayList<>();
-        String qry ="SELECT * FROM `tache`";
+        String qry ="SELECT * FROM `membre_equipe`";
 
         try {
             Statement stm = cnx.createStatement();
@@ -55,7 +55,7 @@ public class ServiceMembresEquipe implements IService<MembresEquipe> {
                 p.setEquipe_id(rs.getInt(2));
                 p.setUtilisateur_id(rs.getInt(3));
                 //p.setRole(rs.getString());
-                p.setRole(roles.valueOf(rs.getString(7)));
+                p.setRole(roles.valueOf(rs.getString(4)));
 
 
 
@@ -74,7 +74,7 @@ public class ServiceMembresEquipe implements IService<MembresEquipe> {
     @Override
     public void update(MembresEquipe MembresEquipe) {
         try {
-            String req ="UPDATE `membres_equipe` SET " +
+            String req ="UPDATE `membre_equipe` SET " +
                     "`equipe_id`='" +MembresEquipe.getEquipe_id()+
                     "',`utilisateur_id`='" +MembresEquipe.getUtilisateur_id()+
                     "',`role`='" +MembresEquipe.getRole().toString()+
@@ -91,7 +91,7 @@ public class ServiceMembresEquipe implements IService<MembresEquipe> {
     @Override
     public void delete(MembresEquipe MembresEquipe) {
         try{
-            String req=" DELETE FROM `membres_equipe` WHERE id= '" +MembresEquipe.getId()+"'";
+            String req=" DELETE FROM `membre_equipe` WHERE id= '" +MembresEquipe.getId()+"'";
             Statement st= cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("membres_equipe supprimé");

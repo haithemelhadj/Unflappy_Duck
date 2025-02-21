@@ -5,6 +5,7 @@ import tn.esprit.models.enums.roles;
 ;
 public class MembresEquipe {
 
+    //id	equipe_id	utilisateur_id	role
     private int id;
     private int equipe_id;
     private int utilisateur_id;

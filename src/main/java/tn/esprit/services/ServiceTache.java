@@ -2,8 +2,8 @@ package tn.esprit.services;
 
 import tn.esprit.interfaces.IService;
 import tn.esprit.models.Tache;
-import tn.esprit.models.enums.Statut;
-import tn.esprit.models.utilisateur;
+//import tn.esprit.models.enums.Statut;
+import tn.esprit.models.Utilisateur;
 import tn.esprit.utils.MyDatabase;
 
 import java.sql.*;
@@ -20,7 +20,7 @@ public class ServiceTache implements IService<Tache> {
     //region CRUD
     @Override
     public void add(Tache tache) {
-
+        //System.out.println("service....adding tache....");
         //create Qry SQL
         //execute Qry
         String qry ="INSERT INTO `tache`(`id`, `equipe_id`, `titre`, `description`, `id_responsable`, `statut`) VALUES (?,?,?,?,?,?)" ;
@@ -32,7 +32,7 @@ public class ServiceTache implements IService<Tache> {
             pstm.setString(4,tache.getDescription());
             //pstm.setInt(5,tache.getId_assignateur());, `id_assignateur`
             pstm.setInt(5,tache.getId_responsable());
-            pstm.setString(6,tache.getStatut().toString());
+            pstm.setString(6,tache.getStatut());
 
 
             pstm.executeUpdate();
@@ -44,11 +44,6 @@ public class ServiceTache implements IService<Tache> {
 
     @Override
     public List<Tache> getAll() {
-        //create Qry sql
-        //execution
-        //Mapping data
-
-
         List<Tache> taches = new ArrayList<>();
         String qry ="SELECT * FROM `tache`";
 
@@ -64,7 +59,8 @@ public class ServiceTache implements IService<Tache> {
                 p.setDescription(rs.getString(4));
                 //p.setId_assignateur(rs.getInt(5));
                 p.setId_responsable(rs.getInt(5));
-                p.setStatut(Statut.valueOf(rs.getString(6)));
+                //p.setStatut(Statut.valueOf(rs.getString(6)));
+                p.setStatut(rs.getString(6));
 
 
                 taches.add(p);
@@ -89,7 +85,8 @@ public class ServiceTache implements IService<Tache> {
                     "',`description`='" +tache.getDescription()+
                     //"',`id_assignateur`='" +tache.getId_assignateur()+
                     "',`id_responsable`='" +tache.getId_responsable()+
-                    "',`statut`='" +tache.getStatut().toString()+"'WHERE id= '" +tache.getId()+"'";
+                    "',`statut`='" +tache.getStatut().toString()+"'WHERE id= '" +tache.getId()+
+                    "'";
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("tache updated");

@@ -21,7 +21,7 @@ public class ServiceEquipe implements IService<Equipe> {
     public void add(Equipe equipe) {
         //create Qry SQL
         //execute Qry
-        String qry ="INSERT INTO `equipes`(`id`, `evenement_id`, `nom`, `chef_equipe_id`) VALUES (?,?,?,?)";
+        String qry ="INSERT INTO `equipe`(`id`, `evenement_id`, `nom`, `chef_equipe_id`) VALUES (?,?,?,?)";
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
             pstm.setInt(1,equipe.getId() );
@@ -45,7 +45,7 @@ public class ServiceEquipe implements IService<Equipe> {
         //Mapping data
 
 
-        List<Equipe> equipes = new ArrayList<>();
+        List<Equipe> equipe = new ArrayList<>();
         String qry ="SELECT * FROM `equipes`";
 
         try {
@@ -58,22 +58,22 @@ public class ServiceEquipe implements IService<Equipe> {
                 p.setEvenement_id(rs.getInt(2));
                 p.setNom(rs.getString(3));
                 p.setChef_equipe_id(rs.getInt(4));
-                equipes.add(p);
 
 
-                equipes.add(p);
+
+                equipe.add(p);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return equipes;
+        return equipe;
     }
 
     @Override
     public void update(Equipe equipe) {
         try {
-            String req = "UPDATE `equipes` SET " +
+            String req = "UPDATE `equipe` SET " +
                     "`evenement_id`='" +equipe.getEvenement_id()+
                     "',`nom`='" +equipe.getNom()+
                     "',`chef_equipe_id`='" +equipe.getChef_equipe_id()+"'WHERE id= '" +equipe.getId()+"'";
@@ -90,7 +90,7 @@ public class ServiceEquipe implements IService<Equipe> {
     public void delete(Equipe equipe) {
         try{
             //DELETE FROM `equipes` WHERE 0
-            String req=" DELETE FROM `equipes` WHERE id= '" +equipe.getId()+"'";
+            String req=" DELETE FROM `equipe` WHERE id= '" +equipe.getId()+"'";
             Statement st= cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("equipes supprimé");

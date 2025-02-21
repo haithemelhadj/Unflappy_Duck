@@ -20,8 +20,23 @@ public class Main {
         try {
 
             ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur(connection);
+/*
+haithem:
+        ServiceUtilisateur sp = new ServiceUtilisateur();
+        utilisateur u1 = new utilisateur(2,"nom","prenom",20,"email","mdp", userRoles.utilisateur);//,"bio self","photo-url",50,1);
+        //sp.delete(u1);
+        /*utilisateur u1 = new utilisateur();
+        u1.setNom("lowel");/**/
+        sp.add(u1);
 
+        /*
+        utilisateur u2 = new utilisateur();
+        u2.setNom("theni");
+        sp.add(u2);
+        /**/
+        System.out.println(sp.getAll());
 
+/**/
             Utilisateur newUtilisateur = new Utilisateur();
             newUtilisateur.setNom("John Doe");
             newUtilisateur.setEmail("john.doe@example.com");

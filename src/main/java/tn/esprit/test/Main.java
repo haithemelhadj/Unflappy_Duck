@@ -13,14 +13,32 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
+
+        //haithem:
+        ServiceUtilisateur sp = new ServiceUtilisateur();
+        //Utilisateur u1 = new Utilisateur(2,"nom","prenom",20,"email","mdp", "utilisateur");//,"bio self","photo-url",50,1);
+        //sp.delete(u1);
+
+        Utilisateur u1 = new Utilisateur();
+        u1.setNom("lowel");
+        //sp.ajouterUtilisateur(u1);
+
+
+        Utilisateur u2 = new Utilisateur(1,"n2","email","mdp","utilisateur","bio2","url",2,1,200);
+        u2.setNom("theni");
+        sp.add(u2);
+
+        System.out.println(sp.getAll());
+
+/**/
+
         MyDatabase db = MyDatabase.getInstance();
         Connection connection = db.getCnx();
 
 
         try {
 
-            ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur(connection);
-
+            ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur();
 
             Utilisateur newUtilisateur = new Utilisateur();
             newUtilisateur.setNom("John Doe");
@@ -69,5 +87,6 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        /**/
     }
 }

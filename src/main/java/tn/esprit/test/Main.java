@@ -1,7 +1,7 @@
-package esprit.tn.test;
+package tn.esprit.test;
 
 
-import esprit.tn.services.ServicePanier;
+import tn.esprit.services.ServicePanier;
 
 public class Main {
     public static void main(String[] args) {

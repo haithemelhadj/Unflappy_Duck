@@ -1,4 +1,4 @@
-package esprit.tn.test;
+package tn.esprit.test;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

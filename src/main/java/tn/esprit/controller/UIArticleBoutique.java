@@ -1,7 +1,7 @@
-package esprit.tn.controllers;
+package tn.esprit.controller;
 
-import esprit.tn.models.ArticleBoutique;
-import esprit.tn.services.ServiceArticleBoutique;
+import tn.esprit.models.ArticleBoutique;
+import tn.esprit.services.ServiceArticleBoutique;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

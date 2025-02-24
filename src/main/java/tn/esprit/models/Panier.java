@@ -1,4 +1,4 @@
-package esprit.tn.models;
+package tn.esprit.models;
 
 public class Panier {
     private int id;

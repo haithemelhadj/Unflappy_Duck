@@ -9,6 +9,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainFX extends Application {
+  /*
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/event_form.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Event Form");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+      /**/
 
     public static void main(String[] args) {
         launch(args);

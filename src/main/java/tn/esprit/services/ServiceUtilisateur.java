@@ -18,129 +18,81 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
         this.connection = MyDatabase.getInstance().getCnx();
     }
 
-    // logique zidane utilisateur
-    public void ajouterUtilisateur(Utilisateur utilisateur) throws SQLException {
-        String query = "INSERT INTO utilisateur (nom, email, mot_de_passe, role, bio, photo_profil, xp, niveau, xp_requis) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, utilisateur.getNom());
-            preparedStatement.setString(2, utilisateur.getEmail());
-            preparedStatement.setString(3, utilisateur.getMotDePasse());
-            preparedStatement.setString(4, utilisateur.getRole());
-            preparedStatement.setString(5, utilisateur.getBio());
-            preparedStatement.setString(6, utilisateur.getPhotoProfil());
-            preparedStatement.setInt(7, utilisateur.getXp());
-            if (utilisateur.getNiveau() != null) {
-                preparedStatement.setInt(8, utilisateur.getNiveau());
-            } else {
-                preparedStatement.setNull(8, Types.INTEGER);
+    @Override
+    public void add(Utilisateur utilisateur) {
+        String qry = "INSERT INTO `Utilisateur` (`pseudo`, `email`, `mot_de_passe_hache`, `est_actif`, `role_id`) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement pstm = cnx.prepareStatement(qry, Statement.RETURN_GENERATED_KEYS)) {
+            pstm.setString(1, utilisateur.getPseudo());
+            pstm.setString(2, utilisateur.getEmail());
+            pstm.setString(3, utilisateur.getMotDePasseHache());
+            pstm.setBoolean(4, utilisateur.isEstActif());
+            pstm.setInt(5, utilisateur.getRoleId());
+
+            pstm.executeUpdate();
+
+            // Récupérer l'ID généré automatiquement
+            try (ResultSet generatedKeys = pstm.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    utilisateur.setUtilisateurId(generatedKeys.getInt(1)); // Mettre à jour l'ID dans l'objet Utilisateur
+                }
             }
-            preparedStatement.setInt(9, utilisateur.getXpRequis());
-            preparedStatement.executeUpdate();
+
+            System.out.println("Utilisateur ajouté avec succès. ID : " + utilisateur.getUtilisateurId());
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
         }
     }
 
-    // logique kiben ilkol
-    public List<Utilisateur> getAllUtilisateurs() throws SQLException {
+    @Override
+    public List<Utilisateur> getAll() {
         List<Utilisateur> utilisateurs = new ArrayList<>();
-        String query = "SELECT * FROM utilisateur";
-        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                Utilisateur utilisateur = new Utilisateur();
-                utilisateur.setId(resultSet.getInt("id"));
-                utilisateur.setNom(resultSet.getString("nom"));
-                utilisateur.setEmail(resultSet.getString("email"));
-                utilisateur.setMotDePasse(resultSet.getString("mot_de_passe"));
-                utilisateur.setRole(resultSet.getString("role"));
-                utilisateur.setBio(resultSet.getString("bio"));
-                utilisateur.setPhotoProfil(resultSet.getString("photo_profil"));
-                utilisateur.setXp(resultSet.getInt("xp"));
-                utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class)); // Nullable Integer
-                utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
-                utilisateurs.add(utilisateur);
+        String qry = "SELECT * FROM `Utilisateur`";
+        try (Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery(qry)) {
+            while (rs.next()) {
+                Utilisateur u = new Utilisateur();
+                u.setUtilisateurId(rs.getInt("utilisateur_id"));
+                u.setPseudo(rs.getString("pseudo"));
+                u.setEmail(rs.getString("email"));
+                u.setMotDePasseHache(rs.getString("mot_de_passe_hache"));
+                u.setEstActif(rs.getBoolean("est_actif"));
+                u.setRoleId(rs.getInt("role_id"));
+
+                utilisateurs.add(u);
             }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des utilisateurs : " + e.getMessage());
         }
         return utilisateurs;
     }
 
-    // logique jiven il utilisateur  bil id
-    public Utilisateur getUtilisateurById(int id) throws SQLException {
-        String query = "SELECT * FROM utilisateur WHERE id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, id);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    Utilisateur utilisateur = new Utilisateur();
-                    utilisateur.setId(resultSet.getInt("id"));
-                    utilisateur.setNom(resultSet.getString("nom"));
-                    utilisateur.setEmail(resultSet.getString("email"));
-                    utilisateur.setMotDePasse(resultSet.getString("mot_de_passe"));
-                    utilisateur.setRole(resultSet.getString("role"));
-                    utilisateur.setBio(resultSet.getString("bio"));
-                    utilisateur.setPhotoProfil(resultSet.getString("photo_profil"));
-                    utilisateur.setXp(resultSet.getInt("xp"));
-                    utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class)); // Nullable Integer
-                    utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
-                    return utilisateur;
-                }
-            }
-        }
-        return null;
-    }
+    @Override
+    public void update(Utilisateur utilisateur) {
+        String qry = "UPDATE `Utilisateur` SET `pseudo` = ?, `email` = ?, `mot_de_passe_hache` = ?, `est_actif` = ?, `role_id` = ? WHERE `utilisateur_id` = ?";
+        try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
+            pstm.setString(1, utilisateur.getPseudo());
+            pstm.setString(2, utilisateur.getEmail());
+            pstm.setString(3, utilisateur.getMotDePasseHache());
+            pstm.setBoolean(4, utilisateur.isEstActif());
+            pstm.setInt(5, utilisateur.getRoleId());
+            pstm.setInt(6, utilisateur.getUtilisateurId());
 
-    // logique update
-    public void modifierUtilisateur(Utilisateur utilisateur) throws SQLException {
-        String query = "UPDATE utilisateur SET nom = ?, email = ?, mot_de_passe = ?, role = ?, bio = ?, photo_profil = ?, xp = ?, niveau = ?, xp_requis = ? WHERE id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, utilisateur.getNom());
-            preparedStatement.setString(2, utilisateur.getEmail());
-            preparedStatement.setString(3, utilisateur.getMotDePasse());
-            preparedStatement.setString(4, utilisateur.getRole());
-            preparedStatement.setString(5, utilisateur.getBio());
-            preparedStatement.setString(6, utilisateur.getPhotoProfil());
-            preparedStatement.setInt(7, utilisateur.getXp());
-            if (utilisateur.getNiveau() != null) {
-                preparedStatement.setInt(8, utilisateur.getNiveau());
-            } else {
-                preparedStatement.setNull(8, Types.INTEGER);
-            }
-            preparedStatement.setInt(9, utilisateur.getXpRequis());
-            preparedStatement.setInt(10, utilisateur.getId());
-            preparedStatement.executeUpdate();
+            pstm.executeUpdate();
+            System.out.println("Utilisateur mis à jour avec succès.");
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la mise à jour de l'utilisateur : " + e.getMessage());
         }
     }
 
-    // logique delete
-    public void supprimerUtilisateur(int id) throws SQLException {
-        String query = "DELETE FROM utilisateur WHERE id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
+    @Override
+    public void delete(Utilisateur utilisateur) {
+        String qry = "DELETE FROM `Utilisateur` WHERE `utilisateur_id` = ?";
+        try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
+            pstm.setInt(1, utilisateur.getUtilisateurId());
+            pstm.executeUpdate();
+            System.out.println("Utilisateur supprimé avec succès.");
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression de l'utilisateur : " + e.getMessage());
         }
-    }
-    // logique il login
-    public Utilisateur loginUtilisateur(String email, String motDePasse) throws SQLException {
-        String query = "SELECT * FROM utilisateur WHERE email = ? AND mot_de_passe = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, motDePasse); // In production: compare hashed values.
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    Utilisateur utilisateur = new Utilisateur();
-                    utilisateur.setId(resultSet.getInt("id"));
-                    utilisateur.setNom(resultSet.getString("nom"));
-                    utilisateur.setEmail(resultSet.getString("email"));
-                    utilisateur.setMotDePasse(resultSet.getString("mot_de_passe"));
-                    utilisateur.setRole(resultSet.getString("role"));
-                    utilisateur.setBio(resultSet.getString("bio"));
-                    utilisateur.setPhotoProfil(resultSet.getString("photo_profil"));
-                    utilisateur.setXp(resultSet.getInt("xp"));
-                    utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class));
-                    utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
-                    return utilisateur;
-                }
-            }
-        }
-        return null;
     }
 
 

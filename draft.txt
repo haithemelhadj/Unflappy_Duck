@@ -1,0 +1,47 @@
+Connection cnx = MyDatabase.getInstance().getCnx();
+        String qry = "SELECT COLUMN_NAME, DATA_TYPE "
+                + "FROM INFORMATION_SCHEMA.COLUMNS "
+                + "WHERE TABLE_NAME = 'contrat' "
+                + "AND TABLE_SCHEMA = 'ss';";
+        try {
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+
+            while (rs.next())
+                System.out.print(rs.getString("COLUMN_NAME")+", ");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println();
+
+        try {
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+
+            while (rs.next())
+                System.out.print("?,");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println();
+
+        try {
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+
+            while (rs.next())
+                System.out.print(rs.getString("COLUMN_NAME")+"=?, ");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println();
+
+        try {
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+
+            while (rs.next())
+                System.out.println("private "+ Sql2Java.mapToJavaType(rs.getString("DATA_TYPE")) +" "+rs.getString("COLUMN_NAME")+";");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }

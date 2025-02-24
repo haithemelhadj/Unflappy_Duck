@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controller.AjouterOffre"
+            prefHeight="400.0" prefWidth="600.0">
+    <VBox layoutX="37.0" layoutY="39.0">
+        <TextField fx:id="freelance_id" promptText="Freelancer_id" />
+        <TextField fx:id="titre" promptText="titre" />
+        <TextField fx:id="duree_jours" promptText="duree_jours" />
+        <TextField fx:id="prix" promptText="prix" />
+        <ChoiceBox fx:id="mode_paiement" prefWidth="150.0" />
+    </VBox>
+    <TextArea fx:id="description" layoutX="336.0" layoutY="39.0" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
+    <TextArea fx:id="expertise" layoutX="23.0" layoutY="176.0" prefHeight="200.0" prefWidth="200.0" promptText="Expertise" />
+    <Button fx:id="boutonAjouter" layoutX="389.0" layoutY="305.0" mnemonicParsing="false" onAction="#ajouterService" text="Ajouter" />
+
+</AnchorPane>

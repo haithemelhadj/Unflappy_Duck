@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.GestionTache">
+   <children>
+      <Label layoutX="263.0" layoutY="14.0" text="Gestion Tache" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="24.0" />
+         </font>
+      </Label>
+      <VBox layoutX="52.0" layoutY="57.0" prefHeight="411.0" prefWidth="318.0" spacing="15.0">
+         <children>
+            <Label text="Titre:">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="titre" promptText="nom" />
+            <Label text="Description:">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="description" promptText="Description" />
+            <Label text="Equipe responsable:">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="equipe_id" prefWidth="150.0" />
+            <Label text="Membre responsable:">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="membre_id" prefWidth="150.0" />
+            <Label text="statut:">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="statut" prefWidth="150.0" />
+            <HBox alignment="CENTER" prefHeight="67.0" prefWidth="318.0" spacing="40.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#update" text="Mise a jour" />
+                  <Button lineSpacing="20.0" mnemonicParsing="false" onAction="#add" text="Ajouter" textAlignment="CENTER" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="387.0" layoutY="83.0" prefHeight="370.0" prefWidth="290.0" spacing="20.0">
+         <children>
+            <Label text="liste taches:">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <ListView fx:id="taches_list" prefHeight="200.0" prefWidth="200.0" />
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+               <children>
+                  <Button lineSpacing="20.0" mnemonicParsing="false" onAction="#refrech" text="Refrech" textAlignment="CENTER" />
+                  <Button lineSpacing="20.0" mnemonicParsing="false" onAction="#delete" text="Delete" textAlignment="CENTER" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

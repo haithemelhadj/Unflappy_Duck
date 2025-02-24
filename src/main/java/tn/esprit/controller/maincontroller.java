@@ -65,7 +65,7 @@ public class maincontroller {
     @FXML
     public void initialize() {
         Connection connection = MyDatabase.getInstance().getCnx();
-        serviceUtilisateur = new ServiceUtilisateur(connection);
+        serviceUtilisateur = new ServiceUtilisateur();
 
         loginPane.setVisible(true);
         mainPane.setVisible(false);

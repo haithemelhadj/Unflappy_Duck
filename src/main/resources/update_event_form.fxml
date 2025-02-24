@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controllers.UpdateEventController">
+    <GridPane hgap="10" prefHeight="633.0" prefWidth="962.0" vgap="10">
+        <!-- Event Name -->
+        <Label text="Nom de l'événement :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="eventNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <!-- Description -->
+        <Label text="Description :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextArea fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <!-- Start Time -->
+        <Label text="Heure de début :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="startTimeField" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <!-- End Time -->
+        <Label text="Heure de fin :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="endTimeField" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <!-- Location -->
+        <Label text="Lieu :" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <ComboBox fx:id="locationComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+        <!-- Manual Location Entry -->
+        <CheckBox fx:id="manualLocationCheckBox" onAction="#toggleManualLocationFields" text="Ajouter un nouveau lieu" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+
+        <!-- New Location Fields -->
+        <Label text="Nom du lieu :" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <TextField fx:id="newLocationField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+        <Label text="Adresse :" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+        <Label text="Capacité :" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+        <TextField fx:id="capacityField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+
+        <!-- Calendar -->
+        <Label text="Calendrier :" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+        <DatePicker fx:id="calendarDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+
+        <!-- Save Button -->
+        <Button onAction="#saveUpdatedEvent" text="Enregistrer les modifications" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+</VBox>

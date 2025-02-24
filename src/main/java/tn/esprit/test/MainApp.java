@@ -1,4 +1,4 @@
-package tn.esprit.test;
+package esprit.tn.test;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +17,12 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/GestionCour.fxml"));
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/Home.fxml"));
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("creation de compte");
+            primaryStage.setTitle("Ajout D'un Article");
             primaryStage.show();
 
         } catch (IOException e) {

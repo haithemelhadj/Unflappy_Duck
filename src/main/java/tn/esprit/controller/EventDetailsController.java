@@ -44,7 +44,7 @@ public class EventDetailsController {
     @FXML
     private void goBack() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UserEventsView.fxml")); // Adjust the path as needed
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/UserEventsView.fxml")); // Adjust the path as needed
             Parent root = loader.load();
 
             Stage stage = (Stage) eventNameLabel.getScene().getWindow();

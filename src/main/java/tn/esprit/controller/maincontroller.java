@@ -65,7 +65,7 @@ public class maincontroller {
     @FXML
     public void initialize() {
         Connection connection = MyDatabase.getInstance().getCnx();
-        serviceUtilisateur = new ServiceUtilisateur(connection);
+        serviceUtilisateur = new ServiceUtilisateur();
 
         loginPane.setVisible(true);
         mainPane.setVisible(false);
@@ -103,12 +103,12 @@ public class maincontroller {
     }
 
     @FXML
-    private void login() {
+    private boolean login() {
         String email = loginEmailField.getText().trim();
         String password = loginPasswordField.getText();
         if (email.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in both email and password.");
-            return;
+            return false;
         }
         try {
             Utilisateur user = serviceUtilisateur.loginUtilisateur(email, password);
@@ -119,12 +119,14 @@ public class maincontroller {
                 prefillEditFields(user);
                 loginPane.setVisible(false);
                 mainPane.setVisible(true);
+                return true;
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password.");
             }
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to login: " + e.getMessage());
         }
+        return false;
     }
 
     @FXML

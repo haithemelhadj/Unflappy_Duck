@@ -13,7 +13,6 @@ import tn.esprit.models.Lieu;
 import tn.esprit.services.ServiceEvenement;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
@@ -125,7 +124,7 @@ public class MyEventsController {
     private void goBack() {
         try {
             // Load the FXML file for the previous view
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UserEventsView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/UserEventsView.fxml"));
             Parent root = loader.load();
 
             // Get the current stage

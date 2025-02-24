@@ -19,7 +19,7 @@ public class Main {
 
         try {
 
-            ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur(connection);
+            ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur();
 
 
             Utilisateur newUtilisateur = new Utilisateur();

@@ -32,7 +32,7 @@ public class AllEventsController {
     @FXML
     private void goBack() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/event_form.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/event_form.fxml"));
             Parent root = loader.load();
 
             // Get the current stage and set the new scene
@@ -105,7 +105,7 @@ public class AllEventsController {
     private void updateEvent(Evenement event) {
         try {
             // Load the update form for the selected event
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/update_event_form.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/update_event_form.fxml"));
             Parent root = loader.load();
 
             // Get the controller for the update form and pass the selected event

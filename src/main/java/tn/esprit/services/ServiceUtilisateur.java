@@ -1,6 +1,7 @@
 package tn.esprit.services;
 
 import tn.esprit.models.Utilisateur;
+import tn.esprit.utils.MyDatabase;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,10 +9,10 @@ import java.util.List;
 
 public class ServiceUtilisateur {
 
-    private Connection connection;
+    private final Connection connection;
 
-    public ServiceUtilisateur(Connection connection) {
-        this.connection = connection;
+    public ServiceUtilisateur() {
+        this.connection = MyDatabase.getInstance().getCnx();
     }
 
     // logique zidane utilisateur

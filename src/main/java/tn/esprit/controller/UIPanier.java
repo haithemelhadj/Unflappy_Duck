@@ -1,9 +1,9 @@
-package esprit.tn.controllers;
+package tn.esprit.controller;
 
-import esprit.tn.models.ArticleBoutique;
-import esprit.tn.models.Panier;
-import esprit.tn.services.ServiceArticleBoutique;
-import esprit.tn.services.ServicePanier;
+import tn.esprit.models.ArticleBoutique;
+import tn.esprit.models.Panier;
+import tn.esprit.services.ServiceArticleBoutique;
+import tn.esprit.services.ServicePanier;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +27,7 @@ public class UIPanier implements Initializable {
     public TextField quantite;
 
     public TextField utilisateur_id;
-    public ListView<esprit.tn.models.Panier> panier;
+    public ListView<tn.esprit.models.Panier> panier;
     public ChoiceBox<Integer> article_id;
 
     public void ajouterPanier(ActionEvent actionEvent) {

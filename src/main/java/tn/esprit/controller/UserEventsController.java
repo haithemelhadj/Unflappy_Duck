@@ -67,7 +67,6 @@ public class UserEventsController {
             e.printStackTrace();
         }
     }
-
     private void setupSearchAndSort() {
         // Search functionality
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {

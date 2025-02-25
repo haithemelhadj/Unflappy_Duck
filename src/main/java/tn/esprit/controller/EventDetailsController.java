@@ -7,6 +7,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import tn.esprit.models.Evenement;
+import tn.esprit.services.ServiceEvenement;
 
 public class EventDetailsController {
 
@@ -35,11 +36,11 @@ public class EventDetailsController {
 
     @FXML
     private void addToMyEvents() {
-        // Add the event to the user's personal list (you can use a service or a list in the controller)
-        System.out.println("Événement ajouté à votre liste: " + event.getNom());
-
-        // Display the event details immediately
-        displayEventDetails();
+        if (event != null) {
+            ServiceEvenement serviceEvenement = new ServiceEvenement();
+            serviceEvenement.addEventToUser(event.getEvenementId());
+            System.out.println("Événement ajouté à votre liste: " + event.getNom());
+        }
     }
     @FXML
     private void goBack() {

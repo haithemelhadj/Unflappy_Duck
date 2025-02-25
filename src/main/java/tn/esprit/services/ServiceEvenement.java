@@ -144,4 +144,47 @@ public class ServiceEvenement implements IService<Evenement> {
             System.out.println("Erreur lors de la suppression de l'événement : " + e.getMessage());
         }
     }
+    public void addEventToUser(int eventId) {
+        String qry = "UPDATE Evenement SET is_added = TRUE WHERE evenement_id = ?";
+        try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
+            pstm.setInt(1, eventId);
+            pstm.executeUpdate();
+            System.out.println("Événement ajouté à l'utilisateur.");
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de l'ajout de l'événement à l'utilisateur : " + e.getMessage());
+        }
+    }
+
+    public void removeEventFromUser(int eventId) {
+        String qry = "UPDATE Evenement SET is_added = FALSE WHERE evenement_id = ?";
+        try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
+            pstm.setInt(1, eventId);
+            pstm.executeUpdate();
+            System.out.println("Événement supprimé de l'utilisateur.");
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression de l'événement de l'utilisateur : " + e.getMessage());
+        }
+    }
+
+    public List<Evenement> getEventsForUser() {
+        List<Evenement> events = new ArrayList<>();
+        String qry = "SELECT * FROM Evenement WHERE is_added = TRUE";
+        try (Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery(qry)) {
+            while (rs.next()) {
+                Evenement event = new Evenement();
+                event.setEvenementId(rs.getInt("evenement_id"));
+                event.setNom(rs.getString("nom"));
+                event.setDescription(rs.getString("description"));
+                event.setDateDebut(rs.getTimestamp("date_debut"));
+                event.setDateFin(rs.getTimestamp("date_fin"));
+                event.setLieuId(rs.getInt("lieu_id"));
+                event.setCalendrierId(rs.getInt("calendrier_id"));
+                event.setAdded(rs.getBoolean("is_added"));
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des événements de l'utilisateur : " + e.getMessage());
+        }
+        return events;
+    }
 }

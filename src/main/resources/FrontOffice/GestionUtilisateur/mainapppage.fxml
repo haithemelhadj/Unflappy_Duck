@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tn.esprit.controller.maincontroller"
+            fx:controller="tn.esprit.controller.MainController"
             prefHeight="700.0" prefWidth="1000.0"
             style="-fx-background-color: #1a237e;">
     <VBox spacing="20" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">

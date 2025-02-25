@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 public class EventFormController {
 
@@ -151,7 +150,7 @@ public class EventFormController {
     private void goToAllEvents(ActionEvent event) {
         try {
             // Load the all_events.fxml interface
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/all_events.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/all_events.fxml"));
             Parent newroot = loader.load();
             Scene scene = new Scene(newroot);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -165,7 +164,7 @@ public class EventFormController {
     @FXML
     private void goToUserInterface() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UserEventsView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/UserEventsView.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) eventNameField.getScene().getWindow();

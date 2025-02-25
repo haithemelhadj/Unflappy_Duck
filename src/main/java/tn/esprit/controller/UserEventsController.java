@@ -13,7 +13,6 @@ import tn.esprit.models.Evenement;
 import tn.esprit.services.ServiceEvenement;
 
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 
 public class UserEventsController {
@@ -54,7 +53,7 @@ public class UserEventsController {
 
     private void showEventDetails(Evenement event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EventDetails.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/EventDetails.fxml"));
             Parent root = loader.load();
 
             EventDetailsController controller = loader.getController();
@@ -83,7 +82,7 @@ public class UserEventsController {
     @FXML
     private void goToMyEvents() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MyEvents.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/MyEvents.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) eventsListContainer.getScene().getWindow();

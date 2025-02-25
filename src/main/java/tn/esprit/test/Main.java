@@ -1,6 +1,7 @@
 package tn.esprit.test;
 
 import tn.esprit.models.Utilisateur;
+import tn.esprit.models.enums.userRoles;
 import tn.esprit.services.ServiceUtilisateur;
 
 
@@ -26,7 +27,7 @@ public class Main {
             newUtilisateur.setNom("John Doe");
             newUtilisateur.setEmail("john.doe@example.com");
             newUtilisateur.setMotDePasse("password123");
-            newUtilisateur.setRole("utilisateur");
+            newUtilisateur.setRole(userRoles.utilisateur);
             newUtilisateur.setBio("A passionate gamer.");
             newUtilisateur.setPhotoProfil("profile.jpg");
             newUtilisateur.setXp(100);

@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="style.css">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="/styleHomePage.css">
     <top>
         <HBox spacing="10" style="-fx-background-color: black; -fx-padding: 15;">
             <Label text="UNFLAPPY DUCK" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>

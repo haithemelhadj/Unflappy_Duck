@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import tn.esprit.models.Utilisateur;
+import tn.esprit.models.enums.userRoles;
 import tn.esprit.services.ServiceUtilisateur;
 import tn.esprit.utils.MyDatabase;
 
@@ -149,7 +150,7 @@ public class maincontroller {
                 username,
                 email,
                 password,
-                "utilisateur",
+                userRoles.utilisateur,
                 "",
                 "",
                 0,

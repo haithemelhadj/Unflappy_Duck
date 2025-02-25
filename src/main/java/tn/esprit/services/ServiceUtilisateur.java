@@ -1,6 +1,7 @@
 package tn.esprit.services;
 
 import tn.esprit.models.Utilisateur;
+import tn.esprit.models.enums.userRoles;
 import tn.esprit.utils.MyDatabase;
 
 import java.sql.*;
@@ -22,7 +23,7 @@ public class ServiceUtilisateur {
             preparedStatement.setString(1, utilisateur.getNom());
             preparedStatement.setString(2, utilisateur.getEmail());
             preparedStatement.setString(3, utilisateur.getMotDePasse());
-            preparedStatement.setString(4, utilisateur.getRole());
+            preparedStatement.setString(4, utilisateur.getRole().toString());
             preparedStatement.setString(5, utilisateur.getBio());
             preparedStatement.setString(6, utilisateur.getPhotoProfil());
             preparedStatement.setInt(7, utilisateur.getXp());
@@ -47,7 +48,7 @@ public class ServiceUtilisateur {
                 utilisateur.setNom(resultSet.getString("nom"));
                 utilisateur.setEmail(resultSet.getString("email"));
                 utilisateur.setMotDePasse(resultSet.getString("mot_de_passe"));
-                utilisateur.setRole(resultSet.getString("role"));
+                utilisateur.setRole(userRoles.valueOf(resultSet.getString("role")));
                 utilisateur.setBio(resultSet.getString("bio"));
                 utilisateur.setPhotoProfil(resultSet.getString("photo_profil"));
                 utilisateur.setXp(resultSet.getInt("xp"));
@@ -71,7 +72,7 @@ public class ServiceUtilisateur {
                     utilisateur.setNom(resultSet.getString("nom"));
                     utilisateur.setEmail(resultSet.getString("email"));
                     utilisateur.setMotDePasse(resultSet.getString("mot_de_passe"));
-                    utilisateur.setRole(resultSet.getString("role"));
+                    utilisateur.setRole(userRoles.valueOf(resultSet.getString("role")));
                     utilisateur.setBio(resultSet.getString("bio"));
                     utilisateur.setPhotoProfil(resultSet.getString("photo_profil"));
                     utilisateur.setXp(resultSet.getInt("xp"));
@@ -91,7 +92,7 @@ public class ServiceUtilisateur {
             preparedStatement.setString(1, utilisateur.getNom());
             preparedStatement.setString(2, utilisateur.getEmail());
             preparedStatement.setString(3, utilisateur.getMotDePasse());
-            preparedStatement.setString(4, utilisateur.getRole());
+            preparedStatement.setString(4, utilisateur.getRole().toString());
             preparedStatement.setString(5, utilisateur.getBio());
             preparedStatement.setString(6, utilisateur.getPhotoProfil());
             preparedStatement.setInt(7, utilisateur.getXp());
@@ -127,7 +128,7 @@ public class ServiceUtilisateur {
                     utilisateur.setNom(resultSet.getString("nom"));
                     utilisateur.setEmail(resultSet.getString("email"));
                     utilisateur.setMotDePasse(resultSet.getString("mot_de_passe"));
-                    utilisateur.setRole(resultSet.getString("role"));
+                    utilisateur.setRole(userRoles.valueOf(resultSet.getString("role")));
                     utilisateur.setBio(resultSet.getString("bio"));
                     utilisateur.setPhotoProfil(resultSet.getString("photo_profil"));
                     utilisateur.setXp(resultSet.getInt("xp"));

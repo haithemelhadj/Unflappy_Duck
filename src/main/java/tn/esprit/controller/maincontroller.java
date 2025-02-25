@@ -124,7 +124,7 @@ public class maincontroller {
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password.");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to login: " + e.getMessage());
         }
         return false;
@@ -159,7 +159,7 @@ public class maincontroller {
         );
 
         try {
-            serviceUtilisateur.ajouterUtilisateur(utilisateur);
+            serviceUtilisateur.add(utilisateur);
             currentUser = utilisateur;
             showAlert(Alert.AlertType.INFORMATION, "Success", "Account created successfully!");
             clearCreateForm();
@@ -167,7 +167,7 @@ public class maincontroller {
             prefillEditFields(utilisateur);
             loginPane.setVisible(false);
             mainPane.setVisible(true);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to create account: " + e.getMessage());
         }
     }
@@ -196,11 +196,11 @@ public class maincontroller {
         currentUser.setEmail(newEmail);
 
         try {
-            serviceUtilisateur.modifierUtilisateur(currentUser);
+            serviceUtilisateur.update(currentUser);
             showAlert(Alert.AlertType.INFORMATION, "Success", "Profile updated successfully!");
             updateProfileSection(currentUser);
             clearEditForm();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to update profile: " + e.getMessage());
         }
     }
@@ -218,10 +218,10 @@ public class maincontroller {
     @FXML
     private void showAllUsers() {
         try {
-            List<Utilisateur> users = serviceUtilisateur.getAllUtilisateurs();
+            List<Utilisateur> users = serviceUtilisateur.getAll();
             ObservableList<Utilisateur> observableUsers = FXCollections.observableArrayList(users);
             usersListView.setItems(observableUsers);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to retrieve users: " + e.getMessage());
         }
     }

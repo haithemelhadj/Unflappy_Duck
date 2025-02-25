@@ -42,7 +42,7 @@ public class Login {
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password.");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to login: " + e.getMessage());
         }
     }

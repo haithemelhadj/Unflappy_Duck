@@ -2,6 +2,7 @@ package tn.esprit.services;
 
 import tn.esprit.interfaces.IService;
 import tn.esprit.models.Utilisateur;
+import tn.esprit.models.enums.userRoles;
 import tn.esprit.utils.MyDatabase;
 
 import java.sql.*;
@@ -17,23 +18,27 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
 
     @Override
     public void add(Utilisateur utilisateur) {
-        String qry = "INSERT INTO utilisateur (pseudo, email, mot_de_passe_hache, est_actif, role_id) VALUES (?, ?, ?, ?, ?)";
+        String qry = "INSERT INTO utilisateur (nom, email, motDePasse, role, bio, photoProfil, xp, niveau, xpRequis) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstm = cnx.prepareStatement(qry, Statement.RETURN_GENERATED_KEYS)) {
-            pstm.setString(1, utilisateur.getPseudo());
+            pstm.setString(1, utilisateur.getNom());
             pstm.setString(2, utilisateur.getEmail());
-            pstm.setString(3, utilisateur.getMotDePasseHache());
-            pstm.setBoolean(4, utilisateur.isEstActif());
-            pstm.setInt(5, utilisateur.getRoleId());
+            pstm.setString(3, utilisateur.getMotDePasse()); // Ensure this is hashed before calling
+            pstm.setString(4, utilisateur.getRole().name()); // Store enum name
+            pstm.setString(5, utilisateur.getBio());
+            pstm.setString(6, utilisateur.getPhotoProfil());
+            pstm.setInt(7, utilisateur.getXp());
+            pstm.setObject(8, utilisateur.getNiveau(), Types.INTEGER); // Handle null values
+            pstm.setInt(9, utilisateur.getXpRequis());
 
             int affectedRows = pstm.executeUpdate();
             if (affectedRows > 0) {
                 try (ResultSet generatedKeys = pstm.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
-                        utilisateur.setUtilisateurId(generatedKeys.getInt(1));
+                        utilisateur.setId(generatedKeys.getInt(1));
                     }
                 }
             }
-            System.out.println("Utilisateur ajouté avec succès. ID : " + utilisateur.getUtilisateurId());
+            System.out.println("Utilisateur ajouté avec succès. ID : " + utilisateur.getId());
         } catch (SQLException e) {
             System.err.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
         }
@@ -45,14 +50,7 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
         String qry = "SELECT * FROM utilisateur";
         try (Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery(qry)) {
             while (rs.next()) {
-                Utilisateur u = new Utilisateur(
-                        rs.getInt("utilisateur_id"),
-                        rs.getString("pseudo"),
-                        rs.getString("email"),
-                        rs.getString("mot_de_passe_hache"),
-                        rs.getBoolean("est_actif"),
-                        rs.getInt("role_id")
-                );
+                Utilisateur u = mapResultSetToUtilisateur(rs);
                 utilisateurs.add(u);
             }
         } catch (SQLException e) {
@@ -63,14 +61,18 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
 
     @Override
     public void update(Utilisateur utilisateur) {
-        String qry = "UPDATE utilisateur SET pseudo = ?, email = ?, mot_de_passe_hache = ?, est_actif = ?, role_id = ? WHERE utilisateur_id = ?";
+        String qry = "UPDATE utilisateur SET nom = ?, email = ?, motDePasse = ?, role = ?, bio = ?, photoProfil = ?, xp = ?, niveau = ?, xpRequis = ? WHERE id = ?";
         try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
-            pstm.setString(1, utilisateur.getPseudo());
+            pstm.setString(1, utilisateur.getNom());
             pstm.setString(2, utilisateur.getEmail());
-            pstm.setString(3, utilisateur.getMotDePasseHache());
-            pstm.setBoolean(4, utilisateur.isEstActif());
-            pstm.setInt(5, utilisateur.getRoleId());
-            pstm.setInt(6, utilisateur.getUtilisateurId());
+            pstm.setString(3, utilisateur.getMotDePasse()); // Ensure this is hashed before calling
+            pstm.setString(4, utilisateur.getRole().name()); // Store enum name
+            pstm.setString(5, utilisateur.getBio());
+            pstm.setString(6, utilisateur.getPhotoProfil());
+            pstm.setInt(7, utilisateur.getXp());
+            pstm.setObject(8, utilisateur.getNiveau(), Types.INTEGER); // Handle null values
+            pstm.setInt(9, utilisateur.getXpRequis());
+            pstm.setInt(10, utilisateur.getId());
 
             int rowsUpdated = pstm.executeUpdate();
             if (rowsUpdated > 0) {
@@ -85,9 +87,9 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
 
     @Override
     public void delete(Utilisateur utilisateur) {
-        String qry = "DELETE FROM utilisateur WHERE utilisateur_id = ?";
+        String qry = "DELETE FROM utilisateur WHERE id = ?";
         try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
-            pstm.setInt(1, utilisateur.getUtilisateurId());
+            pstm.setInt(1, utilisateur.getId());
             int rowsDeleted = pstm.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("Utilisateur supprimé avec succès.");
@@ -100,25 +102,34 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
     }
 
     public Utilisateur loginUtilisateur(String email, String motDePasse) {
-        String qry = "SELECT * FROM utilisateur WHERE email = ? AND mot_de_passe_hache = ?";
+        String qry = "SELECT * FROM utilisateur WHERE email = ? AND motDePasse = ?";
         try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
             pstm.setString(1, email);
-            pstm.setString(2, motDePasse);
+            pstm.setString(2, motDePasse); // Ensure this is hashed before calling
             try (ResultSet rs = pstm.executeQuery()) {
                 if (rs.next()) {
-                    return new Utilisateur(
-                            rs.getInt("utilisateur_id"),
-                            rs.getString("pseudo"),
-                            rs.getString("email"),
-                            rs.getString("mot_de_passe_hache"),
-                            rs.getBoolean("est_actif"),
-                            rs.getInt("role_id")
-                    );
+                    return mapResultSetToUtilisateur(rs);
                 }
             }
         } catch (SQLException e) {
             System.err.println("Erreur lors de l'authentification : " + e.getMessage());
         }
         return null;
+    }
+
+    // Helper method to map ResultSet to Utilisateur
+    private Utilisateur mapResultSetToUtilisateur(ResultSet rs) throws SQLException {
+        return new Utilisateur(
+                rs.getInt("id"),
+                rs.getString("nom"),
+                rs.getString("email"),
+                rs.getString("motDePasse"),
+                userRoles.valueOf(rs.getString("role")), // Convert string back to enum
+                rs.getString("bio"),
+                rs.getString("photoProfil"),
+                rs.getInt("xp"),
+                rs.getObject("niveau", Integer.class), // Handle null values
+                rs.getInt("xpRequis")
+        );
     }
 }

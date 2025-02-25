@@ -17,7 +17,7 @@ public class ServiceEvenement implements IService<Evenement> {
 
     @Override
     public void add(Evenement evenement) {
-        String qry = "INSERT INTO `Evenement` (`nom`, `description`, `date_debut`, `date_fin`, `lieu_id`, `calendrier_id`, `createur_evenement`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String qry = "INSERT INTO `evenement` (`nom`, `description`, `date_debut`, `date_fin`, `lieu_id`, `calendrier_id`, `createur_evenement`) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstm = cnx.prepareStatement(qry, Statement.RETURN_GENERATED_KEYS)) {
             pstm.setString(1, evenement.getNom());
             pstm.setString(2, evenement.getDescription());
@@ -45,7 +45,7 @@ public class ServiceEvenement implements IService<Evenement> {
     @Override
     public List<Evenement> getAll() {
         List<Evenement> evenements = new ArrayList<>();
-        String qry = "SELECT * FROM `Evenement`";
+        String qry = "SELECT * FROM `evenement`";
         try (Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery(qry)) {
             while (rs.next()) {
                 Evenement e = new Evenement();
@@ -115,7 +115,7 @@ public class ServiceEvenement implements IService<Evenement> {
 
     @Override
     public void update(Evenement evenement) {
-        String qry = "UPDATE `Evenement` SET `nom` = ?, `description` = ?, `date_debut` = ?, `date_fin` = ?, `lieu_id` = ?, `calendrier_id` = ?, `createur_evenement` = ? WHERE `evenement_id` = ?";
+        String qry = "UPDATE `evenement` SET `nom` = ?, `description` = ?, `date_debut` = ?, `date_fin` = ?, `lieu_id` = ?, `calendrier_id` = ?, `createur_evenement` = ? WHERE `evenement_id` = ?";
         try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
             pstm.setString(1, evenement.getNom());
             pstm.setString(2, evenement.getDescription());
@@ -135,7 +135,7 @@ public class ServiceEvenement implements IService<Evenement> {
 
     @Override
     public void delete(Evenement evenement) {
-        String qry = "DELETE FROM `Evenement` WHERE `evenement_id` = ?";
+        String qry = "DELETE FROM `evenement` WHERE `evenement_id` = ?";
         try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
             pstm.setInt(1, evenement.getEvenementId());
             pstm.executeUpdate();

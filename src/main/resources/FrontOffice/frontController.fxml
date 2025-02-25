@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tn.esprit.controller.FrontController"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="/styleHomePage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.FrontController">
 
+        <top>
+            <HBox spacing="10" style="-fx-background-color: black; -fx-padding: 15;">
+                <Label style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="UNFLAPPY DUCK" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button onAction="#navigateToEvents" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Events" />
+                <Button onAction="#navigateToMarket" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Market" />
+                <Button onAction="#navigateToQuiz" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Quiz" />
+                <Button onAction="#navigateToStore" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Store" />
+            </HBox>
+        </top>
 
+        <center>
+            <StackPane fx:id="displayPane" style="-fx-background-image: url('background.jpg'); -fx-background-size: cover;">
+         <BorderPane fx:id="borderPane">
+            <center>
+                      <VBox alignment="CENTER" prefHeight="518.0" prefWidth="895.0" spacing="20">
+                          <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="HERE TO CREATE" />
+                          <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="MOMENTS THAT LAST" />
+                          <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="A LIFETIME" />
+                          <Button style="-fx-background-color: yellow; -fx-text-fill: black; -fx-font-weight: bold;" text="Upcoming Events" />
+                      </VBox>
+            </center>
+         </BorderPane>
+            </StackPane>
+        </center>
 
-</AnchorPane>
+</BorderPane>

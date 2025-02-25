@@ -14,7 +14,7 @@ public class UIFreelance extends Application {
     @Override
     public void start(Stage primaryStage) {
         Router.initialize(primaryStage);
-
-        Controller.login();
+        Controller con = new Controller();
+        con.login();
     }
 }

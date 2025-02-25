@@ -1,26 +1,28 @@
 package tn.esprit.controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 import tn.esprit.models.Utilisateur;
 import tn.esprit.models.enums.userRoles;
+import tn.esprit.utils.Session;
 
 public class Controller {
-    private static Utilisateur user = null;
-    public static void login(){
+    public final void login(){
+        if (Session.isActive())
+            return;
         Router.navigateTo("/login.fxml", "Login", new Login(()->{
-            if (user.getRole() == userRoles.admin)
+            if (Session.getActiveUser().getRole() == userRoles.admin)
                 Router.navigateTo("/BackOffice/backController.fxml", null);
             else
                 Router.navigateTo("/FrontOffice/frontController.fxml", null);
-
         }
         ));
     }
 
-    public static void setUser(Utilisateur user) {
-        Controller.user = user;
-    }
+    @FXML
+    private BorderPane borderPane;
 
-    public static Utilisateur getUser() {
-        return user;
+    public BorderPane getBorderPane(){
+        return borderPane;
     }
 }

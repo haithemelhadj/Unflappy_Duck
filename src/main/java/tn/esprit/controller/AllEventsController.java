@@ -26,7 +26,7 @@ public class AllEventsController {
 
     @FXML
     public void initialize() {
-        displayEvents(); // Display events when the controller is initialized
+        displayEvents();
     }
 
     @FXML

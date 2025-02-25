@@ -13,18 +13,17 @@ public class Router {
         return primaryStage;
     }
 
-
-
     // Initialize the router with the primary stage (call this once at startup)
     public static void initialize(Stage stage) {
         primaryStage = stage;
     }
 
     // Navigate to a new scene by FXML path
-    public static void navigateTo(String fxmlPath) {
+    public static void navigateTo(String fxmlPath, Object o) {
         try {
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(Router.class.getResource(fxmlPath));
+            loader.setController(o);
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
@@ -36,10 +35,11 @@ public class Router {
         System.out.println("Hello");
     }
 
-    public static void navigateTo(String fxmlPath, String title) {
+    public static void navigateTo(String fxmlPath, String title, Object o) {
         try {
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(Router.class.getResource(fxmlPath));
+            loader.setController(o);
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);

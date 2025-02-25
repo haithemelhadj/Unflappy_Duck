@@ -45,14 +45,24 @@ public class EventDetailsController {
     @FXML
     private void goBack() {
         try {
+            // Load the FXML file for the previous view
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/UserEventsView.fxml")); // Adjust the path as needed
             Parent root = loader.load();
 
+            // Get the current stage (window)
             Stage stage = (Stage) eventNameLabel.getScene().getWindow();
+
+            // Set the new scene on the existing stage
             stage.setScene(new Scene(root));
+
+            // Optionally, you can set the title of the window
+            stage.setTitle("Mes Événements");
+
+            // Show the stage (it's already visible, so this just updates the content)
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            System.err.println("Failed to load the FXML file: " + e.getMessage());
         }
     }
 }

@@ -112,19 +112,18 @@ public class MyEventsController {
     @FXML
     private void goBack() {
         try {
-            // Load the previous FXML file (e.g., UserEventsView.fxml)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UserEventsView.fxml"));
+            // Ensure the path to the FXML file is correct
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/UserEventsView.fxml"));
             Parent root = loader.load();
 
-            // Get the current stage
+            // Get the current stage and set the new scene
             Stage stage = (Stage) myEventsContainer.getScene().getWindow();
-
-            // Set the new scene
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            // Add a meaningful error message
+            System.err.println("Failed to load the FXML file: " + e.getMessage());
         }
     }
 }

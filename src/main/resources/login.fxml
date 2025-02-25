@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="76.0" prefWidth="53.0" style="-fx-background-color: #1a237e;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="76.0" prefWidth="53.0" style="-fx-background-color: #1a237e;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.Login">
     <TitledPane fx:id="loginPane" animated="false" text="Login">
         <content>
             <VBox prefHeight="132.0" prefWidth="343.0" spacing="10">

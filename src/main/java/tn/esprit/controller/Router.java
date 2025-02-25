@@ -23,7 +23,11 @@ public class Router {
         try {
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(Router.class.getResource(fxmlPath));
-            loader.setController(o);
+            loader.setControllerFactory(con ->{
+                if (o != null)
+                    return o;
+                else return con;
+            });
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
@@ -39,7 +43,11 @@ public class Router {
         try {
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(Router.class.getResource(fxmlPath));
-            loader.setController(o);
+            loader.setControllerFactory(con ->{
+                if (o != null)
+                    return o;
+                else return con;
+            });
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);

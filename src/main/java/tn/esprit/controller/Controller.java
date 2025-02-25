@@ -7,14 +7,10 @@ public class Controller {
     private static Utilisateur user = null;
     public static void login(){
         Router.navigateTo("/login.fxml", "Login", new Login(()->{
-            if (user.getRole() == userRoles.freelancer)
-                Router.navigateTo("/FrontOffice/GestionFreelance/GestionService.fxml", new GestionService());
-            else if (user.getRole() == userRoles.admin)
-                Router.navigateTo("/FrontOffice/homePage.fxml", null);
-            else if (user.getRole() == userRoles.organisateur)
-                Router.navigateTo("/BackOffice/GestionCours/GestionCour.fxml", new QuizController());
-            else // utilsateur
-                Router.navigateTo("/FrontOffice/homePage.fxml", null);
+            if (user.getRole() == userRoles.admin)
+                Router.navigateTo("/BackOffice/backController.fxml", null);
+            else
+                Router.navigateTo("/FrontOffice/frontController.fxml", null);
 
         }
         ));

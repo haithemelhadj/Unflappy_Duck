@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 public class Router {
     private static Stage primaryStage;
@@ -24,9 +25,21 @@ public class Router {
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(Router.class.getResource(fxmlPath));
             loader.setControllerFactory(con ->{
+                try {
+                    System.out.println(con.getClass().getDeclaredConstructor().getName());
+                } catch (NoSuchMethodException e) {
+                    throw new RuntimeException(e);
+                }
                 if (o != null)
                     return o;
-                else return con;
+                else {
+                    try {
+                        return con.getClass().getDeclaredConstructor().newInstance();
+                    } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                             InvocationTargetException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             });
             Parent root = loader.load();
             Scene scene = new Scene(root);

@@ -1,6 +1,5 @@
 package tn.esprit.services;
 
-import tn.esprit.interfaces.IService;
 import tn.esprit.models.Utilisateur;
 import tn.esprit.models.enums.userRoles;
 import tn.esprit.utils.MyDatabase;
@@ -9,127 +8,137 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceUtilisateur implements IService<Utilisateur> {
-    private final Connection cnx;
+public class ServiceUtilisateur {
+
+    private final Connection connection;
 
     public ServiceUtilisateur() {
-        cnx = MyDatabase.getInstance().getCnx();
+        this.connection = MyDatabase.getInstance().getCnx();
     }
 
-    @Override
-    public void add(Utilisateur utilisateur) {
-        String qry = "INSERT INTO utilisateur (nom, email, motDePasse, role, bio, photoProfil, xp, niveau, xpRequis) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement pstm = cnx.prepareStatement(qry, Statement.RETURN_GENERATED_KEYS)) {
-            pstm.setString(1, utilisateur.getNom());
-            pstm.setString(2, utilisateur.getEmail());
-            pstm.setString(3, utilisateur.getMotDePasse()); // Ensure this is hashed before calling
-            pstm.setString(4, utilisateur.getRole().name()); // Store enum name
-            pstm.setString(5, utilisateur.getBio());
-            pstm.setString(6, utilisateur.getPhotoProfil());
-            pstm.setInt(7, utilisateur.getXp());
-            pstm.setObject(8, utilisateur.getNiveau(), Types.INTEGER); // Handle null values
-            pstm.setInt(9, utilisateur.getXpRequis());
-
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                try (ResultSet generatedKeys = pstm.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        utilisateur.setId(generatedKeys.getInt(1));
-                    }
-                }
+    // logique zidane utilisateur
+    public void ajouterUtilisateur(Utilisateur utilisateur) throws SQLException {
+        String query = "INSERT INTO utilisateur (nom, email, mot_de_passe, role, bio, photo_profil, xp, niveau, xp_requis) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, utilisateur.getNom());
+            preparedStatement.setString(2, utilisateur.getEmail());
+            preparedStatement.setString(3, utilisateur.getMotDePasse());
+            preparedStatement.setString(4, utilisateur.getRole().toString());
+            preparedStatement.setString(5, utilisateur.getBio());
+            preparedStatement.setString(6, utilisateur.getPhotoProfil());
+            preparedStatement.setInt(7, utilisateur.getXp());
+            if (utilisateur.getNiveau() != null) {
+                preparedStatement.setInt(8, utilisateur.getNiveau());
+            } else {
+                preparedStatement.setNull(8, Types.INTEGER);
             }
-            System.out.println("Utilisateur ajouté avec succès. ID : " + utilisateur.getId());
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
+            preparedStatement.setInt(9, utilisateur.getXpRequis());
+            preparedStatement.executeUpdate();
         }
     }
 
-    @Override
-    public List<Utilisateur> getAll() {
+    // logique kiben ilkol
+    public List<Utilisateur> getAllUtilisateurs() throws SQLException {
         List<Utilisateur> utilisateurs = new ArrayList<>();
-        String qry = "SELECT * FROM utilisateur";
-        try (Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery(qry)) {
-            while (rs.next()) {
-                Utilisateur u = mapResultSetToUtilisateur(rs);
-                utilisateurs.add(u);
+        String query = "SELECT * FROM utilisateur";
+        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                Utilisateur utilisateur = new Utilisateur();
+                utilisateur.setId(resultSet.getInt("id"));
+                utilisateur.setNom(resultSet.getString("nom"));
+                utilisateur.setEmail(resultSet.getString("email"));
+                utilisateur.setMotDePasse(resultSet.getString("mot_de_passe"));
+                utilisateur.setRole(userRoles.valueOf(resultSet.getString("role")));
+                utilisateur.setBio(resultSet.getString("bio"));
+                utilisateur.setPhotoProfil(resultSet.getString("photo_profil"));
+                utilisateur.setXp(resultSet.getInt("xp"));
+                utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class)); // Nullable Integer
+                utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
+                utilisateurs.add(utilisateur);
             }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la récupération des utilisateurs : " + e.getMessage());
         }
         return utilisateurs;
     }
 
-    @Override
-    public void update(Utilisateur utilisateur) {
-        String qry = "UPDATE utilisateur SET nom = ?, email = ?, motDePasse = ?, role = ?, bio = ?, photoProfil = ?, xp = ?, niveau = ?, xpRequis = ? WHERE id = ?";
-        try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
-            pstm.setString(1, utilisateur.getNom());
-            pstm.setString(2, utilisateur.getEmail());
-            pstm.setString(3, utilisateur.getMotDePasse()); // Ensure this is hashed before calling
-            pstm.setString(4, utilisateur.getRole().name()); // Store enum name
-            pstm.setString(5, utilisateur.getBio());
-            pstm.setString(6, utilisateur.getPhotoProfil());
-            pstm.setInt(7, utilisateur.getXp());
-            pstm.setObject(8, utilisateur.getNiveau(), Types.INTEGER); // Handle null values
-            pstm.setInt(9, utilisateur.getXpRequis());
-            pstm.setInt(10, utilisateur.getId());
-
-            int rowsUpdated = pstm.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("Utilisateur mis à jour avec succès.");
-            } else {
-                System.err.println("Aucun utilisateur mis à jour. ID non trouvé.");
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la mise à jour de l'utilisateur : " + e.getMessage());
-        }
-    }
-
-    @Override
-    public void delete(Utilisateur utilisateur) {
-        String qry = "DELETE FROM utilisateur WHERE id = ?";
-        try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
-            pstm.setInt(1, utilisateur.getId());
-            int rowsDeleted = pstm.executeUpdate();
-            if (rowsDeleted > 0) {
-                System.out.println("Utilisateur supprimé avec succès.");
-            } else {
-                System.err.println("Aucun utilisateur supprimé. ID non trouvé.");
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la suppression de l'utilisateur : " + e.getMessage());
-        }
-    }
-
-    public Utilisateur loginUtilisateur(String email, String motDePasse) {
-        String qry = "SELECT * FROM utilisateur WHERE email = ? AND motDePasse = ?";
-        try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
-            pstm.setString(1, email);
-            pstm.setString(2, motDePasse); // Ensure this is hashed before calling
-            try (ResultSet rs = pstm.executeQuery()) {
-                if (rs.next()) {
-                    return mapResultSetToUtilisateur(rs);
+    // logique jiven il utilisateur  bil id
+    public Utilisateur getUtilisateurById(int id) throws SQLException {
+        String query = "SELECT * FROM utilisateur WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    Utilisateur utilisateur = new Utilisateur();
+                    utilisateur.setId(resultSet.getInt("id"));
+                    utilisateur.setNom(resultSet.getString("nom"));
+                    utilisateur.setEmail(resultSet.getString("email"));
+                    utilisateur.setMotDePasse(resultSet.getString("mot_de_passe"));
+                    utilisateur.setRole(userRoles.valueOf(resultSet.getString("role")));
+                    utilisateur.setBio(resultSet.getString("bio"));
+                    utilisateur.setPhotoProfil(resultSet.getString("photo_profil"));
+                    utilisateur.setXp(resultSet.getInt("xp"));
+                    utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class)); // Nullable Integer
+                    utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
+                    return utilisateur;
                 }
             }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de l'authentification : " + e.getMessage());
         }
         return null;
     }
 
-    // Helper method to map ResultSet to Utilisateur
-    private Utilisateur mapResultSetToUtilisateur(ResultSet rs) throws SQLException {
-        return new Utilisateur(
-                rs.getInt("id"),
-                rs.getString("nom"),
-                rs.getString("email"),
-                rs.getString("motDePasse"),
-                userRoles.valueOf(rs.getString("role")), // Convert string back to enum
-                rs.getString("bio"),
-                rs.getString("photoProfil"),
-                rs.getInt("xp"),
-                rs.getObject("niveau", Integer.class), // Handle null values
-                rs.getInt("xpRequis")
-        );
+    // logique update
+    public void modifierUtilisateur(Utilisateur utilisateur) throws SQLException {
+        String query = "UPDATE utilisateur SET nom = ?, email = ?, mot_de_passe = ?, role = ?, bio = ?, photo_profil = ?, xp = ?, niveau = ?, xp_requis = ? WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, utilisateur.getNom());
+            preparedStatement.setString(2, utilisateur.getEmail());
+            preparedStatement.setString(3, utilisateur.getMotDePasse());
+            preparedStatement.setString(4, utilisateur.getRole().toString());
+            preparedStatement.setString(5, utilisateur.getBio());
+            preparedStatement.setString(6, utilisateur.getPhotoProfil());
+            preparedStatement.setInt(7, utilisateur.getXp());
+            if (utilisateur.getNiveau() != null) {
+                preparedStatement.setInt(8, utilisateur.getNiveau());
+            } else {
+                preparedStatement.setNull(8, Types.INTEGER);
+            }
+            preparedStatement.setInt(9, utilisateur.getXpRequis());
+            preparedStatement.setInt(10, utilisateur.getId());
+            preparedStatement.executeUpdate();
+        }
     }
+
+    // logique delete
+    public void supprimerUtilisateur(int id) throws SQLException {
+        String query = "DELETE FROM utilisateur WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        }
+    }
+    // logique il login
+    public Utilisateur loginUtilisateur(String email, String motDePasse) throws SQLException {
+        String query = "SELECT * FROM utilisateur WHERE email = ? AND mot_de_passe = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, motDePasse); // In production: compare hashed values.
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    Utilisateur utilisateur = new Utilisateur();
+                    utilisateur.setId(resultSet.getInt("id"));
+                    utilisateur.setNom(resultSet.getString("nom"));
+                    utilisateur.setEmail(resultSet.getString("email"));
+                    utilisateur.setMotDePasse(resultSet.getString("mot_de_passe"));
+                    utilisateur.setRole(userRoles.valueOf(resultSet.getString("role")));
+                    utilisateur.setBio(resultSet.getString("bio"));
+                    utilisateur.setPhotoProfil(resultSet.getString("photo_profil"));
+                    utilisateur.setXp(resultSet.getInt("xp"));
+                    utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class));
+                    utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
+                    return utilisateur;
+                }
+            }
+        }
+        return null;
+    }
+
 }

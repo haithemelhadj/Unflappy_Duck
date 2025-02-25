@@ -9,6 +9,10 @@ import java.io.IOException;
 
 public class Router {
     private static Stage primaryStage;
+    public static Stage getStage(){
+        return primaryStage;
+    }
+
 
 
     // Initialize the router with the primary stage (call this once at startup)

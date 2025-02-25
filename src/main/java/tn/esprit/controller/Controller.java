@@ -10,7 +10,8 @@ public class Controller {
 
     public static void setUser(Utilisateur user) {
         Controller.user = user;
-        Router.
+        System.out.println(user);
+        System.out.println(Router.getStage().getScene());
     }
 
     public static Utilisateur getUser() {

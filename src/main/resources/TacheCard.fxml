@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+         <children>
+            <VBox>
+               <children>
+                  <Label text="id|" textAlignment="CENTER" />
+                  <Label fx:id="id" textAlignment="CENTER" />
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="titre|" textAlignment="CENTER" />
+                  <Label fx:id="titre" textAlignment="CENTER" />
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="equipe|" textAlignment="CENTER" />
+                  <Label fx:id="equipe" textAlignment="CENTER" />
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="statut|" textAlignment="CENTER" />
+                  <Label fx:id="statut" textAlignment="CENTER" />
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="responsable|" textAlignment="CENTER" />
+                  <Label fx:id="responsable" textAlignment="CENTER" />
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="description|" textAlignment="CENTER" />
+                  <Label fx:id="description" textAlignment="CENTER" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

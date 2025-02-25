@@ -12,6 +12,7 @@ public class Evenement {
     private int lieuId;
     private int calendrierId;
     private int createurEvenement;
+    private boolean isAdded; // New field
 
     // Constructors
     public Evenement() {}
@@ -44,6 +45,13 @@ public class Evenement {
     public void setCalendrierId(int calendrierId) { this.calendrierId = calendrierId; }
     public int getCreateurEvenement() { return createurEvenement; }
     public void setCreateurEvenement(int createurEvenement) { this.createurEvenement = createurEvenement; }
+    public boolean isAdded() {
+        return isAdded;
+    }
+
+    public void setAdded(boolean added) {
+        isAdded = added;
+    }
 
     @Override
     public String toString() {
@@ -64,4 +72,5 @@ public class Evenement {
         ServiceLieu serviceLieu = new ServiceLieu();
         return serviceLieu.getById(this.lieuId);  // Fetch the Lieu using the ID
     }
+
 }

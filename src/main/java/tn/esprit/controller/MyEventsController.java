@@ -37,7 +37,8 @@ public class MyEventsController {
     }
 
     private void loadMyEvents() {
-        List<Evenement> myEvents = serviceEvenement.getAll(); // Fetch all events
+        ServiceEvenement serviceEvenement = new ServiceEvenement();
+        List<Evenement> myEvents = serviceEvenement.getEventsForUser();
         displayMyEvents(myEvents);
     }
 
@@ -99,32 +100,19 @@ public class MyEventsController {
     @FXML
     private void removeFromMyEvents() {
         if (selectedEvent != null) {
-            // Create a confirmation dialog
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation");
-            alert.setHeaderText("Voulez-vous vraiment supprimer cet événement ?");
-            alert.setContentText("Cette action est irréversible.");
+            ServiceEvenement serviceEvenement = new ServiceEvenement();
+            serviceEvenement.removeEventFromUser(selectedEvent.getEvenementId());
+            System.out.println("Événement supprimé de mes événements: " + selectedEvent.getNom());
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                // Logic to remove the event from the user's "My Events" list
-                System.out.println("Événement supprimé de mes événements: " + selectedEvent.getNom());
-
-                // Remove the event from the database (or local list)
-                serviceEvenement.delete(selectedEvent);
-
-                // Refresh the list
-                loadMyEvents();
-            }
-        } else {
-            System.out.println("Aucun événement sélectionné.");
+            // Refresh the list
+            loadMyEvents();
         }
     }
 
     @FXML
     private void goBack() {
         try {
-            // Load the FXML file for the previous view
+            // Load the previous FXML file (e.g., UserEventsView.fxml)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UserEventsView.fxml"));
             Parent root = loader.load();
 
@@ -132,7 +120,8 @@ public class MyEventsController {
             Stage stage = (Stage) myEventsContainer.getScene().getWindow();
 
             // Set the new scene
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

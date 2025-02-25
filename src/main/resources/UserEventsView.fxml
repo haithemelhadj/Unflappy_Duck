@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controllers.UserEventsController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controller.UserEventsController">
     <VBox layoutX="50" layoutY="50" spacing="10">
         <!-- Search Label -->
         <Label text="Rechercher par nom d'événement" style="-fx-font-size: 14px; -fx-font-weight: bold;" />

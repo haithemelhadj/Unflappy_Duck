@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controllers.UpdateEventController">
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controller.UpdateEventController">
     <GridPane hgap="10" prefHeight="633.0" prefWidth="962.0" vgap="10">
         <!-- Event Name -->
         <Label text="Nom de l'événement :" GridPane.columnIndex="0" GridPane.rowIndex="0" />

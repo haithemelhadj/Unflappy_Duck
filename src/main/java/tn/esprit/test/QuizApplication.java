@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class QuizApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/FrontOffice/GestionCours/GestionCour.fxml")); // ✅ Fixed Path
+        Parent root = FXMLLoader.load(getClass().getResource("/BackOffice/GestionCours/GestionCour.fxml")); // ✅ Fixed Path
         Scene scene = new Scene(root);
         primaryStage.setTitle("Quiz Management System");
         primaryStage.setScene(scene);

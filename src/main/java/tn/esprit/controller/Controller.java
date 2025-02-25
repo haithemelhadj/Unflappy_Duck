@@ -12,7 +12,7 @@ public class Controller {
             else if (user.getRole() == userRoles.admin)
                 Router.navigateTo("/FrontOffice/homePage.fxml", null);
             else if (user.getRole() == userRoles.organisateur)
-                Router.navigateTo("/FrontOffice/homePage.fxml", null);
+                Router.navigateTo("/BackOffice/GestionCours/GestionCour.fxml", new QuizController());
             else // utilsateur
                 Router.navigateTo("/FrontOffice/homePage.fxml", null);
 

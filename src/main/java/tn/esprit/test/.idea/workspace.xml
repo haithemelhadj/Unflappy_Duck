@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6d71fc14-5514-4d58-8480-c5b86e552d47" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../../../../draft.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bundles/BundleFreelance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/AcceuilFreelancer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/AjouterOffre.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/AjouterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/AllEventsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/BackController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/EventDetailsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/EventFormController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/FrontController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/GestionOffre.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/GestionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/Login.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/MyEventsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/QuizSessionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/Router.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/UpdateEventController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/UserEventsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../models/Calendrier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../models/Contrat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../models/Evenement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../models/Lieu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../models/Offre.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../models/Service.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../services/ServiceCalendrier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../services/ServiceContrat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../services/ServiceEvenement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../services/ServiceLieu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../services/ServiceOffre.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../services/ServiceService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../services/ServiceUtilisateurCour.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CLIFreelance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Run.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UIFreelance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../utils/Session.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../utils/Sql2Java.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/BackOffice/GestionCours/GestionCour.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/BackOffice/backController.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionCours/quiz.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionEvenement/EventDetails.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionEvenement/MyEvents.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionEvenement/UserEventsView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionEvenement/all_events.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionEvenement/event_form.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionEvenement/update_event_form.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionFreelance/Acceuil.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionFreelance/AjouterOffre.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionFreelance/AjouterService.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionFreelance/GestionOffre.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionFreelance/GestionService.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/frontController.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/homePage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/backgroundHomePage.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/styleHomePage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../resources/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../pidev.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../pidev.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../controller/QuizController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../controller/QuizController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../controller/maincontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../controller/maincontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../models/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/../models/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../models/Utilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/../models/Utilisateur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../models/enums/userRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/../models/enums/userRoles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/ServiceQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../services/ServiceQuestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/ServiceUtilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/../services/ServiceUtilisateur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../utils/MyDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/../utils/MyDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../resources/GestionCour.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../resources/GestionEquipe.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionEquipe/GestionEquipe.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../resources/GestionTache.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionEquipe/GestionTache.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../resources/mainapppage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../resources/FrontOffice/GestionUtilisateur/mainapppage.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2tZxUO0PCOn1PBSwpzQALkgLec6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging GestionTeams",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6d71fc14-5514-4d58-8480-c5b86e552d47" name="Changes" comment="" />
+      <created>1740573415557</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1740573415557</updated>
+      <workItem from="1740573418457" duration="60000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

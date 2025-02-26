@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllerlogin" styleClass="root">
+    <children>
+        <HBox spacing="20" layoutX="50" layoutY="50" styleClass="hbox">
+            <!-- Login Section -->
+            <VBox alignment="CENTER" spacing="10" styleClass="vbox">
+                <Label text="Login" styleClass="label"/>
+                <TextField fx:id="loginUsernameField" promptText="Username"/>
+                <PasswordField fx:id="loginPasswordField" promptText="Password"/>
+                <Button text="Login" onAction="#handleLogin" styleClass="button"/>
+            </VBox>
+
+            <!-- Create Account Section -->
+            <VBox alignment="CENTER" spacing="10" styleClass="vbox">
+                <Label text="Create Account" styleClass="label"/>
+                <TextField fx:id="createUsernameField" promptText="New Username"/>
+                <PasswordField fx:id="createPasswordField" promptText="New Password"/>
+                <Button text="Create Account" onAction="#handleCreateAccount" styleClass="button"/>
+            </VBox>
+        </HBox>
+    </children>
+</AnchorPane>

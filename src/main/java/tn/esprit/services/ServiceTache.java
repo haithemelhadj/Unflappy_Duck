@@ -115,7 +115,7 @@ public class ServiceTache implements IService<Tache> {
             String req=" DELETE FROM `tache` WHERE id= '" +tache.getId()+"'";
             Statement st= cnx.createStatement();
             st.executeUpdate(req);
-            System.out.println("tache supprimé");
+            System.out.println("tache supprime");
         }
         catch (SQLException ex){
             System.out.println("tache non supprimé!!!");

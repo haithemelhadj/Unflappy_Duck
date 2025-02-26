@@ -46,7 +46,7 @@ public class ServiceEquipe implements IService<Equipe> {
 
 
         List<Equipe> equipe = new ArrayList<>();
-        String qry ="SELECT * FROM `equipes`";
+        String qry ="SELECT * FROM `equipe`";
 
         try {
             Statement stm = cnx.createStatement();

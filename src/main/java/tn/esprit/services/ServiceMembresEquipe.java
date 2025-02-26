@@ -5,6 +5,7 @@ import tn.esprit.models.MembresEquipe;
 import tn.esprit.models.Tache;
 //import tn.esprit.models.enums.Statut;
 import tn.esprit.models.enums.roles;
+import tn.esprit.utils.MyDatabase;
 
 import javax.management.relation.Role;
 import java.sql.*;
@@ -13,13 +14,15 @@ import java.util.List;
 
 public class ServiceMembresEquipe implements IService<MembresEquipe> {
     private Connection cnx ;
-
+    public ServiceMembresEquipe() {
+        cnx = MyDatabase.getInstance().getCnx();
+    }
     //region CRUD
     @Override
     public void add(MembresEquipe MembresEquipe) {
         //create Qry SQL
         //execute Qry
-        String qry ="INSERT INTO `membres_equipe`(`id`, `equipe_id`, `utilisateur_id`, `role`) VALUES (?,?,?,?)";
+        String qry ="INSERT INTO `membre_equipe`(`id`, `equipe_id`, `utilisateur_id`, `role`) VALUES (?,?,?,?)";
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
             pstm.setInt(1,MembresEquipe.getId());
@@ -55,7 +58,8 @@ public class ServiceMembresEquipe implements IService<MembresEquipe> {
                 p.setEquipe_id(rs.getInt(2));
                 p.setUtilisateur_id(rs.getInt(3));
                 //p.setRole(rs.getString());
-                p.setRole(roles.valueOf(rs.getString(4)));
+                //p.setRole(roles.valueOf(rs.getString(4)));
+                p.setRole(rs.getString(4));
 
 
 

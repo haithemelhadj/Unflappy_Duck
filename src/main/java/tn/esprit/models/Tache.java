@@ -118,12 +118,10 @@ public class Tache {
                 ", equipe_id=" + equipe_id +
                 ", titre='" + titre + '\'' +
                 ", description='" + description + '\'' +
-                //", id_assignateur=" + id_assignateur +
                 ", id_responsable=" + id_responsable +
                 ", statut=" + statut +
                 '}';
     }
-
 
     //endregion
 

@@ -9,21 +9,21 @@ public class MembresEquipe {
     private int id;
     private int equipe_id;
     private int utilisateur_id;
-    private roles role;
+    private String role;
 
     //region constructors
 
     public MembresEquipe() {
     }
 
-    public MembresEquipe(int id, int equipe_id, int utilisateur_id, roles role) {
+    public MembresEquipe(int id, int equipe_id, int utilisateur_id, String role) {
         this.id = id;
         this.equipe_id = equipe_id;
         this.utilisateur_id = utilisateur_id;
         this.role = role;
     }
 
-    public MembresEquipe(int equipe_id, int utilisateur_id, roles role) {
+    public MembresEquipe(int equipe_id, int utilisateur_id, String role) {
         this.equipe_id = equipe_id;
         this.utilisateur_id = utilisateur_id;
         this.role = role;
@@ -56,11 +56,11 @@ public class MembresEquipe {
         this.utilisateur_id = utilisateur_id;
     }
 
-    public roles getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(roles role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

@@ -2,69 +2,172 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.GestionEquipe">
+<AnchorPane prefHeight="613.0" prefWidth="566.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.GestionEquipe">
     <children>
-        <Label layoutX="263.0" layoutY="14.0" text="Gestion Equipe" textAlignment="CENTER">
-            <font>
-                <Font name="Arial Black" size="24.0" />
-            </font>
-        </Label>
-        <VBox layoutX="20.0" layoutY="71.0" prefHeight="398.0" prefWidth="318.0" spacing="15.0">
-            <children>
-                <Label text="Nom equipe">
-                    <font>
-                        <Font name="Candara Bold" size="15.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="nom" promptText="nom" />
-                <Label text="Evenement">
-                    <font>
-                        <Font name="System Bold" size="15.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="evenement_id" promptText="evenement_id" />
-                <Label text="Membre responsable:">
-                    <font>
-                        <Font name="Candara Bold" size="15.0" />
-                    </font>
-                </Label>
-                <ChoiceBox fx:id="membre_id" prefWidth="150.0" />
-                <HBox alignment="CENTER" prefHeight="67.0" prefWidth="318.0" spacing="40.0">
-                    <children>
-                        <Button mnemonicParsing="false" onAction="#update" text="Mise a jour" />
-                        <Button lineSpacing="20.0" mnemonicParsing="false" onAction="#add" text="Ajouter" textAlignment="CENTER" />
-                    </children>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </HBox>
-            </children>
-        </VBox>
-        <VBox alignment="TOP_CENTER" layoutX="363.0" layoutY="71.0" prefHeight="382.0" prefWidth="290.0" spacing="20.0">
-            <children>
-                <Label text="liste equipes:">
-                    <font>
-                        <Font name="Candara Bold" size="15.0" />
-                    </font>
-                </Label>
-                <ListView fx:id="taches_list" prefHeight="200.0" prefWidth="200.0" />
-                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
-                    <children>
-                        <Button lineSpacing="20.0" mnemonicParsing="false" onAction="#refrech" text="Refrech" textAlignment="CENTER" />
-                        <Button lineSpacing="20.0" mnemonicParsing="false" onAction="#delete" text="Delete" textAlignment="CENTER" />
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
+      <VBox alignment="TOP_CENTER" prefHeight="874.0" prefWidth="566.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+              <Label text="Gestion Equipe" textAlignment="CENTER">
+                  <font>
+                      <Font name="Arial Black" size="24.0" />
+                  </font>
+              </Label>
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                    <VBox alignment="TOP_CENTER" spacing="15.0">
+                        <children>
+                        <Label text="Ajouter Equipe" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Black" size="24.0" />
+                           </font>
+                        </Label>
+                            <TextField fx:id="idEquipe" promptText="id equipe" />
+                            <Label text="Nom Equipe:">
+                                <font>
+                                    <Font name="Candara Bold" size="15.0" />
+                                </font>
+                            </Label>
+                            <TextField fx:id="NomEquipe" promptText="nom" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                                  <Label text="Evenment:">
+                                      <font>
+                                          <Font name="System Bold" size="15.0" />
+                                      </font>
+                                  </Label>
+                              <ComboBox fx:id="id_Event" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                                  <Label text="Chef de l'equipe:">
+                                      <font>
+                                          <Font name="Candara Bold" size="15.0" />
+                                      </font>
+                                  </Label>
+                              <ComboBox fx:id="idChefEquipe" />
+                           </children>
+                        </HBox>
+                            <HBox alignment="CENTER" spacing="40.0">
+                                <children>
+                                    <Button mnemonicParsing="false" onAction="#AddUpdateEquipe" text="Ajouter / Mise a jour" />
+                                    <Button lineSpacing="20.0" mnemonicParsing="false" onAction="#deleteEquipe" text="Effacer Equipe" textAlignment="CENTER" />
+                                </children>
+                                <opaqueInsets>
+                                    <Insets />
+                                </opaqueInsets>
+                            </HBox>
+                        <VBox alignment="TOP_CENTER" spacing="15.0">
+                           <children>
+                                  <Label text="liste Equipes:">
+                                      <font>
+                                          <Font name="Candara Bold" size="15.0" />
+                                      </font>
+                                  </Label>
+                              <TextField fx:id="RechercheEquipe" promptText="Recherche" />
+                              <ScrollPane>
+                                <content>
+                                  <AnchorPane>
+                                       <children>
+                                          <ListView fx:id="ListViewEquipes" prefHeight="200.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
+                                  <HBox alignment="TOP_CENTER" spacing="40.0">
+                                      <children>
+                                          <Button lineSpacing="20.0" mnemonicParsing="false" onAction="#refrechEquipes" text="Refrech" textAlignment="CENTER" />
+                                      </children>
+                                  </HBox>
+                           </children>
+                        </VBox>
+                        </children>
+                    </VBox>
+                    <VBox alignment="TOP_CENTER" spacing="15.0">
+                        <children>
+                        <VBox alignment="TOP_CENTER" spacing="15.0">
+                           <children>
+                              <Label alignment="TOP_CENTER" text="Ajouter Membre">
+                                 <font>
+                                    <Font name="Arial Black" size="24.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                        <Label text="Choisire Equipe">
+                                            <font>
+                                                <Font name="Candara Bold" size="15.0" />
+                                            </font>
+                                        </Label>
+                                    <ComboBox fx:id="EquipesList" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Label text="Choisire un Membre:">
+                                       <font>
+                                          <Font name="Candara Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="UsersList" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" spacing="40.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#AddMember" text="Ajouter" />
+                                    <Button lineSpacing="20.0" mnemonicParsing="false" onAction="#EffacerMembre" text="Effacer Membre" textAlignment="CENTER" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="252.0" spacing="15.0">
+                           <children>
+                              <Label text="liste Membres:">
+                                 <font>
+                                    <Font name="Candara Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="RechercheMembre" promptText="Recherche" />
+                              <ScrollPane>
+                                 <content>
+                                    <AnchorPane>
+                                       <children>
+                                          <ListView fx:id="ListViewMembres" prefHeight="200.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                              <HBox alignment="TOP_CENTER" spacing="40.0">
+                                 <children>
+                                    <Button lineSpacing="20.0" mnemonicParsing="false" onAction="#refrechMembres" text="Refrech" textAlignment="CENTER" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        </children>
+                    </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+              <Label fx:id="Error" textFill="RED" />
+         </children>
+         <opaqueInsets>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </opaqueInsets>
+      </VBox>
     </children>
-
 </AnchorPane>

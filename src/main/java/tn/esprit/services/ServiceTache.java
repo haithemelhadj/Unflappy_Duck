@@ -1,5 +1,6 @@
 package tn.esprit.services;
 
+
 import tn.esprit.interfaces.IService;
 import tn.esprit.models.Tache;
 //import tn.esprit.models.enums.Statut;
@@ -78,18 +79,31 @@ public class ServiceTache implements IService<Tache> {
 
     @Override
     public void update(Tache tache) {
+        int success;
         try {
             String req ="UPDATE `tache` SET " +
                     "`equipe_id`='" +tache.getEquipe_id()+
                     "',`titre`='" +tache.getTitre()+
                     "',`description`='" +tache.getDescription()+
-                    //"',`id_assignateur`='" +tache.getId_assignateur()+
                     "',`id_responsable`='" +tache.getId_responsable()+
                     "',`statut`='" +tache.getStatut().toString()+"'WHERE id= '" +tache.getId()+
                     "'";
+            //System.out.println("tache: "+req);
+
             Statement st = cnx.createStatement();
-            st.executeUpdate(req);
-            System.out.println("tache updated");
+            /**/
+            success = st.executeUpdate(req);
+            System.out.println("success: "+success);
+            /**/
+            if( st.executeUpdate(req) == 0)
+            {
+                System.out.println("update failed");
+            }
+            else
+            {
+                st.executeUpdate(req);
+                System.out.println("tache updated");
+            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -97,12 +111,11 @@ public class ServiceTache implements IService<Tache> {
 
     @Override
     public void delete(Tache tache) {
-
         try{
             String req=" DELETE FROM `tache` WHERE id= '" +tache.getId()+"'";
             Statement st= cnx.createStatement();
             st.executeUpdate(req);
-            System.out.println("tache supprimé");
+            System.out.println("tache supprime");
         }
         catch (SQLException ex){
             System.out.println("tache non supprimé!!!");
@@ -114,5 +127,9 @@ public class ServiceTache implements IService<Tache> {
     //region CRUD Specifiques
 
 
+    public void  GetBy()
+    {
+
+    }
     //endregion
 }

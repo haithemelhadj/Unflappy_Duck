@@ -94,6 +94,7 @@ CREATE TABLE `evenement` (
   `lieu_id` int(10) UNSIGNED NOT NULL,
   `calendrier_id` int(10) UNSIGNED NOT NULL,
   `createur_evenement` int(10) UNSIGNED NOT NULL
+  `is_added` boolean default false
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

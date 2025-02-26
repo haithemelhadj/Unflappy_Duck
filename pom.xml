@@ -35,7 +35,11 @@
             <artifactId>javafx-fxml</artifactId>
             <version>22.0.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.10</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -46,7 +50,7 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>
-                        tn.esprit.test.MainFX
+                        tn.esprit.test.QuizApplication
                     </mainClass>
                 </configuration>
             </plugin>

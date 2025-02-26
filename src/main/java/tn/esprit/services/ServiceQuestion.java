@@ -121,4 +121,8 @@ public class ServiceQuestion implements IService<Question> {
             throw new RuntimeException("Failed to delete question");
         }
     }
+
+    public List<Question> searchQuestions(String keyword) {
+        return List.of();
+    }
 }

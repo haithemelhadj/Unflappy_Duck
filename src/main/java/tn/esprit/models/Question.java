@@ -11,6 +11,7 @@ public class Question implements Serializable {
     private String reponse3;
     private String reponse4;
     private String reponseCorrecte;
+    private int xp;
 
     public Question(int qid, int qno, String question, String reponse1, String reponse2,
                     String reponse3, String reponse4, String reponseCorrecte) {
@@ -22,6 +23,11 @@ public class Question implements Serializable {
         this.reponse3 = reponse3;
         this.reponse4 = reponse4;
         this.reponseCorrecte = reponseCorrecte;
+        this.xp = xp;
+    }
+
+    public Question() {
+
     }
 
 

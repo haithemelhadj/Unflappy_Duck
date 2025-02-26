@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="76.0" prefWidth="53.0" style="-fx-background-color: #1a237e;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.Login">
+    <TitledPane fx:id="loginPane" animated="false" text="Login">
+        <content>
+            <VBox prefHeight="132.0" prefWidth="343.0" spacing="10">
+                <padding>
+                    <Insets bottom="20" left="20" right="20" top="20" />
+                </padding>
+                <TextField fx:id="loginEmailField" promptText="Email" style="-fx-background-color: #e8eaf6; -fx-text-fill: black;" />
+                <PasswordField fx:id="loginPasswordField" promptText="Password" style="-fx-background-color: #e8eaf6; -fx-text-fill: black;" />
+                <Button fx:id="loginButton" onAction="#login" style="-fx-background-color: gold; -fx-text-fill: #1a237e; -fx-font-weight: bold;" text="Login" />
+            </VBox>
+        </content>
+    </TitledPane>
+</AnchorPane>

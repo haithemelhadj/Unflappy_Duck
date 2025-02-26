@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import tn.esprit.models.Utilisateur;
+import tn.esprit.models.enums.userRoles;
 import tn.esprit.services.ServiceUtilisateur;
 import tn.esprit.utils.MyDatabase;
 
@@ -103,12 +104,12 @@ public class maincontroller {
     }
 
     @FXML
-    private void login() {
+    private boolean login() {
         String email = loginEmailField.getText().trim();
         String password = loginPasswordField.getText();
         if (email.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in both email and password.");
-            return;
+            return false;
         }
         try {
             Utilisateur user = serviceUtilisateur.loginUtilisateur(email, password);
@@ -119,12 +120,14 @@ public class maincontroller {
                 prefillEditFields(user);
                 loginPane.setVisible(false);
                 mainPane.setVisible(true);
+                return true;
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password.");
             }
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to login: " + e.getMessage());
         }
+        return false;
     }
 
     @FXML
@@ -147,7 +150,7 @@ public class maincontroller {
                 username,
                 email,
                 password,
-                "utilisateur",
+                userRoles.utilisateur,
                 "",
                 "",
                 0,

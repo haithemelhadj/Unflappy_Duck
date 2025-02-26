@@ -1,11 +1,13 @@
 package tn.esprit.models;
 
+import tn.esprit.models.enums.userRoles;
+
 public class Utilisateur {
     private int id;
     private String nom;
     private String email;
     private String motDePasse;
-    private String role;
+    private userRoles role;
     private String bio;
     private String photoProfil;
     private int xp;
@@ -13,7 +15,7 @@ public class Utilisateur {
     private int xpRequis;
 
 
-    public Utilisateur(int id, String nom, String email, String motDePasse, String role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis) {
+    public Utilisateur(int id, String nom, String email, String motDePasse, userRoles role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis) {
         this.id = id;
         this.nom = nom;
         this.email = email;
@@ -62,11 +64,11 @@ public class Utilisateur {
         this.motDePasse = motDePasse;
     }
 
-    public String getRole() {
+    public userRoles getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(userRoles role) {
         this.role = role;
     }
 

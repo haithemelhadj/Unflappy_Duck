@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controller.UserEventsController">
+    <VBox layoutX="50" layoutY="50" spacing="10">
+        <!-- Search Label -->
+        <Label text="Rechercher par nom d'événement" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+        <!-- Search Bar -->
+        <TextField fx:id="searchField" promptText="Rechercher un événement..." />
+
+        <!-- List of Events -->
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Tous les événements" />
+        <VBox fx:id="eventsListContainer" spacing="10" />
+    </VBox>
+
+    <!-- Go to My Events Button -->
+    <Button layoutX="50.0" layoutY="250.0" onAction="#goToMyEvents" text="Voir mes événements" />
+</AnchorPane>

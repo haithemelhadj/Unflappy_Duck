@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controller.EventDetailsController">
+    <Label fx:id="eventNameLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+    <Label fx:id="eventDescriptionLabel" />
+    <Label fx:id="eventDateLabel" />
+    <Label fx:id="eventTimeLabel" />
+    <Label fx:id="eventLocationLabel" />
+    <Label fx:id="eventCalendarLabel" />
+
+    <!-- Add to My Events Button -->
+    <Button onAction="#addToMyEvents" text="Ajouter à mes événements" />
+
+    <!-- Retour Button -->
+    <Button onAction="#goBack" text="Retour" />
+</VBox>

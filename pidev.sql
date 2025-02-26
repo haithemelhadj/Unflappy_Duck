@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2025 at 12:51 PM
+-- Generation Time: Feb 25, 2025 at 03:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,11 +42,9 @@ CREATE TABLE `article_boutique` (
 
 CREATE TABLE `calendrier` (
   `id` int(11) NOT NULL,
-  `titre` varchar(255) NOT NULL,
-  `type` enum('evenement','tache') DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
-  `evenement_id` int(11) DEFAULT NULL,
-  `tache_id` int(11) DEFAULT NULL
+  `annee` smallint(4) NOT NULL CHECK (`annee` between 1900 and 2100),
+  `mois` tinyint(2) NOT NULL CHECK (`mois` between 1 and 12),
+  `jour` tinyint(2) NOT NULL CHECK (`jour` between 1 and 31)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -88,25 +86,27 @@ CREATE TABLE `equipe` (
 --
 
 CREATE TABLE `evenement` (
-  `id` int(11) NOT NULL,
+  `evenement_id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
-  `date` datetime NOT NULL,
-  `lieu` varchar(255) DEFAULT NULL,
-  `id_localisation` int(11) DEFAULT NULL,
-  `cree_par` int(11) DEFAULT NULL
+  `description` text DEFAULT NULL,
+  `date_debut` datetime NOT NULL,
+  `date_fin` datetime NOT NULL,
+  `lieu_id` int(10) UNSIGNED NOT NULL,
+  `calendrier_id` int(10) UNSIGNED NOT NULL,
+  `createur_evenement` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `localisation`
+-- Table structure for table `lieu`
 --
 
-CREATE TABLE `localisation` (
-  `id` int(11) NOT NULL,
-  `adresse` varchar(255) DEFAULT NULL,
-  `ville` varchar(100) DEFAULT NULL,
-  `pays` varchar(100) DEFAULT NULL
+CREATE TABLE `lieu` (
+  `lieu_id` int(10) UNSIGNED NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `adresse` varchar(512) NOT NULL,
+  `capacite` int(10) UNSIGNED NOT NULL CHECK (`capacite` > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -277,8 +277,8 @@ ALTER TABLE `article_boutique`
 --
 ALTER TABLE `calendrier`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `evenement_id` (`evenement_id`),
-  ADD KEY `tache_id` (`tache_id`);
+  ADD UNIQUE KEY `date_unique` (`annee`,`mois`,`jour`),
+  ADD KEY `idx_date_calendrier` (`annee`,`mois`,`jour`);
 
 --
 -- Indexes for table `contrat`
@@ -300,15 +300,17 @@ ALTER TABLE `equipe`
 -- Indexes for table `evenement`
 --
 ALTER TABLE `evenement`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_localisation` (`id_localisation`),
-  ADD KEY `cree_par` (`cree_par`);
+  ADD PRIMARY KEY (`evenement_id`),
+  ADD KEY `calendrier_id` (`calendrier_id`),
+  ADD KEY `idx_dates_evenement` (`date_debut`,`date_fin`),
+  ADD KEY `idx_nom_evenement` (`nom`),
+  ADD KEY `lieu_id` (`lieu_id`) USING BTREE;
 
 --
--- Indexes for table `localisation`
+-- Indexes for table `lieu`
 --
-ALTER TABLE `localisation`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `lieu`
+  ADD PRIMARY KEY (`lieu_id`);
 
 --
 -- Indexes for table `membre_equipe`
@@ -395,13 +397,7 @@ ALTER TABLE `equipe`
 -- AUTO_INCREMENT for table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `localisation`
---
-ALTER TABLE `localisation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `evenement_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `membre_equipe`
@@ -450,13 +446,6 @@ ALTER TABLE `utilisateur`
 --
 
 --
--- Constraints for table `calendrier`
---
-ALTER TABLE `calendrier`
-  ADD CONSTRAINT `calendrier_ibfk_1` FOREIGN KEY (`evenement_id`) REFERENCES `evenement` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `calendrier_ibfk_2` FOREIGN KEY (`tache_id`) REFERENCES `tache` (`id`) ON DELETE CASCADE;
-
---
 -- Constraints for table `contrat`
 --
 ALTER TABLE `contrat`
@@ -467,15 +456,8 @@ ALTER TABLE `contrat`
 -- Constraints for table `equipe`
 --
 ALTER TABLE `equipe`
-  ADD CONSTRAINT `equipe_ibfk_1` FOREIGN KEY (`evenement_id`) REFERENCES `evenement` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `equipe_ibfk_1` FOREIGN KEY (`evenement_id`) REFERENCES `evenement` (`evenement_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `equipe_ibfk_2` FOREIGN KEY (`chef_equipe_id`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL;
-
---
--- Constraints for table `evenement`
---
-ALTER TABLE `evenement`
-  ADD CONSTRAINT `evenement_ibfk_1` FOREIGN KEY (`id_localisation`) REFERENCES `localisation` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `evenement_ibfk_2` FOREIGN KEY (`cree_par`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `membre_equipe`
@@ -501,7 +483,7 @@ ALTER TABLE `panier`
 -- Constraints for table `participant_evenement`
 --
 ALTER TABLE `participant_evenement`
-  ADD CONSTRAINT `participant_evenement_ibfk_1` FOREIGN KEY (`evenement_id`) REFERENCES `evenement` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `participant_evenement_ibfk_1` FOREIGN KEY (`evenement_id`) REFERENCES `evenement` (`evenement_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `participant_evenement_ibfk_2` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;
 
 --

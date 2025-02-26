@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainApp extends Application {
+public class Run extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -16,15 +16,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/homePage.fxml"));
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionUtilisateur/mainapppage.fxml"));
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("creation de compte");
+            primaryStage.setTitle("Gestion Service");
             primaryStage.show();
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

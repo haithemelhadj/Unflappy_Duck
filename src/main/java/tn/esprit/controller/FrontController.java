@@ -52,8 +52,6 @@ public class FrontController implements Initializable {
         freelance_menu.getItems().addAll(new MenuItem("Market"), new MenuItem("Create Service"));
         quiz_menu.getItems().addAll(new MenuItem("ziw"), new MenuItem("ppiw"));
         store_menu.getItems().addAll(new MenuItem("Voir Panier"), new MenuItem("Voir Articles"));
-        events_menu.getItems().get(0).setOnAction(event ->{
-            Router.display("FrontOffice/GestionEvenement/all_events.fxml");
-        });
+        events_menu.getItems().
     }
 }

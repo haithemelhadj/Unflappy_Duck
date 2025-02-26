@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styleHomePage.css">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="642.0" prefWidth="1234.0" stylesheets="@styleHomePage.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22">
     <top>
         <HBox spacing="10" style="-fx-background-color: black; -fx-padding: 15;">
-            <Label text="UNFLAPPY DUCK" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button text="Services" style="-fx-text-fill: white; -fx-background-color: transparent;"/>
-            <Button text="About" style="-fx-text-fill: white; -fx-background-color: transparent;"/>
-            <Button text="Contact" style="-fx-text-fill: white; -fx-background-color: transparent;"/>
-            <Button text="Get Tickets" style="-fx-text-fill: white; -fx-background-color: transparent;"/>
-            <Button text="Create an Event" style="-fx-text-fill: white; -fx-background-color: transparent;"/>
-            <Button text="Pass a Test" style="-fx-text-fill: white; -fx-background-color: transparent;"/>
-            <Button text="Store" style="-fx-text-fill: white; -fx-background-color: transparent;"/>
-            <Button text="Freelancer Application" style="-fx-text-fill: white; -fx-background-color: transparent;"/>
-            <Button text="Team Management" style="-fx-text-fill: white; -fx-background-color: transparent;"/>
+            <Label style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="UNFLAPPY DUCK" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Services" />
+            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="About" />
+            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Contact" />
+            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Get Tickets" />
+            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Create an Event" />
+            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Pass a Test" />
+            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Store" />
+            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Freelancer Application" />
+            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Team Management" />
             <Button style="-fx-background-color: white;">
 
             </Button>
@@ -27,10 +31,10 @@
     <center>
         <StackPane style="-fx-background-image: url('@backgroundHomePage.jpg'); -fx-background-size: cover;">
             <VBox alignment="CENTER" spacing="20">
-                <Label text="HERE TO CREATE" style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;"/>
-                <Label text="MOMENTS THAT LAST" style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;"/>
-                <Label text="A LIFETIME" style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;"/>
-                <Button text="Upcoming Events" style="-fx-background-color: yellow; -fx-text-fill: black; -fx-font-weight: bold;"/>
+                <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="HERE TO CREATE" />
+                <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="MOMENTS THAT LAST" />
+                <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="A LIFETIME" />
+                <Button style="-fx-background-color: yellow; -fx-text-fill: black; -fx-font-weight: bold;" text="Upcoming Events" />
             </VBox>
         </StackPane>
     </center>

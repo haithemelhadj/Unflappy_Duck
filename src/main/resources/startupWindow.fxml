@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="296.0" prefWidth="643.0" stylesheets="@styleHomePage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllerlogin">
+<AnchorPane prefHeight="296.0" prefWidth="643.0" stylesheets="@styleHomePage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.StartupController">
     <children>
         <HBox layoutX="50" layoutY="50" prefWidth="556.0" spacing="20" styleClass="hbox">
             <!-- StartupController Section -->
@@ -16,7 +16,7 @@
                 <Label styleClass="label" text="Login" />
                 <TextField fx:id="loginUsernameOrEmailField" promptText="Username or Email" />
                 <PasswordField fx:id="loginPasswordField" promptText="Password" />
-                <Button onAction="#handleLogin" styleClass="button" text="Login" />
+                <Button onAction="#login" styleClass="button" text="Login" />
             </VBox>
 
             <!-- Create Account Section -->
@@ -25,7 +25,7 @@
                 <TextField fx:id="createNameField" promptText="Name" />
                 <TextField fx:id="createEmailField" promptText="Email" />
                 <PasswordField fx:id="createPasswordField" promptText="New Password" />
-                <Button onAction="#handleCreateAccount" styleClass="button" text="Create Account" />
+                <Button onAction="#createAccount" styleClass="button" text="Create Account" />
             </VBox>
         </HBox>
     </children>

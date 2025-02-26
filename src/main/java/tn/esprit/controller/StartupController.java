@@ -1,16 +1,16 @@
+package tn.esprit.controller;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import tn.esprit.models.Utilisateur;
 import tn.esprit.models.enums.userRoles;
 import tn.esprit.services.ServiceUtilisateur;
+import tn.esprit.utils.Session;
 
 import java.sql.SQLException;
 
-public class Controllerlogin {
-
+public class StartupController {
     @FXML
     private TextField loginUsernameOrEmailField;
 
@@ -27,41 +27,41 @@ public class Controllerlogin {
     private PasswordField createPasswordField;
 
     @FXML
-    private Button loginButton;
-
-    @FXML
-    private Button createAccountButton;
-
     private final ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur();
+    private final Callback callback;
 
-    // Handle login action
-    @FXML
-    private void handleLogin() {
-        String usernameOrEmail = loginUsernameOrEmailField.getText();
+
+
+    public interface Callback{
+        void call();
+    }
+
+    public StartupController(Callback call){
+        this.callback = call;
+    }
+
+    public void login(ActionEvent actionEvent) {
+        String email = loginUsernameOrEmailField.getText().trim();
         String password = loginPasswordField.getText();
-
-        if (usernameOrEmail.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "StartupController Error", "Please enter both username/email and password.");
+        if (email.isEmpty() || password.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in both email and password.");
             return;
         }
-
         try {
-            Utilisateur utilisateur = serviceUtilisateur.loginUtilisateur(usernameOrEmail, password);
-            if (utilisateur != null) {
-                showAlert(Alert.AlertType.INFORMATION, "StartupController Success", "Welcome " + utilisateur.getNom() + "!");
-                redirectToHomePage(utilisateur);
+            Utilisateur user = serviceUtilisateur.loginUtilisateur(email, password);
+            if (user != null) {
+                showAlert(Alert.AlertType.INFORMATION, "StartupController Successful", "Welcome " + user.getNom() + "!");
+                Session.start(user);
+                callback.call();
             } else {
-                showAlert(Alert.AlertType.ERROR, "StartupController Failed", "Invalid username/email or password.");
+                showAlert(Alert.AlertType.ERROR, "StartupController Failed", "Invalid email or password.");
             }
-        } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Error accessing the database.");
-            e.printStackTrace();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to login: " + e.getMessage());
         }
     }
 
-    // Handle account creation action
-    @FXML
-    private void handleCreateAccount() {
+    public void createAccount(ActionEvent actionEvent) {
         String name = createNameField.getText();
         String email = createEmailField.getText();
         String password = createPasswordField.getText();
@@ -85,12 +85,13 @@ public class Controllerlogin {
         try {
             serviceUtilisateur.ajouterUtilisateur(newUser);
             showAlert(Alert.AlertType.INFORMATION, "Account Created", "Your account has been created successfully!");
+            Session.start(newUser);
+            callback.call();
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Error while creating the account.");
             e.printStackTrace();
         }
     }
-
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
@@ -98,15 +99,5 @@ public class Controllerlogin {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-
-    private void redirectToHomePage(Utilisateur utilisateur) {
-        if (!userRoles.admin.equals(utilisateur.getRole())) {
-            System.out.println("Redirecting to home page...");
-
-        } else {
-            showAlert(Alert.AlertType.WARNING, "Access Denied", "Admin access detected. Staying on login page.");
-        }
     }
 }

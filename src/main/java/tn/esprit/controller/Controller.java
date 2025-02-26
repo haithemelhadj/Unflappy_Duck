@@ -1,12 +1,10 @@
 package tn.esprit.controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.layout.BorderPane;
 import tn.esprit.models.enums.userRoles;
 import tn.esprit.utils.Session;
 
 public class Controller {
-    public final void login(){
+    public final void start(){
         if (Session.isActive()){
             if (Session.getActiveUser().getRole() == userRoles.admin)
                 Router.navigateTo("/BackOffice/backController.fxml", null);
@@ -14,7 +12,7 @@ public class Controller {
                 Router.navigateTo("/FrontOffice/homePage.fxml", null);
         }
         else
-            Router.navigateTo("/login.fxml", "Login", new Login(()->{
+            Router.navigateTo("/startupWindow.fxml", "StartupController", new StartupController(()->{
                 if (Session.getActiveUser().getRole() == userRoles.admin)
                     Router.navigateTo("/BackOffice/backController.fxml", null);
                 else

@@ -21,6 +21,6 @@ public class UIFreelance extends Application {
         Router.initialize(primaryStage);
         Controller con = new Controller();
 //        Session.start(new ServiceUtilisateur().getUtilisateurById(1));
-        con.login();
+        con.start();
     }
 }

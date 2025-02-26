@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" stylesheets="styles.css" fx:controller="tn.esprit.controller.UserProfileController" spacing="20" alignment="CENTER" styleClass="user-profile-container">
+<VBox alignment="CENTER" prefHeight="475.0" prefWidth="209.0" spacing="20" styleClass="user-profile-container" stylesheets="styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="tn.esprit.controller.UserProfileController">
     <!-- Profile Image -->
     <ImageView fx:id="profileImageView" fitHeight="150" fitWidth="150" />
 
@@ -22,11 +22,11 @@
     <Label fx:id="userXpLabel" styleClass="profile-xp" />
 
     <!-- Edit Profile Button -->
-    <Button fx:id="editProfileButton" text="Edit Profile" onAction="#handleEditProfile" />
+    <Button fx:id="editProfileButton" onAction="#handleEditProfile" text="Edit Profile" />
 
     <!-- Logout Button -->
-    <Button fx:id="logoutButton" text="Logout" onAction="#handleLogout" />
+    <Button fx:id="logoutButton" onAction="#handleLogout" text="Logout" />
 
     <!-- Back to Home Button -->
-    <Button fx:id="backButton" text="Back to Home" onAction="#handleBackToHome" />
+    <Button fx:id="backButton" onAction="#handleBackToHome" text="Back to Home" />
 </VBox>

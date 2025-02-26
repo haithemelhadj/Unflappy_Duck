@@ -8,15 +8,20 @@ import tn.esprit.utils.Session;
 
 public class Controller {
     public final void login(){
-        if (Session.isActive())
-            return;
-        Router.navigateTo("/login.fxml", "Login", new Login(()->{
+        if (Session.isActive()){
             if (Session.getActiveUser().getRole() == userRoles.admin)
                 Router.navigateTo("/BackOffice/backController.fxml", null);
             else
                 Router.navigateTo("/FrontOffice/frontController.fxml", null);
         }
-        ));
+        else
+            Router.navigateTo("/login.fxml", "Login", new Login(()->{
+                if (Session.getActiveUser().getRole() == userRoles.admin)
+                    Router.navigateTo("/BackOffice/backController.fxml", null);
+                else
+                    Router.navigateTo("/FrontOffice/frontController.fxml", null);
+            }
+            ));
     }
 
     @FXML

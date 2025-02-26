@@ -96,9 +96,9 @@ public class Router {
         primaryStage.show();
     }
 
-    public static void innerTo(String fxmlPath){
-
-    }
+//    public static void display(String fxmlPath, Object o){
+//        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/all_events.fxml")).load());
+//    }
 
     // Optional: Show error dialog
     private static void showError(String message) {

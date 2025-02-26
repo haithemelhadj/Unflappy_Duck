@@ -41,20 +41,4 @@
             <version>9.0.10</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.8</version>
-                <configuration>
-                    <mainClass>
-                        tn.esprit.test.QuizApplication
-                    </mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

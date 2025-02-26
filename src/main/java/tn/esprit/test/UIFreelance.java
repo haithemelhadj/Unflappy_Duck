@@ -4,6 +4,11 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import tn.esprit.controller.Controller;
 import tn.esprit.controller.Router;
+import tn.esprit.models.Utilisateur;
+import tn.esprit.services.ServiceUtilisateur;
+import tn.esprit.utils.Session;
+
+import java.sql.SQLException;
 
 public class UIFreelance extends Application {
 
@@ -12,9 +17,10 @@ public class UIFreelance extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws SQLException {
         Router.initialize(primaryStage);
         Controller con = new Controller();
+        Session.start(new ServiceUtilisateur().getUtilisateurById(1));
         con.login();
     }
 }

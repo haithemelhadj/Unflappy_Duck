@@ -20,16 +20,6 @@ public class Router {
 
     public static void initialize(Stage stage) {
         primaryStage = stage;
-        primaryStage.sceneProperty().addListener((observable, oldScene, newScene)->{
-            if (oldScene != null) {
-                System.out.println("Scene removed: " + oldScene);
-            }
-//            if (newScene != null) {
-//
-//            } else {
-//                System.out.println("No scene is set on the stage.");
-//            }
-        });
     }
 
     public static void navigateTo(String fxmlPath, Object o) {
@@ -62,7 +52,6 @@ public class Router {
         }
     }
 
-    // Optional: Show error dialog
     private static void showError(String message) {
         System.err.println("Error: " + message);
     }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="642.0" prefWidth="1234.0" stylesheets="@styleHomePage.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22">
+<BorderPane prefHeight="642.0" prefWidth="1234.0" stylesheets="@styleHomePage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.FrontController">
     <top>
         <HBox spacing="10" style="-fx-background-color: black; -fx-padding: 15;">
             <Label style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="UNFLAPPY DUCK" />
@@ -16,13 +16,13 @@
             <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Services" />
             <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="About" />
             <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Contact" />
-            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Get Tickets" />
-            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Create an Event" />
-            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Pass a Test" />
-            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Store" />
-            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Freelancer Application" />
-            <Button style="-fx-text-fill: white; -fx-background-color: transparent;" text="Team Management" />
-            <Button style="-fx-background-color: white;">
+            <Button onAction="#listEvents" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Get Tickets" />
+            <Button onAction="#createEvent" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Create an Event" />
+            <Button onAction="#passQuiz" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Pass a Test" />
+            <Button onAction="#goToStore" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Store" />
+            <Button onAction="#goToMarket" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Freelancer Application" />
+            <Button onAction="#goToTeams" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Team Management" />
+            <Button onAction="#goToSettings" style="-fx-background-color: white;">
 
             </Button>
         </HBox>
@@ -30,12 +30,16 @@
 
     <center>
         <StackPane style="-fx-background-image: url('@backgroundHomePage.jpg'); -fx-background-size: cover;">
-            <VBox alignment="CENTER" spacing="20">
-                <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="HERE TO CREATE" />
-                <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="MOMENTS THAT LAST" />
-                <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="A LIFETIME" />
-                <Button style="-fx-background-color: yellow; -fx-text-fill: black; -fx-font-weight: bold;" text="Upcoming Events" />
-            </VBox>
+         <BorderPane fx:id="borderPane">
+            <center>
+                  <VBox alignment="CENTER" spacing="20">
+                      <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="HERE TO CREATE" />
+                      <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="MOMENTS THAT LAST" />
+                      <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="A LIFETIME" />
+                      <Button style="-fx-background-color: yellow; -fx-text-fill: black; -fx-font-weight: bold;" text="Upcoming Events" />
+                  </VBox>
+            </center>
+         </BorderPane>
         </StackPane>
     </center>
 </BorderPane>

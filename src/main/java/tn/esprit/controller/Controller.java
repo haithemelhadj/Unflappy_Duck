@@ -22,11 +22,4 @@ public class Controller {
             }
             ));
     }
-
-    @FXML
-    private BorderPane borderPane;
-
-    public BorderPane getBorderPane(){
-        return borderPane;
-    }
 }

@@ -1,0 +1,51 @@
+/* General Styling */
+.root {
+    -fx-background-color: black;
+}
+
+/* Navigation Bar Styling */
+.hbox {
+    -fx-background-color: black;
+    -fx-padding: 15px;
+}
+
+.hbox Label {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.hbox Button {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+}
+.hbox Button:hover {
+    -fx-text-fill: yellow;
+}
+
+/* Main Content Styling */
+.stack-pane {
+    -fx-background-image: url('backgroundHomePage.jpg');
+    -fx-background-size: cover;
+}
+
+.vbox Label {
+    -fx-text-fill: white;
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+/* Button Styling */
+.vbox Button {
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+}
+.vbox Button:hover {
+    -fx-background-color: gold;
+}

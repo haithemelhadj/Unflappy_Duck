@@ -11,7 +11,7 @@ import java.util.List;
 public class ServiceUtilisateur {
 
     private final Connection connection;
-
+    private static Utilisateur loggedInUser;
     public ServiceUtilisateur() {
         this.connection = MyDatabase.getInstance().getCnx();
     }
@@ -134,11 +134,26 @@ public class ServiceUtilisateur {
                     utilisateur.setXp(resultSet.getInt("xp"));
                     utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class));
                     utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
+
+                    // Store the logged-in user
+                    loggedInUser = utilisateur;
+
                     return utilisateur;
                 }
             }
         }
         return null;
     }
+
+    // New method to get the currently logged-in user
+    public Utilisateur getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    // You can implement a logout method to clear the logged-in user
+    public void logout() {
+        loggedInUser = null;
+    }
+
 
 }

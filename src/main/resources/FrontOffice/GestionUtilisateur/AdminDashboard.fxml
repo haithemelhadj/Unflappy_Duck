@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.AdminDashboardController">
+    <children>
+        <!-- Dashboard Title -->
+        <Label layoutX="20" layoutY="20" text="Admin Dashboard" styleClass="title" />
+
+        <!-- Grid for Cards -->
+        <GridPane fx:id="gridPane" layoutX="20" layoutY="80" hgap="20" vgap="20">
+            <!-- Dynamically add cards here -->
+        </GridPane>
+    </children>
+</AnchorPane>

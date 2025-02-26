@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="199.0" prefWidth="435.0" styleClass="root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="Controllerlogin">
+<AnchorPane prefHeight="199.0" prefWidth="435.0" stylesheets="@styleHomePage.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="Controllerlogin">
     <children>
         <HBox layoutX="50" layoutY="50" spacing="20" styleClass="hbox">
             <!-- Login Section -->
             <VBox alignment="CENTER" spacing="10" styleClass="vbox">
                 <Label styleClass="label" text="Login" />
-                <TextField fx:id="loginUsernameField" promptText="Username" />
+                <TextField fx:id="loginUsernameOrEmailField" promptText="Username or Email" />
                 <PasswordField fx:id="loginPasswordField" promptText="Password" />
                 <Button onAction="#handleLogin" styleClass="button" text="Login" />
             </VBox>
@@ -22,7 +22,8 @@
             <!-- Create Account Section -->
             <VBox alignment="CENTER" spacing="10" styleClass="vbox">
                 <Label styleClass="label" text="Create Account" />
-                <TextField fx:id="createUsernameField" promptText="New Username" />
+                <TextField fx:id="createNameField" promptText="Name" />
+                <TextField fx:id="createEmailField" promptText="Email" />
                 <PasswordField fx:id="createPasswordField" promptText="New Password" />
                 <Button onAction="#handleCreateAccount" styleClass="button" text="Create Account" />
             </VBox>

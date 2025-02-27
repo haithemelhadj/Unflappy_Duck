@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 
 public class Contrat {
     private int contrat_id;
-    private int service_id;
-    private int offre_id;
+    private Service service;
+    private Offre offre;
     private Date date_debut;
     private Date date_fin;
     private String description;
@@ -17,10 +17,10 @@ public class Contrat {
 
     // Constructors
     public Contrat(){};
-    public Contrat(int contrat_id, int service_id, int offre_id, Date date_debut, Date date_fin, String description, Status statut, String echeancier_paiement, Timestamp cree_le, Timestamp mis_a_jour_le) {
+    public Contrat(int contrat_id, Service service, Offre offre, Date date_debut, Date date_fin, String description, Status statut, String echeancier_paiement, Timestamp cree_le, Timestamp mis_a_jour_le) {
         this.contrat_id = contrat_id;
-        this.service_id = service_id;
-        this.offre_id = offre_id;
+        this.service = service;
+        this.offre = offre;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.description = description;
@@ -30,9 +30,9 @@ public class Contrat {
         this.mis_a_jour_le = mis_a_jour_le;
     }
 
-    public Contrat(int service_id, int offre_id, Date date_debut, Date date_fin, String description, Status statut, String echeancier_paiement) {
-        this.service_id = service_id;
-        this.offre_id = offre_id;
+    public Contrat(Service service, Offre offre, Date date_debut, Date date_fin, String description, Status statut, String echeancier_paiement) {
+        this.service = service;
+        this.offre = offre;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.description = description;
@@ -45,20 +45,20 @@ public class Contrat {
         return contrat_id;
     }
 
-    public int getService_id() {
-        return service_id;
+    public Service getService_id() {
+        return service;
     }
 
-    public void setService_id(int service_id) {
-        this.service_id = service_id;
+    public void setService_id(Service service) {
+        this.service = service;
     }
 
-    public int getOffre_id() {
-        return offre_id;
+    public Offre getOffre_id() {
+        return offre;
     }
 
-    public void setOffre_id(int offre_id) {
-        this.offre_id = offre_id;
+    public void setOffre_id(Offre offre) {
+        this.offre = offre;
     }
 
     public Date getDate_debut() {

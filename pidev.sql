@@ -493,6 +493,7 @@ ALTER TABLE `participant_evenement`
 ALTER TABLE `service`
   ADD CONSTRAINT `service_ibfk_1` FOREIGN KEY (`freelance_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;
 
+ALTER TABLE lieu MODIFY lieu_id INT AUTO_INCREMENT;
 --
 -- Constraints for table `tache`
 --

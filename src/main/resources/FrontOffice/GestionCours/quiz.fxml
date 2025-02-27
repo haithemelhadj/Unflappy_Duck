@@ -11,7 +11,7 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="tn.esprit.controller.QuizSessionController"
-            stylesheets="@../../styles.css"
+            stylesheets="@styles.css"
             prefWidth="800" prefHeight="600">
 
     <!-- Define a ToggleGroup for answer radio buttons -->
@@ -76,5 +76,10 @@
                 <Label fx:id="xpLabel" styleClass="xp-label"/>
             </HBox>
         </VBox>
+
+        <!-- NEW: Import from API Button -->
+        <HBox alignment="CENTER">
+            <Button text="Import from API" styleClass="button" onAction="#handleImportFromApi" />
+        </HBox>
     </VBox>
 </AnchorPane>

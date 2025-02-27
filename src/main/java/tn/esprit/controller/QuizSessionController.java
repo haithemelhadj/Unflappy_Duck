@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import tn.esprit.api.QuizApiClient;
 import tn.esprit.models.Question;
 import tn.esprit.services.ServiceQuestion;
 import java.util.Collections;
@@ -37,7 +38,9 @@ public class QuizSessionController {
     public void initialize() {
         setupTimer();
         loadQuestions();
-        showQuestion();
+        if (!questions.isEmpty()) {
+            showQuestion();
+        }
         updateProgress();
     }
 
@@ -65,6 +68,12 @@ public class QuizSessionController {
     }
 
     private void showQuestion() {
+        if (questions.isEmpty()) {
+            questionNumberLabel.setText("No questions available.");
+            questionTextLabel.setText("");
+            answersContainer.getChildren().clear();
+            return;
+        }
         answersContainer.getChildren().clear();
         Question current = questions.get(currentQuestionIndex);
 
@@ -150,6 +159,34 @@ public class QuizSessionController {
         alert.setContentText("Final Score: " + score + "/" + questions.size() + "\n"
                 + "Total XP Earned: " + totalXP + "\n"
                 + "Time Taken: " + timerLabel.getText());
+        alert.showAndWait();
+    }
+
+    // NEW: Method to import quiz questions from an external API
+    @FXML
+    private void handleImportFromApi() {
+        QuizApiClient apiClient = new QuizApiClient();
+        try {
+            List<Question> importedQuestions = apiClient.fetchQuestions();
+            // Optionally assign a question number to each imported question.
+            for (Question q : importedQuestions) {
+                // For example, set question number as current total count + 1.
+                q.setQno(questionService.getQuestions().size() + 1);
+                questionService.addQuestion(q);
+            }
+            // Reload questions from the database.
+            loadQuestions();
+            showAlert("Info", "Imported " + importedQuestions.size() + " questions from API.");
+        } catch (Exception e) {
+            showAlert("Error", "Failed to import questions: " + e.getMessage());
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }

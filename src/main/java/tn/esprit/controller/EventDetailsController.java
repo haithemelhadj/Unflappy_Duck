@@ -20,10 +20,16 @@ public class EventDetailsController {
 
     private Evenement event;
 
-    public void setEvent(Evenement event) {
+//    public void setEvent(Evenement event) {
+//
+//    }
+
+    public EventDetailsController(Evenement event){
         this.event = event;
         displayEventDetails();
     }
+
+    public EventDetailsController(){}
 
     private void displayEventDetails() {
         eventNameLabel.setText(event.getNom());

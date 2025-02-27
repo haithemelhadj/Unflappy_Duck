@@ -70,7 +70,7 @@ public class ServiceEvenement implements IService<Evenement> {
 
     public List<Evenement> searchEvents(String keyword) {
         List<Evenement> events = new ArrayList<>();
-        String query = "SELECT * FROM Evenement WHERE nom LIKE ?"; // Only search by nom
+        String query = "SELECT * FROM evenement WHERE nom LIKE ?"; // Only search by nom
         try (PreparedStatement pstm = cnx.prepareStatement(query)) {
             pstm.setString(1, "%" + keyword + "%"); // Search for events with names containing the keyword
             try (ResultSet rs = pstm.executeQuery()) {
@@ -95,7 +95,7 @@ public class ServiceEvenement implements IService<Evenement> {
 
     public List<Evenement> sortEvents(String sortBy) {
         List<Evenement> events = new ArrayList<>();
-        String query = "SELECT * FROM Evenement ORDER BY nom"; // Always sort by nom
+        String query = "SELECT * FROM evenement ORDER BY nom"; // Always sort by nom
         try (Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery(query)) {
             while (rs.next()) {
                 Evenement event = new Evenement();
@@ -168,7 +168,7 @@ public class ServiceEvenement implements IService<Evenement> {
         }
     }
     public void addEventToUser(int eventId) {
-        String qry = "UPDATE Evenement SET is_added = TRUE WHERE evenement_id = ?";
+        String qry = "UPDATE evenement SET is_added = TRUE WHERE evenement_id = ?";
         try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
             pstm.setInt(1, eventId);
             pstm.executeUpdate();
@@ -179,7 +179,7 @@ public class ServiceEvenement implements IService<Evenement> {
     }
 
     public void removeEventFromUser(int eventId) {
-        String qry = "UPDATE Evenement SET is_added = FALSE WHERE evenement_id = ?";
+        String qry = "UPDATE evenement SET is_added = FALSE WHERE evenement_id = ?";
         try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
             pstm.setInt(1, eventId);
             pstm.executeUpdate();
@@ -191,7 +191,7 @@ public class ServiceEvenement implements IService<Evenement> {
 
     public List<Evenement> getEventsForUser() {
         List<Evenement> events = new ArrayList<>();
-        String qry = "SELECT * FROM Evenement WHERE is_added = TRUE";
+        String qry = "SELECT * FROM evenement WHERE is_added = TRUE";
         try (Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery(qry)) {
             while (rs.next()) {
                 Evenement event = new Evenement();

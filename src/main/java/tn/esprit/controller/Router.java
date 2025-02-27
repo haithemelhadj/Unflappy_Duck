@@ -5,14 +5,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 import tn.esprit.utils.Session;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class Router {
     private static Stage primaryStage;
+
+    public static Stack<Stage> getStages() {
+        return stages;
+    }
+
+    private static Stack<Stage> stages;
 
     public static BorderPane getActiveBorderPane() {
         return activeBorderPane;
@@ -26,6 +36,8 @@ public class Router {
 
     public static void initialize(Stage stage) {
         primaryStage = stage;
+        stages = new Stack<>();
+        stages.add(primaryStage);
     }
 
     public static void navigateTo(String fxmlPath, Object o) {
@@ -65,5 +77,14 @@ public class Router {
 
     private static void showError(String message) {
         System.err.println("Error: " + message);
+    }
+
+    public static void newWindow(String fxmlpath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Router.class.getResource(fxmlpath));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stages.add(stage);
+        stage.show();
     }
 }

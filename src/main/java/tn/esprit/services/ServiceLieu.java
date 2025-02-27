@@ -17,7 +17,7 @@ public class ServiceLieu implements IService<Lieu> {
 
     @Override
     public void add(Lieu lieu) {
-        String qry = "INSERT INTO `Lieu` (`nom`, `adresse`, `capacite`) VALUES (?, ?, ?)";
+        String qry = "INSERT INTO `lieu` (`nom`, `adresse`, `capacite`) VALUES (?, ?, ?)";
         try (PreparedStatement pstm = cnx.prepareStatement(qry, Statement.RETURN_GENERATED_KEYS)) {
             pstm.setString(1, lieu.getNom());
             pstm.setString(2, lieu.getAdresse());
@@ -41,7 +41,7 @@ public class ServiceLieu implements IService<Lieu> {
     @Override
     public List<Lieu> getAll() {
         List<Lieu> lieux = new ArrayList<>();
-        String qry = "SELECT * FROM `Lieu`";
+        String qry = "SELECT * FROM `lieu`";
         try (Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery(qry)) {
             while (rs.next()) {
                 Lieu l = new Lieu();
@@ -60,7 +60,7 @@ public class ServiceLieu implements IService<Lieu> {
 
     @Override
     public void update(Lieu lieu) {
-        String qry = "UPDATE `Lieu` SET `nom` = ?, `adresse` = ?, `capacite` = ? WHERE `lieu_id` = ?";
+        String qry = "UPDATE `lieu` SET `nom` = ?, `adresse` = ?, `capacite` = ? WHERE `lieu_id` = ?";
         try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
             pstm.setString(1, lieu.getNom());
             pstm.setString(2, lieu.getAdresse());
@@ -76,7 +76,7 @@ public class ServiceLieu implements IService<Lieu> {
 
     @Override
     public void delete(Lieu lieu) {
-        String qry = "DELETE FROM `Lieu` WHERE `lieu_id` = ?";
+        String qry = "DELETE FROM `lieu` WHERE `lieu_id` = ?";
         try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
             pstm.setInt(1, lieu.getLieuId());
             pstm.executeUpdate();
@@ -88,7 +88,7 @@ public class ServiceLieu implements IService<Lieu> {
 
     // Method to fetch Lieu by ID
     public Lieu getById(int id) {
-        String qry = "SELECT * FROM `Lieu` WHERE `lieu_id` = ?";
+        String qry = "SELECT * FROM `lieu` WHERE `lieu_id` = ?";
         try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
             pstm.setInt(1, id);
             try (ResultSet rs = pstm.executeQuery()) {
@@ -109,7 +109,7 @@ public class ServiceLieu implements IService<Lieu> {
 
     // Method to fetch Lieu by name and address
     public Lieu getByNameAndAddress(String nom, String adresse) {
-        String qry = "SELECT * FROM `Lieu` WHERE `nom` = ? AND `adresse` = ?";
+        String qry = "SELECT * FROM `lieu` WHERE `nom` = ? AND `adresse` = ?";
         try (PreparedStatement pstm = cnx.prepareStatement(qry)) {
             pstm.setString(1, nom);
             pstm.setString(2, adresse);

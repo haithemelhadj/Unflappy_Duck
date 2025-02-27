@@ -20,7 +20,7 @@ public class FrontController implements Initializable {
     private MenuButton freelancerMenu;
 
     public void listEvents(ActionEvent actionEvent) throws IOException {
-        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEvenement/all_events.fxml");
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEvenement/UserEventsView.fxml");
     }
 
     public void createEvent(ActionEvent actionEvent) throws IOException{

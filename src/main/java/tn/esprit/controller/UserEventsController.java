@@ -80,16 +80,17 @@ public class UserEventsController {
     }
 
     @FXML
-    private void goToMyEvents() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/MyEvents.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) eventsListContainer.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void goToMyEvents() throws IOException {
+        Router.newWindow("/FrontOffice/GestionEvenement/MyEvents.fxml");
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/MyEvents.fxml"));
+//            Parent root = loader.load();
+//
+//            Stage stage = (Stage) eventsListContainer.getScene().getWindow();
+//            stage.setScene(new Scene(root));
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }

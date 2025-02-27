@@ -46,26 +46,34 @@ public class UserEventsController {
 
         for (Evenement event : events) {
             Button eventButton = new Button(event.getNom());
-            eventButton.setOnAction(e -> showEventDetails(event)); // Show details when clicked
+            eventButton.setOnAction(e -> {
+                try {
+                    showEventDetails(event);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }); // Show details when clicked
             eventsListContainer.getChildren().add(eventButton);
         }
     }
 
-    private void showEventDetails(Evenement event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/EventDetails.fxml"));
-            Parent root = loader.load();
-
-            EventDetailsController controller = loader.getController();
-            controller.setEvent(event);
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Détails de l'événement");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void showEventDetails(Evenement event) throws IOException {
+        Router.newWindow("/FrontOffice/GestionEvenement/EventDetails.fxml");
+        Router.navigateTo("/FrontOffice/GestionEvenement/EventDetails.fxml", "Détails de l'événement", new EventDetailsController(event));
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/EventDetails.fxml"));
+//            Parent root = loader.load();
+//
+//            EventDetailsController controller = loader.getController();
+//            controller.setEvent(event);
+//
+//            Stage stage = new Stage();
+//            stage.setScene(new Scene(root));
+//            stage.setTitle("");
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
     private void setupSearchAndSort() {
         // Search functionality

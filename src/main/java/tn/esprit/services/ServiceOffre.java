@@ -17,10 +17,10 @@ public class ServiceOffre implements IService<Offre> {
 
     @Override
     public void add(Offre offre){
-        String qry = "INSERT INTO offre(client_id, titre, description, budget, type_contrat, statut, expire_le) VALUES (?,?,?,?,?,?,?)";
+        String qry = "INSERT INTO offre(event_id, titre, description, budget, type_contrat, statut, expire_le) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
-            pstm.setInt(1,offre.getClient_id());
+            pstm.setInt(1,offre.getEvent().getEvenementId());
             pstm.setString(2, offre.getTitre());
             pstm.setString(3, offre.getDescription());
             pstm.setBigDecimal(4, offre.getBudget());
@@ -44,7 +44,7 @@ public class ServiceOffre implements IService<Offre> {
             while (rs.next()) {
                 offres.add(new Offre(
                         rs.getInt("offre_id"),
-                        rs.getInt("client_id"),
+                        new ServiceEvenement().getEventById(rs.getInt("event_id")),
                         rs.getString("titre"),
                         rs.getString("description"),
                         rs.getBigDecimal("budget"),
@@ -62,10 +62,10 @@ public class ServiceOffre implements IService<Offre> {
 
     @Override
     public void update(Offre offre) {
-        String qry = "UPDATE offre SET client_id=?, titre=?, description=?, budget=?, type_contrat=?, statut=?, expire_le=? WHERE offre_id=?";
+        String qry = "UPDATE offre SET event_id=?, titre=?, description=?, budget=?, type_contrat=?, statut=?, expire_le=? WHERE offre_id=?";
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
-            pstm.setInt(1,offre.getClient_id());
+            pstm.setInt(1,offre.getEvent().getEvenementId());
             pstm.setString(2, offre.getTitre());
             pstm.setString(3, offre.getDescription());
             pstm.setBigDecimal(4, offre.getBudget());

@@ -1,16 +1,12 @@
 package tn.esprit.models;
 
-import javax.swing.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Service {
     private int service_id;
-    private int freelancer_id;
+    private Utilisateur freelancer;
     private String titre;
     private String description;
     private String expertise;
@@ -23,19 +19,19 @@ public class Service {
     // Constructor
     public Service(){};
 
-    public Service(int freelancer_id, String titre, String description, String expertise, int duree_jours, BigDecimal prix, MethodePaiement mode_paiement) {
+    public Service(Utilisateur freelancer, String titre, String description, String expertise, int duree_jours, BigDecimal prix, MethodePaiement mode_paiement) {
         this.mode_paiement = mode_paiement;
         this.prix = prix;
         this.duree_jours = duree_jours;
         this.expertise = expertise;
         this.description = description;
         this.titre = titre;
-        this.freelancer_id = freelancer_id;
+        this.freelancer = freelancer;
     }
 
-    public Service(int service_id, int freelancer_id, String titre, String description, String expertise, int duree_jours, BigDecimal prix, MethodePaiement mode_paiement, Timestamp cree_le, Timestamp mis_a_jour_le) {
+    public Service(int service_id, Utilisateur freelancer, String titre, String description, String expertise, int duree_jours, BigDecimal prix, MethodePaiement mode_paiement, Timestamp cree_le, Timestamp mis_a_jour_le) {
         this.service_id = service_id;
-        this.freelancer_id = freelancer_id;
+        this.freelancer = freelancer;
         this.titre = titre;
         this.description = description;
         this.expertise = expertise;
@@ -119,26 +115,26 @@ public class Service {
         this.titre = titre;
     }
 
-    public int getFreelancer_id() {
-        return freelancer_id;
+    public Utilisateur getFreelancer() {
+        return freelancer;
     }
 
-    public void setFreelancer_id(int freelancer_id) {
-        this.freelancer_id = freelancer_id;
+    public void setFreelancer(Utilisateur freelancer) {
+        this.freelancer = freelancer;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Service service = (Service) o;
-        return getService_id() == service.getService_id() && getFreelancer_id() == service.getFreelancer_id() && getDuree_jours() == service.getDuree_jours() && Objects.equals(getTitre(), service.getTitre()) && Objects.equals(getDescription(), service.getDescription()) && Objects.equals(getExpertise(), service.getExpertise()) && Objects.equals(getPrix(), service.getPrix()) && getMode_paiement() == service.getMode_paiement() && Objects.equals(getCree_le(), service.getCree_le()) && Objects.equals(getMis_a_jour_le(), service.getMis_a_jour_le());
+        return getService_id() == service.getService_id() && getFreelancer() == service.getFreelancer() && getDuree_jours() == service.getDuree_jours() && Objects.equals(getTitre(), service.getTitre()) && Objects.equals(getDescription(), service.getDescription()) && Objects.equals(getExpertise(), service.getExpertise()) && Objects.equals(getPrix(), service.getPrix()) && getMode_paiement() == service.getMode_paiement() && Objects.equals(getCree_le(), service.getCree_le()) && Objects.equals(getMis_a_jour_le(), service.getMis_a_jour_le());
     }
 
     @Override
     public String toString() {
         return "Service{" +
                 "service_id=" + service_id +
-                ", freelancer_id=" + freelancer_id +
+                ", freelancer=" + freelancer +
                 ", titre='" + titre + '\'' +
                 ", description='" + description + '\'' +
                 ", expertise='" + expertise + '\'' +
@@ -152,7 +148,7 @@ public class Service {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getService_id(), getFreelancer_id(), getTitre(), getDescription(), getExpertise(), getDuree_jours(), getPrix(), getMode_paiement(), getCree_le(), getMis_a_jour_le());
+        return Objects.hash(getService_id(), getFreelancer(), getTitre(), getDescription(), getExpertise(), getDuree_jours(), getPrix(), getMode_paiement(), getCree_le(), getMis_a_jour_le());
     }
 
     // Enum for payment method

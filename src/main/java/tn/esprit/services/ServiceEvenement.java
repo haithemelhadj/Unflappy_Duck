@@ -2,6 +2,8 @@ package tn.esprit.services;
 
 import tn.esprit.interfaces.IService;
 import tn.esprit.models.Evenement;
+import tn.esprit.models.Utilisateur;
+import tn.esprit.models.enums.userRoles;
 import tn.esprit.utils.MyDatabase;
 
 import java.sql.*;
@@ -131,6 +133,27 @@ public class ServiceEvenement implements IService<Evenement> {
         } catch (SQLException e) {
             System.out.println("Erreur lors de la mise à jour de l'événement : " + e.getMessage());
         }
+    }
+
+    public Evenement getEventById(int id) throws SQLException {
+        String query = "SELECT * FROM evenement WHERE id = ?";
+        try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    Evenement event = new Evenement();
+                    event.setEvenementId(rs.getInt("evenement_id"));
+                    event.setNom(rs.getString("nom"));
+                    event.setDescription(rs.getString("description"));
+                    event.setDateDebut(rs.getTimestamp("date_debut"));
+                    event.setDateFin(rs.getTimestamp("date_fin"));
+                    event.setLieuId(rs.getInt("lieu_id"));
+                    event.setCalendrierId(rs.getInt("calendrier_id"));
+                    return event;
+                }
+            }
+        }
+        return null;
     }
 
     @Override

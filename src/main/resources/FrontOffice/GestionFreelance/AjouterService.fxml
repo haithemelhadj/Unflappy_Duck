@@ -9,13 +9,12 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.AjouterService">
     <VBox layoutX="37.0" layoutY="39.0">
-        <TextField fx:id="freelance_id" promptText="Freelancer_id" />
         <TextField fx:id="titre" promptText="titre" />
         <TextField fx:id="duree_jours" promptText="duree_jours" />
         <TextField fx:id="prix" promptText="prix" />
         <ChoiceBox fx:id="mode_paiement" prefWidth="150.0" />
     </VBox>
     <TextArea fx:id="description" layoutX="336.0" layoutY="39.0" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
-    <TextArea fx:id="expertise" layoutX="23.0" layoutY="176.0" prefHeight="200.0" prefWidth="200.0" promptText="Expertise" />
+    <TextArea fx:id="expertise" layoutX="37.0" layoutY="175.0" prefHeight="200.0" prefWidth="200.0" promptText="Expertise" />
    <Button fx:id="boutonAjouter" layoutX="389.0" layoutY="305.0" mnemonicParsing="false" onAction="#ajouterService" text="Ajouter" />
 </AnchorPane>

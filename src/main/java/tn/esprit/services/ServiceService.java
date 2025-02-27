@@ -23,7 +23,7 @@ public class ServiceService implements IService<Service> {
         String qry = "INSERT INTO service(freelance_id, titre, description, expertise, duree_jours, prix, mode_paiement) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
-            pstm.setInt(1, service.getFreelancer_id());
+            pstm.setInt(1, service.getFreelancer().getId());
             pstm.setString(2, service.getTitre());
             pstm.setString(3, service.getDescription());
             pstm.setString(4, service.getExpertise());
@@ -46,7 +46,7 @@ public class ServiceService implements IService<Service> {
             while (rs.next()) {
                 services.add(new Service(
                         rs.getInt("service_id"),
-                        rs.getInt("freelance_id"),
+                        new ServiceUtilisateur().getUtilisateurById(rs.getInt("freelance_id")),
                         rs.getString("titre"),
                         rs.getString("description"),
                         rs.getString("expertise"),
@@ -68,7 +68,7 @@ public class ServiceService implements IService<Service> {
         String qry = "UPDATE service SET freelance_id=?, titre=?, description=?, expertise=?, duree_jours=?, prix=?, mode_paiement=? WHERE service_id=?";
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
-            pstm.setInt(1, service.getFreelancer_id());
+            pstm.setInt(1, service.getFreelancer().getId());
             pstm.setString(2, service.getTitre());
             pstm.setString(3, service.getDescription());
             pstm.setString(4, service.getExpertise());

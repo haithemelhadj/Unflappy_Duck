@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>tn.esprit</groupId>
-    <artifactId>WorkshopJDBC3A15</artifactId>
+    <artifactId>Unflappy_Duck</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -41,4 +41,20 @@
             <version>9.0.10</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>
+                        tn.esprit.test.MainFX
+                    </mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

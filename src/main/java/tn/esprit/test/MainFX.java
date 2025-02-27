@@ -30,7 +30,8 @@ public class MainFX extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/event_form.fxml"));
+        //FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/event_form.fxml"));
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionEquipe/GestionEquipe.fxml"));
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);

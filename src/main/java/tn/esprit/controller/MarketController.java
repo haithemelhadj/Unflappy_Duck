@@ -19,8 +19,6 @@ public class MarketController implements Initializable {
     @FXML
     private ChoiceBox<String> menu;
     @FXML
-    private ChoiceBox<String> sortMenu;
-    @FXML
     private ChoiceBox<String> searchMenu;
     @FXML
     private TextField searchField;
@@ -41,16 +39,14 @@ public class MarketController implements Initializable {
                 Field[] fields = Service.class.getDeclaredFields();
                 table.getColumns().addAll(
                         Arrays.stream(fields).map(f->{
-                                TableColumn<Object, Object> col = new TableColumn<>(f.getName());
+                                TableColumn<Object, Object> col = new TableColumn<>(f.getName().toUpperCase().replace('_', ' '));
                                 col.setCellValueFactory(new PropertyValueFactory<>(f.getName()));
                                 return col;
                             }
                         ).toList()
                 );
-                sortMenu.getItems().clear();
-                sortMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase()).toList());
                 searchMenu.getItems().clear();
-                searchMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase()).toList());
+                searchMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase().replace('_', ' ')).toList());
             }
             else {
                 offreList = new ServiceOffre().getAll();
@@ -60,16 +56,14 @@ public class MarketController implements Initializable {
                 Field[] fields = Offre.class.getDeclaredFields();
                 table.getColumns().addAll(
                         Arrays.stream(fields).map(f->{
-                                    TableColumn<Object, Object> col = new TableColumn<>(f.getName());
+                                    TableColumn<Object, Object> col = new TableColumn<>(f.getName().toUpperCase().replace('_', ' '));
                                     col.setCellValueFactory(new PropertyValueFactory<>(f.getName()));
                                     return col;
                             }
                         ).toList()
                 );
-                sortMenu.getItems().clear();
-                sortMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase()).toList());
                 searchMenu.getItems().clear();
-                searchMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase()).toList());
+                searchMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase().replace('_', ' ')).toList());
             }
         });
     }

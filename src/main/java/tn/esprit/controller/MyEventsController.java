@@ -91,10 +91,6 @@ public class MyEventsController {
             myEventsContainer.getChildren().add(eventCard);
         }
 
-        // Add a "Retour" button at the bottom (even if events are present)
-        Button backButton = new Button("Retour");
-        backButton.setOnAction(e -> goBack()); // Link the button to the goBack method
-        myEventsContainer.getChildren().add(backButton);
     }
 
     @FXML

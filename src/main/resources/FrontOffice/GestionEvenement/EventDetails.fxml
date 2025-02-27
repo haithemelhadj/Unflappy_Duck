@@ -14,6 +14,5 @@
     <!-- Add to My Events Button -->
     <Button onAction="#addToMyEvents" text="Ajouter à mes événements" />
 
-    <!-- Retour Button -->
-    <Button onAction="#goBack" text="Retour" />
+
 </VBox>

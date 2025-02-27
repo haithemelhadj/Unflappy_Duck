@@ -9,14 +9,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import tn.esprit.models.Service;
 import tn.esprit.services.ServiceService;
+import tn.esprit.utils.Session;
 
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AjouterService implements Initializable {
-    @FXML
-    private TextField freelance_id;
     @FXML
     private TextField titre;
     @FXML
@@ -40,7 +39,7 @@ public class AjouterService implements Initializable {
     @FXML
     public void ajouterService(ActionEvent actionEvent) {
         new ServiceService().add(new Service(
-                Integer.parseInt(freelance_id.getText()),
+                Session.getActiveUser(),
                 titre.getText(),
                 description.getText(),
                 expertise.getText(),

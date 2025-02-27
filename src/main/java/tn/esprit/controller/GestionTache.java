@@ -5,21 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import tn.esprit.models.Equipe;
 import tn.esprit.models.Tache;
 //import tn.esprit.models.enums.Statut;
-import tn.esprit.models.enums.userRoles;
-import tn.esprit.models.Utilisateur;
-import tn.esprit.services.ServiceEquipe;
 import tn.esprit.services.ServiceTache;
-import tn.esprit.services.ServiceUtilisateur;
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
 //choice box
-import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
 import tn.esprit.utils.MyDatabase;
 
 import java.net.URL;
@@ -30,7 +20,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.IntStream;
 
 public class GestionTache implements Initializable {
 
@@ -262,7 +251,7 @@ public class GestionTache implements Initializable {
             taches_cards.getChildren().clear();
             for (int i = 0; i < taches.size(); i++) {
                 FXMLLoader  loader = new FXMLLoader();
-                loader.setLocation(getClass().getClassLoader().getResource("TacheCard.fxml"));
+                loader.setLocation(getClass().getClassLoader().getResource("FrontOffice/GestionEquipe/TacheCard.fxml"));
                 VBox cardBox = loader.load();
                 TacheCard cardDeTache = loader.getController();
                 cardDeTache.setData(taches.get(i));

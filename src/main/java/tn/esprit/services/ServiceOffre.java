@@ -1,6 +1,7 @@
 package tn.esprit.services;
 
 import tn.esprit.interfaces.IService;
+import tn.esprit.models.Evenement;
 import tn.esprit.models.Offre;
 import tn.esprit.utils.MyDatabase;
 
@@ -17,10 +18,10 @@ public class ServiceOffre implements IService<Offre> {
 
     @Override
     public void add(Offre offre){
-        String qry = "INSERT INTO offre(client_id, titre, description, budget, type_contrat, statut, expire_le) VALUES (?,?,?,?,?,?,?)";
+        String qry = "INSERT INTO offre(event_id, titre, description, budget, type_contrat, statut, expire_le) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
-            pstm.setInt(1,offre.getClient_id());
+            pstm.setInt(1,offre.getEvent().getEvenementId());
             pstm.setString(2, offre.getTitre());
             pstm.setString(3, offre.getDescription());
             pstm.setBigDecimal(4, offre.getBudget());
@@ -44,7 +45,7 @@ public class ServiceOffre implements IService<Offre> {
             while (rs.next()) {
                 offres.add(new Offre(
                         rs.getInt("offre_id"),
-                        rs.getInt("client_id"),
+                        new ServiceEvenement().getEventById(rs.getInt("event_id")),
                         rs.getString("titre"),
                         rs.getString("description"),
                         rs.getBigDecimal("budget"),
@@ -60,12 +61,35 @@ public class ServiceOffre implements IService<Offre> {
         return offres;
     }
 
+    public Offre getOffreById(int id) throws SQLException {
+        String query = "SELECT * FROM offre WHERE id = ?";
+        try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    return new Offre(
+                            rs.getInt("offre_id"),
+                            new ServiceEvenement().getEventById(rs.getInt("event_id")),
+                            rs.getString("titre"),
+                            rs.getString("description"),
+                            rs.getBigDecimal("budget"),
+                            Offre.TypeContrat.valueOf(rs.getString("type_contrat")),
+                            Offre.Status.valueOf(rs.getString("statut")),
+                            rs.getTimestamp("cree_le"),
+                            rs.getDate("expire_le")
+                    );
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public void update(Offre offre) {
-        String qry = "UPDATE offre SET client_id=?, titre=?, description=?, budget=?, type_contrat=?, statut=?, expire_le=? WHERE offre_id=?";
+        String qry = "UPDATE offre SET event_id=?, titre=?, description=?, budget=?, type_contrat=?, statut=?, expire_le=? WHERE offre_id=?";
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
-            pstm.setInt(1,offre.getClient_id());
+            pstm.setInt(1,offre.getEvent().getEvenementId());
             pstm.setString(2, offre.getTitre());
             pstm.setString(3, offre.getDescription());
             pstm.setBigDecimal(4, offre.getBudget());

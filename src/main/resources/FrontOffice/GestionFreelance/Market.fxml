@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="458.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.MarketController">
+   <children>
+      <TableView fx:id="table" layoutX="30.0" layoutY="181.0" prefHeight="221.0" prefWidth="529.0" />
+      <ChoiceBox fx:id="menu" layoutX="30.0" layoutY="20.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="searchMenu" layoutX="30.0" layoutY="125.0" prefWidth="150.0" />
+      <TextField fx:id="searchField" layoutX="193.0" layoutY="125.0" />
+      <Label layoutX="30.0" layoutY="109.0" text="Rechercher Par" />
+   </children>
+</AnchorPane>

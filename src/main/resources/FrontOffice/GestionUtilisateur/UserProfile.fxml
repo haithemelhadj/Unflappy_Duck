@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="475.0" prefWidth="209.0" spacing="20" styleClass="user-profile-container" stylesheets="styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="tn.esprit.controller.UserProfileController">
+    <!-- Profile Image -->
+    <ImageView fx:id="profileImageView" fitHeight="150" fitWidth="150" />
+
+    <!-- User Name -->
+    <Label fx:id="userNameLabel" styleClass="profile-name" />
+
+    <!-- User Email -->
+    <Label fx:id="userEmailLabel" styleClass="profile-email" />
+
+    <!-- User Role -->
+    <Label fx:id="userRoleLabel" styleClass="profile-role" />
+
+    <!-- User XP -->
+    <Label fx:id="userXpLabel" styleClass="profile-xp" />
+
+    <!-- Edit Profile Button -->
+    <Button fx:id="editProfileButton" onAction="#handleEditProfile" text="Edit Profile" />
+
+    <!-- Logout Button -->
+    <Button fx:id="logoutButton" onAction="#handleLogout" text="Logout" />
+
+    <!-- Back to Store Button -->
+    <Button fx:id="backButton" onAction="#handleBackToHome" text="Back to Home" />
+</VBox>

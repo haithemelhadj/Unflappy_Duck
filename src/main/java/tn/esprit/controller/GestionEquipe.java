@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -48,6 +49,10 @@ public class GestionEquipe implements Initializable {
     @FXML
     private TextField RechercheEquipe;
 
+    @FXML
+    private ComboBox<String> equipeSort;
+
+
     //endregion
 
     //region Membre
@@ -64,6 +69,16 @@ public class GestionEquipe implements Initializable {
     @FXML
     private TextField RechercheMembre;
 
+    @FXML
+    private ComboBox<String> memberSort;
+
+    @FXML
+    private Button sortEquipe;
+
+    @FXML
+    private Button sortMembre;
+
+
     //endregion
 
     @FXML
@@ -73,7 +88,13 @@ public class GestionEquipe implements Initializable {
     ServiceEquipe se = new ServiceEquipe();
     ServiceMembresEquipe sme = new ServiceMembresEquipe();
     Connection cnx = MyDatabase.getInstance().getCnx();
+    //recherche equipe
     ObservableList<String> observableEquipeList = FXCollections.observableArrayList();
+    FilteredList<String> filteredEqipData;
+    //recherche membre
+    ObservableList<String> observableMembreList = FXCollections.observableArrayList();
+    FilteredList<String> filteredMmbrData;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -86,66 +107,48 @@ public class GestionEquipe implements Initializable {
         loadid_EventChoiceBoxData(id_Event);
         //endregion
 
-
+        //region recherche equipe
+        // Load initial data
         loadEquipesData(observableEquipeList); // Load data from database
-
-        FilteredList<String> filteredEqipData = new FilteredList<>(observableEquipeList, s -> true);
-
-        RechercheEquipe.textProperty().addListener((observable, oldValue, newValue) -> {
-            refreshEquipeListView();
-            filteredEqipData.setPredicate(item -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-                return item.toLowerCase().contains(lowerCaseFilter);
-            });
-        });
-
+        // Wrap observable list in a FilteredList
+        filteredEqipData = new FilteredList<>(observableEquipeList, s -> true);
         // Bind filtered data to ListView
         ListViewEquipes.setItems(filteredEqipData);
-
-        /*
-        // Load Membre Data
-        ObservableList<String> MembreData = FXCollections.observableArrayList();
-        loadMembresData(MembreData); // Load members from database
-
-        // Wrap data in a FilteredList
-        FilteredList<String> filteredMmbrData = new FilteredList<>(MembreData, s -> true);
-
-        // Add listener to search field
-        RechercheMembre.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredMmbrData.setPredicate(item -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-                return item.toLowerCase().contains(lowerCaseFilter);
-            });
+        // Listen for search field changes
+        RechercheEquipe.textProperty().addListener((observable, oldValue, newValue) -> {
+            applyEquipeFilter(newValue);
         });
+        //endregion
 
+        //region recherche membre
+        // Load initial data
+        loadMembreData(observableMembreList); // Load data from database
+        // Wrap observable list in a FilteredList
+        filteredMmbrData = new FilteredList<>(observableMembreList, s -> true);
         // Bind filtered data to ListView
         ListViewMembres.setItems(filteredMmbrData);
-        /**/
+        // Listen for search field changes
+        RechercheMembre.textProperty().addListener((observable, oldValue, newValue) -> {
+            applyMemberFilter(newValue);
+        });
+        //endregion
+
+        //region sort equipe
+        equipeSort.getItems().addAll("Trier par ID", "Trier par Nom");
+        equipeSort.setValue("Trier par ID"); // Default selection
+
+        sortEquipe.setOnAction(event -> sortEquipes());
+        //endregion
+
+        //region sort Membre
+        memberSort.getItems().addAll("Trier par ID", "Trier par Nom","Trier par equipe");
+        memberSort.setValue("Trier par ID"); // Default selection
+
+        sortMembre.setOnAction(event -> sortMembres());
+        //endregion
 
     }
 
-
-    // Function to load Membres data from the database
-    private void loadMembresData(ObservableList<String> list) {
-        String qry = "SELECT * FROM utilisateur"; // Modify if needed for members
-        try {
-            Statement stm = cnx.createStatement();
-            ResultSet rs = stm.executeQuery(qry);
-
-            while (rs.next()) {
-                list.add(rs.getInt("id") + "-" + rs.getString("nom"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            Error.setText(e.getMessage());
-        }
-    }
 
     //
     private void loadEquipesListChoiceBoxData(ComboBox comboBox) {
@@ -201,6 +204,105 @@ public class GestionEquipe implements Initializable {
         }
     }
     //
+    //endregion
+
+    //region equipes
+
+    private void loadEquipesData(ObservableList<String> list) {
+        try{
+            List<Equipe> equipes = se.getAll();
+            for (Equipe e : equipes) {
+                observableEquipeList.add(e.getId()+" | "+e.getNom()+" | "); // Change this to whatever field you want to display
+            }
+        }catch (Exception e)
+        {
+            System.out.println("refrech error");
+            System.out.println(e.getMessage());
+            Error.setText(e.getMessage());
+        }
+    }
+    public void refreshEquipeListView() {
+        observableEquipeList.clear(); // Clear existing data
+        loadEquipesData(observableEquipeList); // Reload data from the database
+    }
+    private void applyEquipeFilter(String filterText) {
+        filteredEqipData.setPredicate(item -> {
+            if (filterText == null || filterText.isEmpty()) {
+                return true;
+            }
+            String lowerCaseFilter = filterText.toLowerCase();
+            return item.toLowerCase().contains(lowerCaseFilter);
+        });
+    }
+
+    @FXML
+    void refrechEquipes(ActionEvent event) {
+        refreshEquipeListView();
+        applyEquipeFilter(RechercheEquipe.getText()); // Reapply the filter after refresh
+    }
+
+    @FXML
+    void AddUpdateEquipe(ActionEvent event) {
+        if(idEquipe.getText().equals(""))
+        {
+            addEquipe();
+        }
+        else {
+            try {
+                int id = Integer.parseInt(idEquipe.getText());
+
+                List<Equipe> equipes = getEquipeById(id);
+                if(equipes.size()==1)
+                {
+                    updateEquipe(id);
+                }
+                else if(equipes.isEmpty())
+                {
+                    addEquipe();
+                }
+                else
+                {
+                    System.out.println("too many equipes found");
+                    Error.setText("too many equipes found");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                Error.setText(e.getMessage());
+            }
+        }
+
+    }
+
+    @FXML
+    void deleteEquipe(ActionEvent event) {
+        try{
+            if(idEquipe.getText()!="")
+            {
+                int id = Integer.parseInt(idEquipe.getText());
+                List<Equipe> equipes = getEquipeById(id);
+                if(equipes.isEmpty())
+                {
+                    Error.setText("no taches found");
+                }
+                else if(equipes.size()==1)
+                {
+                    se.delete(equipes.get(0));
+                }
+                else
+                {
+                    System.out.println("too many equipes found");
+                    Error.setText("too many equipes found");
+                }
+            }
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            Error.setText(e.getMessage());
+        }
+
+    }
+
+
     //endregion
 
     //region methods equipe
@@ -273,76 +375,30 @@ public class GestionEquipe implements Initializable {
 
     //endregion
 
-    //region equipes
-    @FXML
-    void AddUpdateEquipe(ActionEvent event) {
-        if(idEquipe.getText().equals(""))
-        {
-            addEquipe();
-        }
-        else {
-            try {
-                int id = Integer.parseInt(idEquipe.getText());
+    //region members
 
-                List<Equipe> equipes = getEquipeById(id);
-                if(equipes.size()==1)
-                {
-                    updateEquipe(id);
-                }
-                else if(equipes.isEmpty())
-                {
-                    addEquipe();
-                }
-                else
-                {
-                    System.out.println("too many equipes found");
-                    Error.setText("too many equipes found");
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                Error.setText(e.getMessage());
-            }
-        }
-
-    }
-
-    @FXML
-    void deleteEquipe(ActionEvent event) {
+    private void loadMembreData(ObservableList<String> list) {
         try{
-            if(idEquipe.getText()!="")
-            {
-                int id = Integer.parseInt(idEquipe.getText());
-                List<Equipe> equipes = getEquipeById(id);
-                if(equipes.isEmpty())
-                {
-                    Error.setText("no taches found");
-                }
-                else if(equipes.size()==1)
-                {
-                    se.delete(equipes.get(0));
-                }
-                else
-                {
-                    System.out.println("too many equipes found");
-                    Error.setText("too many equipes found");
+            List<MembresEquipe> mmbrsEquipes = sme.getAll();
+
+            ObservableList<String> observableList = FXCollections.observableArrayList();
+            //observableList.add("utilisateur_id"+" | "+"nom"+" | "+"equipe_id");
+            for (MembresEquipe me : mmbrsEquipes) {
+
+                String qry = "SELECT * FROM membre_equipe m JOIN utilisateur u ON m.utilisateur_id = u.id WHERE m.id = '" + me.getId() + "'";
+                try {
+                    Statement stm = cnx.createStatement();
+                    ResultSet rs = stm.executeQuery(qry);
+
+                    while (rs.next()) {
+                        observableMembreList.add(rs.getInt("utilisateur_id") + " | " + rs.getString("nom") + " | " + rs.getString("equipe_id"));
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                    Error.setText(e.getMessage());
                 }
             }
-        }catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            Error.setText(e.getMessage());
-        }
-
-    }
-
-
-    // Function to load Equipes data from the database
-    private void loadEquipesData(ObservableList<String> list) {
-        try{
-            List<Equipe> equipes = se.getAll();
-            for (Equipe e : equipes) {
-                observableEquipeList.add(e.getId()+" | "+e.getNom()+" | "); // Change this to whatever field you want to display
-            }
+            //ListViewMembres.setItems(observableList);
         }catch (Exception e)
         {
             System.out.println("refrech error");
@@ -350,25 +406,47 @@ public class GestionEquipe implements Initializable {
             Error.setText(e.getMessage());
         }
     }
-    public void refreshEquipeListView() {
-        observableEquipeList.clear(); // Clear existing data instead of creating a new list
-        loadEquipesData(observableEquipeList); // Reload data from the database
-        ListViewEquipes.setItems(observableEquipeList);
+    public void refreshMemberListView() {
+        observableMembreList.clear(); // Clear existing data
+        loadMembreData(observableMembreList); // Reload data from the database
+    }
+    private void applyMemberFilter(String filterText) {
+        filteredMmbrData.setPredicate(item -> {
+            if (filterText == null || filterText.isEmpty()) {
+                return true;
+            }
+            String lowerCaseFilter = filterText.toLowerCase();
+            return item.toLowerCase().contains(lowerCaseFilter);
+        });
     }
 
     @FXML
-    void refrechEquipes(ActionEvent event) {
-        refreshEquipeListView();
+    void refrechMembres(ActionEvent event) {
+        refreshMemberListView();
+        applyMemberFilter(RechercheMembre.getText()); // Reapply the filter after refresh
 
         /*
         try{
-            List<Equipe> equipes = se.getAll();
+            List<MembresEquipe> mmbrsEquipes = sme.getAll();
             ObservableList<String> observableList = FXCollections.observableArrayList();
+            observableList.add("utilisateur_id"+" | "+"nom"+" | "+"equipe_id");
+            for (MembresEquipe me : mmbrsEquipes) {
 
-            for (Equipe e : equipes) {
-                observableList.add(e.getId()+" | "+e.getNom()+" | "); // Change this to whatever field you want to display
+                String qry ="SELECT * FROM membre_equipe m JOIN utilisateur u ON m.utilisateur_id = u.id WHERE m.id = '"+me.getId()+"'";
+                try {
+                    Statement stm = cnx.createStatement();
+                    ResultSet rs = stm.executeQuery(qry);
+
+
+                    while (rs.next()){
+                        observableList.add(rs.getInt("utilisateur_id")+" | "+rs.getString("nom")+" | "+rs.getString("equipe_id"));
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                    Error.setText(e.getMessage());
+                }
             }
-            ListViewEquipes.setItems(observableList);
+            ListViewMembres.setItems(observableList);
 
         }catch (Exception e)
         {
@@ -379,9 +457,8 @@ public class GestionEquipe implements Initializable {
         /**/
 
     }
-    //endregion
 
-    //region members
+
     @FXML
     void AddMember(ActionEvent event) {
         System.out.println("adding member");
@@ -437,40 +514,6 @@ public class GestionEquipe implements Initializable {
             Error.setText(e.getMessage());
         }
     }
-
-    @FXML
-    void refrechMembres(ActionEvent event) {
-        try{
-            List<MembresEquipe> mmbrsEquipes = sme.getAll();
-            ObservableList<String> observableList = FXCollections.observableArrayList();
-            observableList.add("utilisateur_id"+" | "+"nom"+" | "+"equipe_id");
-            for (MembresEquipe me : mmbrsEquipes) {
-
-                String qry ="SELECT * FROM membre_equipe m JOIN utilisateur u ON m.utilisateur_id = u.id WHERE m.id = '"+me.getId()+"'";
-                try {
-                    Statement stm = cnx.createStatement();
-                    ResultSet rs = stm.executeQuery(qry);
-
-
-                    while (rs.next()){
-                        observableList.add(rs.getInt("utilisateur_id")+" | "+rs.getString("nom")+" | "+rs.getString("equipe_id"));
-                    }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                    Error.setText(e.getMessage());
-                }
-            }
-            ListViewMembres.setItems(observableList);
-
-        }catch (Exception e)
-        {
-            System.out.println("refrech error");
-            System.out.println(e.getMessage());
-            Error.setText(e.getMessage());
-        }
-
-    }
-
 
     //endregion
 
@@ -546,6 +589,53 @@ public class GestionEquipe implements Initializable {
 
     //endregion
 
+    private void sortEquipes() {
+        String selectedOption = equipeSort.getValue();
+
+        if (selectedOption == null) return;
+
+        Comparator<String> comparator;
+
+        if (selectedOption.equals("Trier par ID")) {
+            comparator = Comparator.comparingInt(equipe -> Integer.parseInt(equipe.split(" \\| ")[0])); // Extract ID
+        } else { // Sort by Name
+            comparator = Comparator.comparing(equipe -> equipe.split(" \\| ")[1]); // Extract Name
+        }
+
+        FXCollections.sort(observableEquipeList, comparator);
+    }
+
+    private void sortMembres() {
+        String selectedOption = memberSort.getValue();
+
+        if (selectedOption == null) return;
+
+        Comparator<String> comparator;
+
+        if (selectedOption.equals("Trier par ID")) {
+            comparator = Comparator.comparingInt(membre -> Integer.parseInt(membre.split(" \\| ")[0]));
+            System.out.println("sorting mmbrs by id");
+        } else if (selectedOption.equals("Trier par Nom")) {
+            comparator = Comparator.comparing(membre -> membre.split(" \\| ")[1]);
+            System.out.println("sorting mmbrs by name");
+        }else {
+            comparator = Comparator.comparingInt(membre -> Integer.parseInt(membre.split(" \\| ")[2]));
+            System.out.println("sorting mmbrs by equipe");
+        }
+
+        FXCollections.sort(observableMembreList, comparator);
+    }
 
 
+
+    @FXML
+    void sortEquipes(ActionEvent event) {
+
+    }
+
+    @FXML
+    void sortMembres(ActionEvent event) {
+
+    }
+/**/
 }

@@ -2,15 +2,12 @@ package tn.esprit.models;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.sql.Date;
-import java.util.List;
 
 
 public class Offre {
-    private static List<Offre> offres = new ArrayList<>();
     private int offre_id;
-    private int client_id;
+    private Evenement event;
     private String titre;
     private String description;
     private BigDecimal budget;
@@ -22,9 +19,9 @@ public class Offre {
     // Constructor
     public Offre(){};
 
-    public Offre(int offre_id, int client_id, String titre, String description, BigDecimal budget, TypeContrat type_contrat, Status statut, Timestamp cree_le, Date expire_le) {
+    public Offre(int offre_id, Evenement event, String titre, String description, BigDecimal budget, TypeContrat type_contrat, Status statut, Timestamp cree_le, Date expire_le) {
         this.offre_id = offre_id;
-        this.client_id = client_id;
+        this.event = event;
         this.titre = titre;
         this.description = description;
         this.budget = budget;
@@ -34,8 +31,8 @@ public class Offre {
         this.expire_le = expire_le;
     }
 
-    public Offre(int client_id, String titre, String description, BigDecimal budget, TypeContrat type_contrat, Status statut, Date expire_le) {
-        this.client_id = client_id;
+    public Offre(Evenement event, String titre, String description, BigDecimal budget, TypeContrat type_contrat, Status statut, Date expire_le) {
+        this.event = event;
         this.titre = titre;
         this.description = description;
         this.budget = budget;
@@ -52,20 +49,12 @@ public class Offre {
     public void setOffre_id(int offre_id) {
         this.offre_id = offre_id;
     }
-    public static List<Offre> getOffres() {
-        return offres;
+    public Evenement getEvent() {
+        return event;
     }
 
-    public static void setOffres(List<Offre> offres) {
-        Offre.offres = offres;
-    }
-
-    public int getClient_id() {
-        return client_id;
-    }
-
-    public void setClient_id(int client_id) {
-        this.client_id = client_id;
+    public void setevent(Evenement event) {
+        this.event = event;
     }
 
     public String getTitre() {
@@ -134,7 +123,7 @@ public class Offre {
     public String toString() {
         return "Offre{" +
                 "offre_id=" + offre_id +
-                ", client_id=" + client_id +
+                ", event=" + event +
                 ", titre='" + titre + '\'' +
                 ", description='" + description + '\'' +
                 ", budget=" + budget +

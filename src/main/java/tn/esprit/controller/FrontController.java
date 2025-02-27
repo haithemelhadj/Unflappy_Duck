@@ -55,7 +55,6 @@ public class FrontController implements Initializable {
             Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Service.fxml");
         else if (Session.getActiveUser().getRole().equals(userRoles.organisateur))
             Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Offre.fxml");
-
     }
 
     @Override

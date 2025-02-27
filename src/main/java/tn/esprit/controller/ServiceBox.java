@@ -25,6 +25,11 @@ public class ServiceBox {
     private Text paymentMethod;
 
     public void setData(Service service){
-
+        title.setText(service.getTitre());
+        price.setText(service.getPrix().toString());
+        description.setText(service.getDescription());
+        expertise.setText(service.getExpertise());
+        FreelancerName.setText(service.getFreelancer().getNom());
+        paymentMethod.setText(service.getMode_paiement().toString());
     }
 }

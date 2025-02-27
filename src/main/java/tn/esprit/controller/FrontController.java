@@ -41,4 +41,8 @@ public class FrontController {
     public void goToSettings(ActionEvent actionEvent) throws IOException{
 //        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/homePage.fxml")).load());
     }
+
+    public void goToMyList(ActionEvent actionEvent) {
+
+    }
 }

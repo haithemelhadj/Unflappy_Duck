@@ -24,7 +24,7 @@ public class ServiceBox {
     @FXML
     private Text paymentMethod;
 
-    public void setData(Service service){
+    public void prepare(Service service){
         title.setText(service.getTitre());
         price.setText(service.getPrix().toString());
         description.setText(service.getDescription());

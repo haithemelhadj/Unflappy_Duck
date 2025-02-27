@@ -54,7 +54,7 @@ public class MarketService implements Initializable {
                 throw new RuntimeException(e);
             }
             ServiceBox cont = loader.getController();
-            cont.setData(service);
+            cont.prepare(service);
             container.getChildren().add(vBox);
         });
     }

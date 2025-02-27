@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="148.0" prefWidth="524.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.OfferBox">
-      <Rectangle fx:id="offerContainer" arcHeight="50.0" arcWidth="50.0" fill="#dcdddd" height="104.0" layoutY="14.0" stroke="#d3c5c5" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" width="524.0" />
-      <Text fx:id="offerTitle" layoutX="22.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="148.0" prefWidth="524.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.OfferBox">
+      <Rectangle fx:id="container" arcHeight="50.0" arcWidth="50.0" fill="#dcdddd" height="104.0" layoutY="14.0" stroke="#d3c5c5" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" width="524.0" />
+      <Text fx:id="title" layoutX="22.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
           <font>
               <Font name="Source Code Pro" size="24.0" />
           </font>
       </Text>
-      <Text fx:id="offerBudget" layoutX="446.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text fx:id="offerDescription" layoutX="26.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Button fx:id="offerApply" layoutX="444.0" layoutY="83.0" mnemonicParsing="false" text="Apply" />
-      <Text fx:id="offerStatus" layoutX="26.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text fx:id="offerEventName" layoutX="26.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text fx:id="offerContactType" layoutX="446.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-</AnchorPane>
+      <Text fx:id="budget" layoutX="446.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+      <Text fx:id="description" layoutX="26.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Button fx:id="apply" layoutX="444.0" layoutY="83.0" mnemonicParsing="false" text="Apply" />
+      <Text fx:id="status" layoutX="26.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fx:id="eventName" layoutX="26.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+      <Text fx:id="contractType" layoutX="446.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+</VBox>

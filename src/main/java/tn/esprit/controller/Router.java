@@ -14,6 +14,12 @@ import java.util.Stack;
 public class Router {
     private static Stage primaryStage;
 
+    public static BorderPane getActiveBorderPane() {
+        return activeBorderPane;
+    }
+
+    private static BorderPane activeBorderPane;
+
     public static Stage getStage(){
         return primaryStage;
     }
@@ -54,6 +60,7 @@ public class Router {
 
     public static void borderPaneCenterInsert(BorderPane borderPane, String fxmlpath) throws IOException {
         borderPane.setCenter(new FXMLLoader(Router.class.getResource(fxmlpath)).load());
+        activeBorderPane = borderPane;
     }
 
     private static void showError(String message) {

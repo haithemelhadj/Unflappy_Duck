@@ -2,18 +2,16 @@ package tn.esprit.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import tn.esprit.models.Offre;
 import tn.esprit.models.Service;
 import tn.esprit.services.ServiceOffre;
 import tn.esprit.services.ServiceService;
 
+import java.lang.reflect.Field;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MarketController implements Initializable {
     @FXML
@@ -37,11 +35,41 @@ public class MarketController implements Initializable {
         menu.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (menu.getValue().equals("Services")) {
                 serviceList = new ServiceService().getAll();
+                table.getColumns().clear();
+                table.getItems().clear();
                 table.getItems().addAll(serviceList);
+                Field[] fields = Service.class.getDeclaredFields();
+                table.getColumns().addAll(
+                        Arrays.stream(fields).map(f->{
+                                TableColumn<Object, Object> col = new TableColumn<>(f.getName());
+                                col.setCellValueFactory(new PropertyValueFactory<>(f.getName()));
+                                return col;
+                            }
+                        ).toList()
+                );
+                sortMenu.getItems().clear();
+                sortMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase()).toList());
+                searchMenu.getItems().clear();
+                searchMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase()).toList());
             }
             else {
                 offreList = new ServiceOffre().getAll();
+                table.getColumns().clear();
+                table.getItems().clear();
                 table.getItems().addAll(offreList);
+                Field[] fields = Offre.class.getDeclaredFields();
+                table.getColumns().addAll(
+                        Arrays.stream(fields).map(f->{
+                                    TableColumn<Object, Object> col = new TableColumn<>(f.getName());
+                                    col.setCellValueFactory(new PropertyValueFactory<>(f.getName()));
+                                    return col;
+                            }
+                        ).toList()
+                );
+                sortMenu.getItems().clear();
+                sortMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase()).toList());
+                searchMenu.getItems().clear();
+                searchMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase()).toList());
             }
         });
     }

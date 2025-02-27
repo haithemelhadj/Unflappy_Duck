@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Service {
-    private static List<Service> services = new ArrayList<>();
     private int service_id;
     private int freelancer_id;
     private String titre;
@@ -48,14 +47,6 @@ public class Service {
     }
 
     // Getters & Setters
-    public static List<Service> getServices() {
-        return services;
-    }
-
-    public static void setServices(List<Service> services) {
-        Service.services = services;
-    }
-
     public int getService_id() {
         return service_id;
     }

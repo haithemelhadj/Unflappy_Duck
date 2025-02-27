@@ -8,7 +8,6 @@ import java.util.List;
 
 
 public class Offre {
-    private static List<Offre> offres = new ArrayList<>();
     private int offre_id;
     private int client_id;
     private String titre;
@@ -52,14 +51,6 @@ public class Offre {
     public void setOffre_id(int offre_id) {
         this.offre_id = offre_id;
     }
-    public static List<Offre> getOffres() {
-        return offres;
-    }
-
-    public static void setOffres(List<Offre> offres) {
-        Offre.offres = offres;
-    }
-
     public int getClient_id() {
         return client_id;
     }

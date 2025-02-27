@@ -75,18 +75,18 @@
 
                         <!-- CRUD Buttons -->
                         <HBox spacing="10" alignment="CENTER">
-                            <Button fx:id="addQuestionBtn" text="Add" onAction="#handleAddQuestion" />
-                            <Button fx:id="updateQuestionBtn" text="Update" onAction="#handleUpdateQuestion" />
-                            <Button fx:id="deleteQuestionBtn" text="Delete" onAction="#handleDeleteQuestion" />
+                            <Button fx:id="addQuestionBtn" text="Ajouter" onAction="#handleAddQuestion" />
+                            <Button fx:id="updateQuestionBtn" text="Mettre à jour" onAction="#handleUpdateQuestion" />
+                            <Button fx:id="deleteQuestionBtn" text="Supprimer" onAction="#handleDeleteQuestion" />
                         </HBox>
                     </VBox>
 
                     <!-- Search & Sort -->
                     <HBox spacing="10" alignment="CENTER" styleClass="search-sort-container">
                         <TextField fx:id="searchField"
-                                   promptText="Search questions..."
+                                   promptText="chercher questions..."
                                    styleClass="text-field"/>
-                        <Button text="Search" onAction="#handleSearch" styleClass="button"/>
+                        <Button text="Recherche" onAction="#handleSearch" styleClass="button"/>
                         <ComboBox fx:id="sortComboBox" promptText="Sort by" onAction="#handleSort" styleClass="combo-box"/>
                     </HBox>
 
@@ -103,7 +103,7 @@
     <!-- BOTTOM: Start Quiz Button -->
     <bottom>
         <HBox alignment="CENTER" style="-fx-padding: 10;">
-            <Button text="Start Quiz"
+            <Button text="Démarrer le Quiz"
                     onAction="#handleStartQuiz"
                     styleClass="button"
                     style="-fx-background-color: -fx-accent;"

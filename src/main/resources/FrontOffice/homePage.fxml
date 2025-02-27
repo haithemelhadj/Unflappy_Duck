@@ -22,7 +22,7 @@
             <Button onAction="#createEvent" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Create an Event" />
             <Button onAction="#passQuiz" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Pass a Test" />
             <Button onAction="#goToStore" style="-fx-text-fill: white; -fx-background-color: transparent;" text="Store" />
-         <MenuButton mnemonicParsing="false" text="Freelancer App">
+         <MenuButton fx:id="freelancerMenu" mnemonicParsing="false" text="Freelancer App">
            <items>
              <MenuItem mnemonicParsing="false" onAction="#goToMarket" text="Market" />
              <MenuItem mnemonicParsing="false" onAction="#goToMyList" text="My List" />

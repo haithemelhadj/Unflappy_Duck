@@ -8,7 +8,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tn.esprit.models.Service;
 import tn.esprit.services.ServiceService;
-import tn.esprit.services.ServiceUtilisateur;
 
 import java.lang.reflect.Field;
 import java.net.URL;

@@ -27,12 +27,11 @@ public class MarketOffre implements Initializable {
     @FXML
     private VBox container;
 
-    private List<Offre> offerListDB;
     private List<Offre> offerList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        offerListDB = new ServiceOffre().getAll();
+        offerList = new ServiceOffre().getAll();
         Field[] fields = Offre.class.getDeclaredFields();
         searchMenu.getItems().addAll(Arrays.stream(fields).skip(1).filter(field -> !field.getName().equals("cree_le") && !field.getName().equals("mis_a_jour_le")).map(f-> f.getName().toUpperCase().replace('_', ' ')).toList());
         sortMenu.getItems().addAll(Arrays.stream(fields).skip(1).filter(field -> !field.getName().equals("cree_le") && !field.getName().equals("mis_a_jour_le")).map(f-> f.getName().toUpperCase().replace('_', ' ')).toList());

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,7 +17,11 @@ public class Market2Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        serviceBorderPane.setCenter();
-        offerBorderPane.setCenter();
+        try {
+            Router.borderPaneCenterInsert(serviceBorderPane, "/FrontOffice/GestionFreelance/MarketService.fxml");
+            Router.borderPaneCenterInsert(offerBorderPane, "/FrontOffice/GestionFreelance/MarketOffre.fxml");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

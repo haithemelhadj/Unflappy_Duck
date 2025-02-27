@@ -9,9 +9,11 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import tn.esprit.models.Service;
 import tn.esprit.services.ServiceService;
+import tn.esprit.services.ServiceUtilisateur;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class GestionService implements Initializable {
@@ -42,7 +44,7 @@ public class GestionService implements Initializable {
                 text_prix.setText(selectedService.getPrix().toString());
                 text_titre.setText(selectedService.getTitre());
                 text_expertise.setText(selectedService.getExpertise());
-                text_freelancer_id.setText(Integer.toString(selectedService.getFreelancer_id()));
+//                text_freelancer_id.setText(Integer.toString(selectedService.getFreelancer()));
                 service_id.setText(Integer.toString(selectedService.getService_id()));
                 mode_paiement.setValue(selectedService.getMode_paiement());
             }
@@ -50,10 +52,10 @@ public class GestionService implements Initializable {
         mode_paiement.getItems().addAll(Service.MethodePaiement.values());
     }
 
-    public void updateService(ActionEvent actionEvent) {
+    public void updateService(ActionEvent actionEvent) throws SQLException {
         if (selectedService == null) return;
         else{
-            selectedService.setFreelancer_id(Integer.parseInt(text_freelancer_id.getText()));
+            selectedService.setFreelancer(new ServiceUtilisateur().getUtilisateurById(Integer.parseInt(text_freelancer_id.getText())));
             selectedService.setTitre(text_titre.getText());
             selectedService.setDescription(text_description.getText());
             selectedService.setExpertise(text_expertise.getText());

@@ -37,7 +37,7 @@ public class FrontController implements Initializable {
     }
 
     public void goToMarket(ActionEvent actionEvent) throws IOException{
-        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Market.fxml");
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Market2.fxml");
 
     }
 

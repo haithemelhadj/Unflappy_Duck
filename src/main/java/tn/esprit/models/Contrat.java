@@ -45,19 +45,19 @@ public class Contrat {
         return contrat_id;
     }
 
-    public Service getService_id() {
+    public Service getService() {
         return service;
     }
 
-    public void setService_id(Service service) {
+    public void setService(Service service) {
         this.service = service;
     }
 
-    public Offre getOffre_id() {
+    public Offre getOffre() {
         return offre;
     }
 
-    public void setOffre_id(Offre offre) {
+    public void setOffre(Offre offre) {
         this.offre = offre;
     }
 

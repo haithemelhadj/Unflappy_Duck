@@ -1,6 +1,7 @@
 package tn.esprit.services;
 
 import tn.esprit.interfaces.IService;
+import tn.esprit.models.Evenement;
 import tn.esprit.models.Offre;
 import tn.esprit.utils.MyDatabase;
 
@@ -58,6 +59,29 @@ public class ServiceOffre implements IService<Offre> {
             System.out.println(e.getMessage());
         }
         return offres;
+    }
+
+    public Offre getOffreById(int id) throws SQLException {
+        String query = "SELECT * FROM offre WHERE id = ?";
+        try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    return new Offre(
+                            rs.getInt("offre_id"),
+                            new ServiceEvenement().getEventById(rs.getInt("event_id")),
+                            rs.getString("titre"),
+                            rs.getString("description"),
+                            rs.getBigDecimal("budget"),
+                            Offre.TypeContrat.valueOf(rs.getString("type_contrat")),
+                            Offre.Status.valueOf(rs.getString("statut")),
+                            rs.getTimestamp("cree_le"),
+                            rs.getDate("expire_le")
+                    );
+                }
+            }
+        }
+        return null;
     }
 
     @Override

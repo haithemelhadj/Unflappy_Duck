@@ -3,7 +3,10 @@ package tn.esprit.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Paint;
 
 import java.io.IOException;
 
@@ -28,7 +31,7 @@ public class FrontController {
     }
 
     public void goToMarket(ActionEvent actionEvent) throws IOException{
-        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionFreelance/GestionService.fxml")).load());
+        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionFreelance/Market.fxml")).load());
     }
 
     public void goToTeams(ActionEvent actionEvent) throws IOException{

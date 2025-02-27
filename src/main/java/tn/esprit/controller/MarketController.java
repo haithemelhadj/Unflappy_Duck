@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import tn.esprit.models.Offre;
 import tn.esprit.models.Service;
@@ -16,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class MarketController implements Initializable {
     @FXML
-    public ListView<Object> listView;
+    public TableView<Object> table;
     @FXML
     private ChoiceBox<String> menu;
     @FXML
@@ -36,11 +37,11 @@ public class MarketController implements Initializable {
         menu.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (menu.getValue().equals("Services")) {
                 serviceList = new ServiceService().getAll();
-                listView.getItems().addAll(serviceList);
+                table.getItems().addAll(serviceList);
             }
             else {
                 offreList = new ServiceOffre().getAll();
-                listView.getItems().addAll(serviceList);
+                table.getItems().addAll(offreList);
             }
         });
     }

@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import tn.esprit.controller.Controller;
 import tn.esprit.controller.Router;
-import tn.esprit.models.Utilisateur;
 import tn.esprit.services.ServiceUtilisateur;
 import tn.esprit.utils.Session;
 

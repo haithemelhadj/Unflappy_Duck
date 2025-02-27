@@ -36,6 +36,7 @@ public class MarketService implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+//        sortOrder.getToggleGroup().getToggles().addAll("1","0");
         serviceList = new ServiceService().getAll();
         updateContainer(serviceList);
         Field[] fields = Service.class.getDeclaredFields();
@@ -54,6 +55,21 @@ public class MarketService implements Initializable {
                     case "MODE PAIEMENT" -> s.getMode_paiement().toString().toLowerCase().contains(searchField.getText().toLowerCase());
                     default -> false;
                 }
+            ).toList());
+        });
+        sortMenu.valueProperty().addListener(keyEvent -> {
+            if (sortMenu.getValue() == null) return;
+            updateContainer(serviceList.stream().sorted((i1, i2) ->
+                    switch (sortMenu.getValue()){
+                        case "FREELANCER" -> i1.getFreelancer().getNom().compareTo(i2.getFreelancer().getNom());
+                        case "TITRE" -> i1.getTitre().compareTo(i2.getTitre());
+                        case "DESCRIPTION" -> i1.getDescription().compareTo(i2.getDescription());
+                        case "EXPERTISE" -> i1.getExpertise().compareTo(i2.getExpertise());
+                        case "DUREE JOURS" -> i1.getDuree_jours()-i2.getDuree_jours();
+                        case "PRIX" -> i1.getPrix().compareTo(i2.getPrix());
+                        case "MODE PAIEMENT" -> i1.getMode_paiement().compareTo(i2.getMode_paiement());
+                        default -> 1;
+                    }
             ).toList());
         });
     }

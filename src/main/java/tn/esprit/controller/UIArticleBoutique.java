@@ -1,7 +1,7 @@
 package tn.esprit.controller;
 
-import esprit.tn.models.ArticleBoutique;
-import esprit.tn.services.ServiceArticleBoutique;
+import tn.esprit.models.ArticleBoutique;
+import tn.esprit.services.ServiceArticleBoutique;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +17,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import static esprit.tn.models.ArticleBoutique.Type.article;
 
 public class UIArticleBoutique implements Initializable {
 
@@ -112,7 +108,7 @@ public class UIArticleBoutique implements Initializable {
         Scene scene;
         Parent root;
 
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/Home.fxml"));
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionStore/Store.fxml"));
         root = loader.load();
         stage=(Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         scene=new Scene(root);

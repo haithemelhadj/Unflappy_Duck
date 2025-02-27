@@ -1,8 +1,8 @@
 package tn.esprit.services;
 
-import esprit.tn.interfaces.IService;
-import esprit.tn.models.ArticleBoutique;
-import esprit.tn.utils.MyDatabase;
+import tn.esprit.interfaces.IService;
+import tn.esprit.models.ArticleBoutique;
+import tn.esprit.utils.MyDatabase;
 import javafx.fxml.FXML;
 
 
@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static esprit.tn.models.ArticleBoutique.Type.article;
+import static tn.esprit.models.ArticleBoutique.Type.article;
 
 // Service Implementation: ServiceArticleBoutique
 public class ServiceArticleBoutique implements IService<ArticleBoutique>{

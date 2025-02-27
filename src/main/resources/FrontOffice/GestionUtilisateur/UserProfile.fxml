@@ -27,6 +27,6 @@
     <!-- Logout Button -->
     <Button fx:id="logoutButton" onAction="#handleLogout" text="Logout" />
 
-    <!-- Back to Home Button -->
+    <!-- Back to Store Button -->
     <Button fx:id="backButton" onAction="#handleBackToHome" text="Back to Home" />
 </VBox>

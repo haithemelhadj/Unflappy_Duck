@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="466.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.UIPanier">
+<AnchorPane prefHeight="466.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.UIPanier">
    <children>
       <ListView fx:id="panier" layoutX="249.0" layoutY="53.0" prefHeight="200.0" prefWidth="390.0" />
       <Button fx:id="ajouter" layoutX="169.0" layoutY="331.0" mnemonicParsing="false" onAction="#ajouterPanier" text="ajouter" />

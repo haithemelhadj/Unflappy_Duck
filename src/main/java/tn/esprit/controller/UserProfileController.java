@@ -81,7 +81,7 @@ public class UserProfileController {
         // Implement logout logic here, such as navigating back to the login page
     }
 
-    // Handle Back to Home button click
+    // Handle Back to Store button click
     @FXML
     private void handleBackToHome() {
         System.out.println("Back to home button clicked");

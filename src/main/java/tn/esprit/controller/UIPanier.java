@@ -1,9 +1,8 @@
 package tn.esprit.controller;
 
-import esprit.tn.models.ArticleBoutique;
-import esprit.tn.models.Panier;
-import esprit.tn.services.ServiceArticleBoutique;
-import esprit.tn.services.ServicePanier;
+import tn.esprit.models.Panier;
+import tn.esprit.services.ServiceArticleBoutique;
+import tn.esprit.services.ServicePanier;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -28,7 +26,7 @@ public class UIPanier implements Initializable {
     public TextField quantite;
 
     public TextField utilisateur_id;
-    public ListView<esprit.tn.models.Panier> panier;
+    public ListView<Panier> panier;
     public ChoiceBox<Integer> article_id;
     public TextField searchfilde;
     @FXML
@@ -99,7 +97,7 @@ public class UIPanier implements Initializable {
         Scene scene;
         Parent root;
 
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/Home.fxml"));
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionStore/Store.fxml"));
         root = loader.load();
         stage=(Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         scene=new Scene(root);

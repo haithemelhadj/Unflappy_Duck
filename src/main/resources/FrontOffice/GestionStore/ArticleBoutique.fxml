@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rechercher" prefHeight="571.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.UIArticleBoutique">
+<AnchorPane fx:id="rechercher" prefHeight="571.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.UIArticleBoutique">
    <children>
       <ListView fx:id="article" layoutX="213.0" layoutY="49.0" prefHeight="272.0" prefWidth="406.0" />
       <Button fx:id="ajouter" layoutX="219.0" layoutY="392.0" mnemonicParsing="false" onAction="#ajouterArticle" text="ajouter" />

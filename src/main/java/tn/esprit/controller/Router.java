@@ -52,6 +52,10 @@ public class Router {
         }
     }
 
+    public static void borderPaneCenterInsert(BorderPane borderPane, String fxmlpath) throws IOException {
+        borderPane.setCenter(new FXMLLoader(Router.class.getResource(fxmlpath)).load());
+    }
+
     private static void showError(String message) {
         System.err.println("Error: " + message);
     }

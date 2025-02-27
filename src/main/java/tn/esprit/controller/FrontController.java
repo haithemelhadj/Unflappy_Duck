@@ -20,15 +20,16 @@ public class FrontController implements Initializable {
     private MenuButton freelancerMenu;
 
     public void listEvents(ActionEvent actionEvent) throws IOException {
-        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/all_events.fxml")).load());
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEvenement/all_events.fxml");
     }
 
     public void createEvent(ActionEvent actionEvent) throws IOException{
-        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/event_form.fxml")).load());
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEvenement/event_form.fxml");
     }
 
     public void passQuiz(ActionEvent actionEvent) throws IOException{
-        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionCours/quiz.fxml")).load());
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionCours/quiz.fxml");
+
     }
 
     public void goToStore(ActionEvent actionEvent) throws IOException{
@@ -36,11 +37,13 @@ public class FrontController implements Initializable {
     }
 
     public void goToMarket(ActionEvent actionEvent) throws IOException{
-        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionFreelance/Market.fxml")).load());
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Market.fxml");
+
     }
 
     public void goToTeams(ActionEvent actionEvent) throws IOException{
-        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionEquipe/GestionEquipe.fxml")).load());
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEquipe/GestionEquipe.fxml");
+
     }
 
     public void goToSettings(ActionEvent actionEvent) throws IOException{
@@ -49,9 +52,10 @@ public class FrontController implements Initializable {
 
     public void goToMyList(ActionEvent actionEvent) throws IOException {
         if (Session.getActiveUser().getRole().equals(userRoles.freelancer))
-            borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionFreelance/Service.fxml")).load());
+            Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Service.fxml");
         else if (Session.getActiveUser().getRole().equals(userRoles.organisateur))
-            borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionFreelance/Offre.fxml")).load());
+            Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Offre.fxml");
+
     }
 
     @Override

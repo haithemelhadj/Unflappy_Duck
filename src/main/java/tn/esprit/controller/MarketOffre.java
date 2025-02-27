@@ -1,5 +1,6 @@
 package tn.esprit.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,6 +40,13 @@ public class MarketOffre implements Initializable {
         Field[] fields = Offre.class.getDeclaredFields();
         searchMenu.getItems().addAll(Arrays.stream(fields).skip(1).filter(field -> !field.getName().equals("cree_le") && !field.getName().equals("mis_a_jour_le")).map(f-> f.getName().toUpperCase().replace('_', ' ')).toList());
         sortMenu.getItems().addAll(Arrays.stream(fields).skip(1).filter(field -> !field.getName().equals("cree_le") && !field.getName().equals("mis_a_jour_le")).map(f-> f.getName().toUpperCase().replace('_', ' ')).toList());
+//        searchField.setOnKeyTyped(keyEvent -> {
+//            updateContainer(offerList.stream().filter(o -> {
+//                switch (searchMenu.getValue()){
+//                   case "" -> System.out.println("a");
+//                }
+//            }));
+//        });
     }
 
     private void updateContainer(List<Offre> list){

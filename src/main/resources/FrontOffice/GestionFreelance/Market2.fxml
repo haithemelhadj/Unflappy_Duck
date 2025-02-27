@@ -55,22 +55,6 @@
                   <ChoiceBox fx:id="offerSortField" layoutX="409.0" layoutY="62.0" prefWidth="150.0" />
                   <Label layoutX="409.0" layoutY="46.0" text="Trier Par" />
                   <ToggleButton fx:id="offerSortOrder" layoutX="559.0" layoutY="62.0" mnemonicParsing="false" text="A" />
-                  <Pane fx:id="serviceItem1" layoutX="38.0" layoutY="123.0">
-                     <children>
-                        <Rectangle fx:id="offerContainer" arcHeight="50.0" arcWidth="50.0" fill="#dcdddd" height="104.0" stroke="#d3c5c5" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" width="524.0" />
-                        <Text fx:id="offerTitle" layoutX="22.0" layoutY="26.384002685546875" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
-                           <font>
-                              <Font name="Source Code Pro" size="24.0" />
-                           </font>
-                        </Text>
-                        <Text fx:id="offerBudget" layoutX="446.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                        <Text fx:id="offerDescription" layoutX="26.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                        <Button fx:id="offerApply" layoutX="444.0" layoutY="69.0" mnemonicParsing="false" text="Apply" />
-                        <Text fx:id="offerStatus" layoutX="26.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                        <Text fx:id="offerEventName" layoutX="26.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                        <Text fx:id="offerContactType" layoutX="446.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                     </children>
-                  </Pane>
                </children></AnchorPane>
       </content>
     </Tab>

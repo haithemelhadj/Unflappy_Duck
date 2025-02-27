@@ -1,7 +1,7 @@
 package tn.esprit.controller;
 
-import tn.esprit.models.ArticleBoutique;
-import tn.esprit.services.ServiceArticleBoutique;
+import esprit.tn.models.ArticleBoutique;
+import esprit.tn.services.ServiceArticleBoutique;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +17,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static esprit.tn.models.ArticleBoutique.Type.article;
 
 public class UIArticleBoutique implements Initializable {
 
@@ -31,6 +35,17 @@ public class UIArticleBoutique implements Initializable {
     private ChoiceBox<ArticleBoutique.Type> type;
     @FXML
     private TextField prix;
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private List<ArticleBoutique> listOfArticleBoutique;
+
+
+
+
+
+
 
 
     public void ajouterArticle(ActionEvent actionEvent) {
@@ -69,21 +84,28 @@ public class UIArticleBoutique implements Initializable {
     }
 
     public void afficherArticle(ActionEvent actionEvent) {
+        listOfArticleBoutique = new ServiceArticleBoutique().getAll();
         article.getItems().clear();
-        List<ArticleBoutique> arb = new ServiceArticleBoutique().getAll();
-        article.getItems().addAll(arb);
-
+        article.getItems().addAll(listOfArticleBoutique);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         type.getItems().addAll(ArticleBoutique.Type.values());
+        listOfArticleBoutique = new ServiceArticleBoutique().getAll();
         article.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             nom.setText("");
             prix.setText("");
             type.setValue(null);
         });
+
+
+
+
     }
+
+
+
 
     public void switch_to_home(ActionEvent actionEvent) throws IOException {
         Stage stage;
@@ -98,4 +120,21 @@ public class UIArticleBoutique implements Initializable {
         stage.show();
 
     }
+
+
+    public void recherche(ActionEvent actionEvent) {
+        article.getItems().clear();
+        article.getItems().addAll( listOfArticleBoutique.stream().filter(a -> a.getNom().startsWith(searchField.getText())).toList());
+
+    }
+
+
+    public void trier(ActionEvent actionEvent) {
+        article.getItems().clear();
+        article.getItems().addAll( listOfArticleBoutique.stream().sorted((a,b)->a.getNom().compareTo(b.getNom())).toList());
+
+    }
 }
+
+
+

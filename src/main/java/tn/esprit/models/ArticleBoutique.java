@@ -1,6 +1,7 @@
 package tn.esprit.models;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 
 public class ArticleBoutique {
     private int id;
@@ -9,7 +10,7 @@ public class ArticleBoutique {
     private BigDecimal prix;
 
     // Constructors
-    public ArticleBoutique() {
+        public ArticleBoutique() {
     }
 
     public ArticleBoutique(int id, String nom, Type type, BigDecimal prix) {
@@ -69,6 +70,8 @@ public class ArticleBoutique {
     }
 
     public enum Type{
-        article, ticket
+        article, ticket;
+
+
+      }
     }
-}

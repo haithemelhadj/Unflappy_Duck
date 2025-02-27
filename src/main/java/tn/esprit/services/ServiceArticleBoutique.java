@@ -1,12 +1,16 @@
 package tn.esprit.services;
 
-import tn.esprit.interfaces.IService;
-import tn.esprit.models.ArticleBoutique;
-import tn.esprit.utils.MyDatabase;
+import esprit.tn.interfaces.IService;
+import esprit.tn.models.ArticleBoutique;
+import esprit.tn.utils.MyDatabase;
+import javafx.fxml.FXML;
+
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static esprit.tn.models.ArticleBoutique.Type.article;
 
 // Service Implementation: ServiceArticleBoutique
 public class ServiceArticleBoutique implements IService<ArticleBoutique>{
@@ -77,6 +81,34 @@ public class ServiceArticleBoutique implements IService<ArticleBoutique>{
             System.out.println(e.getMessage());
         }
     }
+    public List<ArticleBoutique> searchArticles(String keyword) {
+        List<ArticleBoutique> articles = new ArrayList<>();
+        String qry = "SELECT * FROM article_boutique WHERE nom LIKE ? OR type LIKE ?";
+
+        try {
+            PreparedStatement pstm = this.cnx.prepareStatement(qry);
+            pstm.setString(1, "%" + keyword + "%"); // Partial matching for name
+            pstm.setString(2, "%" + keyword + "%"); // Partial matching for type
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                ArticleBoutique article = new ArticleBoutique(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        ArticleBoutique.Type.valueOf(rs.getString("type")),
+                        rs.getBigDecimal("prix")
+                );
+                articles.add(article);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return articles;
+    }
+
+
+
 
 
 }

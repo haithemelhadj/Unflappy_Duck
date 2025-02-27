@@ -1,9 +1,9 @@
 package tn.esprit.services;
 
-import tn.esprit.interfaces.IService;
-import tn.esprit.models.ArticleBoutique;
-import tn.esprit.models.Panier;
-import tn.esprit.utils.MyDatabase;
+import esprit.tn.interfaces.IService;
+import esprit.tn.models.ArticleBoutique;
+import esprit.tn.models.Panier;
+import esprit.tn.utils.MyDatabase;
 
 import java.sql.*;
 import java.util.ArrayList;

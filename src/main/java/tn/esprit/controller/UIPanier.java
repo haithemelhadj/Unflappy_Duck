@@ -1,10 +1,11 @@
 package tn.esprit.controller;
 
-import tn.esprit.models.ArticleBoutique;
-import tn.esprit.models.Panier;
-import tn.esprit.services.ServiceArticleBoutique;
-import tn.esprit.services.ServicePanier;
+import esprit.tn.models.ArticleBoutique;
+import esprit.tn.models.Panier;
+import esprit.tn.services.ServiceArticleBoutique;
+import esprit.tn.services.ServicePanier;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -27,8 +28,12 @@ public class UIPanier implements Initializable {
     public TextField quantite;
 
     public TextField utilisateur_id;
-    public ListView<tn.esprit.models.Panier> panier;
+    public ListView<esprit.tn.models.Panier> panier;
     public ChoiceBox<Integer> article_id;
+    public TextField searchfilde;
+    @FXML
+    private List<Panier> listofpanier;
+
 
     public void ajouterPanier(ActionEvent actionEvent) {
 
@@ -38,6 +43,7 @@ public class UIPanier implements Initializable {
        Panier panier = new Panier (utilisateurId, article_id.getValue(),quantiteValue);
        servicePanier.add( panier);
        afficherPanier(actionEvent);
+        listofpanier = new ServicePanier().getAll();
 
     }
 
@@ -57,12 +63,14 @@ public class UIPanier implements Initializable {
 
         servicePanier.update(panier1);
         afficherPanier(actionEvent);
+        listofpanier = new ServicePanier().getAll();
 
     }
 
     public void supprimerPanier(ActionEvent actionEvent) {
         panier.getSelectionModel().getSelectedItems().forEach(i -> new ServicePanier().delete(i));
         afficherPanier(actionEvent);
+        listofpanier = new ServicePanier().getAll();
     }
 
     public void afficherPanier(ActionEvent actionEvent) {
@@ -75,7 +83,7 @@ public class UIPanier implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ServiceArticleBoutique serviceArticleBoutique=new ServiceArticleBoutique();
-
+        listofpanier = new ServicePanier().getAll();
         article_id.getItems().addAll(serviceArticleBoutique.getAll().stream().map(a->a.getId()).toList());
 
         panier.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -98,5 +106,16 @@ public class UIPanier implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+
+    public void recherche(ActionEvent actionEvent) {
+      panier.getItems().clear();
+      panier.getItems().addAll(listofpanier.stream().filter(a->a.getArticle_id()==Integer.parseInt(searchfilde.getText().trim())).toList());
+    }
+
+    public void trier(ActionEvent actionEvent) {
+        panier.getItems().clear();
+        panier.getItems().addAll( listofpanier.stream().sorted((a,b)->a.getQuantite()-b.getQuantite()).toList());
     }
 }

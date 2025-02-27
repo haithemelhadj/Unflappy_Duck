@@ -38,7 +38,7 @@ public class MarketController implements Initializable {
                 table.getItems().addAll(serviceList);
                 Field[] fields = Service.class.getDeclaredFields();
                 table.getColumns().addAll(
-                        Arrays.stream(fields).map(f->{
+                        Arrays.stream(fields).skip(1).map(f->{
                                 TableColumn<Object, Object> col = new TableColumn<>(f.getName().toUpperCase().replace('_', ' '));
                                 col.setCellValueFactory(new PropertyValueFactory<>(f.getName()));
                                 return col;
@@ -46,7 +46,7 @@ public class MarketController implements Initializable {
                         ).toList()
                 );
                 searchMenu.getItems().clear();
-                searchMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase().replace('_', ' ')).toList());
+                searchMenu.getItems().addAll(Arrays.stream(fields).skip(1).map(f-> f.getName().toUpperCase().replace('_', ' ')).toList());
             }
             else {
                 offreList = new ServiceOffre().getAll();
@@ -55,7 +55,7 @@ public class MarketController implements Initializable {
                 table.getItems().addAll(offreList);
                 Field[] fields = Offre.class.getDeclaredFields();
                 table.getColumns().addAll(
-                        Arrays.stream(fields).map(f->{
+                        Arrays.stream(fields).skip(1).map(f->{
                                     TableColumn<Object, Object> col = new TableColumn<>(f.getName().toUpperCase().replace('_', ' '));
                                     col.setCellValueFactory(new PropertyValueFactory<>(f.getName()));
                                     return col;
@@ -63,7 +63,7 @@ public class MarketController implements Initializable {
                         ).toList()
                 );
                 searchMenu.getItems().clear();
-                searchMenu.getItems().addAll(Arrays.stream(fields).map(f-> f.getName().toUpperCase().replace('_', ' ')).toList());
+                searchMenu.getItems().addAll(Arrays.stream(fields).skip(1).map(f-> f.getName().toUpperCase().replace('_', ' ')).toList());
             }
         });
     }

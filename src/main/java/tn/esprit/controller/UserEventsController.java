@@ -45,35 +45,49 @@ public class UserEventsController {
         }
 
         for (Evenement event : events) {
-            Button eventButton = new Button(event.getNom());
-            eventButton.setOnAction(e -> {
-                try {
-                    showEventDetails(event);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }); // Show details when clicked
-            eventsListContainer.getChildren().add(eventButton);
+            // Create a card for each event
+            VBox card = new VBox();
+            card.setStyle("-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5; -fx-padding: 10; -fx-spacing: 5;");
+            card.setPrefWidth(400); // Set card width
+
+            // Event Name
+            Label nameLabel = new Label(event.getNom());
+            nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+            // Event Description
+            Label descriptionLabel = new Label(event.getDescription());
+            descriptionLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #555555;");
+
+            // Event Calendar (Date)
+            Label dateLabel = new Label("Date: " + event.getDateDebut().toLocalDateTime().toLocalDate());
+            dateLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #777777;");
+
+            // Add components to the card
+            card.getChildren().addAll(nameLabel, descriptionLabel, dateLabel);
+
+            // Add click event to show details
+            card.setOnMouseClicked(e -> showEventDetails(event));
+
+            // Add the card to the container
+            eventsListContainer.getChildren().add(card);
         }
     }
 
-    private void showEventDetails(Evenement event) throws IOException {
-        Router.newWindow("/FrontOffice/GestionEvenement/EventDetails.fxml");
-        Router.navigateTo("/FrontOffice/GestionEvenement/EventDetails.fxml", "Détails de l'événement", new EventDetailsController(event));
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/EventDetails.fxml"));
-//            Parent root = loader.load();
-//
-//            EventDetailsController controller = loader.getController();
-//            controller.setEvent(event);
-//
-//            Stage stage = new Stage();
-//            stage.setScene(new Scene(root));
-//            stage.setTitle("");
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+    private void showEventDetails(Evenement event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/EventDetails.fxml"));
+            Parent root = loader.load();
+
+            EventDetailsController controller = loader.getController();
+            controller.setEvent(event);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Détails de l'événement");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     private void setupSearchAndSort() {
         // Search functionality

@@ -1,10 +1,11 @@
 package tn.esprit.controller;
-
+import javafx.geometry.Pos;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class AllEventsController {
 
-    @FXML private VBox eventsListContainer;
+    @FXML private TilePane eventsGridContainer; // Changed from VBox to TilePane
 
     private final ServiceEvenement serviceEvenement = new ServiceEvenement();
     private final ServiceLieu serviceLieu = new ServiceLieu();
@@ -36,53 +37,63 @@ public class AllEventsController {
 
     @FXML
     private void displayEvents() {
-        eventsListContainer.getChildren().clear();  // Clear the container before adding new content
+        eventsGridContainer.getChildren().clear();  // Clear the container before adding new content
 
         List<Evenement> events = serviceEvenement.getAll();  // Fetch all events
 
         // If no events found, show a message
         if (events.isEmpty()) {
-            eventsListContainer.getChildren().add(new Label("Aucun événement trouvé"));
+            eventsGridContainer.getChildren().add(new Label("Aucun événement trouvé"));
             return; // Exit the method if there are no events
         }
 
         // Loop through all events and display them
         for (Evenement event : events) {
-            // Create an HBox to hold event details and buttons
-            HBox eventBox = new HBox(10); // 10 is the spacing between elements
+            // Create a VBox to hold event details and buttons
+            VBox eventBox = new VBox(10); // 10 is the spacing between elements
+            eventBox.setStyle("-fx-border-color: lightgray; -fx-border-radius: 5; -fx-padding: 10;");
 
             // Get event details
             String eventDetails = "Nom: " + event.getNom() +
-                    ", Description: " + event.getDescription() +
-                    ", Date: " + event.getDateDebut().toLocalDateTime().toLocalDate() +
-                    ", Heure de début: " + event.getDateDebut().toLocalDateTime().toLocalTime() +
-                    ", Heure de fin: " + event.getDateFin().toLocalDateTime().toLocalTime();
+                    "\nDescription: " + event.getDescription() +
+                    "\nDate: " + event.getDateDebut().toLocalDateTime().toLocalDate() +
+                    "\nHeure de début: " + event.getDateDebut().toLocalDateTime().toLocalTime() +
+                    "\nHeure de fin: " + event.getDateFin().toLocalDateTime().toLocalTime();
 
             // Retrieve the Lieu (location) details
             Lieu lieu = serviceLieu.getById(event.getLieuId()); // Fetch the Lieu object using the lieuId
 
             if (lieu != null) {
-                eventDetails += ", Lieu: " + lieu.getNom() + " - " + lieu.getAdresse() + " (Capacité: " + lieu.getCapacite() + ")";
+                eventDetails += "\nLieu: " + lieu.getNom() + " - " + lieu.getAdresse() + " (Capacité: " + lieu.getCapacite() + ")";
             } else {
-                eventDetails += ", Lieu: Inconnu"; // If Lieu is null, display "Inconnu"
+                eventDetails += "\nLieu: Inconnu"; // If Lieu is null, display "Inconnu"
             }
 
             // Create a label to show the event details
             Label eventLabel = new Label(eventDetails);
 
+            // Create an HBox to hold the buttons
+            HBox buttonBox = new HBox(10); // 10 is the spacing between buttons
+            buttonBox.setAlignment(Pos.CENTER); // Center the buttons horizontally
+
             // Add the update button for modifying the event
             Button updateButton = new Button("Modifier");
+            updateButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
             updateButton.setOnAction(e -> updateEvent(event));
 
             // Add the delete button for removing the event
             Button deleteButton = new Button("Supprimer");
+            deleteButton.setStyle("-fx-background-color: #f44336; -fx-text-fill: white;");
             deleteButton.setOnAction(e -> deleteEvent(event));
 
-            // Add the event label and buttons to the HBox
-            eventBox.getChildren().addAll(eventLabel, updateButton, deleteButton);
+            // Add the buttons to the HBox
+            buttonBox.getChildren().addAll(updateButton, deleteButton);
 
-            // Add the HBox to the eventsListContainer
-            eventsListContainer.getChildren().add(eventBox);
+            // Add the event label and button HBox to the VBox
+            eventBox.getChildren().addAll(eventLabel, buttonBox);
+
+            // Add the VBox to the eventsGridContainer
+            eventsGridContainer.getChildren().add(eventBox);
         }
     }
 

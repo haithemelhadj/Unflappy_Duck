@@ -148,20 +148,8 @@ public class EventFormController {
 
     @FXML
     private void goToAllEvents(ActionEvent event) throws IOException {
-            Router.borderPaneCenterInsert(Router.getActiveBorderPane(), "/FrontOffice/GestionEvenement/all_events.fxml");
+        Router.borderPaneCenterInsert(Router.getActiveBorderPane(), "/FrontOffice/GestionEvenement/all_events.fxml");
     }
 
-    @FXML
-    private void goToUserInterface() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/UserEventsView.fxml"));
-            Parent root = loader.load();
 
-            Stage stage = (Stage) eventNameField.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

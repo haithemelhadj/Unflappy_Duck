@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.BackController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.BackController">
     <tabs>
         <Tab text="Freelancer">
          <content>
@@ -43,7 +43,15 @@
       </Tab>
       <Tab text="Store">
          <content>
-            <BorderPane fx:id="storeBorderPane" prefHeight="200.0" prefWidth="200.0" />
+            <BorderPane fx:id="storeBorderPane" prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <HBox prefHeight="24.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#show_article" text="Article" />
+                        <Button mnemonicParsing="false" onAction="#show_panier" text="Panier" />
+                     </children>
+                  </HBox>
+               </top></BorderPane>
          </content>
       </Tab>
     </tabs>

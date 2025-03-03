@@ -1,4 +1,4 @@
-/* styles.css */
+/* styles.css - Enhanced version */
 .root {
     -fx-primary: #2A2E37;
     -fx-secondary: #F5F6FA;
@@ -8,124 +8,79 @@
     -fx-font-family: 'Segoe UI', sans-serif;
 }
 
-/* Quiz Management Screen (QuizController) */
-.main-container {
+/* Quiz Session Screen (QuizSessionController) */
+.quiz-session-root {
     -fx-background-color: -fx-secondary;
     -fx-padding: 20;
 }
 
-.title {
-    -fx-font-size: 24px;
-    -fx-text-fill: -fx-primary;
-    -fx-font-weight: bold;
-    -fx-padding: 0 0 15 0;
-}
-
-.form-container {
-    -fx-background-color: white;
-    -fx-background-radius: 8;
-    -fx-padding: 20;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
-}
-
-.form-label {
-    -fx-text-fill: #666;
-    -fx-font-size: 14px;
-}
-
-.text-field, .combo-box {
-    -fx-background-radius: 4;
-    -fx-border-radius: 4;
-    -fx-border-color: #ddd;
-    -fx-padding: 8;
-    -fx-font-size: 14px;
-}
-
-.button {
-    -fx-background-color: -fx-info;  /* Default button color */
-    -fx-background-radius: 4;
-    -fx-padding: 8 15;
-    -fx-font-size: 14px;
-    -fx-cursor: hand;
-    -fx-text-fill: white;
-}
-
-/* Specific buttons can override the color via their ID selectors */
-#addQuestionBtn {
-    -fx-background-color: -fx-accent;
-}
-#updateQuestionBtn {
-    -fx-background-color: -fx-info;
-}
-#deleteQuestionBtn {
-    -fx-background-color: -fx-danger;
-}
-#addQuestionBtn:hover, #updateQuestionBtn:hover, #deleteQuestionBtn:hover {
-    -fx-opacity: 0.9;
-}
-
-.search-sort-container {
-    -fx-spacing: 15;
-    -fx-padding: 15 0;
-}
-
-.list-view {
-    -fx-background-color: white;
-    -fx-border-color: #eee;
-    -fx-background-radius: 8;
-    -fx-border-radius: 8;
-}
-
-.list-cell {
-    -fx-padding: 10 15;
-    -fx-border-color: #eee;
-}
-
-.list-cell:filled:selected {
-    -fx-background-color: #e3f2fd;
-    -fx-text-fill: -fx-primary;
-}
-
-.list-cell:filled:hover {
-    -fx-background-color: #f5f5f5;
-}
-
-/* Quiz Session Screen (QuizSessionController) */
 .quiz-title {
     -fx-font-size: 28px;
     -fx-text-fill: -fx-primary;
     -fx-font-weight: bold;
+    -fx-padding: 0 0 20 0;
 }
 
 .question-card {
     -fx-background-color: white;
     -fx-background-radius: 8;
     -fx-padding: 25;
+    -fx-spacing: 15;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    -fx-min-width: 600;
+    -fx-max-width: 800;
 }
 
 .question-number {
     -fx-font-size: 16px;
     -fx-text-fill: #666;
+    -fx-padding: 0 0 10 0;
 }
 
 .question-text {
     -fx-font-size: 18px;
     -fx-text-fill: -fx-primary;
-    -fx-wrap-text: true; /* allows multiple lines */
+    -fx-wrap-text: true;
+    -fx-padding: 0 0 20 0;
+}
+
+.options-container {
+    -fx-spacing: 10;
 }
 
 .radio-button {
-    -fx-padding: 15;
+    -fx-padding: 12;
     -fx-background-color: #f8f9fa;
     -fx-background-radius: 4;
     -fx-border-radius: 4;
     -fx-border-color: #eee;
+    -fx-min-width: 500;
 }
 
 .radio-button:selected {
     -fx-background-color: #e3f2fd;
     -fx-border-color: -fx-info;
+}
+
+.radio-button .radio {
+    -fx-border-width: 1px;
+    -fx-border-color: #ddd;
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-padding: 3px;
+}
+
+.radio-button:selected .radio {
+    -fx-border-color: -fx-info;
+}
+
+.radio-button .dot {
+    -fx-background-radius: 15px;
+    -fx-padding: 4px;
+}
+
+.radio-button:selected .dot {
+    -fx-background-color: -fx-info;
 }
 
 .answer-letter {
@@ -134,9 +89,48 @@
     -fx-font-size: 16px;
 }
 
+.navigation-container {
+    -fx-padding: 20 0;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+.nav-button {
+    -fx-background-color: -fx-info;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-min-width: 100;
+    -fx-padding: 10 15;
+}
+
+.nav-button:hover {
+    -fx-opacity: 0.9;
+}
+
+.progress-container {
+    -fx-spacing: 10;
+    -fx-padding: 20 0;
+}
+
+.progress-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-primary;
+    -fx-font-weight: bold;
+}
+
 .progress-bar {
-    -fx-accent: -fx-accent;
     -fx-pref-height: 12px;
+    -fx-min-width: 500;
+}
+
+.progress-bar .bar {
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 2;
+}
+
+.progress-bar .track {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 2;
 }
 
 .xp-label {
@@ -144,15 +138,34 @@
     -fx-font-size: 14px;
 }
 
-/* If you use styleClass="xp-title" for the XP Progress label */
 .xp-title {
     -fx-font-size: 16px;
     -fx-text-fill: -fx-primary;
     -fx-font-weight: bold;
 }
 
+.timer-container {
+    -fx-padding: 10;
+    -fx-background-color: rgba(255,255,255,0.9);
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-border-color: #eee;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 0);
+}
+
 .timer-label {
     -fx-text-fill: -fx-danger;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
+}
+
+.import-button {
+    -fx-background-color: #6c757d;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 8 15;
+}
+
+.import-button:hover {
+    -fx-opacity: 0.9;
 }

@@ -17,7 +17,7 @@
             <children>
                 <VBox alignment="CENTER" maxWidth="700.0" spacing="30.0">
                     <children>
-                        <Label alignment="CENTER" styleClass="header-label" text="Bienvenue à AppName">
+                        <Label alignment="CENTER" styleClass="header-label" text="Bienvenue à Unflappy Duck">
                             <font>
                                 <Font name="System Bold" size="42.0" />
                             </font>

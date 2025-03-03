@@ -6,12 +6,12 @@
 
  <HBox spacing="10" style="-fx-border-color: #eee; -fx-border-width: 1px; -fx-padding: 10;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.RecentJob">
      <VBox>
-         <Label style="-fx-font-weight: bold;" text="Logo Design" />
-         <Label style="-fx-text-fill: #666;" text="2 weeks | $1,500" />
+         <Label style="-fx-font-weight: bold;" text="Logo Design" fx:id="serviceTitle"/>
+         <Label style="-fx-text-fill: #666;" text="2 weeks | $1,500" fx:id="durationAndPrice"/>
      </VBox>
      <HBox HBox.hgrow="ALWAYS" />
      <VBox alignment="CENTER">
-         <Label text="⭐ 4.8" />
-         <Label style="-fx-text-fill: #4CAF50;" text="+250 XP" />
+         <Label text="⭐ 4.8" fx:id="rating"/>
+         <Label style="-fx-text-fill: #4CAF50;" text="+250 XP" fx:id="earnedXP"/>
      </VBox>
  </HBox>

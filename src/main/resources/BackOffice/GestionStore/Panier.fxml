@@ -16,7 +16,7 @@
       <TextField fx:id="utilisateur_id" layoutX="40.0" layoutY="103.0" promptText="utilisateur_id" />
       <Button fx:id="afficher" layoutX="341.0" layoutY="401.0" mnemonicParsing="false" onAction="#afficherPanier" text="afficher" />
       <ChoiceBox fx:id="article_id" layoutX="40.0" layoutY="178.0" prefWidth="150.0" />
-      <Button layoutX="343.0" layoutY="278.0" mnemonicParsing="false" onAction="#switch_to_home" text="home" />
+
       <TextField fx:id="searchfilde" layoutX="40.0" layoutY="28.0" promptText="recherche" />
       <Button layoutX="79.0" layoutY="53.0" mnemonicParsing="false" onAction="#recherche" text="recherche " />
       <Button layoutX="650.0" layoutY="53.0" mnemonicParsing="false" onAction="#trier" text="tri" />

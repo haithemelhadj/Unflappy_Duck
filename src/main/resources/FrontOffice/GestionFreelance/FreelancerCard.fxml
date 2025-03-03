@@ -31,7 +31,10 @@
             <!-- Current XP Progress Bar -->
             <ProgressBar prefWidth="300" progress="0.1" fx:id="xpBar" />
             <Label alignment="CENTER" text="1,200 / 2,000 XP" fx:id="xpLabel" />
+            <!-- Recent Jobs List -->
+            <VBox fx:id="recentJobsContainer" spacing="10"></VBox>
         </VBox>
+
     </center>
 
     <!-- Bottom Section: Expertise -->

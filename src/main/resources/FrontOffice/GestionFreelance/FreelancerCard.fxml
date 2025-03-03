@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.FreelancerCard">
+    <!-- Top Section: Profile + Status -->
+    <top>
+        <HBox spacing="10" style="-fx-padding: 20;">
+            <!-- Profile Image -->
+                <ImageView fitHeight="80" fitWidth="80" />
+            <!-- Status Indicator -->
+            <VBox alignment="CENTER_LEFT" spacing="5">
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Your Name" />
+                <HBox spacing="5">
+                    <Circle fill="#4CAF50" radius="8" /> <!-- Green = Online -->
+                    <Label style="-fx-text-fill: #666;" text="Online" />
+                </HBox>
+            </VBox>
+        </HBox>
+    </top>
+
+    <!-- Center Section: XP + Recent Jobs -->
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <!-- Current XP Progress Bar -->
+            <ProgressBar prefWidth="300" progress="0.1" fx:id="xpBar" />
+            <Label alignment="CENTER" text="1,200 / 2,000 XP" fx:id="xpLabel" />
+        </VBox>
+    </center>
+
+    <!-- Bottom Section: Expertise -->
+    <bottom>
+        <HBox fx:id="skillsContainer" spacing="10" style="-fx-padding: 20;">
+        </HBox>
+    </bottom>
+</BorderPane>

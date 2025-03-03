@@ -1,0 +1,136 @@
+/* Base styles */
+.card-container {
+    -fx-background-color: #231E39;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 10, 0, 0, 2);
+    -fx-text-fill: #B3B8CD;
+    -fx-padding: 30;
+    -fx-pref-width: 350;
+    -fx-max-width: 100%;
+}
+
+.pro-badge {
+    -fx-background-color: #FEBB0B;
+    -fx-text-fill: #231E39;
+    -fx-font-size: 1.2em;
+    -fx-padding: 3 7;
+    -fx-border-radius: 3;
+}
+
+.name-label {
+    -fx-font-size: 2em;
+    -fx-font-weight: 600;
+}
+
+.location-label {
+    -fx-font-size: 1.4em;
+}
+
+.job-title-label {
+    -fx-font-size: 1em;
+    -fx-text-fill: #7A7A7A;
+    -fx-wrap-text: true;
+}
+
+.button-group .button {
+    -fx-font-size: 1em;
+    -fx-padding: 10 25;
+    -fx-background-radius: 3;
+}
+
+.skills-container {
+    -fx-background-color: #1F1A36;
+    -fx-padding: 15;
+    -fx-border-radius: 5;
+}
+
+.skill-tag {
+    -fx-background-color: #2D2747;
+    -fx-text-fill: #B3B8CD;
+    -fx-font-size: 12px;
+    -fx-padding: 7 12;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 600px) {
+    .card-container {
+        -fx-pref-width: 300;
+    }
+
+    .name-label {
+        -fx-font-size: 1.8em;
+    }
+
+    .button-group {
+        -fx-orientation: vertical;
+        -fx-spacing: 10;
+    }
+
+    .skill-tag {
+        -fx-font-size: 0.8em;
+        -fx-padding: 5 10;
+    }
+}
+
+@media (max-width: 400px) {
+    .card-container {
+        -fx-pref-width: 280;
+    }
+
+    .pro-badge {
+        -fx-font-size: 1em;
+    }
+
+    .job-title-label {
+        -fx-font-size: 0.9em;
+    }
+}
+
+/* JavaFX CSS - buttons.css */
+.root {
+    -fx-font-family: 'Montserrat';
+}
+
+/* Primary Button */
+.primary-button {
+    -fx-background-color: #03BFCB;
+    -fx-border-color: #03BFCB;
+    -fx-text-fill: #231E39;
+    -fx-font-weight: 500;
+    -fx-padding: 10 25;
+    -fx-background-radius: 3;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0, 0, 1);
+}
+
+.primary-button:hover {
+    -fx-background-color: #02A3B0;
+    -fx-border-color: #02A3B0;
+    -fx-cursor: hand;
+}
+
+/* Ghost Button */
+.ghost-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #03BFCB;
+    -fx-text-fill: #02899C;
+    -fx-font-weight: 500;
+    -fx-padding: 10 25;
+    -fx-background-radius: 3;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+.ghost-button:hover {
+    -fx-background-color: rgba(3,191,203,0.1);
+    -fx-cursor: hand;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .primary-button, .ghost-button {
+        -fx-font-size: 14px;
+        -fx-padding: 8 15;
+    }
+}

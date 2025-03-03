@@ -19,7 +19,7 @@ public class UIFreelance extends Application {
     public void start(Stage primaryStage) throws SQLException {
         Router.initialize(primaryStage);
         Controller con = new Controller();
-       Session.start(new ServiceUtilisateur().getUtilisateurById(2));
+      // Session.start(new ServiceUtilisateur().getUtilisateurById(1));
         con.start();
     }
 }

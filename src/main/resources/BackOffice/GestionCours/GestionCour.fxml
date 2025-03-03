@@ -6,7 +6,7 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             xmlns="http://javafx.com/javafx/19"
             fx:controller="tn.esprit.controller.QuizController"
-            stylesheets="@../../styles.css"
+            stylesheets="@../../FrontOffice/GestionCours/styles.css"
             prefWidth="900" prefHeight="600">
 
     <!-- TOP: Title -->

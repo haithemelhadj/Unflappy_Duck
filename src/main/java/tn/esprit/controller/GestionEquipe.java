@@ -6,10 +6,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import tn.esprit.api.FirebaseNotifs;
 import tn.esprit.models.*;
 import tn.esprit.services.*;
 import tn.esprit.utils.MyDatabase;
-
+import tn.esprit.api.EquipeNotif;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -174,7 +175,13 @@ public class GestionEquipe implements Initializable {
         equipeSort.getItems().addAll("Trier par ID", "Trier par Nom");
         equipeSort.setValue("Trier par ID");
 
-        sortEquipe.setOnAction(event -> sortEquipes());
+        sortEquipe.setOnAction(event -> {
+            try {
+                sortEquipes();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
         //endregion
 
         //region recherche membre
@@ -584,7 +591,17 @@ public class GestionEquipe implements Initializable {
         FXCollections.sort(observableMembreList, comparator);
     }
     /**/
-    private void sortEquipes() {
+    private void sortEquipes() throws Exception {
+
+        String clientToken = "your-device-token";
+        FirebaseNotifs.sendNotificationToDevice(clientToken, "Hello!", "This is a direct message.");
+
+        //FirebaseNotifs.sendNotificationToTopic("news", "Breaking News", "JavaFX supports Firebase!");
+        EquipeNotif en=new EquipeNotif();
+        en.creatingANewTrayNotification();
+        //en.SendSmS();
+
+        /**/
         String selectedOption = equipeSort.getValue();
         if (selectedOption == null) return;
 

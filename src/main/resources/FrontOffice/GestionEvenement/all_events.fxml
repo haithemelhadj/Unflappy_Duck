@@ -3,14 +3,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controller.AllEventsController">
-    <VBox layoutX="50" layoutY="50" spacing="10">
-        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Liste de tous les événements" />
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controller.AllEventsController" spacing="10" alignment="TOP_CENTER">
+    <!-- Title Label -->
+    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Liste de tous les événements" />
 
-        <!-- TilePane for Grid-like Layout -->
-        <TilePane fx:id="eventsGridContainer" prefColumns="2" hgap="10" vgap="10" />
-    </VBox>
+    <!-- TilePane for Grid-like Layout -->
+    <TilePane fx:id="eventsGridContainer" prefColumns="2" hgap="10" vgap="10" />
 
-    <!-- Go Back Button -->
-    <Button layoutX="68.0" layoutY="313.0" onAction="#goBack" text="Retour à l'ajout d'événements" />
-</AnchorPane>
+    <!-- Spacer to push the button to the bottom -->
+    <Region VBox.vgrow="ALWAYS" />
+
+    <!-- Go Back Button at the bottom -->
+    <Button onAction="#goBack" text="Retour à l'ajout d'événements" />
+</VBox>

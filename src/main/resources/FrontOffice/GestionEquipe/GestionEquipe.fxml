@@ -1,203 +1,214 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1100.0" stylesheets="@GestionEquipescss-styles.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.GestionEquipe">
+<AnchorPane stylesheets="@GestionEquipescss-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.GestionEquipe">
     <children>
-        <VBox alignment="CENTER" spacing="25.0" styleClass="main-container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <Label styleClass="main-header" text="Gestion des Équipes">
-                    <font>
-                        <Font name="System Bold" size="32.0" />
-                    </font>
-                </Label>
-            <ScrollPane>
-               <content>
-      
-                      <HBox alignment="CENTER" spacing="30.0">
-                          <children>
-                              <!-- Team Management Section -->
-                              <VBox styleClass="card" HBox.hgrow="ALWAYS">
-                                  <children>
-                                      <Label styleClass="card-header" text="Ajouter Équipe">
-                                          <font>
-                                              <Font name="System Bold" size="24.0" />
-                                          </font>
-                                      </Label>
-      
-                                      <VBox spacing="15.0" styleClass="form-container">
-                                          <children>
-                                              <VBox styleClass="form-group">
-                                                  <children>
-                                                      <Label styleClass="form-label" text="ID Équipe">
-                                                          <font>
-                                                              <Font name="System Bold" size="14.0" />
-                                                          </font>
-                                                      </Label>
-                                                      <TextField fx:id="idEquipe" promptText="Identifier l'équipe" styleClass="form-control" />
-                                                  </children>
-                                              </VBox>
-      
-                                              <VBox styleClass="form-group">
-                                                  <children>
-                                                      <Label styleClass="form-label" text="Nom Équipe">
-                                                          <font>
-                                                              <Font name="System Bold" size="14.0" />
-                                                          </font>
-                                                      </Label>
-                                                      <TextField fx:id="NomEquipe" promptText="Entrez le nom de l'équipe" styleClass="form-control" />
-                                                  </children>
-                                              </VBox>
-      
-                                              <VBox styleClass="form-group">
-                                                  <children>
-                                                      <Label styleClass="form-label" text="Événement">
-                                                          <font>
-                                                              <Font name="System Bold" size="14.0" />
-                                                          </font>
-                                                      </Label>
-                                                      <ComboBox fx:id="id_Event" maxWidth="1.7976931348623157E308" styleClass="form-control" />
-                                                  </children>
-                                              </VBox>
-      
-                                              <VBox styleClass="form-group">
-                                                  <children>
-                                                      <Label styleClass="form-label" text="Chef de l'équipe">
-                                                          <font>
-                                                              <Font name="System Bold" size="14.0" />
-                                                          </font>
-                                                      </Label>
-                                                      <ComboBox fx:id="idChefEquipe" maxWidth="1.7976931348623157E308" styleClass="form-control" />
-                                                  </children>
-                                              </VBox>
-      
-                                              <HBox alignment="CENTER" spacing="15.0" styleClass="btn-group">
-                                                  <children>
-                                                      <Button mnemonicParsing="false" onAction="#AddUpdateEquipe" styleClass="btn-primary" text="Ajouter / Mettre à jour" />
-                                                      <Button mnemonicParsing="false" onAction="#deleteEquipe" styleClass="btn-danger" text="Effacer Équipe" />
-                                                  </children>
-                                              </HBox>
-                                          </children>
-                                      </VBox>
-      
-                                      <VBox spacing="15.0" styleClass="list-section">
-                                          <children>
-                                              <Label styleClass="section-header" text="Liste des Équipes">
-                                                  <font>
-                                                      <Font name="System Bold" size="18.0" />
-                                                  </font>
-                                              </Label>
-      
-                                              <HBox alignment="CENTER" spacing="10.0" styleClass="search-sort">
-                                                  <children>
-                                                      <TextField fx:id="RechercheEquipe" promptText="Rechercher une équipe..." styleClass="form-control, search-input" HBox.hgrow="ALWAYS" />
-                                                      <HBox alignment="CENTER" spacing="5.0" styleClass="sort-control">
-                                                          <children>
-                                                              <Button fx:id="sortEquipe" mnemonicParsing="false" onAction="#sortEquipes" styleClass="btn-secondary" text="Trier" />
-                                                              <ComboBox fx:id="equipeSort" styleClass="form-control" />
-                                                          </children>
-                                                      </HBox>
-                                                  </children>
-                                              </HBox>
-      
-                                              <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="list-container">
-                                                  <content>
-                                                      <ListView fx:id="ListViewEquipes" styleClass="list-view" />
-                                                  </content>
-                                              </ScrollPane>
-      
-                                              <Button mnemonicParsing="false" onAction="#refrechEquipes" styleClass="btn-secondary" text="Rafraîchir" />
-                                          </children>
-                                      </VBox>
-                                  </children>
-                              </VBox>
-      
-                              <!-- Member Management Section -->
-                              <VBox styleClass="card" HBox.hgrow="ALWAYS">
-                                  <children>
-                                      <Label styleClass="card-header" text="Ajouter Membre">
-                                          <font>
-                                              <Font name="System Bold" size="24.0" />
-                                          </font>
-                                      </Label>
-      
-                                      <VBox spacing="15.0" styleClass="form-container">
-                                          <children>
-                                              <VBox styleClass="form-group">
-                                                  <children>
-                                                      <Label styleClass="form-label" text="Choisir Équipe">
-                                                          <font>
-                                                              <Font name="System Bold" size="14.0" />
-                                                          </font>
-                                                      </Label>
-                                                      <ComboBox fx:id="EquipesList" maxWidth="1.7976931348623157E308" styleClass="form-control" />
-                                                  </children>
-                                              </VBox>
-      
-                                              <VBox styleClass="form-group">
-                                                  <children>
-                                                      <Label styleClass="form-label" text="Choisir un Membre">
-                                                          <font>
-                                                              <Font name="System Bold" size="14.0" />
-                                                          </font>
-                                                      </Label>
-                                                      <ComboBox fx:id="UsersList" maxWidth="1.7976931348623157E308" styleClass="form-control" />
-                                                  </children>
-                                              </VBox>
-      
-                                              <HBox alignment="CENTER" spacing="15.0" styleClass="btn-group">
-                                                  <children>
-                                                      <Button mnemonicParsing="false" onAction="#AddMember" styleClass="btn-primary" text="Ajouter" />
-                                                      <Button mnemonicParsing="false" onAction="#EffacerMembre" styleClass="btn-danger" text="Effacer Membre" />
-                                                  </children>
-                                              </HBox>
-                                          </children>
-                                      </VBox>
-      
-                                      <VBox spacing="15.0" styleClass="list-section">
-                                          <children>
-                                              <Label styleClass="section-header" text="Liste des Membres">
-                                                  <font>
-                                                      <Font name="System Bold" size="18.0" />
-                                                  </font>
-                                              </Label>
-      
-                                              <HBox alignment="CENTER" spacing="10.0" styleClass="search-sort">
-                                                  <children>
-                                                      <TextField fx:id="RechercheMembre" promptText="Rechercher un membre..." styleClass="form-control, search-input" HBox.hgrow="ALWAYS" />
-                                                      <HBox alignment="CENTER" spacing="5.0" styleClass="sort-control">
-                                                          <children>
-                                                              <Button fx:id="sortMembre" mnemonicParsing="false" onAction="#sortMembres" styleClass="btn-secondary" text="Trier" />
-                                                              <ComboBox fx:id="memberSort" styleClass="form-control" />
-                                                          </children>
-                                                      </HBox>
-                                                  </children>
-                                              </HBox>
-      
-                                              <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="list-container">
-                                                  <content>
-                                                      <ListView fx:id="ListViewMembres" styleClass="list-view" />
-                                                  </content>
-                                              </ScrollPane>
-      
-                                              <Button mnemonicParsing="false" onAction="#refrechMembres" styleClass="btn-secondary" text="Rafraîchir" />
-                                          </children>
-                                      </VBox>
-                                  </children>
-                              </VBox>
-                          </children>
-                      </HBox>
-               </content>
-            </ScrollPane>
-
-                <Label fx:id="Error" styleClass="error-text" textFill="RED" />
-            </children>
-            <padding>
-                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-            </padding>
-        </VBox>
+      <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0">
+        <content>
+          <AnchorPane>
+               <children>
+                    <VBox alignment="CENTER" spacing="25.0" styleClass="main-container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <children>
+                            <Label styleClass="main-header" text="Gestion des Équipes">
+                                <font>
+                                    <Font name="System Bold" size="32.0" />
+                                </font>
+                            </Label>
+            
+                                                                            <HBox alignment="CENTER" spacing="30.0">
+                                <children>
+                                    <!-- Team Management Section -->
+                                    <VBox styleClass="card" HBox.hgrow="ALWAYS">
+                                        <children>
+                                            <Label styleClass="card-header" text="Ajouter Équipe">
+                                                <font>
+                                                    <Font name="System Bold" size="24.0" />
+                                                </font>
+                                            </Label>
+            
+                                                                                            <VBox spacing="15.0" styleClass="form-container">
+                                                <children>
+                                                    <VBox styleClass="form-group">
+                                                        <children>
+                                                            <Label styleClass="form-label" text="ID Équipe">
+                                                                <font>
+                                                                    <Font name="System Bold" size="14.0" />
+                                                                </font>
+                                                            </Label>
+                                                            <TextField fx:id="idEquipe" promptText="Identifier l'équipe" styleClass="form-control" />
+                                                        </children>
+                                                    </VBox>
+            
+                                                                                                    <VBox styleClass="form-group">
+                                                        <children>
+                                                            <Label styleClass="form-label" text="Nom Équipe">
+                                                                <font>
+                                                                    <Font name="System Bold" size="14.0" />
+                                                                </font>
+                                                            </Label>
+                                                            <TextField fx:id="NomEquipe" promptText="Entrez le nom de l'équipe" styleClass="form-control" />
+                                                        </children>
+                                                    </VBox>
+            
+                                                                                                    <VBox styleClass="form-group">
+                                                        <children>
+                                                            <Label styleClass="form-label" text="Événement">
+                                                                <font>
+                                                                    <Font name="System Bold" size="14.0" />
+                                                                </font>
+                                                            </Label>
+                                                            <ComboBox fx:id="id_Event" maxWidth="1.7976931348623157E308" styleClass="form-control" />
+                                                        </children>
+                                                    </VBox>
+            
+                                                                                                     <VBox styleClass="form-group">
+                                                        <children>
+                                                            <Label styleClass="form-label" text="Chef de l'équipe">
+                                                                <font>
+                                                                    <Font name="System Bold" size="14.0" />
+                                                                </font>
+                                                            </Label>
+                                                            <ComboBox fx:id="idChefEquipe" maxWidth="1.7976931348623157E308" styleClass="form-control" />
+                                                        </children>
+                                                    </VBox>
+            
+                                                                                                    <HBox alignment="CENTER" spacing="15.0" styleClass="btn-group">
+                                                        <children>
+                                                            <Button mnemonicParsing="false" onAction="#AddUpdateEquipe" styleClass="btn-primary" text="Ajouter / Mettre à jour" />
+                                                            <Button mnemonicParsing="false" onAction="#deleteEquipe" styleClass="btn-danger" text="Effacer Équipe" />
+                                                        </children>
+                                                    </HBox>
+                                                </children>
+                                            </VBox>
+            
+                                                                                            <VBox spacing="15.0" styleClass="list-section">
+                                                <children>
+                                                    <Label styleClass="section-header" text="Liste des Équipes">
+                                                        <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                        </font>
+                                                    </Label>
+            
+                                                                                                    <HBox alignment="CENTER" spacing="10.0" styleClass="search-sort">
+                                                        <children>
+                                                            <TextField fx:id="RechercheEquipe" promptText="Rechercher une équipe..." styleClass="form-control, search-input" HBox.hgrow="ALWAYS" />
+                                                            <HBox alignment="CENTER" spacing="5.0" styleClass="sort-control">
+                                                                <children>
+                                                                    <Button fx:id="sortEquipe" mnemonicParsing="false" onAction="#sortEquipes" styleClass="btn-secondary" text="Trier" />
+                                                                    <ComboBox fx:id="equipeSort" styleClass="form-control" />
+                                                                </children>
+                                                            </HBox>
+                                                        </children>
+                                                    </HBox>
+            
+                                                                                                    <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="list-container">
+                                                        <content>
+                                                            <ListView fx:id="ListViewEquipes" styleClass="list-view" />
+                                                        </content>
+                                                    </ScrollPane>
+            
+                                                                                                    <Button mnemonicParsing="false" onAction="#refrechEquipes" styleClass="btn-secondary" text="Rafraîchir" />
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </VBox>
+            
+                                                                                    <!-- Member Management Section -->
+                                    <VBox styleClass="card" HBox.hgrow="ALWAYS">
+                                              <children>
+                                            <Label styleClass="card-header" text="Ajouter Membre">
+                                                <font>
+                                                    <Font name="System Bold" size="24.0" />
+                                                </font>
+                                            </Label>
+            
+                                                                                            <VBox spacing="15.0" styleClass="form-container">
+                                                <children>
+                                                    <VBox styleClass="form-group">
+                                                        <children>
+                                                            <Label styleClass="form-label" text="Choisir Équipe">
+                                                                <font>
+                                                                    <Font name="System Bold" size="14.0" />
+                                                                </font>
+                                                            </Label>
+                                                            <ComboBox fx:id="EquipesList" maxWidth="1.7976931348623157E308" styleClass="form-control" />
+                                                        </children>
+                                                    </VBox>
+            
+                                                                                                    <VBox styleClass="form-group">
+                                                        <children>
+                                                            <Label styleClass="form-label" text="Choisir un Membre">
+                                                                <font>
+                                                                    <Font name="System Bold" size="14.0" />
+                                                                </font>
+                                                            </Label>
+                                                            <ComboBox fx:id="UsersList" maxWidth="1.7976931348623157E308" styleClass="form-control" />
+                                                        </children>
+                                                    </VBox>
+            
+                                                                                                    <HBox alignment="CENTER" spacing="15.0" styleClass="btn-group">
+                                                        <children>
+                                                            <Button mnemonicParsing="false" onAction="#AddMember" styleClass="btn-primary" text="Ajouter" />
+                                                            <Button mnemonicParsing="false" onAction="#EffacerMembre" styleClass="btn-danger" text="Effacer Membre" />
+                                                        </children>
+                                                    </HBox>
+                                                </children>
+                                            </VBox>
+            
+                                                                                            <VBox spacing="15.0" styleClass="list-section">
+                                                <children>
+                                                    <Label styleClass="section-header" text="Liste des Membres">
+                                                        <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                        </font>
+                                                    </Label>
+            
+                                                                                                    <HBox alignment="CENTER" spacing="10.0" styleClass="search-sort">
+                                                        <children>
+                                                            <TextField fx:id="RechercheMembre" promptText="Rechercher un membre..." styleClass="form-control, search-input" HBox.hgrow="ALWAYS" />
+                                                            <HBox alignment="CENTER" spacing="5.0" styleClass="sort-control">
+                                                                <children>
+                                                                    <Button fx:id="sortMembre" mnemonicParsing="false" onAction="#sortMembres" styleClass="btn-secondary" text="Trier" />
+                                                                    <ComboBox fx:id="memberSort" styleClass="form-control" />
+                                                                </children>
+                                                            </HBox>
+                                                        </children>
+                                                    </HBox>
+            
+                                                                                                    <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="list-container">
+                                                        <content>
+                                                            <ListView fx:id="ListViewMembres" styleClass="list-view" />
+                                                        </content>
+                                                    </ScrollPane>
+            
+                                                                                                    <Button mnemonicParsing="false" onAction="#refrechMembres" styleClass="btn-secondary" text="Rafraîchir" />
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </VBox>
+                                </children>
+                            </HBox>
+            
+                            <Label fx:id="Error" styleClass="error-text" textFill="RED" />
+                        </children>
+                        <padding>
+                            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                        </padding>
+                    </VBox>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
     </children>
 </AnchorPane>

@@ -8,7 +8,11 @@ import java.io.IOException;
 
 public class FirebaseConfig {
     public static void initializeFirebase() throws IOException {
-        FileInputStream serviceAccount = new FileInputStream("src/main/resources/firebase-config.json");
+        String credentialsPath = System.getenv("GOOGLE_APPLICATION_CREDENTIALS");
+        if (credentialsPath == null) {
+            throw new IllegalStateException("GOOGLE_APPLICATION_CREDENTIALS environment variable is not set.");
+        }
+        FileInputStream serviceAccount = new FileInputStream(credentialsPath);
 
         FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))

@@ -9,7 +9,7 @@
 /* The background image is already in place */
 .stack-pane {
     /* Keep your existing background image */
-    -fx-background-image: url('backgroundHomePage.jpg');
+    -fx-background-image: url('FrontOffice/backgroundHomePage.jpg');
     -fx-background-size: cover;
     -fx-background-position: center center;
 }

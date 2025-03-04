@@ -51,6 +51,7 @@
                 <configuration>
                     <mainClass>
                         tn.esprit.test.UIFreelance
+                        <!--tn.esprit.test.MainFX-->
                     </mainClass>
                 </configuration>
             </plugin>

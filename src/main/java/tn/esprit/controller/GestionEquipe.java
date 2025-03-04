@@ -95,61 +95,6 @@ public class GestionEquipe implements Initializable {
     ObservableList<String> observableMembreList = FXCollections.observableArrayList();
     FilteredList<String> filteredMmbrData;
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //region combobox
-        //membre
-        loadEquipesListChoiceBoxData(EquipesList);
-        loadUsersListChoiceBoxData(UsersList);
-        //equipe
-        loadUsersListChoiceBoxData(idChefEquipe);
-        loadid_EventChoiceBoxData(id_Event);
-        //endregion
-
-        //region recherche equipe
-        // Load initial data
-        loadEquipesData(observableEquipeList); // Load data from database
-        // Wrap observable list in a FilteredList
-        filteredEqipData = new FilteredList<>(observableEquipeList, s -> true);
-        // Bind filtered data to ListView
-        ListViewEquipes.setItems(filteredEqipData);
-        // Listen for search field changes
-        RechercheEquipe.textProperty().addListener((observable, oldValue, newValue) -> {
-            applyEquipeFilter(newValue);
-        });
-        //endregion
-
-        //region sort equipe
-        equipeSort.getItems().addAll("Trier par ID", "Trier par Nom");
-        equipeSort.setValue("Trier par ID"); // Default selection
-
-        sortEquipe.setOnAction(event -> sortEquipes());
-        //endregion
-
-        //region recherche membre
-        // Load initial data
-        loadMembreData(observableMembreList); // Load data from database
-        // Wrap observable list in a FilteredList
-        filteredMmbrData = new FilteredList<>(observableMembreList, s -> true);
-        // Bind filtered data to ListView
-        ListViewMembres.setItems(filteredMmbrData);
-        // Listen for search field changes
-        RechercheMembre.textProperty().addListener((observable, oldValue, newValue) -> {
-            applyMemberFilter(newValue);
-        });
-        //endregion
-
-        //region sort Membre
-        memberSort.getItems().addAll("Trier par ID", "Trier par Nom","Trier par equipe");
-        memberSort.setValue("Trier par ID"); // Default selection
-
-        sortMembre.setOnAction(event -> sortMembres());
-        //endregion
-
-    }
-
-
     //
     private void loadEquipesListChoiceBoxData(ComboBox comboBox) {
 
@@ -206,13 +151,57 @@ public class GestionEquipe implements Initializable {
     //
     //endregion
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //region combobox
+        loadEquipesListChoiceBoxData(EquipesList);
+        loadUsersListChoiceBoxData(UsersList);
+        //equipe
+        loadUsersListChoiceBoxData(idChefEquipe);
+        loadid_EventChoiceBoxData(id_Event);
+        //endregion
+
+        //region recherche equipe
+        loadEquipesData(observableEquipeList);
+        filteredEqipData = new FilteredList<>(observableEquipeList, s -> true);
+        ListViewEquipes.setItems(filteredEqipData);
+        RechercheEquipe.textProperty().addListener((observable, oldValue, newValue) -> {
+            applyEquipeFilter(newValue);
+        });
+        //endregion
+
+        //region sort equipe
+        equipeSort.getItems().addAll("Trier par ID", "Trier par Nom");
+        equipeSort.setValue("Trier par ID");
+
+        sortEquipe.setOnAction(event -> sortEquipes());
+        //endregion
+
+        //region recherche membre
+        loadMembreData(observableMembreList);
+        filteredMmbrData = new FilteredList<>(observableMembreList, s -> true);
+        ListViewMembres.setItems(filteredMmbrData);
+        RechercheMembre.textProperty().addListener((observable, oldValue, newValue) -> {
+            applyMemberFilter(newValue);
+        });
+        //endregion
+
+        //region sort Membre
+        memberSort.getItems().addAll("Trier par ID", "Trier par Nom","Trier par equipe");
+        memberSort.setValue("Trier par ID"); // Default selection
+
+        sortMembre.setOnAction(event -> sortMembres());
+        //endregion
+
+    }
+
     //region equipes
 
     private void loadEquipesData(ObservableList<String> list) {
         try{
             List<Equipe> equipes = se.getAll();
             for (Equipe e : equipes) {
-                observableEquipeList.add(e.getId()+" | "+e.getNom()+" | "); // Change this to whatever field you want to display
+                observableEquipeList.add(e.getId()+" | "+e.getNom()+" | ");
             }
         }catch (Exception e)
         {
@@ -222,8 +211,8 @@ public class GestionEquipe implements Initializable {
         }
     }
     public void refreshEquipeListView() {
-        observableEquipeList.clear(); // Clear existing data
-        loadEquipesData(observableEquipeList); // Reload data from the database
+        observableEquipeList.clear();
+        loadEquipesData(observableEquipeList);
     }
     private void applyEquipeFilter(String filterText) {
         filteredEqipData.setPredicate(item -> {
@@ -238,7 +227,7 @@ public class GestionEquipe implements Initializable {
     @FXML
     void refrechEquipes(ActionEvent event) {
         refreshEquipeListView();
-        applyEquipeFilter(RechercheEquipe.getText()); // Reapply the filter after refresh
+        applyEquipeFilter(RechercheEquipe.getText());
     }
 
     @FXML
@@ -398,7 +387,6 @@ public class GestionEquipe implements Initializable {
                     Error.setText(e.getMessage());
                 }
             }
-            //ListViewMembres.setItems(observableList);
         }catch (Exception e)
         {
             System.out.println("refrech error");
@@ -407,8 +395,8 @@ public class GestionEquipe implements Initializable {
         }
     }
     public void refreshMemberListView() {
-        observableMembreList.clear(); // Clear existing data
-        loadMembreData(observableMembreList); // Reload data from the database
+        observableMembreList.clear();
+        loadMembreData(observableMembreList);
     }
     private void applyMemberFilter(String filterText) {
         filteredMmbrData.setPredicate(item -> {
@@ -423,39 +411,7 @@ public class GestionEquipe implements Initializable {
     @FXML
     void refrechMembres(ActionEvent event) {
         refreshMemberListView();
-        applyMemberFilter(RechercheMembre.getText()); // Reapply the filter after refresh
-
-        /*
-        try{
-            List<MembresEquipe> mmbrsEquipes = sme.getAll();
-            ObservableList<String> observableList = FXCollections.observableArrayList();
-            observableList.add("utilisateur_id"+" | "+"nom"+" | "+"equipe_id");
-            for (MembresEquipe me : mmbrsEquipes) {
-
-                String qry ="SELECT * FROM membre_equipe m JOIN utilisateur u ON m.utilisateur_id = u.id WHERE m.id = '"+me.getId()+"'";
-                try {
-                    Statement stm = cnx.createStatement();
-                    ResultSet rs = stm.executeQuery(qry);
-
-
-                    while (rs.next()){
-                        observableList.add(rs.getInt("utilisateur_id")+" | "+rs.getString("nom")+" | "+rs.getString("equipe_id"));
-                    }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                    Error.setText(e.getMessage());
-                }
-            }
-            ListViewMembres.setItems(observableList);
-
-        }catch (Exception e)
-        {
-            System.out.println("refrech error");
-            System.out.println(e.getMessage());
-            Error.setText(e.getMessage());
-        }
-        /**/
-
+        applyMemberFilter(RechercheMembre.getText());
     }
 
 
@@ -589,6 +545,8 @@ public class GestionEquipe implements Initializable {
 
     //endregion
 
+    //region sort
+    /*
     private void sortEquipes() {
         String selectedOption = equipeSort.getValue();
 
@@ -597,9 +555,9 @@ public class GestionEquipe implements Initializable {
         Comparator<String> comparator;
 
         if (selectedOption.equals("Trier par ID")) {
-            comparator = Comparator.comparingInt(equipe -> Integer.parseInt(equipe.split(" \\| ")[0])); // Extract ID
-        } else { // Sort by Name
-            comparator = Comparator.comparing(equipe -> equipe.split(" \\| ")[1]); // Extract Name
+            comparator = Comparator.comparingInt(equipe -> Integer.parseInt(equipe.split(" \\| ")[0]));
+        } else {
+            comparator = Comparator.comparing(equipe -> equipe.split(" \\| ")[1]);
         }
 
         FXCollections.sort(observableEquipeList, comparator);
@@ -625,17 +583,56 @@ public class GestionEquipe implements Initializable {
 
         FXCollections.sort(observableMembreList, comparator);
     }
+    /**/
+    private void sortEquipes() {
+        String selectedOption = equipeSort.getValue();
+        if (selectedOption == null) return;
 
+        List<String> sortedList = observableEquipeList.stream()
+                .sorted((e1, e2) -> selectedOption.equals("Trier par ID") ?
+                        Integer.compare(
+                                Integer.parseInt(e1.split(" \\| ")[0]),
+                                Integer.parseInt(e2.split(" \\| ")[0])
+                        ) :
+                        e1.split(" \\| ")[1].compareTo(e2.split(" \\| ")[1])
+                )
+                .toList();
+
+        observableEquipeList.setAll(sortedList);
+    }
+
+    private void sortMembres() {
+        String selectedOption = memberSort.getValue();
+        if (selectedOption == null) return;
+
+        System.out.println("Sorting members by " + selectedOption);
+
+        List<String> sortedList = observableMembreList.stream()
+                .sorted((m1, m2) -> {
+                    if (selectedOption.equals("Trier par ID")) {
+                        return Integer.compare(
+                                Integer.parseInt(m1.split(" \\| ")[0]),
+                                Integer.parseInt(m2.split(" \\| ")[0])
+                        );
+                    } else if (selectedOption.equals("Trier par Nom")) {
+                        return m1.split(" \\| ")[1].compareTo(m2.split(" \\| ")[1]);
+                    } else {
+                        return Integer.compare(
+                                Integer.parseInt(m1.split(" \\| ")[2]),
+                                Integer.parseInt(m2.split(" \\| ")[2])
+                        );
+                    }
+                })
+                .toList();
+
+        observableMembreList.setAll(sortedList);
+    }
 
 
     @FXML
-    void sortEquipes(ActionEvent event) {
-
-    }
+    void sortEquipes(ActionEvent event) {}
 
     @FXML
-    void sortMembres(ActionEvent event) {
-
-    }
-/**/
+    void sortMembres(ActionEvent event) {}
+    //endregion
 }

@@ -29,7 +29,6 @@ import java.util.ResourceBundle;
 
 public class GestionTache implements Initializable {
 
-
     @FXML
     private Label Error;
 
@@ -67,58 +66,28 @@ public class GestionTache implements Initializable {
     private VBox taches_cards;
 
 
+    //region init
     ServiceTache st = new ServiceTache();
     Connection cnx = MyDatabase.getInstance().getCnx();
     ObservableList<String> observableTacheList = FXCollections.observableArrayList();
     FilteredList<String> filteredTacheData;
-    //region init combobox
-    //combo box init
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        //region combobox
-        loadEquipeChoiceBoxData(equipe_id);
-        loadMembreChoiceBoxData(membre_id);
-        loadStatutChoiceBoxData(statut);
-        //endregion
-
-        //region recherche tache
-        // Load initial data
-        loadTacheData(observableTacheList); // Load data from database
-
-        // Wrap observable list in a FilteredList
-        filteredTacheData = new FilteredList<>(observableTacheList, s -> true);
-        // Bind filtered data to ListView
-        ListViewTaches.setItems(filteredTacheData);
-        // Listen for search field changes
-        RechercheTache.textProperty().addListener((observable, oldValue, newValue) -> {
-            applyTacheFilter(newValue);
-        });
-        //endregion
-
-        //region sort taches
-        tacheSort.getItems().addAll("Trier par ID", "Trier par Nom","Trier par equipe");
-        tacheSort.setValue("Trier par ID"); // Default selection
-
-        sortTache.setOnAction(event -> sortTache());
-        //endregion
-    }
     //
     private void loadEquipeChoiceBoxData(ComboBox comboBox) {
 
-            String qry ="SELECT * FROM `equipe`";
-            //String qry ="SELECT u.nom FROM tache m JOIN equipe u ON m.equipe_id = u.id";
-            try {
-                Statement stm = cnx.createStatement();
-                ResultSet rs = stm.executeQuery(qry);
+        String qry ="SELECT * FROM `equipe`";
+        //String qry ="SELECT u.nom FROM tache m JOIN equipe u ON m.equipe_id = u.id";
+        try {
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
 
-                while (rs.next()){
-                    comboBox.getItems().add(rs.getInt("id")+"-"+rs.getString("nom"));
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                Error.setText(e.getMessage());
+            while (rs.next()){
+                comboBox.getItems().add(rs.getInt("id")+"-"+rs.getString("nom"));
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            Error.setText(e.getMessage());
+        }
     }
     //
     private void loadMembreChoiceBoxData(ComboBox comboBox) {
@@ -145,6 +114,33 @@ public class GestionTache implements Initializable {
     }
     //
     //endregion
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //region combobox init
+        loadEquipeChoiceBoxData(equipe_id);
+        loadMembreChoiceBoxData(membre_id);
+        loadStatutChoiceBoxData(statut);
+        //region sort taches
+        tacheSort.getItems().addAll("Trier par ID", "Trier par Nom","Trier par equipe");
+        tacheSort.setValue("Trier par ID");
+        sortTache.setOnAction(event -> sortTache());
+        //endregion
+
+        //endregion
+
+        //region recherche tache
+        loadTacheData(observableTacheList);
+        filteredTacheData = new FilteredList<>(observableTacheList, s -> true);
+        ListViewTaches.setItems(filteredTacheData);
+        RechercheTache.textProperty().addListener((observable, oldValue, newValue) -> {
+            applyTacheFilter(newValue);
+        });
+        //endregion
+
+    }
+
 
     private void add() {
         System.out.println("add started");
@@ -223,14 +219,12 @@ public class GestionTache implements Initializable {
 
     @FXML
     void AddUpdate(ActionEvent event) {
-        //if id field is empty add new task
         if(idfield.getText().equals(""))
         {
             add();
         }
         else {
             try {
-                //get in id and check if it exists
                 int id = Integer.parseInt(idfield.getText());
 
                 List<Tache> taches = getTacheById(id);
@@ -252,17 +246,13 @@ public class GestionTache implements Initializable {
                 Error.setText(e.getMessage());
             }
         }
-
-        //update();
     }
 
     @FXML
     void delete(ActionEvent event) {
         try{
-            //if id field is empty add new task
             if(idfield.getText()!="")
             {
-                //get in id and check if it exists
                 int id = Integer.parseInt(idfield.getText());
                 List<Tache> taches = getTacheById(id);
                 if(taches.isEmpty())
@@ -311,7 +301,7 @@ public class GestionTache implements Initializable {
     @FXML
     void refrech(ActionEvent event) {
         refreshTacheListView();
-        applyTacheFilter(RechercheTache.getText()); // Reapply the filter after refresh
+        applyTacheFilter(RechercheTache.getText());
     }
 
     //region recherche
@@ -320,18 +310,17 @@ public class GestionTache implements Initializable {
         try{
             List<Tache> taches = st.getAll();
             for (Tache t : taches) {
-                observableTacheList.add(t.getId()+" | "+t.getTitre()+" | "+t.getStatut()+" | "); // Change this to whatever field you want to display
+                observableTacheList.add(t.getId()+" | "+t.getTitre()+" | "+t.getStatut()+" | ");
             }
         }catch (Exception e)
         {
-            System.out.println("refrech error");
             System.out.println(e.getMessage());
             Error.setText(e.getMessage());
         }
     }
     public void refreshTacheListView() {
-        observableTacheList.clear(); // Clear existing data
-        loadTacheData(observableTacheList); // Reload data from the database
+        observableTacheList.clear();
+        loadTacheData(observableTacheList);
     }
     private void applyTacheFilter(String filterText) {
         filteredTacheData.setPredicate(item -> {
@@ -349,6 +338,7 @@ public class GestionTache implements Initializable {
     @FXML
     void sortTache(ActionEvent event) {}
 
+    /*
     private void sortTache() {
         String selectedOption = tacheSort.getValue();
 
@@ -358,17 +348,43 @@ public class GestionTache implements Initializable {
 
         if (selectedOption.equals("Trier par ID")) {
             comparator = Comparator.comparingInt(tache -> Integer.parseInt(tache.split(" \\| ")[0]));
-            System.out.println("sorting tache by id");
         } else if (selectedOption.equals("Trier par Nom")) {
             comparator = Comparator.comparing(tache -> tache.split(" \\| ")[1]);
-            System.out.println("sorting tache by name");
         }else {
             comparator = Comparator.comparingInt(tache -> Integer.parseInt(tache.split(" \\| ")[2]));
-            System.out.println("sorting tache by equipe");
         }
 
         FXCollections.sort(observableTacheList, comparator);
     }
+    /**/
+    private void sortTache() {
+        String selectedOption = tacheSort.getValue();
+
+        if (selectedOption == null) return;
+
+        System.out.println("Sorting tache by " + selectedOption);
+
+        List<String> sortedList = observableTacheList.stream()
+                .sorted((t1, t2) -> {
+                    if (selectedOption.equals("Trier par ID")) {
+                        return Integer.compare(
+                                Integer.parseInt(t1.split(" \\| ")[0]),
+                                Integer.parseInt(t2.split(" \\| ")[0])
+                        );
+                    } else if (selectedOption.equals("Trier par Nom")) {
+                        return t1.split(" \\| ")[1].compareTo(t2.split(" \\| ")[1]);
+                    } else {
+                        return Integer.compare(
+                                Integer.parseInt(t1.split(" \\| ")[2]),
+                                Integer.parseInt(t2.split(" \\| ")[2])
+                        );
+                    }
+                })
+                .toList();
+
+        observableTacheList.setAll(sortedList);
+    }
+
     //endregion
 
 

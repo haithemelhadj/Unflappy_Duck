@@ -596,11 +596,12 @@ public class GestionEquipe implements Initializable {
         String clientToken = "your-device-token";
         FirebaseNotifs.sendNotificationToDevice(clientToken, "Hello!", "This is a direct message.");
 
+        /*
+        //local notifs
         //FirebaseNotifs.sendNotificationToTopic("news", "Breaking News", "JavaFX supports Firebase!");
         EquipeNotif en=new EquipeNotif();
         en.creatingANewTrayNotification();
-        //en.SendSmS();
-
+        //en.SendSmS(); // sms notuif
         /**/
         String selectedOption = equipeSort.getValue();
         if (selectedOption == null) return;

@@ -3,7 +3,7 @@ package tn.esprit.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import tn.esprit.api.FirebaseNotifs;
+import tn.esprit.api.FirebaseNotificationSender;
 
 public class NotificationCardController {
     @FXML private TextField titleField;
@@ -17,7 +17,7 @@ public class NotificationCardController {
             String body = bodyField.getText();
 
             try {
-                FirebaseNotifs.sendNotificationToTopic("news", title, body);
+                FirebaseNotificationSender.sendNotificationToUser("news", title, body);
             } catch (Exception e) {
                 e.printStackTrace();
             }

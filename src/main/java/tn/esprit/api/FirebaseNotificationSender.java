@@ -1,15 +1,29 @@
 package tn.esprit.api;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 
-import java.io.*;
+public class FirebaseNotificationSender {
 
+    public static void sendNotificationToUser(String registrationToken, String title, String body) {
+        try {
+            FirebaseMessaging fcm = FirebaseConfig.getFirebaseMessaging();
+
+            Message message = Message.builder()
+                    .setToken(registrationToken) // Send to a single user
+                    .putData("title", title)
+                    .putData("body", body)
+                    .build();
+
+            String messageId = fcm.send(message);
+            System.out.println("Message sent successfully! ID: " + messageId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+/*
 public class FirebaseNotifs {
 
     //send Notification To a Topic
@@ -35,10 +49,9 @@ public class FirebaseNotifs {
         String response = FirebaseMessaging.getInstance().send(message);
         System.out.println("Message sent to device: " + response);
     }
-
-
 }
-
+/**/
+/*
 class TokenHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -72,3 +85,4 @@ class TokenHandler implements HttpHandler {
         return json.substring(start, end);
     }
 }
+/**/

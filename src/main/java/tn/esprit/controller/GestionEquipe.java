@@ -1,16 +1,18 @@
 package tn.esprit.controller;
 
+import com.google.firebase.FirebaseOptions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import tn.esprit.api.FirebaseNotifs;
+import tn.esprit.api.*;
+import tn.esprit.api.FirebaseNotificationSender;
 import tn.esprit.models.*;
 import tn.esprit.services.*;
 import tn.esprit.utils.MyDatabase;
-import tn.esprit.api.EquipeNotif;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -424,22 +426,27 @@ public class GestionEquipe implements Initializable {
 
     @FXML
     void AddMember(ActionEvent event) {
-        System.out.println("adding member");
+        //System.out.println("adding member");
         String[] usrsParts = UsersList.getValue().split("-", 2);
         int idUsr = Integer.parseInt(usrsParts[0]);
         String nomUsrModf = usrsParts[1];
         try {
-            System.out.println("trying to add member");
+            //System.out.println("trying to add member");
             List<MembresEquipe> mmbrsEquipes = getMembreById(idUsr);
             if(mmbrsEquipes.size()==1)
             {
                 updateMembre(idUsr);
+                sendnotif("Mise a jour equipe","votre equipe a ete mis a jour!"); // send local notif
+                //sendsms("votre equipe a ete mis a jour!");//send sms
             }
             else if(mmbrsEquipes.isEmpty())
             {
                 addMembre();
                 System.out.println("member added");
-                FirebaseNotifs.sendNotificationToDevice("","ajouté a une equipe","vous avez ete ajouté a une equipe");
+
+                sendnotif("Ajouter a l'equipe","vous avez ete ajouté a une equipe!"); // send local notif
+                //sendsms("vous eté ajouté a une equipe!");//send sms
+                //FirebaseNotifs.sendNotificationToDevice("","ajouté a une equipe","vous avez ete ajouté a une equipe");
             }
             else
             {
@@ -593,17 +600,6 @@ public class GestionEquipe implements Initializable {
     }
     /**/
     private void sortEquipes() throws Exception {
-
-        String clientToken = "your-device-token";
-        FirebaseNotifs.sendNotificationToDevice(clientToken, "Hello!", "This is a direct message.");
-
-        /*
-        //local notifs
-        //FirebaseNotifs.sendNotificationToTopic("news", "Breaking News", "JavaFX supports Firebase!");
-        EquipeNotif en=new EquipeNotif();
-        en.creatingANewTrayNotification();
-        //en.SendSmS(); // sms notuif
-        /**/
         String selectedOption = equipeSort.getValue();
         if (selectedOption == null) return;
 
@@ -654,4 +650,24 @@ public class GestionEquipe implements Initializable {
     @FXML
     void sortMembres(ActionEvent event) {}
     //endregion
+
+    public void sendnotif(String title,String body) throws Exception {
+        /*
+        FirebaseConfig config = new FirebaseConfig();
+        String clientToken = "";//config.returnCreds();
+        System.out.println("sending notif with: "+clientToken+"|"+title+"|"+body);
+        FirebaseNotificationSender.sendNotificationToUser(clientToken, title, body);
+        /*
+        //local notifs
+        //FirebaseNotifs.sendNotificationToTopic("news", "Breaking News", "JavaFX supports Firebase!");
+        /**/
+
+        SendNotification sn =new SendNotification();
+        sn.creatingANewTrayNotification();
+        /**/
+    }
+    public void sendsms(String msg) throws Exception {
+        SendSmS ss = new SendSmS();
+        ss.SendSms(msg); // sms notuif
+    }
 }

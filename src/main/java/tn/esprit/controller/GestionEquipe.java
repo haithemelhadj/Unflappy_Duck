@@ -439,6 +439,7 @@ public class GestionEquipe implements Initializable {
             {
                 addMembre();
                 System.out.println("member added");
+                FirebaseNotifs.sendNotificationToDevice("","ajouté a une equipe","vous avez ete ajouté a une equipe");
             }
             else
             {

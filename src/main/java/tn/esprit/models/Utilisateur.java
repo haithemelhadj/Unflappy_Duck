@@ -13,6 +13,7 @@ public class Utilisateur {
     private int xp;
     private Integer niveau; // Integer to allow null values
     private int xpRequis;
+    private String token;
 
 
     public Utilisateur(int id, String nom, String email, String motDePasse, userRoles role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis) {
@@ -28,6 +29,17 @@ public class Utilisateur {
         this.xpRequis = xpRequis;
     }
 
+    public Utilisateur(String nom, String email, String motDePasse, userRoles role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis) {
+        this.nom = nom;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.role = role;
+        this.bio = bio;
+        this.photoProfil = photoProfil;
+        this.xp = xp;
+        this.niveau = niveau;
+        this.xpRequis = xpRequis;
+    }
 
     public Utilisateur() {}
 
@@ -112,6 +124,14 @@ public class Utilisateur {
         this.xpRequis = xpRequis;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
         return "Utilisateur{" +
@@ -125,6 +145,7 @@ public class Utilisateur {
                 ", xp=" + xp +
                 ", niveau=" + niveau +
                 ", xpRequis=" + xpRequis +
+                //",token=" + token +
                 '}';
     }
 }

@@ -5,9 +5,10 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 public class FirebaseNotifs {
 
@@ -36,4 +37,38 @@ public class FirebaseNotifs {
     }
 
 
+}
+
+class TokenHandler implements HttpHandler {
+    @Override
+    public void handle(HttpExchange exchange) throws IOException {
+        // Get the request body
+        BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+
+        // Parse the token (assuming the token is sent as JSON)
+        String requestBody = sb.toString();
+        String token = extractTokenFromJson(requestBody); // Custom function to extract token from the JSON
+
+        // Print the token to the console (you can store it in a database)
+        System.out.println("Received token: " + token);
+
+        // Send the response back
+        String response = "Token received successfully";
+        exchange.sendResponseHeaders(200, response.getBytes().length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(response.getBytes());
+        os.close();
+    }
+
+    private String extractTokenFromJson(String json) {
+        // Simple JSON extraction for the token (you can use a library like Gson or Jackson for this)
+        int start = json.indexOf("\"token\":\"") + 9;
+        int end = json.indexOf("\"", start);
+        return json.substring(start, end);
+    }
 }

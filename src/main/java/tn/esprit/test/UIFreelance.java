@@ -39,8 +39,6 @@ public class UIFreelance extends Application {
         FirebaseConfig.initializeFirebase(); // Initialize Firebase on App Start
         primaryStage.setTitle("JavaFX Firebase Push Notification");
         primaryStage.show();
-
-
     }
 
 

@@ -15,9 +15,9 @@ public class EventDetailsController {
 
     private Evenement event;
 
-//    public void setEvent(Evenement event) {
-//
-//    }
+    public void setEvent(Evenement event) {
+        this.event = event;
+    }
 
     public EventDetailsController(Evenement event){
         this.event = event;

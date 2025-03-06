@@ -9,10 +9,7 @@
     <Label fx:id="eventDateLabel" />
     <Label fx:id="eventTimeLabel" />
     <Label fx:id="eventLocationLabel" />
-    <Label fx:id="eventCalendarLabel" />
 
     <!-- Add to My Events Button -->
     <Button onAction="#addToMyEvents" text="Ajouter à mes événements" />
-
-
 </VBox>

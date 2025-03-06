@@ -2,48 +2,20 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
 
-<AnchorPane prefHeight="590.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.EventFormController">
+<AnchorPane prefHeight="702.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.EventFormController">
 
-    <GridPane hgap="10" layoutX="50" layoutY="50" prefHeight="505.0" prefWidth="706.0" vgap="10">
-        <!-- Event Name -->
-        <Label text="Nom de l'événement :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="eventNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-        <!-- Description -->
-        <Label text="Description :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextArea fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-        <!-- Start Time -->
-        <Label text="Heure de début :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="startTimeField" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-        <!-- End Time -->
-        <Label text="Heure de fin :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <TextField fx:id="endTimeField" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-        <!-- Location Details -->
-        <Label text="Nom du lieu :" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="newLocationField" promptText="Nom du lieu" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-
-        <Label text="Adresse :" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <TextField fx:id="addressField" promptText="Adresse" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-
-        <Label text="Capacité :" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-        <TextField fx:id="capacityField" promptText="Capacité" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-
-        <!-- Calendar -->
-        <Label text="Calendrier :" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-        <DatePicker fx:id="calendarDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-
-        <!-- Save Button -->
-        <Button onAction="#saveEvent" text="Enregistrer l'événement" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-        <Button onAction="#goToAllEvents" text="Voir tous les événements" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-
+    <GridPane hgap="10" layoutX="50" layoutY="50" prefHeight="505.0" prefWidth="1100.0" vgap="10">
+        <!-- Column Constraints -->
         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
+            <!-- Left Column (Form) -->
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="300" />
+            <!-- Right Column (Map) -->
+            <ColumnConstraints hgrow="ALWAYS" minWidth="600" prefWidth="800" />
         </columnConstraints>
+
+        <!-- Row Constraints -->
         <rowConstraints>
             <RowConstraints />
             <RowConstraints />
@@ -55,8 +27,45 @@
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
+            <RowConstraints />
         </rowConstraints>
+
+        <!-- Event Name -->
+        <Label text="Nom de l'événement :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="eventNameField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+        <!-- Description -->
+        <Label text="Description :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextArea fx:id="descriptionField" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+
+        <!-- Start Time -->
+        <Label text="Heure de début :" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="startTimeField" promptText="HH:MM" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+
+        <!-- End Time -->
+        <Label text="Heure de fin :" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <TextField fx:id="endTimeField" promptText="HH:MM" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+
+        <!-- Location Details -->
+        <Label text="Nom du lieu :" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+        <TextField fx:id="newLocationField" promptText="Nom du lieu" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+
+        <Label text="Adresse :" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+        <TextField fx:id="addressField" promptText="Adresse" GridPane.columnIndex="0" GridPane.rowIndex="11" />
+
+        <Label text="Capacité :" GridPane.columnIndex="0" GridPane.rowIndex="12" />
+        <TextField fx:id="capacityField" promptText="Capacité" GridPane.columnIndex="0" GridPane.rowIndex="13" />
+
+        <!-- Calendar -->
+        <Label text="Calendrier :" GridPane.columnIndex="0" GridPane.rowIndex="14" />
+        <DatePicker fx:id="calendarDatePicker" GridPane.columnIndex="0" GridPane.rowIndex="15" />
+
+        <!-- Save Button -->
+        <Button onAction="#saveEvent" text="Enregistrer l'événement" GridPane.columnIndex="0" GridPane.rowIndex="16" />
+        <Button onAction="#goToAllEvents" text="Voir tous les événements" GridPane.columnIndex="0" GridPane.rowIndex="17" />
+
+        <!-- Map Component -->
+        <Label text="Sélectionnez un lieu sur la carte :" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <WebView fx:id="mapWebView" prefHeight="600.0" prefWidth="800.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="17" />
     </GridPane>
-
-
 </AnchorPane>

@@ -81,6 +81,16 @@ public class ServiceArticleBoutique implements IService<ArticleBoutique>{
             System.out.println(e.getMessage());
         }
     }
+    public void delete(int article) {
+        String qry = "DELETE FROM article_boutique WHERE id = ?";
+        try {
+            PreparedStatement pstm = this.cnx.prepareStatement(qry);
+            pstm.setInt(1, article);
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public List<ArticleBoutique> searchArticles(String keyword) {
         List<ArticleBoutique> articles = new ArrayList<>();
         String qry = "SELECT * FROM article_boutique WHERE nom LIKE ? OR type LIKE ?";

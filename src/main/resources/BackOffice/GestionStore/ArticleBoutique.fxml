@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="rechercher" prefHeight="571.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.UIArticleBoutique">
+<AnchorPane fx:id="rechercher" prefHeight="800.0" prefWidth="1102.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.UIArticleBoutique">
    <children>
-      <ListView fx:id="article" layoutX="213.0" layoutY="49.0" prefHeight="272.0" prefWidth="406.0" />
-      <Button fx:id="ajouter" layoutX="219.0" layoutY="392.0" mnemonicParsing="false" onAction="#ajouterArticle" text="ajouter" />
-      <Button fx:id="modifer" layoutX="369.0" layoutY="392.0" mnemonicParsing="false" onAction="#modiferArticle" text="modifer" />
-      <Button fx:id="supprimer" layoutX="521.0" layoutY="392.0" mnemonicParsing="false" onAction="#supprimerArticle" text="supprimer" />
-      <TextField fx:id="nom" layoutX="24.0" layoutY="147.0" promptText="nom" />
-      <TextField fx:id="prix" layoutX="24.0" layoutY="197.0" promptText="prix" />
-      <Button fx:id="afficher" layoutX="372.0" layoutY="467.0" mnemonicParsing="false" onAction="#afficherArticle" text="afficher" />
-      <ChoiceBox fx:id="type" layoutX="24.0" layoutY="261.0" prefWidth="150.0" />
+      <Button fx:id="ajouter" layoutX="-412.0" layoutY="414.0" mnemonicParsing="false" onAction="#ajouterArticle" text="ajouter" />
+      <Button fx:id="modifer" layoutX="-413.0" layoutY="455.0" mnemonicParsing="false" onAction="#modiferArticle" text="modifer" />
+      <Button fx:id="supprimer" layoutX="-420.0" layoutY="519.0" mnemonicParsing="false" onAction="#supprimerArticle" text="supprimer" />
+      <TextField fx:id="nom" layoutX="-460.0" layoutY="250.0" promptText="nom" />
+      <TextField fx:id="prix" layoutX="-460.0" layoutY="300.0" promptText="prix" />
+      <Button fx:id="afficher" layoutX="-413.0" layoutY="487.0" mnemonicParsing="false" onAction="#afficherArticle" text="afficher" />
+      <ChoiceBox fx:id="type" layoutX="-460.0" layoutY="364.0" prefWidth="150.0" />
 
-      <TextField fx:id="searchField" layoutX="24.0" layoutY="56.0" promptText="recherche" />
-      <Button layoutX="64.0" layoutY="81.0" mnemonicParsing="false" onAction="#recherche" text="recherche " />
-      <Button layoutX="684.0" layoutY="56.0" mnemonicParsing="false" onAction="#trier" text="tri" />
+      <TextField fx:id="searchField" layoutX="236.0" layoutY="81.0" promptText="recherche" />
+      <Button layoutX="560.0" layoutY="69.0" mnemonicParsing="false" onAction="#recherche1" text="recherche " />
+      <Button layoutX="820.0" layoutY="69.0" mnemonicParsing="false" onAction="#trier1" text="tri" />
+      <ScrollPane layoutX="174.0" layoutY="116.0" prefHeight="625.0" prefWidth="875.0">
+         <content>
+            <GridPane fx:id="itemlist" prefHeight="625.0" prefWidth="836.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <styleClass>
+                  <String fx:value="grid-pane" />
+                  <String fx:value="row" />
+               </styleClass>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <ListView fx:id="article" layoutX="-561.0" layoutY="221.0" prefHeight="272.0" prefWidth="406.0" />
    
       
    </children>

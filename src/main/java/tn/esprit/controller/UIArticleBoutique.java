@@ -1,5 +1,9 @@
 package tn.esprit.controller;
 
+import javafx.geometry.Insets;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import tn.esprit.models.ArticleBoutique;
 import tn.esprit.services.ServiceArticleBoutique;
 import javafx.event.ActionEvent;
@@ -15,9 +19,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class UIArticleBoutique implements Initializable {
@@ -37,9 +45,39 @@ public class UIArticleBoutique implements Initializable {
     @FXML
     private List<ArticleBoutique> listOfArticleBoutique;
 
+    @FXML
+    public GridPane itemlist;
+    private List<ArticleBoutique> q;
 
 
+    public void show() {
+        ServiceArticleBoutique serviceArticleBoutique = new ServiceArticleBoutique();
+        q = serviceArticleBoutique.getAll();
 
+        int col = 0;
+        int row = 1;
+        for (ArticleBoutique qzz : q) {
+
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionStore/storeItem.fxml"));
+            try {
+                AnchorPane p = fxmlLoader.load();
+                UIItemArticleController cntrll = fxmlLoader.getController();
+                cntrll.setDATA(qzz, this);
+                if (col == 3) {
+                    col = 0;
+                    row++;
+                }
+                itemlist.add(p, col++, row);
+                GridPane.setMargin(p, new Insets(10));
+                //  itemlist.getChildren().add(p);
+            } catch (
+                    IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
+    }
 
 
 
@@ -51,10 +89,15 @@ public class UIArticleBoutique implements Initializable {
         serviceArticleBoutique.add(articleBoutique);
         afficherArticle(actionEvent);
     }
+    public void afficherArticle(ActionEvent actionEvent) {
+        listOfArticleBoutique = new ServiceArticleBoutique().getAll();
+        article.getItems().clear();
+        article.getItems().addAll(listOfArticleBoutique);
+    }
 
     public void modiferArticle(ActionEvent actionEvent) {
         ServiceArticleBoutique serviceArticleBoutique = new ServiceArticleBoutique();
-        ArticleBoutique articleBoutique = article.getSelectionModel().getSelectedItem();
+       ArticleBoutique articleBoutique = article.getSelectionModel().getSelectedItem();
 
 
 
@@ -76,14 +119,10 @@ public class UIArticleBoutique implements Initializable {
 
     public void supprimerArticle(ActionEvent actionEvent) {
         article.getSelectionModel().getSelectedItems().forEach(i -> new ServiceArticleBoutique().delete(i));
-        afficherArticle(actionEvent);
+        show();
     }
 
-    public void afficherArticle(ActionEvent actionEvent) {
-        listOfArticleBoutique = new ServiceArticleBoutique().getAll();
-        article.getItems().clear();
-        article.getItems().addAll(listOfArticleBoutique);
-    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -95,8 +134,29 @@ public class UIArticleBoutique implements Initializable {
             type.setValue(null);
         });
 
+        show();
 
 
+    }
+    private void displayArticle(List<ArticleBoutique> articleBoutiques) {
+        int col = 0;
+        int row = 1;
+        for (ArticleBoutique qzz : articleBoutiques) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FrontOffice/GestionStore/storeitem.fxml"));
+            try {
+                AnchorPane p = fxmlLoader.load();
+                UIItemArticleController cntrll = fxmlLoader.getController();
+                cntrll.setDATA(qzz, this);
+                if (col == 3) {
+                    col = 0;
+                    row++;
+                }
+                itemlist.add(p, col++, row);
+                GridPane.setMargin(p, new Insets(10));
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
 
     }
 
@@ -128,6 +188,26 @@ public class UIArticleBoutique implements Initializable {
     public void trier(ActionEvent actionEvent) {
         article.getItems().clear();
         article.getItems().addAll( listOfArticleBoutique.stream().sorted((a,b)->a.getNom().compareTo(b.getNom())).toList());
+
+    }
+    public void recherche1(ActionEvent actionEvent) {
+        itemlist.getChildren().clear();  // Clear all items from the GridPane
+        List<ArticleBoutique> filteredArticles = listOfArticleBoutique.stream()
+                .filter(a -> a.getNom().startsWith(searchField.getText()))
+                .toList();
+        displayArticle(filteredArticles);  // Use displayArticle to add filtered items
+
+
+    }
+
+
+    public void trier1(ActionEvent actionEvent) {
+        itemlist.getChildren().clear();  // Clear all items from the GridPane
+        List<ArticleBoutique> sortedArticles = listOfArticleBoutique.stream()
+                .sorted((a, b) -> a.getNom().compareTo(b.getNom()))
+                .toList();
+        displayArticle(sortedArticles);  // Use displayArticle to add sorted items
+
 
     }
 }

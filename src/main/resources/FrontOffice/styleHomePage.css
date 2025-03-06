@@ -1,51 +1,56 @@
-/* General Styling */
 .root {
-    -fx-background-color: black;
+    -fx-primary: #2D46B9;
+    -fx-secondary: #5E17EB;
+    -fx-accent: #FF3366;
+    -fx-background: #0A1128;
+    -fx-text: #F8F9FA;
+    -fx-gradient: linear-gradient(to bottom, -fx-secondary, -fx-primary);
+    -fx-font-family: 'Poppins', 'Segoe UI', sans-serif;
+    -fx-neon-glow: dropshadow(gaussian, -fx-accent, 10, 0, 0, 0);
+    -fx-button-hover-glow: dropshadow(gaussian, -fx-primary, 5, 0, 0, 0);
 }
 
-/* Navigation Bar Styling */
 .hbox {
-    -fx-background-color: black;
+    -fx-background-color: -fx-background;
     -fx-padding: 15px;
 }
 
 .hbox Label {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-text;
     -fx-font-size: 18px;
     -fx-font-weight: bold;
 }
 
 .hbox Button {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-text;
     -fx-background-color: transparent;
     -fx-font-size: 14px;
 }
 .hbox Button:hover {
-    -fx-text-fill: yellow;
+    -fx-text-fill: -fx-accent;
 }
 
-/* Main Content Styling */
 .stack-pane {
     -fx-background-image: url('backgroundHomePage.jpg');
     -fx-background-size: cover;
 }
 
 .vbox Label {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-text;
     -fx-font-size: 36px;
     -fx-font-weight: bold;
     -fx-alignment: center;
 }
 
-/* Button Styling */
 .vbox Button {
-    -fx-background-color: yellow;
-    -fx-text-fill: black;
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: -fx-background;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
     -fx-padding: 10px 20px;
     -fx-background-radius: 5px;
 }
 .vbox Button:hover {
-    -fx-background-color: gold;
+    -fx-background-color: -fx-primary;
+    -fx-effect: -fx-button-hover-glow;
 }

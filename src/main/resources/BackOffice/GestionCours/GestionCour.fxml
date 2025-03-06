@@ -6,13 +6,13 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             xmlns="http://javafx.com/javafx/19"
             fx:controller="tn.esprit.controller.QuizController"
-            stylesheets="@../../FrontOffice/GestionCours/styles.css"
+            stylesheets="@/BackOffice/GestionCours/styles.css"
             prefWidth="900" prefHeight="600">
 
     <!-- TOP: Title -->
     <top>
         <HBox alignment="CENTER" styleClass="main-container">
-            <Label text="Course Management System" styleClass="title" />
+            <Label text="Système de gestion de cours" styleClass="title" />
         </HBox>
     </top>
 
@@ -34,40 +34,40 @@
                             </columnConstraints>
 
                             <!-- Question Number -->
-                            <Label text="Question Number:" styleClass="form-label"/>
+                            <Label text="Numéro de question:" styleClass="form-label"/>
                             <TextField fx:id="questionNumberField"
                                        styleClass="text-field"
                                        GridPane.columnIndex="1" />
 
                             <!-- Question Text -->
-                            <Label text="Question Text:" styleClass="form-label" GridPane.rowIndex="1"/>
+                            <Label text="Texte de la question:" styleClass="form-label" GridPane.rowIndex="1"/>
                             <TextField fx:id="questionField"
                                        styleClass="text-field"
                                        GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                             <!-- Answers -->
-                            <Label text="Answer 1 (A):" styleClass="form-label" GridPane.rowIndex="2"/>
+                            <Label text="Reponse 1 (A):" styleClass="form-label" GridPane.rowIndex="2"/>
                             <TextField fx:id="answer1Field"
                                        styleClass="text-field"
                                        GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                            <Label text="Answer 2 (B):" styleClass="form-label" GridPane.rowIndex="3"/>
+                            <Label text="Reponse 2 (B):" styleClass="form-label" GridPane.rowIndex="3"/>
                             <TextField fx:id="answer2Field"
                                        styleClass="text-field"
                                        GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                            <Label text="Answer 3 (C):" styleClass="form-label" GridPane.rowIndex="4"/>
+                            <Label text="Reponse 3 (C):" styleClass="form-label" GridPane.rowIndex="4"/>
                             <TextField fx:id="answer3Field"
                                        styleClass="text-field"
                                        GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-                            <Label text="Answer 4 (D):" styleClass="form-label" GridPane.rowIndex="5"/>
+                            <Label text="Reponse 4 (D):" styleClass="form-label" GridPane.rowIndex="5"/>
                             <TextField fx:id="answer4Field"
                                        styleClass="text-field"
                                        GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
                             <!-- Correct Answer ComboBox -->
-                            <Label text="Correct Answer:" styleClass="form-label" GridPane.rowIndex="6"/>
+                            <Label text="Reponse Correcte:" styleClass="form-label" GridPane.rowIndex="6"/>
                             <ComboBox fx:id="correctAnswerCombo"
                                       styleClass="combo-box"
                                       GridPane.columnIndex="1" GridPane.rowIndex="6" />
@@ -89,7 +89,7 @@
                                    promptText="chercher questions..."
                                    styleClass="text-field"/>
                         <Button text="Recherche" onAction="#handleSearch" styleClass="button"/>
-                        <ComboBox fx:id="sortComboBox" promptText="Sort by" onAction="#handleSort" styleClass="combo-box"/>
+                        <ComboBox fx:id="sortComboBox" promptText="Trier par" onAction="#handleSort" styleClass="combo-box"/>
                     </HBox>
 
                     <!-- Questions List -->

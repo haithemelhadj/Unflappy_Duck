@@ -72,7 +72,7 @@
                             </VBox>
 
                             <!-- Register Form -->
-                            <VBox fx:id="registerForm" spacing="15.0" styleClass="form-panel" visible="false" managed="false">
+                            <VBox fx:id="registerForm" spacing="15.0" styleClass="form-panel" visible="false">
                                 <VBox spacing="15.0" styleClass="input-container">
                                     <children>
                                         <!-- Full Name -->

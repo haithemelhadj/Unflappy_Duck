@@ -98,7 +98,6 @@ public class StartupController implements Initializable {
                 showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome " + utilisateur.getNom() + "!");
                 Session.start(utilisateur);
                 callback.call(); // Trigger next step (e.g., open main app)
-
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username/email or password.");
             }

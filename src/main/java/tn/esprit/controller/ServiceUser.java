@@ -7,7 +7,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tn.esprit.models.Service;
-import tn.esprit.models.Utilisateur;
 import tn.esprit.services.ServiceService;
 
 import java.lang.reflect.Field;
@@ -27,7 +26,6 @@ public class ServiceUser implements Initializable {
 
     private List<Service> serviceList;
     private final ServiceService ss = new ServiceService();
-
 
 
     @Override

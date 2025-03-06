@@ -1,16 +1,11 @@
 package tn.esprit.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import tn.esprit.models.Equipe;
-import tn.esprit.models.MembresEquipe;
 import tn.esprit.models.Tache;
 //import tn.esprit.models.enums.Statut;
 import tn.esprit.services.ServiceTache;
@@ -23,21 +18,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class GestionTache implements Initializable {
 
+    @FXML
+    private TextField idfield;
 
     @FXML
-    private Label Error;
-
-    @FXML
-    private ListView<String> ListViewTaches;
-
-    @FXML
-    private TextField RechercheTache;
+    private TextField titre;
 
     @FXML
     private TextField description;
@@ -46,66 +36,31 @@ public class GestionTache implements Initializable {
     private ComboBox<String> equipe_id;
 
     @FXML
-    private TextField idfield;
-
-    @FXML
     private ComboBox<String> membre_id;
-
-    @FXML
-    private Button sortTache;
 
     @FXML
     private ComboBox<String> statut;
 
     @FXML
-    private ComboBox<String> tacheSort;
-
-    @FXML
-    private TextField titre;
-
-    @FXML
     private VBox taches_cards;
+
+    @FXML
+    private Label Error;
 
 
     ServiceTache st = new ServiceTache();
-    Connection cnx = MyDatabase.getInstance().getCnx();
-    ObservableList<String> observableTacheList = FXCollections.observableArrayList();
-    FilteredList<String> filteredTacheData;
     //region init combobox
     //combo box init
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        //region combobox
         loadEquipeChoiceBoxData(equipe_id);
         loadMembreChoiceBoxData(membre_id);
         loadStatutChoiceBoxData(statut);
-        //endregion
-
-        //region recherche tache
-        // Load initial data
-        loadTacheData(observableTacheList); // Load data from database
-
-        // Wrap observable list in a FilteredList
-        filteredTacheData = new FilteredList<>(observableTacheList, s -> true);
-        // Bind filtered data to ListView
-        ListViewTaches.setItems(filteredTacheData);
-        // Listen for search field changes
-        RechercheTache.textProperty().addListener((observable, oldValue, newValue) -> {
-            applyTacheFilter(newValue);
-        });
-        //endregion
-
-        //region sort taches
-        tacheSort.getItems().addAll("Trier par ID", "Trier par Nom","Trier par equipe");
-        tacheSort.setValue("Trier par ID"); // Default selection
-
-        sortTache.setOnAction(event -> sortTache());
-        //endregion
     }
     //
     private void loadEquipeChoiceBoxData(ComboBox comboBox) {
 
+            Connection cnx = MyDatabase.getInstance().getCnx();
             String qry ="SELECT * FROM `equipe`";
             //String qry ="SELECT u.nom FROM tache m JOIN equipe u ON m.equipe_id = u.id";
             try {
@@ -123,6 +78,7 @@ public class GestionTache implements Initializable {
     //
     private void loadMembreChoiceBoxData(ComboBox comboBox) {
 
+        Connection cnx = MyDatabase.getInstance().getCnx();
         String qry ="SELECT * FROM membre_equipe m JOIN utilisateur u ON m.utilisateur_id = u.id WHERE m.role = 'membre'";
 
         try {
@@ -199,6 +155,7 @@ public class GestionTache implements Initializable {
 
     private List<Tache> getTacheById(int id) {
         List<Tache> taches = new ArrayList<>();
+        Connection cnx = MyDatabase.getInstance().getCnx();
         String qry="SELECT * FROM `tache` WHERE `id` = "+ id;
         try{
             Statement stm = cnx.createStatement();
@@ -288,7 +245,7 @@ public class GestionTache implements Initializable {
     }
 
     @FXML
-    void refrechByCard(ActionEvent event) {
+    void refrech(ActionEvent event) {
         try{
             List<Tache> taches = st.getAll();
             taches_cards.getChildren().clear();
@@ -308,68 +265,7 @@ public class GestionTache implements Initializable {
             Error.setText(e.getMessage());
         }
     }
-    @FXML
-    void refrech(ActionEvent event) {
-        refreshTacheListView();
-        applyTacheFilter(RechercheTache.getText()); // Reapply the filter after refresh
-    }
 
-    //region recherche
-
-    private void loadTacheData(ObservableList<String> list) {
-        try{
-            List<Tache> taches = st.getAll();
-            for (Tache t : taches) {
-                observableTacheList.add(t.getId()+" | "+t.getTitre()+" | "+t.getStatut()+" | "); // Change this to whatever field you want to display
-            }
-        }catch (Exception e)
-        {
-            System.out.println("refrech error");
-            System.out.println(e.getMessage());
-            Error.setText(e.getMessage());
-        }
-    }
-    public void refreshTacheListView() {
-        observableTacheList.clear(); // Clear existing data
-        loadTacheData(observableTacheList); // Reload data from the database
-    }
-    private void applyTacheFilter(String filterText) {
-        filteredTacheData.setPredicate(item -> {
-            if (filterText == null || filterText.isEmpty()) {
-                return true;
-            }
-            String lowerCaseFilter = filterText.toLowerCase();
-            return item.toLowerCase().contains(lowerCaseFilter);
-        });
-    }
-
-    //endregion
-
-    //region sort
-    @FXML
-    void sortTache(ActionEvent event) {}
-
-    private void sortTache() {
-        String selectedOption = tacheSort.getValue();
-
-        if (selectedOption == null) return;
-
-        Comparator<String> comparator;
-
-        if (selectedOption.equals("Trier par ID")) {
-            comparator = Comparator.comparingInt(tache -> Integer.parseInt(tache.split(" \\| ")[0]));
-            System.out.println("sorting tache by id");
-        } else if (selectedOption.equals("Trier par Nom")) {
-            comparator = Comparator.comparing(tache -> tache.split(" \\| ")[1]);
-            System.out.println("sorting tache by name");
-        }else {
-            comparator = Comparator.comparingInt(tache -> Integer.parseInt(tache.split(" \\| ")[2]));
-            System.out.println("sorting tache by equipe");
-        }
-
-        FXCollections.sort(observableTacheList, comparator);
-    }
-    //endregion
 
 
 }

@@ -3,45 +3,30 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.web.WebView?>
 
-<!--suppress ALL -->
 <AnchorPane prefHeight="296.0" prefWidth="643.0" stylesheets="@styleHomePage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllerlogin">
     <children>
-        <TabPane layoutX="50" layoutY="50" prefWidth="556.0" styleClass="tabPane">
-            <!-- Login Tab -->
-            <Tab text="Login">
-                <AnchorPane>
-                    <VBox alignment="CENTER" spacing="10" layoutX="10" layoutY="10" styleClass="vbox">
-                        <Label styleClass="label" text="Login" />
-                        <TextField fx:id="loginUsernameOrEmailField" promptText="Username or Email" />
-                        <PasswordField fx:id="loginPasswordField" promptText="Password" />
-                        <Button text="Login with Google" onAction="#handleGoogleLogin"/>
-                        <Button text="Login with Facebook" onAction="#handleFacebookLogin"/>
-                        <Button onAction="#handleLogin" styleClass="button" text="Login" />
-                        <WebView fx:id="captchaView" layoutX="20" layoutY="300" prefHeight="100" prefWidth="300"/>
-                    </VBox>
-                </AnchorPane>
-            </Tab>
+        <HBox layoutX="50" layoutY="50" prefWidth="556.0" spacing="20" styleClass="hbox">
+            <!-- StartupController Section -->
+            <VBox alignment="CENTER" spacing="10" styleClass="vbox">
+                <Label styleClass="label" text="Login" />
+                <TextField fx:id="loginUsernameOrEmailField" promptText="Username or Email" />
+                <PasswordField fx:id="loginPasswordField" promptText="Password" />
+                <Button onAction="#handleLogin" styleClass="button" text="Login" />
+            </VBox>
 
-            <!-- Create Account Tab -->
-            <Tab text="Create Account">
-                <AnchorPane>
-                    <VBox alignment="CENTER" spacing="10" layoutX="10" layoutY="10" styleClass="vbox">
-                        <Label styleClass="label" text="Create Account" />
-                        <TextField fx:id="createNameField" promptText="Name" />
-                        <TextField fx:id="createEmailField" promptText="Email" />
-                        <PasswordField fx:id="createPasswordField" promptText="New Password" />
-                        <Button onAction="#handleCreateAccount" styleClass="button" text="Create Account" />
-                        <WebView fx:id="captchaView" layoutX="20" layoutY="300" prefHeight="100" prefWidth="300"/>
-                    </VBox>
-                </AnchorPane>
-            </Tab>
-        </TabPane>
+            <!-- Create Account Section -->
+            <VBox alignment="CENTER" spacing="10" styleClass="vbox">
+                <Label styleClass="label" text="Create Account" />
+                <TextField fx:id="createNameField" promptText="Name" />
+                <TextField fx:id="createEmailField" promptText="Email" />
+                <PasswordField fx:id="createPasswordField" promptText="New Password" />
+                <Button onAction="#handleCreateAccount" styleClass="button" text="Create Account" />
+            </VBox>
+        </HBox>
     </children>
 </AnchorPane>

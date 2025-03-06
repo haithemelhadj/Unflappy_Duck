@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="FullborderPane" prefHeight="642.0" prefWidth="1234.0" stylesheets="@FrontOffice/styleHomePage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.FrontController">
+<BorderPane fx:id="FullborderPane" prefHeight="642.0" prefWidth="1234.0" stylesheets="@FrontOffice/styleHomePage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.FrontController">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="15" styleClass="nav-bar">
@@ -55,9 +55,6 @@
             <Region HBox.hgrow="ALWAYS" />
 
             <HBox alignment="CENTER" spacing="5" styleClass="nav-buttons">
-                <Button styleClass="nav-button" text="Services" />
-                <Button styleClass="nav-button" text="À Propos" />
-                <Button styleClass="nav-button" text="Contact" />
                 <Button onAction="#listEvents" styleClass="nav-button" text="Billets" />
                 <Button onAction="#createEvent" styleClass="nav-button" text="Créer un Événement" />
                 <Button onAction="#passQuiz" styleClass="nav-button" text="Passer un Test" />

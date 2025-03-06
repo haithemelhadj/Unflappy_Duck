@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.lang.String?>
+<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.api.ChatbotController">
+    <stylesheets>
+
+        <String fx:value="@../chatbot.css" />
+
+    </stylesheets>
+
+    <TextArea fx:id="chatArea" editable="false" prefHeight="400.0" prefWidth="600.0"  styleClass="chat-content"/>
+    <TextField fx:id="inputField" onKeyPressed="#handleKeyPress"  onAction="#sendMessage"/>
+    <Button text="Send" onAction="#sendMessage" />
+</VBox>

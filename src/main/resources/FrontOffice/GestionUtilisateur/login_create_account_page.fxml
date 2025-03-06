@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.web.WebView?>
 <AnchorPane prefHeight="296.0" prefWidth="643.0" stylesheets="@styleHomePage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllerlogin">
     <children>
         <HBox layoutX="50" layoutY="50" prefWidth="556.0" spacing="20" styleClass="hbox">
@@ -16,9 +17,13 @@
                 <Label styleClass="label" text="Login" />
                 <TextField fx:id="loginUsernameOrEmailField" promptText="Username or Email" />
                 <PasswordField fx:id="loginPasswordField" promptText="Password" />
+                <Button text="Login with Google" onAction="#handleGoogleLogin"/>
+                <Button text="Login with Facebook" onAction="#handleFacebookLogin"/>
+
+
                 <Button onAction="#handleLogin" styleClass="button" text="Login" />
             </VBox>
-
+            <WebView fx:id="captchaView" layoutX="20" layoutY="300" prefHeight="100" prefWidth="300"/>
             <!-- Create Account Section -->
             <VBox alignment="CENTER" spacing="10" styleClass="vbox">
                 <Label styleClass="label" text="Create Account" />

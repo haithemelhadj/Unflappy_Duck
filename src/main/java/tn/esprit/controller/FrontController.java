@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FrontController implements Initializable {
+public class    FrontController implements Initializable {
     @FXML
     private BorderPane borderPane;
     @FXML

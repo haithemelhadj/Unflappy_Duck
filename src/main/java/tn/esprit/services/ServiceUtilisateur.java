@@ -16,6 +16,18 @@ public class ServiceUtilisateur {
         this.connection = MyDatabase.getInstance().getCnx();
     }
 
+    public boolean emailExists(String email) throws SQLException {
+        String query = "SELECT COUNT(*) FROM utilisateurs WHERE email = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
+    }
+
     // logique zidane utilisateur
     public void ajouterUtilisateur(Utilisateur utilisateur) throws SQLException {
         String query = "INSERT INTO utilisateur (nom, email, mot_de_passe, role, bio, photo_profil, xp, niveau, xp_requis) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";

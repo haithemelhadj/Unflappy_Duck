@@ -58,6 +58,8 @@
                                         </VBox>
 
                                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" styleClass="action-button login-button" text="Se connecter" />
+                                        <Button text="Login with Google" onAction="#handleGoogleLogin"/>
+                                        <Button text="Login with Facebook" onAction="#handleFacebookLogin"/>
 
                                         <Label styleClass="link-label" text="Mot de passe oublié ?" />
 
@@ -73,6 +75,7 @@
                             <VBox fx:id="registerForm" spacing="15.0" styleClass="form-panel" visible="false" managed="false">
                                 <VBox spacing="15.0" styleClass="input-container">
                                     <children>
+                                        <!-- Full Name -->
                                         <VBox spacing="5.0">
                                             <children>
                                                 <Label styleClass="field-label" text="Nom complet" />
@@ -80,6 +83,7 @@
                                             </children>
                                         </VBox>
 
+                                        <!-- Email -->
                                         <VBox spacing="5.0">
                                             <children>
                                                 <Label styleClass="field-label" text="Email" />
@@ -87,6 +91,7 @@
                                             </children>
                                         </VBox>
 
+                                        <!-- Password -->
                                         <VBox spacing="5.0">
                                             <children>
                                                 <Label styleClass="field-label" text="Mot de passe" />
@@ -94,9 +99,20 @@
                                             </children>
                                         </VBox>
 
-                                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#createAccount" styleClass="action-button create-button" text="Créer un compte" />
+                                        <!-- Password Confirmation -->
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label styleClass="field-label" text="Confirmez le mot de passe" />
+                                                <PasswordField fx:id="confirmPasswordField" promptText="Confirmez votre mot de passe" styleClass="text-input" />
+                                            </children>
+                                        </VBox>
 
+                                        <!-- CAPTCHA -->
                                         <WebView fx:id="registerCaptchaView" prefHeight="100" prefWidth="300"/>
+
+                                        <!-- Create Account Button -->
+                                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                                                onAction="#createAccount" styleClass="action-button create-button" text="Créer un compte" />
                                     </children>
                                     <padding>
                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

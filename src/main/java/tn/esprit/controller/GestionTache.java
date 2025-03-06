@@ -97,7 +97,7 @@ public class GestionTache implements Initializable {
         //endregion
 
         //region sort taches
-        tacheSort.getItems().addAll("Trier par ID", "Trier par Nom","Trier par equipe");
+        tacheSort.getItems().addAll("Trier par ID", "Trier par Nom");
         tacheSort.setValue("Trier par ID"); // Default selection
 
         sortTache.setOnAction(event -> sortTache());

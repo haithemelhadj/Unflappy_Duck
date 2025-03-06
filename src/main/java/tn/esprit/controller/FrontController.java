@@ -37,7 +37,7 @@ public class FrontController implements Initializable {
 
     @FXML
     public void goToStore(ActionEvent actionEvent) throws IOException{
-        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionStore/Store.fxml")).load());
+        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionStore/ArticleBoutique.fxml")).load());
     }
 
     @FXML

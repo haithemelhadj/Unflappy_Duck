@@ -46,12 +46,12 @@ public class ProfileController {
 
     @FXML
     public void handleSaveProfile() {
-        // Here, you'd handle saving the user data
+
         String name = nameTextField.getText();
         String email = emailTextField.getText();
         String bio = bioTextArea.getText();
 
-        // Save the updated profile information and profile image (if uploaded)
+
         System.out.println("Profile saved for user: " + name);
     }
 }

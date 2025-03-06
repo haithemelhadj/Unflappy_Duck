@@ -6,8 +6,8 @@ import java.util.UUID;
 
 public class ServiceSession {
 
-    private static final Map<String, String> sessionStore = new HashMap<>(); // In-memory session store
-    private static final int SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes session timeout
+    private static final Map<String, String> sessionStore = new HashMap<>();
+    private static final int SESSION_TIMEOUT = 30 * 60 * 1000;
 
 
     public static String createSession(String userId) {

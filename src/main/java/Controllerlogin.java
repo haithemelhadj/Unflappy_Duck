@@ -1,5 +1,6 @@
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.sun.javafx.iio.ImageLoader;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -20,6 +21,7 @@ import java.sql.SQLException;
 
 public class Controllerlogin {
 
+    public WebView captchaView2;
     @FXML
     private TextField loginUsernameOrEmailField;
 
@@ -50,22 +52,33 @@ public class Controllerlogin {
         String password = loginPasswordField.getText();
 
         if (usernameOrEmail.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "StartupController Error", "Please enter both username/email and password.");
+            showAlert(Alert.AlertType.WARNING, "Login Error", "Please enter both username/email and password.");
+            return;
+        }
+
+        // Check if the input is in email format
+        if (usernameOrEmail.contains("@") && !isValidEmail(usernameOrEmail)) {
+            showAlert(Alert.AlertType.WARNING, "Login Error", "Please enter a valid email address.");
             return;
         }
 
         try {
             Utilisateur utilisateur = serviceUtilisateur.loginUtilisateur(usernameOrEmail, password);
             if (utilisateur != null) {
-                showAlert(Alert.AlertType.INFORMATION, "StartupController Success", "Welcome " + utilisateur.getNom() + "!");
+                showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome " + utilisateur.getNom() + "!");
                 redirectToHomePage(utilisateur);
             } else {
-                showAlert(Alert.AlertType.ERROR, "StartupController Failed", "Invalid username/email or password.");
+                showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username/email or password.");
             }
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Error accessing the database.");
             e.printStackTrace();
         }
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(emailRegex);
     }
 
     // Handle account creation action
@@ -77,6 +90,11 @@ public class Controllerlogin {
 
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Account Creation Error", "Please fill out all fields.");
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            showAlert(Alert.AlertType.WARNING, "Account Creation Error", "Please enter a valid email address.");
             return;
         }
 
@@ -99,6 +117,7 @@ public class Controllerlogin {
             e.printStackTrace();
         }
     }
+
 
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
@@ -151,12 +170,12 @@ public class Controllerlogin {
     }
 
     private void openBrowser(String url) {
-        // Use JavaFX WebView to open the OAuth login page
+
         WebView webView = new WebView();
         WebEngine webEngine = webView.getEngine();
         webEngine.load(url);
 
-        // After login, handle redirect and fetch token
+
         webEngine.locationProperty().addListener((obs, oldLocation, newLocation) -> {
             if (newLocation.contains("code=")) {
                 String code = newLocation.split("code=")[1];
@@ -203,7 +222,7 @@ public class Controllerlogin {
 
 
     private void handleLoginSuccess(String token) {
-        // Use token to retrieve user information
+
         System.out.println("Login successful with token: " + token);
     }
 
@@ -221,6 +240,8 @@ public class Controllerlogin {
     public void initialize() {
         WebEngine captchaEngine = captchaView.getEngine();
         captchaEngine.load("https://www.google.com/recaptcha/api/fallback?k=6Le2wuoqAAAAALRX6Ma4Ya_KS81cukJMp2SVglQA");
+
+
     }
 
     // Method to verify CAPTCHA response

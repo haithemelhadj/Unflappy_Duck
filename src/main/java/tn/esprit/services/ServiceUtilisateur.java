@@ -145,15 +145,19 @@ public class ServiceUtilisateur {
         return null;
     }
 
-    // New method to get the currently logged-in user
+
     public Utilisateur getLoggedInUser() {
         return loggedInUser;
     }
 
-    // You can implement a logout method to clear the logged-in user
+
     public void logout() {
         loggedInUser = null;
     }
 
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(emailRegex);
+    }
 
 }

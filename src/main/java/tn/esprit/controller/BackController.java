@@ -31,7 +31,11 @@ public class BackController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        try {
+            Router.borderPaneCenterInsert(coursBorderPane, "/BackOffice/GestionCours/GestionCour.fxml");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void show_article(ActionEvent actionEvent) throws IOException {
@@ -41,4 +45,8 @@ public class BackController implements Initializable {
     public void show_panier(ActionEvent actionEvent) throws IOException {
         Router.borderPaneCenterInsert(storeBorderPane,"/BackOffice/GestionStore/Panier.fxml");
     }
+
+
+
+
 }

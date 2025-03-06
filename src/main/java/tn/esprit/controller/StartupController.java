@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import tn.esprit.utils.Session;
 
 public class StartupController implements Initializable {
 
@@ -95,6 +96,7 @@ public class StartupController implements Initializable {
             Utilisateur utilisateur = serviceUtilisateur.loginUtilisateur(usernameOrEmail, password);
             if (utilisateur != null) {
                 showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome " + utilisateur.getNom() + "!");
+                Session.start(utilisateur);
                 callback.call(); // Trigger next step (e.g., open main app)
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username/email or password.");

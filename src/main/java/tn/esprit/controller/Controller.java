@@ -9,14 +9,14 @@ public class Controller {
             if (Session.getActiveUser().getRole() == userRoles.admin)
                 Router.navigateTo("/BackOffice/backController.fxml", null);
             else
-                Router.navigateTo("/FrontOffice/homePage.fxml", null);
+                Router.navigateTo("/homePage.fxml", null);
         }
         else
             Router.navigateTo("/startupWindow.fxml", "StartupController", new StartupController(()->{
                 if (Session.getActiveUser().getRole() == userRoles.admin)
                     Router.navigateTo("/BackOffice/backController.fxml", null);
                 else
-                    Router.navigateTo("/FrontOffice/homePage.fxml", null);
+                    Router.navigateTo("/homePage.fxml", null);
             }
             ));
     }

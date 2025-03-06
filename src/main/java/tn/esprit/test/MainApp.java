@@ -1,5 +1,6 @@
 package tn.esprit.test;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,23 +11,15 @@ import java.io.IOException;
 
 public class MainApp extends Application {
 
-    public static void main(String[] args) {
+    public static void main(MysqlxDatatypes.Scalar.String[] args) {
         launch(args);
+    }
+
+    private static void launch(MysqlxDatatypes.Scalar.String[] args) {
     }
 
     @Override
     public void start(Stage primaryStage) {
 
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionUtilisateur/UserProfile.fxml"));
-        try {
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("creation de compte");
-            primaryStage.show();
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
     }
 }

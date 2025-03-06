@@ -13,48 +13,65 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FrontController implements Initializable {
+public class    FrontController implements Initializable {
     @FXML
     private BorderPane borderPane;
     @FXML
     private MenuButton freelancerMenu;
 
+    @FXML
     public void listEvents(ActionEvent actionEvent) throws IOException {
         Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEvenement/UserEventsView.fxml");
     }
 
+    @FXML
     public void createEvent(ActionEvent actionEvent) throws IOException{
         Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEvenement/event_form.fxml");
     }
 
+    @FXML
     public void passQuiz(ActionEvent actionEvent) throws IOException{
         Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionCours/quiz.fxml");
 
     }
 
+    @FXML
     public void goToStore(ActionEvent actionEvent) throws IOException{
         borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionStore/ArticleBoutique.fxml")).load());
     }
 
+    @FXML
     public void goToMarket(ActionEvent actionEvent) throws IOException{
         Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Market2.fxml");
 
     }
 
+    @FXML
     public void goToTeams(ActionEvent actionEvent) throws IOException{
         Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEquipe/GestionEquipe.fxml");
 
     }
 
+    @FXML
+    public void goToTaches(ActionEvent actionEvent) throws IOException{
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEquipe/GestionTache.fxml");
+    }
+
+    @FXML
     public void goToSettings(ActionEvent actionEvent) throws IOException{
 //        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/homePage.fxml")).load());
     }
 
+    @FXML
     public void goToMyList(ActionEvent actionEvent) throws IOException {
         if (Session.getActiveUser().getRole().equals(userRoles.freelancer))
             Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Service.fxml");
         else if (Session.getActiveUser().getRole().equals(userRoles.organisateur))
             Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Offre.fxml");
+    }
+    @FXML
+    public void openChatbot(ActionEvent actionEvent) throws IOException {
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionUtilisateur/ChatbotView.fxml");
     }
 
     @Override

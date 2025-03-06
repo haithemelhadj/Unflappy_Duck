@@ -120,6 +120,13 @@ public class GestionEquipe implements Initializable {
         });
         //endregion
 
+        //region sort equipe
+        equipeSort.getItems().addAll("Trier par ID", "Trier par Nom");
+        equipeSort.setValue("Trier par ID"); // Default selection
+
+        sortEquipe.setOnAction(event -> sortEquipes());
+        //endregion
+
         //region recherche membre
         // Load initial data
         loadMembreData(observableMembreList); // Load data from database
@@ -131,13 +138,6 @@ public class GestionEquipe implements Initializable {
         RechercheMembre.textProperty().addListener((observable, oldValue, newValue) -> {
             applyMemberFilter(newValue);
         });
-        //endregion
-
-        //region sort equipe
-        equipeSort.getItems().addAll("Trier par ID", "Trier par Nom");
-        equipeSort.setValue("Trier par ID"); // Default selection
-
-        sortEquipe.setOnAction(event -> sortEquipes());
         //endregion
 
         //region sort Membre

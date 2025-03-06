@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import tn.esprit.models.Question;
 import tn.esprit.services.ServiceQuestion;
+import tn.esprit.api.QuizApiClient;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
@@ -167,6 +168,22 @@ public class QuizController {
         }
     }
 
+    @FXML
+    private void handleImportApi() {
+        try {
+            QuizApiClient apiClient = new QuizApiClient();
+            List<Question> importedQuestions = apiClient.fetchQuestions();
+            // Add each fetched question via the service layer
+            for (Question q : importedQuestions) {
+                serviceQuestion.addQuestion(q);
+            }
+            loadQuestions();
+            showAlert("Success", "Questions imported successfully from API.");
+        } catch (Exception e) {
+            showAlert("Error", "Failed to import questions from API: " + e.getMessage());
+        }
+    }
+
     private boolean validateInput() {
         if (questionNumberField.getText().isEmpty() ||
                 questionField.getText().isEmpty() ||
@@ -197,7 +214,10 @@ public class QuizController {
     }
 
     private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if (title.equals("Error")) {
+            alert.setAlertType(Alert.AlertType.ERROR);
+        }
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

@@ -28,7 +28,7 @@
 
             <!-- Quiz Title and Timer Display -->
             <HBox alignment="CENTER" spacing="20">
-                <Label text="Quiz Session" styleClass="quiz-title"/>
+                <Label text="Quiz " styleClass="quiz-title"/>
             </HBox>
 
             <!-- Question Card -->
@@ -70,7 +70,7 @@
 
             <!-- Navigation Buttons -->
             <HBox spacing="25" alignment="CENTER">
-                <Button text="Previous"
+                <Button text="Précédent"
                         styleClass="nav-button"
                         onAction="#handlePreviousQuestion" />
 
@@ -79,7 +79,7 @@
                     <Label fx:id="progressLabel" styleClass="progress-number" />
                 </StackPane>
 
-                <Button text="Next"
+                <Button text="Suivant"
                         styleClass="nav-button"
                         onAction="#handleNextQuestion" />
             </HBox>

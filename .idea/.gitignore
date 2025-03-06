@@ -1,3 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+.env/
+# Ignore Firebase service account JSON file
+src/main/resources/FireBase/*.json
+

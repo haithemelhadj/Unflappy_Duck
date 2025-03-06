@@ -45,6 +45,7 @@ public class ServiceUtilisateur {
                 preparedStatement.setNull(8, Types.INTEGER);
             }
             preparedStatement.setInt(9, utilisateur.getXpRequis());
+            //preparedStatement.setString(10, utilisateur.getToken());
             preparedStatement.executeUpdate();
         }
     }
@@ -66,6 +67,7 @@ public class ServiceUtilisateur {
                 utilisateur.setXp(resultSet.getInt("xp"));
                 utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class)); // Nullable Integer
                 utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
+                utilisateur.setToken(resultSet.getString("token"));
                 utilisateurs.add(utilisateur);
             }
         }
@@ -90,6 +92,7 @@ public class ServiceUtilisateur {
                     utilisateur.setXp(resultSet.getInt("xp"));
                     utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class)); // Nullable Integer
                     utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
+                    utilisateur.setToken(resultSet.getString("token"));
                     return utilisateur;
                 }
             }
@@ -114,7 +117,10 @@ public class ServiceUtilisateur {
                 preparedStatement.setNull(8, Types.INTEGER);
             }
             preparedStatement.setInt(9, utilisateur.getXpRequis());
+            //preparedStatement.setString(10, utilisateur.getToken());
             preparedStatement.setInt(10, utilisateur.getId());
+
+
             preparedStatement.executeUpdate();
         }
     }
@@ -146,6 +152,7 @@ public class ServiceUtilisateur {
                     utilisateur.setXp(resultSet.getInt("xp"));
                     utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class));
                     utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
+                    //utilisateur.setToken(resultSet.getString("token"));
 
                     // Store the logged-in user
                     loggedInUser = utilisateur;

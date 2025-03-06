@@ -25,8 +25,8 @@ public class Store implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            Router.borderPaneCenterInsert(articlePane, "/BackOffice/GestionStore/ArticleBoutique.fxml");
-            Router.borderPaneCenterInsert(panierPane, "/BackOffice/GestionStore/Panier.fxml");
+            Router.borderPaneCenterInsert(articlePane, "/FrontOffice/GestionStore/ArticleBoutique.fxml");
+            Router.borderPaneCenterInsert(panierPane, "/FrontOffice/GestionStore/Panier.fxml");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -7,16 +7,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
+import tn.esprit.api.QuizApiClient;
 import tn.esprit.models.Question;
 import tn.esprit.services.ServiceQuestion;
-import javafx.scene.text.Text;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 public class QuizSessionController {
     @FXML private Label questionNumberLabel;
@@ -25,8 +22,6 @@ public class QuizSessionController {
     @FXML private Label progressLabel;
     @FXML private ProgressBar xpProgressBar;
     @FXML private Label xpLabel;
-    @FXML private Circle progressCircle;
-    @FXML private Label difficultyLabel;
 
     private List<Question> questions;
     private int currentQuestionIndex = 0;
@@ -34,55 +29,37 @@ public class QuizSessionController {
     private int totalXP = 0;
     private final int XP_PER_QUESTION = 25;
     private Timeline timer;
-    private int remainingTimeSeconds = 300;
+    private int timeSeconds = 0;
     private Label timerLabel;
-    private Map<Integer, String> userAnswers = new HashMap<>();
+
     private final ServiceQuestion questionService = new ServiceQuestion();
 
     @FXML
     public void initialize() {
-        setupCountdownTimer();
+        setupTimer();
         loadQuestions();
         if (!questions.isEmpty()) {
             showQuestion();
         }
-        setupProgressCircle();
         updateProgress();
-        updateXPDisplay();
     }
 
-    private void setupProgressCircle() {
-        progressCircle.setFill(Color.CORNFLOWERBLUE);
-        progressCircle.setStroke(Color.DARKBLUE);
-        progressCircle.setStrokeWidth(2);
-        progressLabel.setTextFill(Color.WHITE);
-        progressLabel.setStyle("-fx-font-weight: bold;");
-    }
-
-    private void setupCountdownTimer() {
-        timerLabel = new Label("05:00");
+    private void setupTimer() {
+        timerLabel = new Label("Time: 00:00");
         timerLabel.getStyleClass().add("timer-label");
-        HBox titleBox = (HBox) ((VBox) answersContainer.getParent()).getChildren().get(0);
-        titleBox.getChildren().add(timerLabel);
+
+        HBox timerBox = new HBox(timerLabel);
+        timerBox.setAlignment(Pos.TOP_RIGHT);
+        ((VBox) answersContainer.getParent()).getChildren().add(0, timerBox);
 
         timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            remainingTimeSeconds--;
-            updateTimerDisplay();
-            if (remainingTimeSeconds <= 0) {
-                timer.stop();
-                showResults();
-            }
-            if (remainingTimeSeconds <= 60) {
-                timerLabel.setStyle(remainingTimeSeconds % 2 == 0 ?
-                        "-fx-background-color: #FF3333;" : "-fx-background-color: #3A3A3A;");
-            }
+            timeSeconds++;
+            timerLabel.setText(String.format("Time: %02d:%02d",
+                    timeSeconds / 60,
+                    timeSeconds % 60));
         }));
         timer.setCycleCount(Timeline.INDEFINITE);
         timer.play();
-    }
-
-    private void updateTimerDisplay() {
-        timerLabel.setText(String.format("%02d:%02d", remainingTimeSeconds / 60, remainingTimeSeconds % 60));
     }
 
     private void loadQuestions() {
@@ -91,40 +68,23 @@ public class QuizSessionController {
     }
 
     private void showQuestion() {
+        if (questions.isEmpty()) {
+            questionNumberLabel.setText("No questions available.");
+            questionTextLabel.setText("");
+            answersContainer.getChildren().clear();
+            return;
+        }
         answersContainer.getChildren().clear();
         Question current = questions.get(currentQuestionIndex);
+
         questionNumberLabel.setText("Question #" + (currentQuestionIndex + 1));
         questionTextLabel.setText(current.getQuestion());
-        setQuestionDifficulty(current);
 
         ToggleGroup answerGroup = new ToggleGroup();
         addStyledAnswerButton(current.getReponse1(), "A", answerGroup);
         addStyledAnswerButton(current.getReponse2(), "B", answerGroup);
         addStyledAnswerButton(current.getReponse3(), "C", answerGroup);
         addStyledAnswerButton(current.getReponse4(), "D", answerGroup);
-
-        if (userAnswers.containsKey(currentQuestionIndex)) {
-            String previousAnswer = userAnswers.get(currentQuestionIndex);
-            getRadioButtons().stream()
-                    .filter(rb -> rb.getUserData().toString().equals(previousAnswer))
-                    .findFirst()
-                    .ifPresent(rb -> rb.setSelected(true));
-        }
-    }
-
-    private void setQuestionDifficulty(Question question) {
-        int length = question.getQuestion().length();
-        String difficulty = length < 50 ? "Easy" : length < 100 ? "Medium" : "Hard";
-        difficultyLabel.setText(difficulty);
-        difficultyLabel.setStyle("-fx-background-color: " +
-                (length < 50 ? "#4CAF50" : length < 100 ? "#FFA726" : "#F44336") +
-                "; -fx-text-fill: white; -fx-padding: 2 8; -fx-background-radius: 4;");
-    }
-
-    private List<RadioButton> getRadioButtons() {
-        return answersContainer.getChildren().stream()
-                .map(node -> (RadioButton) ((HBox) node).getChildren().get(0))
-                .toList();
     }
 
     private void addStyledAnswerButton(String answer, String letter, ToggleGroup group) {
@@ -132,11 +92,14 @@ public class QuizSessionController {
         button.getStyleClass().add("radio-button");
         button.setToggleGroup(group);
         button.setUserData(letter);
+
         HBox container = new HBox(10);
         Label letterLabel = new Label(letter + ".");
         letterLabel.getStyleClass().add("answer-letter");
+
         Text answerText = new Text(answer);
         answerText.setWrappingWidth(500);
+
         container.getChildren().addAll(letterLabel, answerText);
         button.setGraphic(container);
         answersContainer.getChildren().add(button);
@@ -144,8 +107,8 @@ public class QuizSessionController {
 
     @FXML
     private void handleNextQuestion() {
-        saveCurrentAnswer();
-        if (currentQuestionIndex < questions.size() - 1) {
+        checkAnswer();
+        if(currentQuestionIndex < questions.size() - 1) {
             currentQuestionIndex++;
             showQuestion();
             updateProgress();
@@ -156,39 +119,29 @@ public class QuizSessionController {
 
     @FXML
     private void handlePreviousQuestion() {
-        saveCurrentAnswer();
-        if (currentQuestionIndex > 0) {
+        if(currentQuestionIndex > 0) {
             currentQuestionIndex--;
             showQuestion();
             updateProgress();
         }
     }
 
-    private void saveCurrentAnswer() {
+    private void checkAnswer() {
         RadioButton selected = (RadioButton) answersContainer.lookup(".radio-button:selected");
-        if (selected != null) {
-            userAnswers.put(currentQuestionIndex, selected.getUserData().toString());
-            checkAllAnswers();
-            updateXPDisplay();
-        }
-    }
+        if(selected != null) {
+            String userAnswer = selected.getUserData().toString();
+            String correctAnswer = questions.get(currentQuestionIndex).getReponseCorrecte();
 
-    private void checkAllAnswers() {
-        score = 0;
-        for (Map.Entry<Integer, String> entry : userAnswers.entrySet()) {
-            int questionIndex = entry.getKey();
-            String userAnswer = entry.getValue();
-            String correctAnswer = questions.get(questionIndex).getReponseCorrecte();
-
-            if (userAnswer.equalsIgnoreCase(correctAnswer)) {
+            if(userAnswer.equalsIgnoreCase(correctAnswer)) {
                 score++;
+                totalXP += XP_PER_QUESTION;
+                updateXPDisplay();
             }
         }
-        totalXP = score * XP_PER_QUESTION;
     }
 
     private void updateProgress() {
-        progressLabel.setText((currentQuestionIndex + 1) + "/" + questions.size());
+        progressLabel.setText("Question " + (currentQuestionIndex + 1) + " of " + questions.size());
     }
 
     private void updateXPDisplay() {
@@ -200,26 +153,40 @@ public class QuizSessionController {
 
     private void showResults() {
         timer.stop();
-        checkAllAnswers();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Quiz Results");
+        alert.setHeaderText("Quiz Completed!");
+        alert.setContentText("Final Score: " + score + "/" + questions.size() + "\n"
+                + "Total XP Earned: " + totalXP + "\n"
+                + "Time Taken: " + timerLabel.getText());
+        alert.showAndWait();
+    }
 
-        VBox resultsContent = new VBox(10);
-        Label scoreLabel = new Label("Final Score: " + score + "/" + questions.size());
-        scoreLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+    // NEW: Method to import quiz questions from an external API
+    @FXML
+    private void handleImportFromApi() {
+        QuizApiClient apiClient = new QuizApiClient();
+        try {
+            List<Question> importedQuestions = apiClient.fetchQuestions();
+            // Optionally assign a question number to each imported question.
+            for (Question q : importedQuestions) {
+                // For example, set question number as current total count + 1.
+                q.setQno(questionService.getQuestions().size() + 1);
+                questionService.addQuestion(q);
+            }
+            // Reload questions from the database.
+            loadQuestions();
+            showAlert("Info", "Imported " + importedQuestions.size() + " questions from API.");
+        } catch (Exception e) {
+            showAlert("Error", "Failed to import questions: " + e.getMessage());
+        }
+    }
 
-        int minutesTaken = (300 - remainingTimeSeconds) / 60;
-        int secondsTaken = (300 - remainingTimeSeconds) % 60;
-        Label timeLabel = new Label("Time Used: " + String.format("%02d:%02d", minutesTaken, secondsTaken));
-        timeLabel.setStyle("-fx-font-size: 14px;");
-
-        Label xpEarnedLabel = new Label("XP Earned: " + totalXP);
-        xpEarnedLabel.setStyle("-fx-font-size: 14px;");
-
-        resultsContent.getChildren().addAll(scoreLabel, timeLabel, xpEarnedLabel);
-
-        Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Quiz Results");
-        dialog.getDialogPane().setContent(resultsContent);
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-        dialog.showAndWait();
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

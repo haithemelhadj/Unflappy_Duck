@@ -5,140 +5,46 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Region?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.BackController" stylesheets="@javafx-css-styles.css">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.BackController">
     <tabs>
         <Tab text="Freelancer">
-            <content>
-                <BorderPane fx:id="freelancerBorderPane" prefHeight="200.0" prefWidth="200.0">
-                    <top>
-                        <VBox styleClass="header-panel" BorderPane.alignment="CENTER">
-                            <Label text="Freelancer Management" styleClass="header-label"/>
-                            <Label text="Manage freelancer services and offers" styleClass="subheader-label"/>
-                        </VBox>
-                    </top>
-                    <bottom>
-                        <HBox spacing="10.0" styleClass="button-panel" BorderPane.alignment="CENTER">
-                            <Button mnemonicParsing="false" text="Service" styleClass="action-button"/>
-                            <Button mnemonicParsing="false" text="Offre" styleClass="action-button"/>
-                            <Region HBox.hgrow="ALWAYS" />
-                            <Button mnemonicParsing="false" text="Refresh" styleClass="secondary-button"/>
-                            <padding>
-                                <Insets top="10.0" right="20.0" bottom="10.0" left="20.0"/>
-                            </padding>
-                        </HBox>
-                    </bottom>
-                    <center>
-                        <VBox alignment="CENTER" styleClass="placeholder-container">
-                            <Label text="No freelancers selected" styleClass="placeholder-text"/>
-                            <Label text="Select an action from the buttons below" styleClass="placeholder-subtext"/>
-                        </VBox>
-                    </center>
-                </BorderPane>
-            </content>
+         <content>
+            <BorderPane fx:id="freelancerBorderPane" prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <HBox prefHeight="24.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Service" />
+                        <Button mnemonicParsing="false" text="Offre" />
+                     </children>
+                  </HBox>
+               </bottom></BorderPane>
+         </content>
         </Tab>
         <Tab text="Evenement">
-            <content>
-                <BorderPane fx:id="evenementBorderPane" prefHeight="200.0" prefWidth="200.0">
-                    <top>
-                        <VBox styleClass="header-panel" BorderPane.alignment="CENTER">
-                            <Label text="Event Management" styleClass="header-label"/>
-                            <Label text="Create and manage your events" styleClass="subheader-label"/>
-                        </VBox>
-                    </top>
-                    <center>
-                        <VBox alignment="CENTER" styleClass="placeholder-container">
-                            <Label text="No events to display" styleClass="placeholder-text"/>
-                            <Button text="Create New Event" styleClass="primary-button"/>
-                        </VBox>
-                    </center>
-                </BorderPane>
-            </content>
+         <content>
+            <BorderPane fx:id="evenementBorderPane" prefHeight="200.0" prefWidth="200.0" />
+         </content>
         </Tab>
         <Tab text="Utilisateurs">
-            <content>
-                <BorderPane fx:id="utilisateurBorderPane" prefHeight="200.0" prefWidth="200.0">
-                    <top>
-                        <VBox styleClass="header-panel" BorderPane.alignment="CENTER">
-                            <Label text="User Management" styleClass="header-label"/>
-                            <Label text="Manage system users and permissions" styleClass="subheader-label"/>
-                        </VBox>
-                    </top>
-                    <center>
-                        <VBox alignment="CENTER" styleClass="placeholder-container">
-                            <Label text="User data will appear here" styleClass="placeholder-text"/>
-                        </VBox>
-                    </center>
-                </BorderPane>
-            </content>
+         <content>
+            <BorderPane fx:id="utilisateurBorderPane" prefHeight="200.0" prefWidth="200.0" />
+         </content>
         </Tab>
-        <Tab text="Equipe">
-            <content>
-                <BorderPane fx:id="equipeBorderPane" prefHeight="200.0" prefWidth="200.0">
-                    <top>
-                        <VBox styleClass="header-panel" BorderPane.alignment="CENTER">
-                            <Label text="Team Management" styleClass="header-label"/>
-                            <Label text="Manage team structure and members" styleClass="subheader-label"/>
-                        </VBox>
-                    </top>
-                    <center>
-                        <VBox alignment="CENTER" styleClass="placeholder-container">
-                            <Label text="Team information will display here" styleClass="placeholder-text"/>
-                        </VBox>
-                    </center>
-                </BorderPane>
-            </content>
-        </Tab>
-        <Tab text="Cours">
-            <content>
-                <BorderPane fx:id="coursBorderPane" prefHeight="200.0" prefWidth="200.0">
-                    <top>
-                        <VBox styleClass="header-panel" BorderPane.alignment="CENTER">
-                            <Label text="Course Management" styleClass="header-label"/>
-                            <Label text="Manage learning content and materials" styleClass="subheader-label"/>
-                        </VBox>
-                    </top>
-                    <center>
-                        <VBox alignment="CENTER" styleClass="placeholder-container">
-                            <Label text="Course content will appear here" styleClass="placeholder-text"/>
-                        </VBox>
-                    </center>
-                </BorderPane>
-            </content>
-        </Tab>
-        <Tab text="Store">
-            <content>
-                <BorderPane fx:id="storeBorderPane" prefHeight="200.0" prefWidth="200.0">
-                    <top>
-                        <VBox spacing="10.0">
-                            <VBox styleClass="header-panel" BorderPane.alignment="CENTER">
-                                <Label text="Store Management" styleClass="header-label"/>
-                                <Label text="Manage store items and orders" styleClass="subheader-label"/>
-                            </VBox>
-                            <HBox spacing="10.0" styleClass="button-panel">
-                                <Button mnemonicParsing="false" onAction="#show_article" text="Articles" styleClass="action-button"/>
-                                <Button mnemonicParsing="false" onAction="#show_panier" text="Shopping Cart" styleClass="action-button"/>
-                                <Region HBox.hgrow="ALWAYS" />
-                                <Button mnemonicParsing="false" text="Reports" styleClass="secondary-button"/>
-                                <padding>
-                                    <Insets top="5.0" right="20.0" bottom="5.0" left="20.0"/>
-                                </padding>
-                            </HBox>
-                        </VBox>
-                    </top>
-                    <center>
-                        <VBox alignment="CENTER" styleClass="placeholder-container">
-                            <Label text="Store data will appear here" styleClass="placeholder-text"/>
-                            <Label text="Select an option from the menu above" styleClass="placeholder-subtext"/>
-                        </VBox>
-                    </center>
-                </BorderPane>
-            </content>
-        </Tab>
+      <Tab text="Equipe">
+         <content>
+            <BorderPane fx:id="equipeBorderPane" prefHeight="200.0" prefWidth="200.0" />
+         </content>
+      </Tab>
+      <Tab text="Cours">
+         <content>
+            <BorderPane fx:id="coursBorderPane" prefHeight="200.0" prefWidth="200.0" />
+         </content>
+      </Tab>
+      <Tab text="Store">
+         <content>
+            <BorderPane fx:id="storeBorderPane" prefHeight="200.0" prefWidth="200.0" />
+         </content>
+      </Tab>
     </tabs>
 </TabPane>

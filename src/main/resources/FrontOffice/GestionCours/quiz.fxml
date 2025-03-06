@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="tn.esprit.controller.QuizSessionController"
@@ -24,13 +26,18 @@
         <VBox spacing="25" alignment="CENTER"
               style="-fx-padding: 30;">
 
-            <!-- Quiz Title -->
-            <Label text="Quiz Session" styleClass="quiz-title"/>
+            <!-- Quiz Title and Timer Display -->
+            <HBox alignment="CENTER" spacing="20">
+                <Label text="Quiz Session" styleClass="quiz-title"/>
+            </HBox>
 
             <!-- Question Card -->
             <VBox styleClass="question-card" spacing="15">
-                <Label fx:id="questionNumberLabel" styleClass="question-number"/>
-                <Label fx:id="questionTextLabel" styleClass="question-text" prefWidth="500"/>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label fx:id="questionNumberLabel" styleClass="question-number"/>
+                    <Label fx:id="difficultyLabel" styleClass="difficulty-label"/>
+                </HBox>
+                <Label fx:id="questionTextLabel" styleClass="question-text" prefWidth="500" wrapText="true"/>
 
                 <!-- Answer Options -->
                 <VBox fx:id="answersContainer" spacing="10" style="-fx-padding: 10 0 0 0;">
@@ -63,17 +70,17 @@
 
             <!-- Navigation Buttons -->
             <HBox spacing="25" alignment="CENTER">
-                <!-- Inline style to ensure text color is visible on a dark background -->
                 <Button text="Previous"
                         styleClass="nav-button"
-                        style="-fx-text-fill: white; -fx-background-color: #3A3A3A;"
                         onAction="#handlePreviousQuestion" />
 
-                <Label fx:id="progressLabel" styleClass="xp-label" />
+                <StackPane>
+                    <Circle fx:id="progressCircle" radius="20" styleClass="progress-circle"/>
+                    <Label fx:id="progressLabel" styleClass="progress-number" />
+                </StackPane>
 
                 <Button text="Next"
                         styleClass="nav-button"
-                        style="-fx-text-fill: white; -fx-background-color: #3A3A3A;"
                         onAction="#handleNextQuestion" />
             </HBox>
 
@@ -85,14 +92,6 @@
                     <Label fx:id="xpLabel" styleClass="xp-label"/>
                 </HBox>
             </VBox>
-
-            <!-- "Import from API" Button -->
-            <HBox alignment="CENTER">
-                <Button text="Import from API"
-                        styleClass="import-button"
-                        style="-fx-text-fill: white; -fx-background-color: #6D6D6D;"
-                        onAction="#handleImportFromApi" />
-            </HBox>
 
         </VBox>
     </ScrollPane>

@@ -78,6 +78,8 @@
                             <Button fx:id="addQuestionBtn" text="Ajouter" onAction="#handleAddQuestion" />
                             <Button fx:id="updateQuestionBtn" text="Mettre à jour" onAction="#handleUpdateQuestion" />
                             <Button fx:id="deleteQuestionBtn" text="Supprimer" onAction="#handleDeleteQuestion" />
+                            <!-- New Import API Button -->
+                            <Button fx:id="importApiBtn" text="Importer API" onAction="#handleImportApi" />
                         </HBox>
                     </VBox>
 

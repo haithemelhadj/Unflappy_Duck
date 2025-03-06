@@ -32,6 +32,7 @@ public class MainFX extends Application {
 
         //FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionEvenement/event_form.fxml"));
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionEquipe/GestionEquipe.fxml"));
+        //FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionEquipe/GestionTache.fxml"));
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);

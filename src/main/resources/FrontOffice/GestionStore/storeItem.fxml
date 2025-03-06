@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="midlasttt" prefHeight="362.0" prefWidth="238.0" stylesheets="@storeItem.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.UIItemArticleController">
+   <children>
+      <Rectangle fx:id="aaa" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="183.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="244.0" />
+      <ImageView fx:id="imagev" fitHeight="168.0" fitWidth="244.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@1.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutY="164.0" prefHeight="102.0" prefWidth="244.0" styleClass="bgr">
+         <children>
+            <Label fx:id="titre" layoutX="7.0" layoutY="-2.0" prefHeight="27.0" prefWidth="168.0" styleClass="content" text="Title">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Text fx:id="descrp" layoutX="7.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" wrappingWidth="75.0">
+               <font>
+                  <Font size="10.5" />
+               </font>
+            </Text>
+            <Label fx:id="categ" layoutX="16.0" layoutY="81.0" styleClass="content" text="Categorie">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="quest" layoutX="64.0" layoutY="81.0" styleClass="content" text="15">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="id" text="0" visible="false" />
+            <Label layoutX="81.0" layoutY="80.0" prefHeight="17.0" prefWidth="59.0" styleClass="content" text="Questions">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Button layoutX="204.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="bg">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@bin.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="mod_btn" layoutX="171.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="bg">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@bin.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fx:id="qrCodeView" fitHeight="75.0" fitWidth="97.0" layoutX="74.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+
+   </children>
+   <styleClass>
+      <String fx:value="bg" />
+      <String fx:value="mid-menu2" />
+      <String fx:value="quiz-item" />
+   </styleClass>
+</AnchorPane>

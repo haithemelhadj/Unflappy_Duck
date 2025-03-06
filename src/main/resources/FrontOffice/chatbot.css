@@ -1,0 +1,56 @@
+/* ChatbotView.css */
+
+.vbox {
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+    -fx-background-color: #f0f0f0; /* Light gray background */
+}
+
+.text-area {
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-wrap-text: true;
+}
+
+.text-field {
+    -fx-font-size: 14px;
+    -fx-padding: 8px;
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+}
+
+.button {
+    -fx-font-size: 14px;
+    -fx-padding: 8px 15px;
+    -fx-background-color: #4CAF50; /* Green button */
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #3e8e41; /* Darker green on hover */
+}
+
+/* Style for user messages */
+.user-message {
+    -fx-background-color: #e0e0e0; /* Lighter gray for user */
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+}
+
+/* Style for bot messages */
+.bot-message {
+    -fx-background-color: #b3e5fc; /* Light blue for bot */
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+}
+
+/* Style for the chat area content (messages) */
+.chat-content {
+    -fx-padding: 5px;
+    -fx-wrap-text: true;
+}

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FrontController implements Initializable {
+public class    FrontController implements Initializable {
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -56,7 +56,7 @@ public class FrontController implements Initializable {
     public void goToTaches(ActionEvent actionEvent) throws IOException{
         Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEquipe/GestionTache.fxml");
     }
-/**/
+
     @FXML
     public void goToSettings(ActionEvent actionEvent) throws IOException{
 //        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/homePage.fxml")).load());
@@ -68,6 +68,10 @@ public class FrontController implements Initializable {
             Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Service.fxml");
         else if (Session.getActiveUser().getRole().equals(userRoles.organisateur))
             Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Offre.fxml");
+    }
+    @FXML
+    public void openChatbot(ActionEvent actionEvent) throws IOException {
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionUtilisateur/ChatbotView.fxml");
     }
 
     @Override

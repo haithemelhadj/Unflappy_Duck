@@ -17,7 +17,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionUtilisateur/UserProfile.fxml"));
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/FrontOffice/GestionUtilisateur/login_create_account_page.fxml"));
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);

@@ -123,7 +123,7 @@ public class GestionTache implements Initializable {
         loadMembreChoiceBoxData(membre_id);
         loadStatutChoiceBoxData(statut);
         //region sort taches
-        tacheSort.getItems().addAll("Trier par ID", "Trier par Nom","Trier par equipe");
+        tacheSort.getItems().addAll("Trier par ID", "Trier par Nom");
         tacheSort.setValue("Trier par ID");
         sortTache.setOnAction(event -> sortTache());
         //endregion

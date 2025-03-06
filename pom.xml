@@ -134,8 +134,8 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>
-                        tn.esprit.test.UIFreelance
-                        <!--tn.esprit.test.MainFX-->
+                        <!--tn.esprit.test.UIFreelance-->
+                        tn.esprit.test.MainFX
                     </mainClass>
                 </configuration>
             </plugin>

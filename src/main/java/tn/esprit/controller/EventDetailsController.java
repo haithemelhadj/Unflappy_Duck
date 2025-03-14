@@ -17,6 +17,10 @@ public class EventDetailsController {
 
     public void setEvent(Evenement event) {
         this.event = event;
+    }
+
+    public EventDetailsController(Evenement event){
+        this.event = event;
         displayEventDetails();
     }
 

@@ -34,23 +34,20 @@ public class SendSmS {
 
 
     // Find your Account Sid and Token at twilio.com/console
-    public static final String ACCOUNT_SID = System.getenv("TWILIO_ACCOUNT_SID");
-    public static final String AUTH_TOKEN = System.getenv("TWILIO_AUTH_TOKEN");
-    /*
+    public static final String ACCOUNT_SID = "AC54b12d1ffba053-5a93e383d1141793b0";//System.getenv("TWILIO_ACCOUNT_SID");
+    public static final String AUTH_TOKEN ="e16eb77f04ecb0f7-4ce17c67841fae4c";// System.getenv("TWILIO_AUTH_TOKEN");
 
-     String sd="AC54b12d1ffba053-5a93e383d1141793b0";
-     String st="e16eb77f04ecb0f7-4ce17c67841fae4c";
-
+/*
     // Find your Account Sid and Token at twilio.com/console
-    public static final String ACCOUNT_SID = sd;
-    public static final String AUTH_TOKEN = st;
+    public static final String ACCOUNT_SID = "AC54b12d1ffba053-5a93e383d1141793b0";
+    public static final String AUTH_TOKEN = "e16eb77f04ecb0f7-4ce17c67841fae4c";
 	/**/
     public SendSmS() {
 
-        /*
+
         Dotenv dotenv = Dotenv.load();
-        String ACCOUNT_SID = dotenv.get("TWILIO_ACCOUNT_SID");
-        String AUTH_TOKEN = dotenv.get("TWILIO_AUTH_TOKEN");
+        String ACCOUNT_SID = "AC54b12d1ffba053-5a93e383d1141793b0";//dotenv.get("TWILIO_ACCOUNT_SID");
+        String AUTH_TOKEN ="e16eb77f04ecb0f7-4ce17c67841fae4c";// dotenv.get("TWILIO_AUTH_TOKEN");
 		/*
 		String ACCOUNT_SID = sd;
 		String AUTH_TOKEN = st;

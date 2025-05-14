@@ -1,3 +1,4 @@
+
 package tn.esprit.api;
 
 import com.google.auth.oauth2.GoogleCredentials;
@@ -38,7 +39,7 @@ public class FirebaseConfig {
         return FirebaseMessaging.getInstance(firebaseApp);
     }
 }
-
+/**/
 
 /*
 public class FirebaseConfig {

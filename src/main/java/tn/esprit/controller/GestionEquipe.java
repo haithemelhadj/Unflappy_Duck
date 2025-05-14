@@ -1,6 +1,6 @@
 package tn.esprit.controller;
 
-import com.google.firebase.FirebaseOptions;
+//import com.google.firebase.FirebaseOptions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -668,6 +668,6 @@ public class GestionEquipe implements Initializable {
     }
     public void sendsms(String msg) throws Exception {
         SendSmS ss = new SendSmS();
-        ss.SendSms(msg); // sms notuif
+        //ss.SendSms(msg); // sms notuif
     }
 }

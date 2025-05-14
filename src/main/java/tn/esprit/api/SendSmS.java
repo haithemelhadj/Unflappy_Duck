@@ -1,6 +1,5 @@
 package tn.esprit.api;
 
-import com.google.firebase.messaging.Message;
 import com.twilio.Twilio;
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -10,7 +9,7 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.twilio.Twilio;
 import com.twilio.converter.Promoter;
-//import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
 import java.net.URI;
@@ -57,7 +56,7 @@ public class SendSmS {
 
 
 
-	/*
+	
     public void SendSms(String msg) {
 		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(

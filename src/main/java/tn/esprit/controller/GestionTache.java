@@ -54,13 +54,16 @@ public class GestionTache implements Initializable {
     private Button sortTache;
 
     @FXML
-    private ComboBox<String> statut;
+    private CheckBox statusCheckBox;
 
     @FXML
     private ComboBox<String> tacheSort;
 
     @FXML
     private TextField titre;
+
+    @FXML
+    private CheckBox statut;
 
     @FXML
     private VBox taches_cards;
@@ -107,12 +110,6 @@ public class GestionTache implements Initializable {
         }
     }
     //
-    private void loadStatutChoiceBoxData(ComboBox comboBox) {
-        statut.getItems().add("en_attente");
-        statut.getItems().add("en_cours");//'en_attente','en_cours','termine'
-        statut.getItems().add("termine");
-    }
-    //
     //endregion
 
     @Override
@@ -121,7 +118,6 @@ public class GestionTache implements Initializable {
         //region combobox init
         loadEquipeChoiceBoxData(equipe_id);
         loadMembreChoiceBoxData(membre_id);
-        loadStatutChoiceBoxData(statut);
         //region sort taches
         tacheSort.getItems().addAll("Trier par ID", "Trier par Nom");
         tacheSort.setValue("Trier par ID");
@@ -148,18 +144,18 @@ public class GestionTache implements Initializable {
         try {
             String[] eqpParts = equipe_id.getValue().split("-", 2);
             int idEquipe = Integer.parseInt(eqpParts[0]);
-            String nomEqpModf = eqpParts[1];
+            // String nomEqpModf = eqpParts[1]; // Unused
 
             String[] mbmrParts = membre_id.getValue().split("-", 2);
             int idMembr = Integer.parseInt(mbmrParts[0]);
-            String nomMbrModf = mbmrParts[1];
+            // String nomMbrModf = mbmrParts[1]; // Unused
 
             st.add(new Tache(
                         idEquipe,
                         titre.getText(),//string
                         description.getText(),//string
-                        idMembr
-                        ,statut.getValue()//String
+                        idMembr,
+                        statusCheckBox.isSelected() // Changed from statut.getValue()
                 ));
         }catch(Exception e) {
             System.out.println("huge int failure :(");
@@ -174,11 +170,11 @@ public class GestionTache implements Initializable {
         try {
             String[] eqpParts = equipe_id.getValue().split("-", 2);
             int idEquipe = Integer.parseInt(eqpParts[0]);
-            String nomEqpModf = eqpParts[1];
+            // String nomEqpModf = eqpParts[1]; // Unused
 
             String[] mbmrParts = membre_id.getValue().split("-", 2);
             int idMembr = Integer.parseInt(mbmrParts[0]);
-            String nomMbrModf = mbmrParts[1];
+            // String nomMbrModf = mbmrParts[1]; // Unused
 
             st.update(new Tache(
                     id,
@@ -186,7 +182,7 @@ public class GestionTache implements Initializable {
                     titre.getText(),
                     description.getText(),
                     idMembr,
-                    statut.getValue()));
+                    statusCheckBox.isSelected())); // Changed from statut.getValue()
         }catch(Exception e) {
             System.out.println(e.getMessage());
             Error.setText(e.getMessage());
@@ -206,7 +202,7 @@ public class GestionTache implements Initializable {
                 p.setTitre(rs.getString(3));
                 p.setDescription(rs.getString(4));
                 p.setId_responsable(rs.getInt(5));
-                p.setStatut(rs.getString(6));
+                p.setStatut(rs.getBoolean(6)); // Changed from rs.getString(6)
 
                 taches.add(p);
             }
@@ -230,6 +226,14 @@ public class GestionTache implements Initializable {
                 List<Tache> taches = getTacheById(id);
                 if(taches.size()==1)
                 {
+                    // Populate form fields for update, including the checkbox
+                    Tache tacheToEdit = taches.get(0);
+                    titre.setText(tacheToEdit.getTitre());
+                    description.setText(tacheToEdit.getDescription());
+                    // equipe_id.setValue(...); // You might need to find the correct string format or Tache object
+                    // membre_id.setValue(...); // Similar to equipe_id
+                    statusCheckBox.setSelected(tacheToEdit.getStatut()); // Set checkbox state
+
                     update(id);
                 }
                 else if(taches.isEmpty())
@@ -287,7 +291,7 @@ public class GestionTache implements Initializable {
                 loader.setLocation(getClass().getClassLoader().getResource("FrontOffice/GestionEquipe/TacheCard.fxml"));
                 VBox cardBox = loader.load();
                 TacheCard cardDeTache = loader.getController();
-                cardDeTache.setData(taches.get(i));
+                //cardDeTache.setData(taches.get(i));
                 taches_cards.getChildren().add(cardBox);
             }
 

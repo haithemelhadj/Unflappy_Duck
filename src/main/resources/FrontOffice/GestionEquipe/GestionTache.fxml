@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -14,7 +15,7 @@
 
 <AnchorPane stylesheets="@GestionEquipescss-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.GestionTache">
    <children>
-      <ScrollPane prefHeight="750.0">
+      <ScrollPane>
          <content>
             <AnchorPane>
                <children>
@@ -28,99 +29,119 @@
 
                         <HBox alignment="CENTER" spacing="30.0">
                            <children>
-                              <!-- Task Management Section -->
-                              <VBox styleClass="card" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Label styleClass="card-header" text="Ajouter / Modifier Tâche">
-                                       <font>
-                                          <Font name="System Bold" size="24.0" />
-                                       </font>
-                                    </Label>
-                                    <VBox spacing="15.0" styleClass="form-container">
+                              <ScrollPane>
+                                <content>
+                                  <AnchorPane>
                                        <children>
-                                          <VBox styleClass="form-group">
+                                          <!-- Task Management Section -->
+                                          <VBox styleClass="card">
                                              <children>
-                                                <Label styleClass="form-label" text="ID Tâche" />
-                                                <TextField fx:id="idfield" promptText="Identifiant de la tâche" styleClass="form-control" />
+                                                <Label styleClass="card-header" text="Ajouter / Modifier Tâche">
+                                                   <font>
+                                                      <Font name="System Bold" size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox spacing="15.0" styleClass="form-container">
+                                                   <children>
+                                                      <VBox styleClass="form-group">
+                                                         <children>
+                                                            <Label styleClass="form-label" text="ID Tâche" />
+                                                            <TextField fx:id="idfield" promptText="Identifiant de la tâche" styleClass="form-control" />
+                                                         </children>
+                                                      </VBox>
+            
+                                                                              <VBox styleClass="form-group">
+                                                         <children>
+                                                            <Label styleClass="form-label" text="Titre" />
+                                                            <TextField fx:id="titre" promptText="Nom de la tâche" styleClass="form-control" />
+                                                         </children>
+                                                      </VBox>
+            
+                                                                              <VBox styleClass="form-group">
+                                                         <children>
+                                                            <Label styleClass="form-label" text="Description" />
+                                                            <TextField fx:id="description" promptText="Description" styleClass="form-control" />
+                                                         </children>
+                                                      </VBox>
+            
+                                                                              <VBox styleClass="form-group">
+                                                         <children>
+                                                            <Label styleClass="form-label" text="Équipe Responsable" />
+                                                            <ComboBox fx:id="equipe_id" maxWidth="1.7976931348623157E308" styleClass="form-control" />
+                                                         </children>
+                                                      </VBox>
+            
+                                                                              <VBox styleClass="form-group">
+                                                         <children>
+                                                            <Label styleClass="form-label" text="Membre Responsable" />
+                                                            <ComboBox fx:id="membre_id" maxWidth="1.7976931348623157E308" styleClass="form-control" />
+                                                         </children>
+                                                      </VBox>
+            
+                                                                              <VBox styleClass="form-group">
+                                                         <children>
+                                                            <Label styleClass="form-label" text="Statut" />
+                                                            <CheckBox fx:id="statusCheckBox" lineSpacing="5.0" mnemonicParsing="false" text="terminée?">
+                                                               <font>
+                                                                  <Font size="20.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </VBox>
+            
+                                                                              <HBox alignment="CENTER" spacing="15.0" styleClass="btn-group">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" onAction="#AddUpdate" styleClass="btn-primary" text="Ajouter / Mettre à jour" />
+                                                            <Button mnemonicParsing="false" onAction="#delete" styleClass="btn-danger" text="Supprimer" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
                                              </children>
                                           </VBox>
-
-                                          <VBox styleClass="form-group">
-                                             <children>
-                                                <Label styleClass="form-label" text="Titre" />
-                                                <TextField fx:id="titre" promptText="Nom de la tâche" styleClass="form-control" />
-                                             </children>
-                                          </VBox>
-
-                                          <VBox styleClass="form-group">
-                                             <children>
-                                                <Label styleClass="form-label" text="Description" />
-                                                <TextField fx:id="description" promptText="Description" styleClass="form-control" />
-                                             </children>
-                                          </VBox>
-
-                                          <VBox styleClass="form-group">
-                                             <children>
-                                                <Label styleClass="form-label" text="Équipe Responsable" />
-                                                <ComboBox fx:id="equipe_id" maxWidth="1.7976931348623157E308" styleClass="form-control" />
-                                             </children>
-                                          </VBox>
-
-                                          <VBox styleClass="form-group">
-                                             <children>
-                                                <Label styleClass="form-label" text="Membre Responsable" />
-                                                <ComboBox fx:id="membre_id" maxWidth="1.7976931348623157E308" styleClass="form-control" />
-                                             </children>
-                                          </VBox>
-
-                                          <VBox styleClass="form-group">
-                                             <children>
-                                                <Label styleClass="form-label" text="Statut" />
-                                                <ComboBox fx:id="statut" maxWidth="1.7976931348623157E308" styleClass="form-control" />
-                                             </children>
-                                          </VBox>
-
-                                          <HBox alignment="CENTER" spacing="15.0" styleClass="btn-group">
-                                             <children>
-                                                <Button mnemonicParsing="false" onAction="#AddUpdate" styleClass="btn-primary" text="Ajouter / Mettre à jour" />
-                                                <Button mnemonicParsing="false" onAction="#delete" styleClass="btn-danger" text="Supprimer" />
-                                             </children>
-                                          </HBox>
                                        </children>
-                                    </VBox>
-                                 </children>
-                              </VBox>
-
-                              <!-- Task List Section -->
-                              <VBox styleClass="card" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Label styleClass="card-header" text="Liste des Tâches">
-                                       <font>
-                                          <Font name="System Bold" size="24.0" />
-                                       </font>
-                                    </Label>
-
-                                    <HBox alignment="CENTER" spacing="10.0" styleClass="search-sort">
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
+                              <ScrollPane>
+                                <content>
+                                  <AnchorPane>
                                        <children>
-                                          <TextField fx:id="RechercheTache" promptText="Rechercher une tâche..." styleClass="form-control, search-input" HBox.hgrow="ALWAYS" />
-                                          <HBox alignment="CENTER" spacing="5.0" styleClass="sort-control">
+            
+                                          <!-- Task List Section -->
+                                          <VBox styleClass="card">
                                              <children>
-                                                <Button fx:id="sortTache" mnemonicParsing="false" onAction="#sortTache" styleClass="btn-secondary" text="Trier" />
-                                                <ComboBox fx:id="tacheSort" styleClass="form-control" />
+                                                <Label styleClass="card-header" text="Liste des Tâches">
+                                                   <font>
+                                                      <Font name="System Bold" size="24.0" />
+                                                   </font>
+                                                </Label>
+            
+                                                <HBox alignment="CENTER" spacing="10.0" styleClass="search-sort">
+                                                   <children>
+                                                      <TextField fx:id="RechercheTache" promptText="Rechercher une tâche..." styleClass="form-control, search-input" HBox.hgrow="ALWAYS" />
+                                                      <HBox alignment="CENTER" spacing="5.0" styleClass="sort-control">
+                                                         <children>
+                                                            <Button fx:id="sortTache" mnemonicParsing="false" onAction="#sortTache" styleClass="btn-secondary" text="Trier" />
+                                                            <ComboBox fx:id="tacheSort" styleClass="form-control" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </HBox>
+            
+                                                <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="list-container">
+                                                   <content>
+                                                      <ListView fx:id="ListViewTaches" styleClass="list-view" />
+                                                   </content>
+                                                </ScrollPane>
+            
+                                                <Button mnemonicParsing="false" onAction="#refrech" styleClass="btn-secondary" text="Rafraîchir" />
                                              </children>
-                                          </HBox>
+                                          </VBox>
                                        </children>
-                                    </HBox>
-
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="list-container">
-                                       <content>
-                                          <ListView fx:id="ListViewTaches" styleClass="list-view" />
-                                       </content>
-                                    </ScrollPane>
-
-                                    <Button mnemonicParsing="false" onAction="#refrech" styleClass="btn-secondary" text="Rafraîchir" />
-                                 </children>
-                              </VBox>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
                            </children>
                         </HBox>
 

@@ -11,14 +11,14 @@ public class Tache {
     private String titre;
     private String description;
     private int id_responsable;
-    private String statut;
+    private boolean statut;
 
     //region constructors
 
     public Tache() {
     }
 
-    public Tache(int id, int equipe_id, String titre, String description, int id_responsable, String statut) {
+    public Tache(int id, int equipe_id, String titre, String description, int id_responsable, boolean statut) {
         //System.out.println("const w id....adding tache....");
         this.id = id;
         this.equipe_id = equipe_id;
@@ -29,7 +29,7 @@ public class Tache {
         this.statut = statut;
     }
 
-    public Tache(int equipe_id, String titre, String description, int id_responsable, String statut) {
+    public Tache(int equipe_id, String titre, String description, int id_responsable, boolean statut) {
         //System.out.println("no id const....adding tache....");
         this.equipe_id = equipe_id;
         this.titre = titre;
@@ -98,11 +98,11 @@ public class Tache {
         this.id_responsable = id_responsable;
     }
 
-    public String getStatut() {
+    public boolean getStatut() {
         return statut;
     }
 
-    public void setStatut(String statut) {
+    public void setStatut(boolean statut) {
         this.statut = statut;
     }
 /**/
@@ -152,7 +152,7 @@ public class Tache {
         tache.setTitre(titre);
         tache.setDescription(description);
         tache.setId_responsable(id_responsable);
-        tache.setStatut(statut);
+        tache.setStatut("TERMINE".equalsIgnoreCase(statut));
 
         return tache;
     }

@@ -57,6 +57,14 @@ public class FrontController implements Initializable {
             Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Offre.fxml");
     }
 
+    public void goToMyEvents(ActionEvent actionEvent) throws IOException {
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEvenement/MyEvents.fxml");
+    }
+
+    public void goToUpdateEvents(ActionEvent actionEvent) throws IOException {
+        Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionEvenement/all_events.fxml");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (Session.getActiveUser().getRole().equals(userRoles.freelancer))

@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controller.EventDetailsController">
-    <Label fx:id="eventNameLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
-    <Label fx:id="eventDescriptionLabel" />
-    <Label fx:id="eventDateLabel" />
-    <Label fx:id="eventTimeLabel" />
-    <Label fx:id="eventLocationLabel" />
+<VBox spacing="20" alignment="TOP_CENTER" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controller.EventDetailsController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+
+    <!-- Event Name -->
+    <Label fx:id="eventNameLabel" styleClass="event-name" />
+
+    <!-- Event Description -->
+    <Label fx:id="eventDescriptionLabel" styleClass="event-description" wrapText="true" />
+
+    <!-- Event Date and Time -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label fx:id="eventDateLabel" styleClass="event-detail" />
+        <Label fx:id="eventTimeLabel" styleClass="event-detail" />
+    </HBox>
+
+    <!-- Event Location -->
+    <Label fx:id="eventLocationLabel" styleClass="event-detail" />
 
     <!-- Add to My Events Button -->
-    <Button onAction="#addToMyEvents" text="Ajouter à mes événements" />
+    <Button onAction="#addToMyEvents" text="Ajouter à mes événements" styleClass="action-button" />
 </VBox>

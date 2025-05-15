@@ -3,20 +3,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controller.UserEventsController">
-    <VBox layoutX="50" layoutY="50" spacing="10">
-        <!-- Search Label -->
-        <Label text="Rechercher par nom d'événement" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
-        <!-- Search Bar -->
-        <TextField fx:id="searchField" promptText="Rechercher un événement..." />
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controller.UserEventsController">
+    <VBox spacing="20" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+        <!-- Header Section -->
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <Label text="Events" styleClass="page-title">
+                <font>
+                    <Font size="24" />
+                </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#goToMyEvents" text="My Events" styleClass="action-button" />
+        </HBox>
 
-        <!-- List of Events -->
-        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Tous les événements" />
-        <VBox fx:id="eventsListContainer" spacing="10" />
+        <!-- Search Section -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <TextField fx:id="searchField" promptText="Search events..." prefWidth="300" styleClass="search-field" />
+            <ComboBox fx:id="sortComboBox" promptText="Sort by" prefWidth="150" styleClass="sort-combo" />
+        </HBox>
+
+        <!-- Events Grid -->
+        <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+            <TilePane fx:id="eventsListContainer" hgap="20" vgap="20" prefColumns="3" />
+        </ScrollPane>
     </VBox>
-
-    <!-- Go to My Events Button -->
-    <Button layoutX="50.0" layoutY="250.0" onAction="#goToMyEvents" text="Voir mes événements"
-            AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" />
 </AnchorPane>

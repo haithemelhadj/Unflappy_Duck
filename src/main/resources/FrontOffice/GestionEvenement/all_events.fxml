@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="tn.esprit.controller.AllEventsController" spacing="10" alignment="TOP_CENTER">
-    <!-- Title Label -->
-    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Liste de tous les événements" />
+<VBox fx:id="myEventsContainer" alignment="TOP_CENTER" spacing="20" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.MyEventsController" styleClass="root">
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40" />
+    </padding>
 
-    <!-- TilePane for Grid-like Layout -->
-    <TilePane fx:id="eventsGridContainer" prefColumns="2" hgap="10" vgap="10" />
+    <!-- Title -->
+    <Label text="Mes Événements" styleClass="title-label">
+        <font>
+            <Font name="Poppins" size="28" />
+        </font>
+        <effect>
+            <DropShadow color="#5E17EB" radius="5" spread="0.2" />
+        </effect>
+    </Label>
 
-    <!-- Spacer to push the button to the bottom -->
-    <Region VBox.vgrow="ALWAYS" />
-
-    <!-- Go Back Button at the bottom -->
-    <Button onAction="#goBack" text="Retour à l'ajout d'événements" />
+    <!-- Events List -->
+    <VBox fx:id="eventsListContainer" spacing="20" alignment="TOP_CENTER" styleClass="events-list-container">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20" />
+        </padding>
+    </VBox>
 </VBox>

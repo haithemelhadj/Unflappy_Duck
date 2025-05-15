@@ -67,7 +67,7 @@ public class ServiceUtilisateur {
                 utilisateur.setXp(resultSet.getInt("xp"));
                 utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class)); // Nullable Integer
                 utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
-                utilisateur.setToken(resultSet.getString("token"));
+                utilisateur.setStatut(resultSet.getBoolean("statut"));
                 utilisateurs.add(utilisateur);
             }
         }
@@ -92,7 +92,7 @@ public class ServiceUtilisateur {
                     utilisateur.setXp(resultSet.getInt("xp"));
                     utilisateur.setNiveau(resultSet.getObject("niveau", Integer.class)); // Nullable Integer
                     utilisateur.setXpRequis(resultSet.getInt("xp_requis"));
-                    utilisateur.setToken(resultSet.getString("token"));
+                    utilisateur.setStatut(resultSet.getBoolean("statut"));
                     return utilisateur;
                 }
             }
@@ -117,7 +117,7 @@ public class ServiceUtilisateur {
                 preparedStatement.setNull(8, Types.INTEGER);
             }
             preparedStatement.setInt(9, utilisateur.getXpRequis());
-            //preparedStatement.setString(10, utilisateur.getToken());
+            preparedStatement.setBoolean(11, utilisateur.getStatut());
             preparedStatement.setInt(10, utilisateur.getId());
 
 

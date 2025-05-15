@@ -13,10 +13,11 @@ public class Utilisateur {
     private int xp;
     private Integer niveau; // Integer to allow null values
     private int xpRequis;
-    private String token;
+    private boolean statut;
 
+    public Utilisateur() {}
 
-    public Utilisateur(int id, String nom, String email, String motDePasse, userRoles role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis) {
+    public Utilisateur(int id, String nom, String email, String motDePasse, userRoles role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis, String token) {
         this.id = id;
         this.nom = nom;
         this.email = email;
@@ -27,9 +28,10 @@ public class Utilisateur {
         this.xp = xp;
         this.niveau = niveau;
         this.xpRequis = xpRequis;
+        this.statut = statut;
     }
 
-    public Utilisateur(String nom, String email, String motDePasse, userRoles role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis) {
+    public Utilisateur(String nom, String email, String motDePasse, userRoles role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis, String token) {
         this.nom = nom;
         this.email = email;
         this.motDePasse = motDePasse;
@@ -39,10 +41,8 @@ public class Utilisateur {
         this.xp = xp;
         this.niveau = niveau;
         this.xpRequis = xpRequis;
+        this.statut = statut;
     }
-
-    public Utilisateur() {}
-
 
     public int getId() {
         return id;
@@ -124,12 +124,12 @@ public class Utilisateur {
         this.xpRequis = xpRequis;
     }
 
-    public String getToken() {
-        return token;
+    public boolean getStatut() {
+        return statut;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setStatut(boolean statut) {
+        this.statut = statut;
     }
 
     @Override
@@ -145,7 +145,9 @@ public class Utilisateur {
                 ", xp=" + xp +
                 ", niveau=" + niveau +
                 ", xpRequis=" + xpRequis +
-                //",token=" + token +
+                ", statut='" + statut + '\'' +
                 '}';
     }
+
+
 }

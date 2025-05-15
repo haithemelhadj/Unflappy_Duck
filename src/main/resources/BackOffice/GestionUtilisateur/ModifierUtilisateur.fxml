@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+
+<?import java.lang.String?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+            fx:controller="tn.esprit.controller.ModifierUtilisateur">
+    <VBox spacing="10" alignment="CENTER" prefWidth="600" prefHeight="700" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+
+        <Label fx:id="idLabel" text="ID: "/>
+
+        <TextField fx:id="nomField" promptText="Nom"/>
+        <TextField fx:id="emailField" promptText="Email"/>
+        <PasswordField fx:id="motDePasseField" promptText="Mot de passe"/>
+
+        <ChoiceBox fx:id="roleChoiceBox">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="utilisateur"/>
+                    <String fx:value="admin"/>
+                    <String fx:value="organisateur"/>
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+
+        <TextArea fx:id="bioField" promptText="Bio"/>
+        <TextField fx:id="photoField" promptText="Photo Profil URL"/>
+        <TextField fx:id="xpField" promptText="XP"/>
+        <TextField fx:id="niveauField" promptText="Niveau"/>
+        <TextField fx:id="xpRequisField" promptText="XP Requis"/>
+
+        <Button text="Modifier" onAction="#handleModifier"/>
+    </VBox>
+</AnchorPane>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+            fx:controller="tn.esprit.controller.ListUtilisateur">
+    <VBox spacing="10" alignment="CENTER" prefWidth="800" prefHeight="600" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+        <TableView fx:id="tableView">
+            <columns>
+                <TableColumn fx:id="colId" text="ID"/>
+                <TableColumn fx:id="colNom" text="Nom"/>
+                <TableColumn fx:id="colEmail" text="Email"/>
+                <TableColumn fx:id="colMotDePasse" text="Mot de Passe"/>
+                <TableColumn fx:id="colRole" text="Rôle"/>
+                <TableColumn fx:id="colBio" text="Bio"/>
+                <TableColumn fx:id="colPhoto" text="Photo Profil"/>
+                <TableColumn fx:id="colXp" text="XP"/>
+                <TableColumn fx:id="colNiveau" text="Niveau"/>
+                <TableColumn fx:id="colXpRequis" text="XP Requis"/>
+            </columns>
+        </TableView>
+        <HBox spacing="10">
+            <Button text="Ajouter" onAction="#handleAjouter"/>
+            <Button text="Modifier" onAction="#handleModifier"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

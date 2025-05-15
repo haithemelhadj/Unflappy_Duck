@@ -37,7 +37,8 @@ public class BackController implements Initializable {
             Router.borderPaneCenterInsert(coursBorderPane, "/BackOffice/GestionCours/GestionCour.fxml");
             Router.borderPaneCenterInsert(equipeBorderPane, "/BackOffice/GestionEquipe/GestionEquipe.fxml");
             Router.borderPaneCenterInsert(tacheBorderPane, "/BackOffice/GestionEquipe/GestionTache.fxml");
-            //Router.borderPaneCenterInsert(utilisateurBorderPane, "/BackOffice/GestionEquipe/GestionTache.fxml");
+            Router.borderPaneCenterInsert(evenementBorderPane, "/FrontOffice/GestionEvenement/event_form.fxml");
+            Router.borderPaneCenterInsert(utilisateurBorderPane, "/BackOffice/GestionUtilisateur/ListeUtilisateurs.fxml");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

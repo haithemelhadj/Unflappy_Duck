@@ -19,6 +19,8 @@ public class BackController implements Initializable {
     @FXML
     private BorderPane equipeBorderPane;
     @FXML
+    private BorderPane tacheBorderPane;
+    @FXML
     private BorderPane coursBorderPane;
     @FXML
     private BorderPane storeBorderPane;
@@ -33,6 +35,9 @@ public class BackController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             Router.borderPaneCenterInsert(coursBorderPane, "/BackOffice/GestionCours/GestionCour.fxml");
+            Router.borderPaneCenterInsert(equipeBorderPane, "/BackOffice/GestionEquipe/GestionEquipe.fxml");
+            Router.borderPaneCenterInsert(tacheBorderPane, "/BackOffice/GestionEquipe/GestionTache.fxml");
+            //Router.borderPaneCenterInsert(utilisateurBorderPane, "/BackOffice/GestionEquipe/GestionTache.fxml");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

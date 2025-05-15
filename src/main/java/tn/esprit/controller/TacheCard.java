@@ -1,7 +1,6 @@
 package tn.esprit.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import tn.esprit.models.Tache;
 
@@ -22,17 +21,14 @@ public class TacheCard {
     @FXML
     private Label statut;
 
-    //@FXML
-    //private CheckBox statut;
-
     @FXML
     private Label responsable;
-/*
+
     public void setData(Tache tache) {
         id.setText( String.valueOf(tache.getId()));
         equipe.setText( String.valueOf(tache.getEquipe_id()));
         responsable.setText(String.valueOf(tache.getId_responsable()));
-        statut.setText(tache.getStatut());
+        statut.setText(tache.getStatut()?"TERMINE":"EN_ATTENTE");
         description.setText(tache.getDescription());
         titre.setText(tache.getTitre());
     }
@@ -40,8 +36,7 @@ public class TacheCard {
         int tacheId = Integer.parseInt(id.getText());
         int tacheEquipe = Integer.parseInt(equipe.getText());
         int tacheResponsable = Integer.parseInt(responsable.getText());
-        Tache tache = new Tache(tacheId,tacheEquipe,titre.getText(),description.getText(),tacheResponsable,statut);
+        Tache tache = new Tache();//tacheId,tacheEquipe,titre.getText(),description.getText(),tacheResponsable,statut.isSelected());
         return tache;
     }
-    /* */
 }

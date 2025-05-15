@@ -156,13 +156,11 @@ public class GestionEquipe implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //region combobox
-        loadEquipesListChoiceBoxData(EquipesList);
-        loadUsersListChoiceBoxData(UsersList);
-        //equipe
-        loadUsersListChoiceBoxData(idChefEquipe);
-        loadid_EventChoiceBoxData(id_Event);
-        //endregion
+        // Only initialize ComboBoxes if they exist in the FXML
+        if (EquipesList != null) loadEquipesListChoiceBoxData(EquipesList);
+        if (UsersList != null) loadUsersListChoiceBoxData(UsersList);
+        if (idChefEquipe != null) loadUsersListChoiceBoxData(idChefEquipe);
+        if (id_Event != null) loadid_EventChoiceBoxData(id_Event);
 
         //region recherche equipe
         loadEquipesData(observableEquipeList);
@@ -174,16 +172,18 @@ public class GestionEquipe implements Initializable {
         //endregion
 
         //region sort equipe
-        equipeSort.getItems().addAll("Trier par ID", "Trier par Nom");
-        equipeSort.setValue("Trier par ID");
-
-        sortEquipe.setOnAction(event -> {
-            try {
-                sortEquipes();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        if (equipeSort != null)
+        {
+            equipeSort.getItems().addAll("Trier par ID", "Trier par Nom");
+            equipeSort.setValue("Trier par ID");
+            sortEquipe.setOnAction(event -> {
+                try {
+                    sortEquipes();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
         //endregion
 
         //region recherche membre
@@ -196,16 +196,15 @@ public class GestionEquipe implements Initializable {
         //endregion
 
         //region sort Membre
-        memberSort.getItems().addAll("Trier par ID", "Trier par Nom","Trier par equipe");
-        memberSort.setValue("Trier par ID"); // Default selection
-
-        sortMembre.setOnAction(event -> sortMembres());
+        if(memberSort != null) {
+            memberSort.getItems().addAll("Trier par ID", "Trier par Nom", "Trier par equipe");
+            memberSort.setValue("Trier par ID"); // Default selection
+            sortMembre.setOnAction(event -> sortMembres());
+        }
         //endregion
-
     }
 
     //region equipes
-
     private void loadEquipesData(ObservableList<String> list) {
         try{
             List<Equipe> equipes = se.getAll();
@@ -241,6 +240,7 @@ public class GestionEquipe implements Initializable {
 
     @FXML
     void AddUpdateEquipe(ActionEvent event) {
+        if (id_Event == null || idChefEquipe == null || NomEquipe == null) return;
         if(idEquipe.getText().equals(""))
         {
             addEquipe();
@@ -273,6 +273,7 @@ public class GestionEquipe implements Initializable {
 
     @FXML
     void deleteEquipe(ActionEvent event) {
+        if (idEquipe == null) return;
         try{
             if(idEquipe.getText()!="")
             {
@@ -305,6 +306,7 @@ public class GestionEquipe implements Initializable {
 
     //region methods equipe
     private void addEquipe() {
+        if (id_Event == null || idChefEquipe == null || NomEquipe == null) return;
         System.out.println("add started");
         try {
             String[] evntParts = id_Event.getValue().split("-", 2);
@@ -327,6 +329,7 @@ public class GestionEquipe implements Initializable {
     }
 
     private void updateEquipe(int id) {
+        if (id_Event == null || idChefEquipe == null || NomEquipe == null) return;
         System.out.println("update started");
         try {
             String[] evntParts = id_Event.getValue().split("-", 2);
@@ -426,27 +429,22 @@ public class GestionEquipe implements Initializable {
 
     @FXML
     void AddMember(ActionEvent event) {
-        //System.out.println("adding member");
+        if (EquipesList == null || UsersList == null) return;
         String[] usrsParts = UsersList.getValue().split("-", 2);
         int idUsr = Integer.parseInt(usrsParts[0]);
         String nomUsrModf = usrsParts[1];
         try {
-            //System.out.println("trying to add member");
             List<MembresEquipe> mmbrsEquipes = getMembreById(idUsr);
             if(mmbrsEquipes.size()==1)
             {
                 updateMembre(idUsr);
-                sendnotif("Mise a jour equipe","votre equipe a ete mis a jour!"); // send local notif
-                //sendsms("votre equipe a ete mis a jour!");//send sms
+                sendnotif("Mise a jour equipe","votre equipe a ete mis a jour!");
             }
             else if(mmbrsEquipes.isEmpty())
             {
                 addMembre();
                 System.out.println("member added");
-
-                sendnotif("Ajouter a l'equipe","vous avez ete ajouté a une equipe!"); // send local notif
-                //sendsms("vous eté ajouté a une equipe!");//send sms
-                //FirebaseNotifs.sendNotificationToDevice("","ajouté a une equipe","vous avez ete ajouté a une equipe");
+                sendnotif("Ajouter a l'equipe","vous avez ete ajouté a une equipe!");
             }
             else
             {
@@ -461,6 +459,7 @@ public class GestionEquipe implements Initializable {
 
     @FXML
     void EffacerMembre(ActionEvent event) {
+        if (UsersList == null) return;
         try{
             String[] usrsParts = UsersList.getValue().split("-", 2);
             int idUsr = Integer.parseInt(usrsParts[0]);
@@ -490,8 +489,8 @@ public class GestionEquipe implements Initializable {
 
     //region methods membres
     private void addMembre() {
+        if (EquipesList == null || UsersList == null) return;
         System.out.println("add started");
-
         try {
             String[] eqpParts = EquipesList.getValue().split("-", 2);
             int idEqp = Integer.parseInt(eqpParts[0]);
@@ -513,6 +512,7 @@ public class GestionEquipe implements Initializable {
     }
 
     private void updateMembre(int id) {
+        if (EquipesList == null || UsersList == null) return;
         System.out.println("update started");
         try {
             String[] eqpParts = EquipesList.getValue().split("-", 2);

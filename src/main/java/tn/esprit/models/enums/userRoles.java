@@ -1,3 +1,8 @@
 package tn.esprit.models.enums;
 
-public enum  userRoles{utilisateur,admin,organisateur, ADMIN, USER, freelancer}
+public enum userRoles {
+    ROLE_USER,
+    ROLE_ADMIN,
+    ROLE_CLIENT,
+    ROLE_FREELANCER
+}

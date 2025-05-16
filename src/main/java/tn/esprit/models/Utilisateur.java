@@ -6,7 +6,7 @@ public class Utilisateur {
     private int id;
     private String nom;
     private String email;
-    private String motDePasse;
+    private String password;
     private userRoles role;
     private String bio;
     private String photoProfil;
@@ -17,11 +17,11 @@ public class Utilisateur {
 
     public Utilisateur() {}
 
-    public Utilisateur(int id, String nom, String email, String motDePasse, userRoles role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis, String token) {
+    public Utilisateur(int id, String nom, String email, String password, userRoles role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis, boolean statut) {
         this.id = id;
         this.nom = nom;
         this.email = email;
-        this.motDePasse = motDePasse;
+        this.password = password;
         this.role = role;
         this.bio = bio;
         this.photoProfil = photoProfil;
@@ -31,10 +31,10 @@ public class Utilisateur {
         this.statut = statut;
     }
 
-    public Utilisateur(String nom, String email, String motDePasse, userRoles role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis, String token) {
+    public Utilisateur(String nom, String email, String password, userRoles role, String bio, String photoProfil, int xp, Integer niveau, int xpRequis, boolean statut) {
         this.nom = nom;
         this.email = email;
-        this.motDePasse = motDePasse;
+        this.password = password;
         this.role = role;
         this.bio = bio;
         this.photoProfil = photoProfil;
@@ -68,12 +68,12 @@ public class Utilisateur {
         this.email = email;
     }
 
-    public String getMotDePasse() {
-        return motDePasse;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public userRoles getRole() {
@@ -138,7 +138,7 @@ public class Utilisateur {
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", email='" + email + '\'' +
-                ", motDePasse='" + motDePasse + '\'' +
+                ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 ", bio='" + bio + '\'' +
                 ", photoProfil='" + photoProfil + '\'' +
@@ -148,6 +148,4 @@ public class Utilisateur {
                 ", statut='" + statut + '\'' +
                 '}';
     }
-
-
 }

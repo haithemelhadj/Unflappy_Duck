@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ChoiceBox?>
 <AnchorPane stylesheets="@GestionEquipescss-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.GestionTache">
    <children>
       <ScrollPane prefHeight="600.0">
@@ -81,11 +82,8 @@
                                                                               <VBox styleClass="form-group">
                                                          <children>
                                                             <Label styleClass="form-label" text="Statut" />
-                                                            <CheckBox fx:id="statusCheckBox" lineSpacing="5.0" mnemonicParsing="false" text="terminée?">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </CheckBox>
+                                                            <ChoiceBox fx:id="statusCheckBox">
+                                                            </ChoiceBox>
                                                          </children>
                                                       </VBox>
             

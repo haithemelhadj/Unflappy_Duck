@@ -13,14 +13,15 @@
 
         <TextField fx:id="nomField" promptText="Nom"/>
         <TextField fx:id="emailField" promptText="Email"/>
-        <PasswordField fx:id="motDePasseField" promptText="Mot de passe"/>
+        <PasswordField fx:id="passwordField" promptText="Password"/>
 
         <ChoiceBox fx:id="roleChoiceBox">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="utilisateur"/>
-                    <String fx:value="admin"/>
-                    <String fx:value="organisateur"/>
+                    <String fx:value="ROLE_USER"/>
+                    <String fx:value="ROLE_ADMIN"/>
+                    <String fx:value="ROLE_CLIENT"/>
+                    <String fx:value="ROLE_FREELANCER"/>
                 </FXCollections>
             </items>
         </ChoiceBox>

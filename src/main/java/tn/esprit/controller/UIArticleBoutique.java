@@ -101,10 +101,10 @@ public class UIArticleBoutique implements Initializable {
 
 
 
-        if (nom.getText().length()>0){
+        if (!nom.getText().isEmpty()){
             articleBoutique.setNom(nom.getText());
         }
-        if (prix.getText().length()>0){
+        if (!prix.getText().isEmpty()){
           BigDecimal bigDecimal = new BigDecimal(prix.getText());
             articleBoutique.setPrix(bigDecimal);
         }
@@ -180,8 +180,9 @@ public class UIArticleBoutique implements Initializable {
 
     public void recherche(ActionEvent actionEvent) {
         article.getItems().clear();
-        article.getItems().addAll( listOfArticleBoutique.stream().filter(a -> a.getNom().startsWith(searchField.getText())).toList());
-
+        article.getItems().addAll( listOfArticleBoutique.stream()
+                .filter(a -> a.getNom().toLowerCase().contains(searchField.getText().toLowerCase()))
+                .toList());
     }
 
 
@@ -193,7 +194,7 @@ public class UIArticleBoutique implements Initializable {
     public void recherche1(ActionEvent actionEvent) {
         itemlist.getChildren().clear();  // Clear all items from the GridPane
         List<ArticleBoutique> filteredArticles = listOfArticleBoutique.stream()
-                .filter(a -> a.getNom().startsWith(searchField.getText()))
+                .filter(a -> a.getNom().toLowerCase().contains(searchField.getText().toLowerCase()))
                 .toList();
         displayArticle(filteredArticles);  // Use displayArticle to add filtered items
 

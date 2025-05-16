@@ -1,28 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-            fx:controller="tn.esprit.controller.ListUtilisateur">
-    <VBox spacing="10" alignment="CENTER" prefWidth="800" prefHeight="600" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
-        <TableView fx:id="tableView">
-            <columns>
-                <TableColumn fx:id="colId" text="ID"/>
-                <TableColumn fx:id="colNom" text="Nom"/>
-                <TableColumn fx:id="colEmail" text="Email"/>
-                <TableColumn fx:id="colMotDePasse" text="Mot de Passe"/>
-                <TableColumn fx:id="colRole" text="Rôle"/>
-                <TableColumn fx:id="colBio" text="Bio"/>
-                <TableColumn fx:id="colPhoto" text="Photo Profil"/>
-                <TableColumn fx:id="colXp" text="XP"/>
-                <TableColumn fx:id="colNiveau" text="Niveau"/>
-                <TableColumn fx:id="colXpRequis" text="XP Requis"/>
-            </columns>
-        </TableView>
-        <HBox spacing="10">
-            <Button text="Ajouter" onAction="#handleAjouter"/>
-            <Button text="Modifier" onAction="#handleModifier"/>
+<AnchorPane stylesheets="/styles/modern.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.ListUtilisateur">
+    <VBox prefHeight="600" prefWidth="800" spacing="10" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" styleClass="header-container">
+            <padding>
+                <Insets bottom="15" left="15" right="15" top="15" />
+            </padding>
+            <Label styleClass="title-label" text="Gestion des Utilisateurs" />
+        </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" styleClass="header-container">
+         <padding>
+            <Insets bottom="15" left="15" right="15" top="15" />
+         </padding>
+         <children>
+            <TextField fx:id="searchField"/>
+            <Button onAction="#rechercher" mnemonicParsing="false" text="Rechercher"/>
+            <Button onAction="#tri" mnemonicParsing="false" text="Tri" />
+         </children>
+      </HBox>
+        
+        <!-- ListView for users -->
+        <ListView fx:id="listView" styleClass="user-list-view" VBox.vgrow="ALWAYS">
+            <placeholder>
+                <Label text="Aucun utilisateur trouvé" />
+            </placeholder>
+        </ListView>
+        
+        <!-- Action Buttons -->
+        <HBox alignment="CENTER_RIGHT" spacing="10" styleClass="button-container">
+            <padding>
+                <Insets bottom="10" left="15" right="15" top="10" />
+            </padding>
+            <Button onAction="#handleAjouter" styleClass="add-button" text="Ajouter" />
+            <Button onAction="#handleModifier" styleClass="edit-button" text="Modifier" />
         </HBox>
     </VBox>
 </AnchorPane>

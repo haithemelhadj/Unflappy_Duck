@@ -23,8 +23,8 @@ public class Main {
             Utilisateur newUtilisateur = new Utilisateur();
             newUtilisateur.setNom("John Doe");
             newUtilisateur.setEmail("john.doe@example.com");
-            newUtilisateur.setMotDePasse("password123"); // Ensure this is hashed before storing
-            newUtilisateur.setRole(userRoles.utilisateur);
+            newUtilisateur.setPassword("password123"); // Ensure this is hashed before storing
+            newUtilisateur.setRole(userRoles.ROLE_USER);
             newUtilisateur.setBio("A passionate gamer.");
             newUtilisateur.setPhotoProfil("profile.jpg");
             newUtilisateur.setXp(100);

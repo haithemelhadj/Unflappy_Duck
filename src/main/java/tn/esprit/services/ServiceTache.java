@@ -33,7 +33,7 @@ public class ServiceTache implements IService<Tache> {
             pstm.setString(4,tache.getDescription());
             //pstm.setInt(5,tache.getId_assignateur());, `id_assignateur`
             pstm.setInt(5,tache.getId_responsable());
-            pstm.setBoolean(6,tache.getStatut());
+            pstm.setString(6,tache.getStatut());
 
 
             pstm.executeUpdate();
@@ -61,7 +61,7 @@ public class ServiceTache implements IService<Tache> {
                 //p.setId_assignateur(rs.getInt(5));
                 p.setId_responsable(rs.getInt(5));
                 //p.setStatut(Statut.valueOf(rs.getString(6)));
-                p.setStatut(rs.getBoolean(6));
+                p.setStatut(rs.getString(6));
 
 
                 taches.add(p);

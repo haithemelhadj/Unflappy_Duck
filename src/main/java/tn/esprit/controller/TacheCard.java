@@ -28,7 +28,7 @@ public class TacheCard {
         id.setText( String.valueOf(tache.getId()));
         equipe.setText( String.valueOf(tache.getEquipe_id()));
         responsable.setText(String.valueOf(tache.getId_responsable()));
-        statut.setText(tache.getStatut()?"TERMINE":"EN_ATTENTE");
+        statut.setText(tache.getStatut());
         description.setText(tache.getDescription());
         titre.setText(tache.getTitre());
     }

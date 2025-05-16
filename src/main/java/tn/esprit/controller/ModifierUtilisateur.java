@@ -11,7 +11,7 @@ public class ModifierUtilisateur {
     @FXML private Label idLabel;
     @FXML private TextField nomField;
     @FXML private TextField emailField;
-    @FXML private PasswordField motDePasseField;
+    @FXML private PasswordField passwordField;
     @FXML private ChoiceBox<userRoles> roleChoiceBox;
     @FXML private TextArea bioField;
     @FXML private TextField photoField;
@@ -24,34 +24,29 @@ public class ModifierUtilisateur {
     private final ServiceUtilisateur utilisateurService = new ServiceUtilisateur();
 
     public void setUtilisateur(Utilisateur u) {
-        /*
         this.utilisateur = u;
         populateFields();
-        /**/
     }
 
     private void populateFields() {
-        /*
         idLabel.setText("ID: " + utilisateur.getId());
         nomField.setText(utilisateur.getNom());
         emailField.setText(utilisateur.getEmail());
-        motDePasseField.setText(utilisateur.getMotDePasse());
+        passwordField.setText(utilisateur.getPassword());
         roleChoiceBox.setValue(utilisateur.getRole());
         bioField.setText(utilisateur.getBio());
         photoField.setText(utilisateur.getPhotoProfil());
         xpField.setText(String.valueOf(utilisateur.getXp()));
         niveauField.setText(String.valueOf(utilisateur.getNiveau()));
         xpRequisField.setText(String.valueOf(utilisateur.getXpRequis()));
-        /**/
     }
 
     @FXML
     private void handleModifier() {
-        /*
         try {
             utilisateur.setNom(nomField.getText());
             utilisateur.setEmail(emailField.getText());
-            utilisateur.setMotDePasse(motDePasseField.getText());
+            utilisateur.setPassword(passwordField.getText());
             utilisateur.setRole(userRoles.valueOf(String.valueOf(roleChoiceBox.getValue())));
             utilisateur.setBio(bioField.getText());
             utilisateur.setPhotoProfil(photoField.getText());
@@ -68,6 +63,5 @@ public class ModifierUtilisateur {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur : " + e.getMessage());
             alert.showAndWait();
         }
-        /**/
     }
 }

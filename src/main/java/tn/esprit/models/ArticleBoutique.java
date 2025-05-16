@@ -70,8 +70,6 @@ public class ArticleBoutique {
     }
 
     public enum Type{
-        article, ticket;
-
-
+        Article, Ticket
       }
     }

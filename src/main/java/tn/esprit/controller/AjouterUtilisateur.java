@@ -10,7 +10,7 @@ public class AjouterUtilisateur {
 
     @FXML private TextField nomField;
     @FXML private TextField emailField;
-    @FXML private PasswordField motDePasseField;
+    @FXML private PasswordField passwordField;
     @FXML private ChoiceBox<String> roleChoiceBox;
     @FXML private TextArea bioField;
     @FXML private TextField photoField;
@@ -29,12 +29,11 @@ public class AjouterUtilisateur {
 
     @FXML
     private void handleAjouter() {
-        /*
         try {
             Utilisateur u = new Utilisateur();
             u.setNom(nomField.getText());
             u.setEmail(emailField.getText());
-            u.setMotDePasse(motDePasseField.getText());
+            u.setPassword(passwordField.getText());
             u.setRole(userRoles.valueOf(roleChoiceBox.getValue()));
             u.setBio(bioField.getText());
             u.setPhotoProfil(photoField.getText());
@@ -48,12 +47,9 @@ public class AjouterUtilisateur {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Utilisateur ajouté avec succès !");
             alert.showAndWait();
 
-
-
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur : " + e.getMessage());
             alert.showAndWait();
         }
-        /* */
     }
 }

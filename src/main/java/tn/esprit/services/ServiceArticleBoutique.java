@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static tn.esprit.models.ArticleBoutique.Type.article;
+import static tn.esprit.models.ArticleBoutique.Type.Article;
 
 // Service Implementation: ServiceArticleBoutique
 public class ServiceArticleBoutique implements IService<ArticleBoutique>{

@@ -21,7 +21,7 @@ public class FirebaseConfig {
     public static void initializeFirebase() {
         if (firebaseApp != null) return; // Avoid re-initialization
 
-        try (InputStream serviceAccount = new FileInputStream("D:\\Users\\Kuruttakao\\Documents\\GitHub\\env\\firebase-config.json")) {
+        try (InputStream serviceAccount = new FileInputStream("\\GitHub\\env\\firebase-config.json")) {
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .build();

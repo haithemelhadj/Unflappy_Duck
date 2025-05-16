@@ -32,8 +32,9 @@ public class UIFreelance extends Application {
     public void start(Stage primaryStage) throws SQLException {
         Router.initialize(primaryStage);
         Controller con = new Controller();
-        FirebaseConfig.initializeFirebase();
-      // Session.start(new ServiceUtilisateur().getUtilisateurById(1));
+        //FirebaseConfig.initializeFirebase();
+//        Session.start(new ServiceUtilisateur().getUtilisateurById(1429));
+        Session.start(new ServiceUtilisateur().getUtilisateurById(1426));
         con.start();
     }
     void initFireBase(Stage primaryStage) throws IOException {
@@ -41,9 +42,4 @@ public class UIFreelance extends Application {
         primaryStage.setTitle("JavaFX Firebase Push Notification");
         primaryStage.show();
     }
-
-
 }
-
-
-

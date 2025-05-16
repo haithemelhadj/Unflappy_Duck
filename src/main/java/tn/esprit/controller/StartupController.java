@@ -91,9 +91,11 @@ public class StartupController implements Initializable {
             return;
         }
 
+        System.out.println("--A-will login to user");
         try {
             // Try logging in with the service
             Utilisateur utilisateur = serviceUtilisateur.loginUtilisateur(usernameOrEmail, password);
+            System.out.println("--A-user is :"+ utilisateur);
             if (utilisateur != null) {
                 showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome " + utilisateur.getNom() + "!");
                 Session.start(utilisateur);
@@ -129,13 +131,6 @@ public class StartupController implements Initializable {
             return;
         }
 
-        // CAPTCHA verification
-        String captchaResponse = getResponseFromCaptcha(registerCaptchaView);
-        if (!verifyCaptcha(captchaResponse)) {
-            showAlert(Alert.AlertType.WARNING, "CAPTCHA invalide", "Veuillez valider le CAPTCHA");
-            return;
-        }
-
         // Check if email already exists
         try {
             if (serviceUtilisateur.emailExists(email)) {
@@ -154,8 +149,8 @@ public class StartupController implements Initializable {
         Utilisateur newUser = new Utilisateur();
         newUser.setNom(name);
         newUser.setEmail(email);
-        newUser.setMotDePasse(password); // Consider hashing before saving
-        newUser.setRole(userRoles.utilisateur);
+        newUser.setPassword(password); // Consider hashing before saving
+        newUser.setRole(userRoles.ROLE_USER);
         newUser.setBio("");
         newUser.setPhotoProfil("");
         newUser.setXp(0);
@@ -176,23 +171,6 @@ public class StartupController implements Initializable {
     private String getResponseFromCaptcha(WebView captchaView) {
         return (String) captchaView.getEngine()
                 .executeScript("document.getElementById('g-recaptcha-response').value");
-    }
-
-    private boolean verifyCaptcha(String userResponseToken) {
-        String secretKey = "your-secret-key-here";
-        String url = "https://www.google.com/recaptcha/api/siteverify";
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url + "?secret=" + secretKey + "&response=" + userResponseToken))
-                .POST(HttpRequest.BodyPublishers.noBody())
-                .build();
-        try {
-            HttpClient client = HttpClient.newHttpClient();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.body().contains("\"success\": true");
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     @FXML
@@ -276,7 +254,7 @@ public class StartupController implements Initializable {
 
     private void handleSocialLoginSuccess(String provider, String accessToken) {
         System.out.println(provider + " login successful! Access Token: " + accessToken);
-        // For now, just log it. You’d normally fetch user info here and link it to your app
+        // For now, just log it. You'd normally fetch user info here and link it to your app
         // callback.call(); // Uncomment this to proceed after login
     }
 

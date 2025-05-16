@@ -59,14 +59,14 @@ public class    FrontController implements Initializable {
 
     @FXML
     public void goToSettings(ActionEvent actionEvent) throws IOException{
-//        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/homePage.fxml")).load());
+        borderPane.setCenter(new FXMLLoader(getClass().getResource("/FrontOffice/GestionUtilisateur/UserProfile.fxml")).load());
     }
 
     @FXML
     public void goToMyList(ActionEvent actionEvent) throws IOException {
-        if (Session.getActiveUser().getRole().equals(userRoles.freelancer))
+        if (Session.getActiveUser().getRole().equals(userRoles.ROLE_FREELANCER))
             Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Service.fxml");
-        else if (Session.getActiveUser().getRole().equals(userRoles.organisateur))
+        else if (Session.getActiveUser().getRole().equals(userRoles.ROLE_CLIENT))
             Router.borderPaneCenterInsert(borderPane, "/FrontOffice/GestionFreelance/Offre.fxml");
     }
     @FXML
@@ -76,9 +76,9 @@ public class    FrontController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (Session.getActiveUser().getRole().equals(userRoles.freelancer))
+        if (Session.getActiveUser().getRole().equals(userRoles.ROLE_FREELANCER))
             freelancerMenu.getItems().get(1).setText("Mes Services");
-        else if (Session.getActiveUser().getRole().equals(userRoles.organisateur))
+        else if (Session.getActiveUser().getRole().equals(userRoles.ROLE_CLIENT))
             freelancerMenu.getItems().get(1).setText("Mes Offres");
         else
             freelancerMenu.hide();

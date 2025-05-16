@@ -54,7 +54,7 @@ public class GestionTache implements Initializable {
     private Button sortTache;
 
     @FXML
-    private CheckBox statusCheckBox;
+    private ChoiceBox<String> statusCheckBox;
 
     @FXML
     private ComboBox<String> tacheSort;
@@ -126,6 +126,13 @@ public class GestionTache implements Initializable {
             sortTache.setOnAction(event -> sortTache());
         }
 
+        //region sort taches
+        if(statusCheckBox!= null)
+        {
+            statusCheckBox.getItems().addAll("Terminée", "En cours", "À faire", "Bloquée", "Proposée");
+            statusCheckBox.setValue("À faire");
+        }
+
         //endregion
 
         //region recherche tache
@@ -153,7 +160,7 @@ public class GestionTache implements Initializable {
                         titre.getText(),
                         description.getText(),
                         idMembr,
-                        statusCheckBox.isSelected()
+                        statusCheckBox.getValue()
                 ));
         }catch(Exception e) {
             System.out.println("huge int failure :(");
@@ -177,7 +184,7 @@ public class GestionTache implements Initializable {
                     titre.getText(),
                     description.getText(),
                     idMembr,
-                    statusCheckBox.isSelected()));
+                    statusCheckBox.getValue()));
         }catch(Exception e) {
             System.out.println(e.getMessage());
             Error.setText(e.getMessage());
@@ -197,7 +204,7 @@ public class GestionTache implements Initializable {
                 p.setTitre(rs.getString(3));
                 p.setDescription(rs.getString(4));
                 p.setId_responsable(rs.getInt(5));
-                p.setStatut(rs.getBoolean(6)); // Changed from rs.getString(6)
+                p.setStatut(rs.getString(6)); // Changed from rs.getString(6)
 
                 taches.add(p);
             }
@@ -224,7 +231,7 @@ public class GestionTache implements Initializable {
                     Tache tacheToEdit = taches.get(0);
                     titre.setText(tacheToEdit.getTitre());
                     description.setText(tacheToEdit.getDescription());
-                    statusCheckBox.setSelected(tacheToEdit.getStatut());
+                    statusCheckBox.setValue(tacheToEdit.getStatut());
                     update(id);
                 }
                 else if(taches.isEmpty())
@@ -305,9 +312,9 @@ public class GestionTache implements Initializable {
         try{
             List<Tache> taches = st.getAll();
             for (Tache t : taches) {
-                String sts = t.getStatut()?"TERMINE":"EN_ATTENTE";
-                //observableTacheList.add(t.getId()+" | "+t.getTitre()+" | "+t.getStatut()+" | ");
-                observableTacheList.add(t.getId()+" | "+t.getTitre()+" | "+sts+" | ");
+//                String sts = t.getStatut()?"TERMINE":"EN_ATTENTE";
+                observableTacheList.add(t.getId()+" | "+t.getTitre()+" | "+t.getStatut()+" | ");
+//                observableTacheList.add(t.getId()+" | "+t.getTitre()+" | "+sts+" | ");
             }
         }catch (Exception e)
         {

@@ -101,8 +101,8 @@ public class Controllerlogin {
         Utilisateur newUser = new Utilisateur();
         newUser.setNom(name);
         newUser.setEmail(email);
-        newUser.setMotDePasse(password);
-        newUser.setRole(userRoles.utilisateur);
+        newUser.setPassword(password);
+        newUser.setRole(userRoles.ROLE_USER);
         newUser.setBio("");
         newUser.setPhotoProfil("");
         newUser.setXp(0);
@@ -130,7 +130,7 @@ public class Controllerlogin {
 
 
     private void redirectToHomePage(Utilisateur utilisateur) {
-        if (!userRoles.admin.equals(utilisateur.getRole())) {
+        if (!userRoles.ROLE_ADMIN.equals(utilisateur.getRole())) {
             System.out.println("Redirecting to home page...");
 
         } else {

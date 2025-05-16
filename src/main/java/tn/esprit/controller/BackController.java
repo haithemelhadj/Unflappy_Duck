@@ -53,6 +53,12 @@ public class BackController implements Initializable {
     }
 
 
+    public void show_service(ActionEvent actionEvent) throws IOException {
+        Router.borderPaneCenterInsert(freelancerBorderPane,"/BackOffice/GestionFreelancer/GestionService.fxml");
+    }
 
+    public void show_offre(ActionEvent actionEvent) throws IOException {
+        Router.borderPaneCenterInsert(freelancerBorderPane,"/BackOffice/GestionFreelancer/GestionOffre.fxml");
 
+    }
 }

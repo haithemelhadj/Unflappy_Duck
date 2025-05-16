@@ -3,21 +3,35 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.Market2Controller">
-  <tabs>
-      <Tab text="Services">
-         <content>
-            <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <BorderPane fx:id="serviceBorderPane" layoutX="-12.0" layoutY="-4.0" prefHeight="728.0" prefWidth="651.0" />
-               </children>
-            </Pane>
-         </content></Tab>
-    <Tab text="Offres">
-         <content>
-            <BorderPane fx:id="offerBorderPane" prefHeight="728.0" prefWidth="651.0" />
-         </content></Tab>
-  </tabs>
-</TabPane>
+<StackPane prefHeight="720.0" prefWidth="1000.0" styleClass="market-container" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.Market2Controller">
+   <VBox alignment="CENTER" spacing="10">
+      <padding>
+         <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+      </padding>
+      
+      <!-- Main title for the market -->
+      <VBox alignment="CENTER" styleClass="page-header">
+         <fx:include source="MarketHeader.fxml"/>
+      </VBox>
+      
+      <!-- Tab container for Services and Offers -->
+      <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" styleClass="market-tabs" VBox.vgrow="ALWAYS">
+        <tabs>
+            <Tab text="Services" styleClass="market-tab">
+               <content>
+                  <BorderPane fx:id="serviceBorderPane" styleClass="content-pane" />
+               </content>
+            </Tab>
+            <Tab text="Offres" styleClass="market-tab">
+               <content>
+                  <BorderPane fx:id="offerBorderPane" styleClass="content-pane" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </VBox>
+</StackPane>

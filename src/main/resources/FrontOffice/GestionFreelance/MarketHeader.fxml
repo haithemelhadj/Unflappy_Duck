@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="5.0" styleClass="market-header" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets bottom="15.0" />
+   </padding>
+   <children>
+      <Label text="Espace Freelance" styleClass="market-title">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label text="Trouvez des services ou des offres qui correspondent à vos besoins" styleClass="market-subtitle">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</VBox> 

@@ -23,8 +23,8 @@
                     </top>
                     <bottom>
                         <HBox spacing="10.0" styleClass="button-panel" BorderPane.alignment="CENTER">
-                            <Button mnemonicParsing="false" styleClass="action-button" text="Service" />
-                            <Button mnemonicParsing="false" styleClass="action-button" text="Offre" />
+                            <Button mnemonicParsing="false" styleClass="action-button" text="Service" onAction="#show_service"/>
+                            <Button mnemonicParsing="false" styleClass="action-button" text="Offre" onAction="#show_offre"/>
                             <Region HBox.hgrow="ALWAYS" />
                             <Button mnemonicParsing="false" styleClass="secondary-button" text="Refresh" />
                             <padding>

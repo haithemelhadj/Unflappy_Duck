@@ -3,9 +3,13 @@
     -fx-primary: #2D46B9;
     -fx-secondary: #5E17EB;
     -fx-accent: #FF3366;
-    -fx-background: #0A1128;
+    -fx-background: #1a1f36;
     -fx-text: #F8F9FA;
     -fx-gradient: linear-gradient(135deg, -fx-secondary, -fx-primary);
+    -fx-card-bg: #FFFFFF;
+    -fx-card-shadow: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
 
     /* Font Settings */
     -fx-font-family: 'Poppins', 'Segoe UI', sans-serif;
@@ -19,75 +23,378 @@
     /* Transparency Variants */
     -fx-primary-transparent: rgba(94, 23, 235, 0.25);
     -fx-secondary-transparent: rgba(255, 51, 102, 0.15);
-    -fx-background-transparent: rgba(10, 17, 40, 0.95);
+    -fx-background-transparent: rgba(26, 31, 54, 0.95);
+}
+
+/* Market Container Styles */
+.market-container {
+    -fx-background-color: -fx-background;
+}
+
+.market-header {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 10px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 4);
+    -fx-margin-bottom: 20px;
+}
+
+.market-title {
+    -fx-text-fill: -fx-text;
+    -fx-font-weight: bold;
+    -fx-font-size: 32px;
+    -fx-effect: -fx-primary-glow;
+}
+
+.market-subtitle {
+    -fx-text-fill: derive(-fx-text, -10%);
+    -fx-font-size: 16px;
+}
+
+/* Tab Pane Styles */
+.market-tabs {
+    -fx-background-color: transparent;
+}
+
+.market-tabs .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.market-tabs .tab {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-padding: 12px 25px;
+}
+
+.market-tabs .tab:selected {
+    -fx-background-color: -fx-primary;
+    -fx-effect: dropshadow(gaussian, rgba(94, 23, 235, 0.5), 10, 0, 0, 0);
+}
+
+.market-tabs .tab .tab-label {
+    -fx-text-fill: -fx-text;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.market-tabs .tab-content-area {
+    -fx-background-color: transparent;
+}
+
+/* Filter Section */
+.filter-section {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 2);
+    -fx-margin-bottom: 15px;
+}
+
+.section-label {
+    -fx-text-fill: -fx-text;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+.search-field, .search-combo, .sort-combo {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-background-radius: 8px;
+    -fx-text-fill: -fx-text;
+    -fx-prompt-text-fill: derive(-fx-text, -20%);
+    -fx-padding: 10px 15px;
+    -fx-font-size: 14px;
+}
+
+.search-button {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px 20px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.search-button:hover {
+    -fx-background-color: derive(-fx-accent, 10%);
+    -fx-effect: -fx-button-hover-glow;
+}
+
+.sort-toggle {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-text;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 15px;
+}
+
+.sort-toggle:selected {
+    -fx-rotate: 180;
+    -fx-background-color: derive(-fx-primary, 15%);
+}
+
+.count-label {
+    -fx-text-fill: derive(-fx-text, -10%);
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+/* ScrollPane Styles */
+.services-scroll-pane, .offers-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.services-scroll-pane > .viewport, .offers-scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.services-container, .offers-container {
+    -fx-background-color: transparent;
+    -fx-padding: 15px 0;
+    -fx-spacing: 20px;
+}
+
+/* Service and Offer Card Styles */
+.service-card, .offer-card {
+    -fx-background-color: -fx-card-bg;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 4);
+    -fx-spacing: 15px;
+    -fx-padding: 24px;
+    -fx-border-width: 0 0 0 5px;
+    -fx-border-color: -fx-accent;
+    -fx-border-radius: 0 0 0 12px;
+}
+
+.service-card:hover, .offer-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(94, 23, 235, 0.4), 15, 0, 0, 5);
+    -fx-cursor: hand;
+    -fx-background-color: derive(-fx-card-bg, -2%);
+    -fx-border-color: derive(-fx-accent, 15%);
+    -fx-border-width: 0 0 0 5px;
+}
+
+.freelancer-info, .event-info {
+    -fx-padding: 0 0 8px 0;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: rgba(0, 0, 0, 0.08);
+}
+
+.freelancer-name, .event-name {
+    -fx-text-fill: -fx-primary;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.service-title, .offer-title {
+    -fx-text-fill: #121212;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
+.service-price, .offer-budget {
+    -fx-text-fill: -fx-accent;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-background-color: rgba(255, 51, 102, 0.1);
+    -fx-background-radius: 4px;
+    -fx-padding: 4px 10px;
+}
+
+.service-description, .offer-description {
+    -fx-text-fill: #3a3a3a;
+    -fx-line-spacing: 5px;
+    -fx-font-size: 14px;
+}
+
+.service-details, .offer-details {
+    -fx-padding: 10px 0 0 0;
+    -fx-border-width: 1px 0 0 0;
+    -fx-border-color: rgba(0, 0, 0, 0.08);
+}
+
+.service-expertise, .payment-method, .offer-status, .contract-type {
+    -fx-text-fill: #4d4d4d;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-color: rgba(0, 0, 0, 0.04);
+    -fx-background-radius: 4px;
+    -fx-padding: 4px 8px;
+}
+
+.hire-button, .apply-button {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+}
+
+.hire-button:hover, .apply-button:hover {
+    -fx-background-color: derive(-fx-accent, 10%);
+    -fx-effect: -fx-button-hover-glow;
+    -fx-cursor: hand;
 }
 
 /* Base Styles for Common Components */
 .label, .button, .text-field, .combo-box, .list-cell {
     -fx-font-family: -fx-font-family;
     -fx-font-size: -fx-font-size-base;
-    -fx-text-fill: -fx-text;
-}
-
-.vbox, .hbox, .split-pane, .tab-pane {
-    -fx-background-color: -fx-background;
 }
 
 .button {
     -fx-background-color: -fx-primary;
     -fx-text-fill: -fx-text;
     -fx-effect: -fx-primary-glow;
+    -fx-cursor: hand;
+    -fx-padding: 10px 15px;
+    -fx-background-radius: 8px;
 }
 
 .button:hover {
     -fx-effect: -fx-button-hover-glow;
-}
-
-.list-view {
-    -fx-background-color: -fx-background;
-}
-
-.list-cell {
-    -fx-text-fill: -fx-text;
-    -fx-background-color: -fx-background;
-}
-
-.list-cell:selected {
-    -fx-background-color: -fx-primary-transparent;
-}
-
-.tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: -fx-background;
-}
-
-.tab-pane .tab {
-    -fx-background-color: -fx-secondary;
-}
-
-.tab-pane .tab:selected {
-    -fx-background-color: -fx-primary;
-}
-
-.tab-pane .tab .tab-label {
-    -fx-text-fill: -fx-text;
-}
-
-.text-field {
-    -fx-background-color: -fx-background-transparent;
-    -fx-text-fill: -fx-text;
-    -fx-prompt-text-fill: derive(-fx-text, 50%);
-}
-
-.combo-box {
-    -fx-background-color: -fx-background;
-}
-
-.combo-box .list-cell {
-    -fx-text-fill: -fx-text;
+    -fx-background-color: derive(-fx-primary, 10%);
 }
 
 /* Specific Styles for Elements with fx:id */
 #serviceTitleLabel, #eventNameLabel {
     -fx-font-size: 18px;
     -fx-font-weight: bold;
+}
+
+/* Content pane styles */
+.content-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 15px;
+}
+
+/* List view styles */
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10px 0;
+}
+
+/* Improve visibility of combo box dropdown */
+.combo-box-popup .list-view {
+    -fx-background-color: -fx-card-bg;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: -fx-card-bg;
+    -fx-text-fill: #333333;
+    -fx-padding: 8px 12px;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: rgba(94, 23, 235, 0.1);
+}
+
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: rgba(94, 23, 235, 0.2);
+    -fx-text-fill: -fx-primary;
+}
+
+/* Offer Box Specific Styles */
+.expire-date {
+    -fx-text-fill: #4d4d4d;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+}
+
+.offer-status {
+    -fx-font-weight: bold;
+    -fx-background-color: rgba(45, 70, 185, 0.1);
+    -fx-text-fill: -fx-primary;
+    -fx-padding: 4px 8px;
+    -fx-background-radius: 4px;
+}
+
+/* Card Container Styles */
+.flow-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 15px;
+    -fx-hgap: 20px;
+    -fx-vgap: 20px;
+}
+
+/* Toggle Button Styles */
+.toggle-button {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-text-fill: -fx-text;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 15px;
+    -fx-font-size: 14px;
+}
+
+.toggle-button:selected {
+    -fx-background-color: -fx-primary;
+    -fx-effect: -fx-primary-glow;
+}
+
+/* Action buttons */
+.edit-button {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-background-radius: 4px;
+    -fx-padding: 5px 10px;
+}
+
+.delete-button {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-background-radius: 4px;
+    -fx-padding: 5px 10px;
+}
+
+.edit-button:hover, .delete-button:hover {
+    -fx-effect: -fx-button-hover-glow;
+    -fx-cursor: hand;
+}
+
+.save-button {
+    -fx-background-color: #28a745;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 8px 20px;
+}
+
+.cancel-button {
+    -fx-background-color: #6c757d;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 8px 20px;
+}
+
+.save-button:hover {
+    -fx-background-color: derive(#28a745, 10%);
+    -fx-effect: dropshadow(gaussian, rgba(40, 167, 69, 0.5), 8, 0, 0, 0);
+}
+
+.cancel-button:hover {
+    -fx-background-color: derive(#6c757d, 10%);
+}
+
+.action-button {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 8px 15px;
+}
+
+.action-button:hover {
+    -fx-background-color: derive(-fx-primary, 10%);
+    -fx-effect: -fx-primary-glow;
 }

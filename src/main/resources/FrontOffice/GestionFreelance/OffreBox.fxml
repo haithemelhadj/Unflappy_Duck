@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.Rectangle?>
+
+<VBox fx:id="offerCard" styleClass="offer-card" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.OfferBox">
+    <padding>
+        <Insets top="24.0" right="28.0" bottom="24.0" left="28.0" />
+    </padding>
+
+    <Rectangle fx:id="container" visible="false" />
+
+    <!-- Event Info -->
+    <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="event-info">
+        <Text fx:id="eventName" text="Festival de Musique" styleClass="event-name" />
+        <padding>
+            <Insets bottom="12.0" />
+        </padding>
+    </HBox>
+
+    <!-- Title and Budget -->
+    <HBox alignment="CENTER" spacing="15.0" styleClass="title-section">
+        <StackPane HBox.hgrow="ALWAYS">
+            <Text fx:id="title" text="Eos dolorem ad." styleClass="offer-title" wrappingWidth="320">
+                <font>
+                    <Font name="System Bold" size="20.0" />
+                </font>
+            </Text>
+        </StackPane>
+        <Text fx:id="budget" text="2398 DT" styleClass="offer-budget">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Text>
+        <padding>
+            <Insets top="8.0" bottom="15.0" />
+        </padding>
+    </HBox>
+
+    <!-- Description -->
+    <Text fx:id="description" text="Harum id blanditiis in aperiam. Veritatis nisi molestias soluta temporibus. Dignissimos illum suscipit ipsum voluptate beatae. Ut qui autem porro doloremque. Dolorum omnis et consequatur ipsa aperiam. Voluptate consequatur praesentium voluptatem id iste." wrappingWidth="450" styleClass="offer-description">
+        <VBox.margin>
+            <Insets bottom="18.0" />
+        </VBox.margin>
+    </Text>
+
+    <!-- Details and Action -->
+    <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="offer-details">
+        <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+            <HBox spacing="10.0">
+                <Text fx:id="status" text="Ouvert" styleClass="offer-status" />
+                <Text fx:id="contractType" text="SEO" styleClass="contract-type" />
+            </HBox>
+        </VBox>
+        <Button fx:id="apply" mnemonicParsing="false" text="Postuler" styleClass="apply-button" />
+        <padding>
+            <Insets top="15.0" />
+        </padding>
+    </HBox>
+</VBox>

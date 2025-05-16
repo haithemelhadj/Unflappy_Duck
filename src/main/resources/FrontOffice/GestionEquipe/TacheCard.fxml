@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.effect.DropShadow?>
+
+<VBox fx:id="taskCard" styleClass="task-card" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.TacheCard">
+   <effect>
+      <DropShadow color="#00000022" height="5" radius="2" width="5" />
+   </effect>
+   
+   <HBox alignment="CENTER_LEFT" spacing="15">
+      <!-- Status indicator -->
+      <Circle fx:id="statusIndicator" radius="5" styleClass="status-indicator" />
+      
+      <!-- Main content -->
+      <VBox spacing="5" HBox.hgrow="ALWAYS">
+         <!-- Title and ID -->
+         <HBox alignment="CENTER_LEFT" spacing="8">
+            <Label fx:id="taskTitle" text="Former l'équipe d'accueil" styleClass="task-title">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="taskId" text="ID: 1" styleClass="task-id" />
+         </HBox>
+         
+         <!-- Description -->
+         <Label fx:id="taskDescription" text="Laudantium dolore molestiae nesciunt et ut. Animi illum molestiae exercitationem ad a doloribus minus. Quidem magni nisi qui at eaque quo facere." wrapText="true" styleClass="task-description" />
+         
+         <!-- Team and assignee info -->
+         <HBox spacing="15" styleClass="task-meta">
+            <Label fx:id="teamLabel" text="Équipe: Équipe Alpha" styleClass="task-team" />
+            <Label fx:id="assigneeLabel" text="Assigné à: Membre #1387" styleClass="task-assignee" />
+         </HBox>
+      </VBox>
+      
+      <!-- Status badge -->
+      <Label fx:id="statusLabel" text="Terminée" styleClass="status-badge, status-completed-badge" />
+   </HBox>
+   
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+</VBox> 

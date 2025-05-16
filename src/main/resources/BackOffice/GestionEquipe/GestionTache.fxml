@@ -1,156 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.effect.DropShadow?>
 
-<?import javafx.scene.control.ChoiceBox?>
 <AnchorPane stylesheets="@GestionEquipescss-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.GestionTache">
    <children>
-      <ScrollPane prefHeight="600.0">
+      <!-- Navigation header -->
+      <HBox styleClass="nav-header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <Button styleClass="nav-item" text="Freelancer" />
+         <Button styleClass="nav-item" text="Evenement" />
+         <Button styleClass="nav-item" text="Utilisateurs" />
+         <Button styleClass="nav-item" text="Equipe" />
+         <Button styleClass="nav-item, nav-active" text="Tache" />
+         <Button styleClass="nav-item" text="Cours" />
+         <Button styleClass="nav-item" text="Store" />
+      </HBox>
+      
+      <!-- Page Header -->
+      <VBox styleClass="page-header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+         <Label text="Team Management" styleClass="page-title" />
+         <Label text="Manage team structure and members" styleClass="page-subtitle" />
+      </VBox>
+      
+      <ScrollPane prefHeight="600.0" fitToWidth="true" styleClass="main-scroll-pane" 
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0" AnchorPane.bottomAnchor="0.0">
          <content>
-            <AnchorPane prefHeight="600.0">
-               <children>
-                  <VBox alignment="CENTER" spacing="25.0" styleClass="main-container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox spacing="25.0" styleClass="main-container">
+               <!-- Section Header -->
+               <Label text="Gestion des Tâches" styleClass="section-title" />
+               
+               <HBox spacing="30.0">
+                  <!-- LEFT PANEL - TASK FORM -->
+                  <VBox spacing="15" styleClass="card" HBox.hgrow="NEVER" prefWidth="400">
+                     <effect>
+                        <DropShadow color="#00000022" height="10" radius="4.5" width="10" />
+                     </effect>
                      <children>
-                        <Label styleClass="main-header" text="Gestion des Tâches">
-                           <font>
-                              <Font name="System Bold" size="32.0" />
-                           </font>
-                        </Label>
-
-                        <HBox alignment="CENTER" spacing="30.0">
-                           <children>
-                              <ScrollPane>
-                                <content>
-                                  <AnchorPane>
-                                       <children>
-                                          <!-- Task Management Section -->
-                                          <VBox styleClass="card">
-                                             <children>
-                                                <Label styleClass="card-header" text="Ajouter / Modifier Tâche">
-                                                   <font>
-                                                      <Font name="System Bold" size="24.0" />
-                                                   </font>
-                                                </Label>
-                                                <VBox spacing="15.0" styleClass="form-container">
-                                                   <children>
-                                                      <VBox styleClass="form-group">
-                                                         <children>
-                                                            <Label styleClass="form-label" text="ID Tâche" />
-                                                            <TextField fx:id="idfield" promptText="Identifiant de la tâche" styleClass="form-control" />
-                                                         </children>
-                                                      </VBox>
-            
-                                                                              <VBox styleClass="form-group">
-                                                         <children>
-                                                            <Label styleClass="form-label" text="Titre" />
-                                                            <TextField fx:id="titre" promptText="Nom de la tâche" styleClass="form-control" />
-                                                         </children>
-                                                      </VBox>
-            
-                                                                              <VBox styleClass="form-group">
-                                                         <children>
-                                                            <Label styleClass="form-label" text="Description" />
-                                                            <TextField fx:id="description" promptText="Description" styleClass="form-control" />
-                                                         </children>
-                                                      </VBox>
-            
-                                                                              <VBox styleClass="form-group">
-                                                         <children>
-                                                            <Label styleClass="form-label" text="Équipe Responsable" />
-                                                            <ComboBox fx:id="equipe_id" maxWidth="1.7976931348623157E308" styleClass="form-control" />
-                                                         </children>
-                                                      </VBox>
-            
-                                                                              <VBox styleClass="form-group">
-                                                         <children>
-                                                            <Label styleClass="form-label" text="Membre Responsable" />
-                                                            <ComboBox fx:id="membre_id" maxWidth="1.7976931348623157E308" styleClass="form-control" />
-                                                         </children>
-                                                      </VBox>
-            
-                                                                              <VBox styleClass="form-group">
-                                                         <children>
-                                                            <Label styleClass="form-label" text="Statut" />
-                                                            <ChoiceBox fx:id="statusCheckBox">
-                                                            </ChoiceBox>
-                                                         </children>
-                                                      </VBox>
-            
-                                                                              <HBox alignment="CENTER" spacing="15.0" styleClass="btn-group">
-                                                         <children>
-                                                            <Button mnemonicParsing="false" onAction="#AddUpdate" styleClass="btn-primary" text="Ajouter / Mettre à jour" />
-                                                            <Button mnemonicParsing="false" onAction="#delete" styleClass="btn-danger" text="Supprimer" />
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </ScrollPane>
-                              <ScrollPane>
-                                <content>
-                                  <AnchorPane>
-                                       <children>
-            
-                                          <!-- Task List Section -->
-                                          <VBox styleClass="card">
-                                             <children>
-                                                <Label styleClass="card-header" text="Liste des Tâches">
-                                                   <font>
-                                                      <Font name="System Bold" size="24.0" />
-                                                   </font>
-                                                </Label>
-            
-                                                <HBox alignment="CENTER" spacing="10.0" styleClass="search-sort">
-                                                   <children>
-                                                      <TextField fx:id="RechercheTache" promptText="Rechercher une tâche..." styleClass="form-control, search-input" HBox.hgrow="ALWAYS" />
-                                                      <HBox alignment="CENTER" spacing="5.0" styleClass="sort-control">
-                                                         <children>
-                                                            <Button fx:id="sortTache" mnemonicParsing="false" onAction="#sortTache" styleClass="btn-secondary" text="Trier" />
-                                                            <ComboBox fx:id="tacheSort" styleClass="form-control" />
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                </HBox>
-            
-                                                <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="list-container">
-                                                   <content>
-                                                      <ListView fx:id="ListViewTaches" styleClass="list-view" />
-                                                   </content>
-                                                </ScrollPane>
-            
-                                                <Button mnemonicParsing="false" onAction="#refrech" styleClass="btn-secondary" text="Rafraîchir" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </ScrollPane>
-                           </children>
-                        </HBox>
-
-                        <Label fx:id="Error" styleClass="error-text" textFill="RED" />
+                        <Label styleClass="card-header" text="Ajouter / Modifier Tâche" />
+                        
+                        <VBox spacing="15.0" styleClass="form-container">
+                           <HBox spacing="10" alignment="CENTER_LEFT">
+                              <VBox styleClass="form-group" HBox.hgrow="ALWAYS">
+                                 <Label styleClass="form-label" text="ID Tâche" />
+                                 <TextField fx:id="idfield" promptText="Auto-généré si vide" styleClass="form-control" />
+                              </VBox>
+                              
+                              <Button fx:id="searchTaskBtn" styleClass="search-task-btn" text="🔍" onAction="#searchTask">
+                                 <tooltip>
+                                    <Tooltip text="Rechercher par ID" />
+                                 </tooltip>
+                              </Button>
+                           </HBox>
+                           
+                           <VBox styleClass="form-group">
+                              <Label styleClass="form-label" text="Titre" />
+                              <TextField fx:id="titre" promptText="Nom de la tâche" styleClass="form-control" />
+                           </VBox>
+                           
+                           <VBox styleClass="form-group">
+                              <Label styleClass="form-label" text="Description" />
+                              <TextArea fx:id="description" promptText="Description détaillée" styleClass="form-control" wrapText="true" prefHeight="80" />
+                           </VBox>
+                           
+                           <HBox spacing="10">
+                              <VBox styleClass="form-group" HBox.hgrow="ALWAYS">
+                                 <Label styleClass="form-label" text="Équipe Responsable" />
+                                 <ComboBox fx:id="equipe_id" maxWidth="1.7976931348623157E308" styleClass="form-control" />
+                              </VBox>
+                              
+                              <VBox styleClass="form-group" HBox.hgrow="ALWAYS">
+                                 <Label styleClass="form-label" text="Membre Responsable" />
+                                 <ComboBox fx:id="membre_id" maxWidth="1.7976931348623157E308" styleClass="form-control" />
+                              </VBox>
+                           </HBox>
+                           
+                           <VBox styleClass="form-group">
+                              <Label styleClass="form-label" text="Statut" />
+                              <HBox spacing="10" styleClass="status-selection">
+                                 <RadioButton fx:id="statusProposee" text="Proposée" toggleGroup="$statusGroup" styleClass="status-radio, status-proposed" />
+                                 <RadioButton fx:id="statusAFaire" text="À faire" toggleGroup="$statusGroup" styleClass="status-radio, status-todo" selected="true" />
+                                 <RadioButton fx:id="statusEnCours" text="En cours" toggleGroup="$statusGroup" styleClass="status-radio, status-inprogress" />
+                                 <RadioButton fx:id="statusBloquee" text="Bloquée" toggleGroup="$statusGroup" styleClass="status-radio, status-blocked" />
+                                 <RadioButton fx:id="statusTerminee" text="Terminée" toggleGroup="$statusGroup" styleClass="status-radio, status-completed" />
+                                 <fx:define>
+                                    <ToggleGroup fx:id="statusGroup" />
+                                 </fx:define>
+                              </HBox>
+                           </VBox>
+                           
+                           <HBox alignment="CENTER" spacing="15.0" styleClass="btn-group">
+                              <Button mnemonicParsing="false" onAction="#clearForm" styleClass="btn-secondary" text="Effacer" />
+                              <Button mnemonicParsing="false" onAction="#delete" styleClass="btn-danger" text="Supprimer" />
+                              <Button mnemonicParsing="false" onAction="#AddUpdate" styleClass="btn-primary" text="Enregistrer" />
+                           </HBox>
+                        </VBox>
                      </children>
-                     <padding>
-                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-                     </padding>
                   </VBox>
-               </children>
-            </AnchorPane>
+                  
+                  <!-- RIGHT PANEL - TASK LIST -->
+                  <VBox spacing="15" styleClass="card" HBox.hgrow="ALWAYS">
+                     <effect>
+                        <DropShadow color="#00000022" height="10" radius="4.5" width="10" />
+                     </effect>
+                     <children>
+                        <Label styleClass="card-header" text="Liste des Tâches" />
+                        
+                        <!-- Search field -->
+                        <TextField fx:id="RechercheTache" promptText="Rechercher une tâche..." styleClass="form-control, search-input" />
+                        
+                        <!-- Status Filter Tabs -->
+                        <HBox styleClass="status-filter-tabs">
+                           <ToggleButton text="Toutes" fx:id="filterAll" styleClass="status-tab, status-tab-all" selected="true" toggleGroup="$filterGroup" />
+                           <ToggleButton text="À faire" fx:id="filterTodo" styleClass="status-tab, status-tab-todo" toggleGroup="$filterGroup" />
+                           <ToggleButton text="En cours" fx:id="filterInProgress" styleClass="status-tab, status-tab-inprogress" toggleGroup="$filterGroup" />
+                           <ToggleButton text="Terminées" fx:id="filterCompleted" styleClass="status-tab, status-tab-completed" toggleGroup="$filterGroup" />
+                           <ToggleButton text="Bloquées" fx:id="filterBlocked" styleClass="status-tab, status-tab-blocked" toggleGroup="$filterGroup" />
+                           <fx:define>
+                              <ToggleGroup fx:id="filterGroup" />
+                           </fx:define>
+                        </HBox>
+                        
+                        <!-- Task List View -->
+                        <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="list-container" VBox.vgrow="ALWAYS">
+                           <content>
+                              <VBox fx:id="tasksContainer" spacing="10" styleClass="tasks-container" />
+                           </content>
+                        </ScrollPane>
+                        
+                        <!-- Refresh & Sort Controls -->
+                        <HBox alignment="CENTER_RIGHT" spacing="10">
+                           <ComboBox fx:id="tacheSort" styleClass="form-control" prefWidth="150" />
+                           <Button fx:id="sortTache" mnemonicParsing="false" onAction="#sortTache" styleClass="btn-secondary" text="Trier" />
+                           <Region HBox.hgrow="ALWAYS" />
+                           <Button mnemonicParsing="false" onAction="#refrech" styleClass="refresh-button" text="↻ Rafraîchir" />
+                        </HBox>
+                        
+                        <!-- Legacy ListView - Hidden but kept for compatibility -->
+                        <ListView fx:id="ListViewTaches" styleClass="list-view" visible="false" managed="false" />
+                        
+                        <Label fx:id="Error" styleClass="error-text" />
+                     </children>
+                  </VBox>
+               </HBox>
+               
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+            </VBox>
          </content>
       </ScrollPane>
    </children>

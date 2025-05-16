@@ -3,7 +3,7 @@ package tn.esprit.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
@@ -22,11 +22,11 @@ import java.util.stream.Collectors;
 
 public class MarketService implements Initializable {
     @FXML
-    private ChoiceBox<String> searchMenu;
+    private ComboBox<String> searchMenu;
     @FXML
     private TextField searchField;
     @FXML
-    private ChoiceBox<String> sortMenu;
+    private ComboBox<String> sortMenu;
     @FXML
     private ToggleButton sortOrder;
     @FXML

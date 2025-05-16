@@ -1,0 +1,269 @@
+/* 
+ * Freelancer Management Styles
+ * Modern styling for the Freelancer Service Management interface
+ */
+
+/* Base styles */
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-background-color: #f5f5f7;
+    -fx-font-size: 13px;
+}
+
+/* Header styles */
+.header-container {
+    -fx-background-color: #3498db;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 3);
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+}
+
+.header-title {
+    -fx-font-size: 24px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 5px 0;
+}
+
+.header-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #e6e6e6;
+    -fx-font-style: italic;
+}
+
+/* ListView styles */
+.service-list {
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #ddd;
+    -fx-padding: 5px;
+    -fx-min-height: 200px;
+}
+
+.service-list .list-cell {
+    -fx-padding: 12px 20px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #eee transparent;
+    -fx-font-size: 14px;
+}
+
+.service-list .list-cell:selected {
+    -fx-background-color: #e3f2fd;
+    -fx-text-fill: #333;
+}
+
+.service-list .list-cell:hover {
+    -fx-background-color: #f0f8ff;
+}
+
+/* TitledPane styles */
+.titled-pane {
+    -fx-text-fill: #333;
+    -fx-margin: 0 0 15px 0;
+}
+
+.titled-pane > .title {
+    -fx-background-color: #e6e6e6;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 15px;
+    -fx-font-size: 14px;
+}
+
+.titled-pane > .content {
+    -fx-background-color: white;
+    -fx-background-radius: 0 0 5px 5px;
+    -fx-border-color: #e6e6e6;
+    -fx-border-radius: 0 0 5px 5px;
+    -fx-padding: 20px;
+}
+
+/* Form styles */
+.form-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #555;
+    -fx-font-size: 13px;
+    -fx-padding: 0 0 5px 0;
+}
+
+.form-field {
+    -fx-background-color: #f8f8f8;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 3px;
+    -fx-padding: 10px;
+    -fx-min-height: 40px;
+    -fx-font-size: 13px;
+}
+
+.form-field:focused {
+    -fx-border-color: #3498db;
+    -fx-background-color: white;
+}
+
+.form-text-area {
+    -fx-background-color: #f8f8f8;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 3px;
+    -fx-padding: 10px;
+    -fx-font-size: 13px;
+}
+
+.form-text-area:focused {
+    -fx-border-color: #3498db;
+    -fx-background-color: white;
+}
+
+.service-id-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #555;
+    -fx-font-size: 14px;
+}
+
+.service-id-value {
+    -fx-fill: #3498db;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+/* Form Container Styles */
+.form-container {
+    -fx-background-color: #f5f7fa;
+    -fx-border-color: #e1e4e8;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 3, 0, 0, 1);
+    -fx-margin: 0 0 10px 0;
+}
+
+.form-row {
+    -fx-background-color: white;
+    -fx-border-color: #e1e4e8;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+    -fx-margin: 0 0 10px 0;
+}
+
+/* GridPane spacing */
+.grid-pane {
+    -fx-hgap: 25px;
+    -fx-vgap: 20px;
+    -fx-padding: 10px 0;
+}
+
+/* VBox containers */
+.form-vbox {
+    -fx-spacing: 8px;
+    -fx-padding: 5px 10px;
+    -fx-background-color: white;
+    -fx-border-color: #e1e4e8;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* HBox spacing */
+.form-hbox {
+    -fx-spacing: 10px;
+    -fx-padding: 5px 0;
+}
+
+/* ID section */
+.id-section {
+    -fx-padding: 10px 15px;
+    -fx-background-color: #f0f7ff;
+    -fx-border-color: #cce5ff;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-margin: 0 0 20px 0;
+}
+
+/* Button styles */
+.button {
+    -fx-background-radius: 4px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-min-width: 120px;
+}
+
+.button-container {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 20px;
+    -fx-spacing: 20px;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.button-add {
+    -fx-background-color: #2ecc71;
+}
+
+.button-add:hover {
+    -fx-background-color: #27ae60;
+}
+
+.button-update {
+    -fx-background-color: #3498db;
+}
+
+.button-update:hover {
+    -fx-background-color: #2980b9;
+}
+
+.button-delete {
+    -fx-background-color: #e74c3c;
+}
+
+.button-delete:hover {
+    -fx-background-color: #c0392b;
+}
+
+/* TextArea section */
+.textarea-container {
+    -fx-background-color: white;
+    -fx-border-color: #e1e4e8;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+/* Scrollbar styling */
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: #f0f0f0;
+}
+
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: #cdcdcd;
+    -fx-background-radius: 5em;
+}
+
+.scroll-bar:vertical .thumb:hover,
+.scroll-bar:horizontal .thumb:hover {
+    -fx-background-color: #b8b8b8;
+}
+
+/* Separator styling */
+.separator {
+    -fx-background-color: #e0e0e0;
+    -fx-padding: 10px 0;
+}
+
+/* ChoiceBox styling */
+.choice-box {
+    -fx-background-color: #f8f8f8;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 3px;
+    -fx-padding: 8px;
+    -fx-min-height: 40px;
+    -fx-font-size: 13px;
+}
+
+.choice-box:focused {
+    -fx-border-color: #3498db;
+} 
